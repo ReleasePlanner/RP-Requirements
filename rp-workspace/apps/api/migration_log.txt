@@ -1,0 +1,72 @@
+
+> @rp-workspace/api@1.0.0 migration:run
+> typeorm-ts-node-commonjs migration:run -d src/infrastructure/database/data-source.ts
+
+[90m[4mquery:[24m[39m [94mSELECT[0m [95mversion[0m[37m([0m[37m)[0m
+[90m[4mquery:[24m[39m [94mSELECT[0m [37m*[0m [94mFROM[0m [95mcurrent_schema[0m[37m([0m[37m)[0m
+[90m[4mquery:[24m[39m [94mCREATE[0m [37mEXTENSION[0m [94mIF[0m [94mNOT[0m [94mEXISTS[0m [37m"uuid-ossp"[0m
+[90m[4mquery:[24m[39m [94mSELECT[0m [37m*[0m [94mFROM[0m [37m"information_schema"[0m[37m.[0m[37m"tables"[0m [94mWHERE[0m [37m"table_schema"[0m [37m=[0m [37m'public'[0m [94mAND[0m [37m"table_name"[0m [37m=[0m [37m'migrations'[0m
+[90m[4mquery:[24m[39m [94mSELECT[0m [37m*[0m [94mFROM[0m [37m"migrations"[0m [37m"migrations"[0m [94mORDER BY[0m [37m"id"[0m [94mDESC[0m
+[4m0 migrations are already loaded in the database.[24m
+[4m4 migrations were found in the source code.[24m
+[4m4 migrations are new migrations must be executed.[24m
+[90m[4mquery:[24m[39m [37mSTART[0m [37mTRANSACTION[0m
+[90m[4mquery:[24m[39m [94mCREATE TABLE[0m [37m"Priority"[0m [37m([0m[37m"priorityId"[0m [37mSERIAL[0m [94mNOT NULL[0m[37m,[0m [37m"name"[0m [37mcharacter[0m [95mvarying[0m[37m([0m[32m100[0m[37m)[0m [94mNOT NULL[0m[37m,[0m [94mCONSTRAINT[0m [37m"PK_59d84f34be3ef8bd38863b84de6"[0m [94mPRIMARY KEY[0m [37m([0m[37m"priorityId"[0m[37m)[0m[37m)[0m
+[4m[31mquery failed:[39m[24m [94mCREATE TABLE[0m [37m"Priority"[0m [37m([0m[37m"priorityId"[0m [37mSERIAL[0m [94mNOT NULL[0m[37m,[0m [37m"name"[0m [37mcharacter[0m [95mvarying[0m[37m([0m[32m100[0m[37m)[0m [94mNOT NULL[0m[37m,[0m [94mCONSTRAINT[0m [37m"PK_59d84f34be3ef8bd38863b84de6"[0m [94mPRIMARY KEY[0m [37m([0m[37m"priorityId"[0m[37m)[0m[37m)[0m
+[4m[31merror:[39m[24m error: la relaci├│n ┬½Priority┬╗ ya existe
+[4mMigration "UpdateSchemaForPortal1765531548946" failed, error: la relaci├│n ┬½Priority┬╗ ya existe[24m
+[90m[4mquery:[24m[39m [37mROLLBACK[0m
+[30m[41mError during migration run:[49m[39m
+QueryFailedError: la relaci├│n ┬½Priority┬╗ ya existe
+    at PostgresQueryRunner.query (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:325:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async UpdateSchemaForPortal1765531548946.up (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\src\infrastructure\database\migrations\1765531548946-UpdateSchemaForPortal.ts:7:5)
+    at async MigrationExecutor.executePendingMigrations (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\src\migration\MigrationExecutor.ts:336:17)
+    at async DataSource.runMigrations (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\src\data-source\DataSource.ts:404:13)
+    at async Object.handler (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\src\commands\MigrationRunCommand.ts:76:13) {
+  query: 'CREATE TABLE "Priority" ("priorityId" SERIAL NOT NULL, "name" character varying(100) NOT NULL, CONSTRAINT "PK_59d84f34be3ef8bd38863b84de6" PRIMARY KEY ("priorityId"))',
+  parameters: undefined,
+  driverError: error: la relaci├│n ┬½Priority┬╗ ya existe
+      at C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\pg\lib\client.js:545:17
+      at processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async PostgresQueryRunner.query (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:254:25)
+      at async UpdateSchemaForPortal1765531548946.up (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\src\infrastructure\database\migrations\1765531548946-UpdateSchemaForPortal.ts:7:5)
+      at async MigrationExecutor.executePendingMigrations (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\src\migration\MigrationExecutor.ts:336:17)
+      at async DataSource.runMigrations (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\src\data-source\DataSource.ts:404:13)
+      at async Object.handler (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\src\commands\MigrationRunCommand.ts:76:13) {
+    length: 103,
+    severity: 'ERROR',
+    code: '42P07',
+    detail: undefined,
+    hint: undefined,
+    position: undefined,
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'heap.c',
+    line: '1179',
+    routine: 'heap_create_with_catalog'
+  },
+  length: 103,
+  severity: 'ERROR',
+  code: '42P07',
+  detail: undefined,
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'heap.c',
+  line: '1179',
+  routine: 'heap_create_with_catalog'
+}

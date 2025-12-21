@@ -1,0 +1,95 @@
+'use client';
+
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow
+} from '@/components/ui/table';
+import { Initiative } from '../types';
+import { Edit2, Trash2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { InitiativesService } from '../service';
+import { useRouter } from 'next/navigation';
+
+interface InitiativeListProps {
+    data: Initiative[];
+    onSort?: (field: string) => void;
+    currentSort?: string;
+    currentOrder?: 'ASC' | 'DESC';
+}
+
+export function InitiativeList({ data, onSort, currentSort, currentOrder }: InitiativeListProps) {
+    const router = useRouter();
+
+    const SortIcon = ({ field }: { field: string }) => {
+        if (currentSort !== field) return <div className="ml-1 w-3 h-3 opacity-0 group-hover:opacity-30 inline-block bg-zinc-300 rounded-sm" />;
+        return (
+            <span className="ml-1 text-zinc-800 text-[9px]">
+                {currentOrder === 'ASC' ? '▲' : '▼'}
+            </span>
+        );
+    };
+
+    const handleDelete = async (id: string) => {
+        if (confirm('Are you sure you want to delete this initiative?')) {
+            try {
+                await InitiativesService.delete(id);
+                router.refresh();
+                window.location.reload();
+            } catch (e) {
+                console.error(e);
+            }
+        }
+    }
+
+    if (!data || data.length === 0) {
+        return <div className="p-12 text-center text-zinc-400 text-sm italic font-serif">No initiatives found</div>;
+    }
+
+    return (
+        <div className="w-full px-6 overflow-auto h-full">
+            <Table>
+                <TableHeader>
+                    <TableRow className="border-b border-zinc-100/50 hover:bg-transparent sticky top-0 bg-zinc-50/95 backdrop-blur z-10">
+                        <TableHead className="w-[300px] text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] pl-6 pb-4 pt-6 cursor-pointer" onClick={() => onSort?.('title')}>
+                            Title <SortIcon field="title" />
+                        </TableHead>
+                        <TableHead className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] pb-4 pt-6">Portfolio</TableHead>
+
+                        <TableHead className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] pb-4 pt-6">Est. ROI</TableHead>
+                        <TableHead className="text-right text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] pr-6 pb-4 pt-6">Actions</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {data.map((item) => (
+                        <TableRow key={item.initiativeId} className="border-b border-zinc-100 hover:bg-white hover:shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-all duration-500 group cursor-default h-16">
+                            <TableCell className="text-[14px] font-medium text-zinc-900 pl-6 py-4">
+                                {item.title}
+                            </TableCell>
+                            <TableCell className="py-4 text-sm text-zinc-600">
+                                {item.portfolio?.name || '-'}
+                            </TableCell>
+
+                            <TableCell className="py-4 text-sm text-zinc-600">
+                                {item.estimatedROI ? `${item.estimatedROI}%` : '-'}
+                            </TableCell>
+                            <TableCell className="text-right pr-6 py-4">
+                                <div className="flex justify-end gap-2">
+                                    <button className="h-8 w-8 rounded-full flex items-center justify-center text-zinc-300 hover:text-black hover:bg-zinc-100 transition-all duration-300">
+                                        <Edit2 className="h-4 w-4" />
+                                    </button>
+                                    <button onClick={() => handleDelete(item.initiativeId)} className="h-8 w-8 rounded-full flex items-center justify-center text-zinc-300 hover:text-red-600 hover:bg-red-50 transition-all duration-300">
+                                        <Trash2 className="h-4 w-4" />
+                                    </button>
+                                </div>
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </div>
+    );
+}

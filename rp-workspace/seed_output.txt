@@ -1,0 +1,56 @@
+
+> @rp-workspace/source@0.0.0 seed:api
+> npx --yes ts-node -r tsconfig-paths/register apps/api/src/infrastructure/database/seed.ts
+
+Couldn't find tsconfig.json. tsconfig-paths will be skipped
+­ƒî▒ Starting Database Seed...
+­ƒº╣ Cleaning existing data...
+ÔØî Seeding failed: QueryFailedError: no existe la relaci├│n ┬½Sponsor┬╗
+    at PostgresQueryRunner.query (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:325:19)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DataSource.query (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\src\data-source\DataSource.ts:541:20)
+    at async seed (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\src\infrastructure\database\seed.ts:47:13) {
+  query: 'TRUNCATE TABLE "Sponsor" CASCADE;',
+  parameters: undefined,
+  driverError: error: no existe la relaci├│n ┬½Sponsor┬╗
+      at C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\pg\lib\client.js:545:17
+      at processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async PostgresQueryRunner.query (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\typeorm\src\driver\postgres\PostgresQueryRunner.ts:254:25)
+      at async DataSource.query (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\src\data-source\DataSource.ts:541:20)
+      at async seed (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\src\infrastructure\database\seed.ts:47:13) {
+    length: 106,
+    severity: 'ERROR',
+    code: '42P01',
+    detail: undefined,
+    hint: undefined,
+    position: undefined,
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'namespace.c',
+    line: '639',
+    routine: 'RangeVarGetRelidExtended'
+  },
+  length: 106,
+  severity: 'ERROR',
+  code: '42P01',
+  detail: undefined,
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'namespace.c',
+  line: '639',
+  routine: 'RangeVarGetRelidExtended'
+}

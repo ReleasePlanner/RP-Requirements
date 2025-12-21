@@ -1,0 +1,4 @@
+--- Fetching Initiatives ---
+TypeError: Cannot read properties of undefined (reading '0')
+    at debugEpics (C:\MySources\RP-Requirements-Web\rp-workspace\debug-epics.js:11:44)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)

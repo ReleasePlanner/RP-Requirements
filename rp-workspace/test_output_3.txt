@@ -1,0 +1,1187 @@
+
+> nx run api:test
+
+> jest --config jest.config.js
+
+ FAIL  src/infrastructure/auth/guards/jwt-auth.guard.spec.ts (8.419 s)
+  ÔùÅ JwtAuthGuard ÔÇ║ canActivate ÔÇ║ should allow access for public routes
+
+    expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+    Expected: "isPublic", [undefined, undefined]
+
+    Number of calls: 0
+
+      31 |
+      32 |       expect(result).toBe(true);
+    > 33 |       expect(reflector.getAllAndOverride).toHaveBeenCalledWith('isPublic', [
+         |                                           ^
+      34 |         mockContext.getHandler(),
+      35 |         mockContext.getClass(),
+      36 |       ]);
+
+      at Object.<anonymous> (infrastructure/auth/guards/jwt-auth.guard.spec.ts:33:43)
+
+  ÔùÅ JwtAuthGuard ÔÇ║ canActivate ÔÇ║ should call parent canActivate for protected routes
+
+    expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+    Expected: "isPublic", [undefined, undefined]
+
+    Number of calls: 0
+
+      55 |       guard.canActivate(mockContext);
+      56 |
+    > 57 |       expect(reflector.getAllAndOverride).toHaveBeenCalledWith('isPublic', [
+         |                                           ^
+      58 |         mockContext.getHandler(),
+      59 |         mockContext.getClass(),
+      60 |       ]);
+
+      at Object.<anonymous> (infrastructure/auth/guards/jwt-auth.guard.spec.ts:57:43)
+
+ PASS  src/infrastructure/auth/strategies/jwt.strategy.spec.ts
+ PASS  src/presentation/health/health.controller.spec.ts (9.191 s)
+ PASS  src/application/auth/services/auth.service.spec.ts (9.198 s)
+ FAIL  src/infrastructure/database/repositories/epics.repository.spec.ts (9.401 s)
+  ÔùÅ EpicsRepository ÔÇ║ findById ÔÇ║ should return one epic
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: {}
+    Received: undefined
+
+      49 |       const result = new Epic();
+      50 |       mockTypeOrmRepository.findOneBy.mockResolvedValue(result);
+    > 51 |       expect(await repository.findById('1')).toBe(result);
+         |                                              ^
+      52 |     });
+      53 |   });
+      54 |
+
+      at Object.<anonymous> (infrastructure/database/repositories/epics.repository.spec.ts:51:46)
+
+  ÔùÅ EpicsRepository ÔÇ║ update ÔÇ║ should update an epic
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: {}
+    Received: undefined
+
+      66 |       mockTypeOrmRepository.update.mockResolvedValue(undefined);
+      67 |       mockTypeOrmRepository.findOneBy.mockResolvedValue(epic);
+    > 68 |       expect(await repository.update('1', {})).toBe(epic);
+         |                                                ^
+      69 |     });
+      70 |   });
+      71 |
+
+      at Object.<anonymous> (infrastructure/database/repositories/epics.repository.spec.ts:68:48)
+
+ PASS  src/infrastructure/repositories/user.repository.spec.ts (9.548 s)
+ PASS  src/shared/decorators/api-paginated-response.decorator.spec.ts (9.593 s)
+ PASS  src/shared/config/config.validation.spec.ts
+ PASS  src/shared/dto/pagination.dto.spec.ts (9.661 s)
+ PASS  src/presentation/catalogs/catalogs.controller.spec.ts (9.829 s)
+ PASS  src/application/users/services/users.service.spec.ts
+ PASS  src/application/initiatives/services/initiatives.service.spec.ts (9.81 s)
+ PASS  src/shared/interceptors/transform.interceptor.spec.ts
+ PASS  src/application/catalogs/services/catalogs.service.spec.ts
+ PASS  src/app.controller.spec.ts
+ PASS  src/infrastructure/database/database.config.spec.ts
+ PASS  src/application/portfolios/services/portfolios.service.spec.ts
+[Nest] 16920  - 19/12/2025, 4:15:38 p.┬ám.   ERROR [LoggingInterceptor] Request Failed: GET /test - Time: 1ms - Error: Test error
+[Nest] 29716  - 19/12/2025, 4:15:38 p.┬ám.   ERROR [HttpExceptionFilter] GET /test - 400 - Test error
+HttpException: Test error
+    at Object.<anonymous> (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\src\shared\filters\http-exception.filter.spec.ts:32:25)
+    at Promise.then.completed (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\utils.js:298:28)
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\utils.js:231:10)
+    at _callCircusTest (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:252:3)
+    at _runTestsForDescribeBlock (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:126:9)
+    at _runTestsForDescribeBlock (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:121:9)
+    at _runTestsForDescribeBlock (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:121:9)
+    at run (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:71:3)
+    at runAndTransformResultsToJestFormat (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
+    at jestAdapter (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
+    at runTestInternal (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-runner\build\runTest.js:367:16)
+    at runTest (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-runner\build\runTest.js:444:34)
+    at Object.worker (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-runner\build\testWorker.js:106:12)
+[Nest] 29716  - 19/12/2025, 4:15:38 p.┬ám.   ERROR [HttpExceptionFilter] GET /test - 400 - Custom error
+HttpException: Custom error
+    at Object.<anonymous> (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\src\shared\filters\http-exception.filter.spec.ts:46:25)
+    at Promise.then.completed (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\utils.js:298:28)
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\utils.js:231:10)
+    at _callCircusTest (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:252:3)
+    at _runTestsForDescribeBlock (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:126:9)
+    at _runTestsForDescribeBlock (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:121:9)
+    at _runTestsForDescribeBlock (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:121:9)
+    at run (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:71:3)
+    at runAndTransformResultsToJestFormat (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
+    at jestAdapter (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
+    at runTestInternal (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-runner\build\runTest.js:367:16)
+    at runTest (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-runner\build\runTest.js:444:34)
+    at Object.worker (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-runner\build\testWorker.js:106:12)
+[Nest] 29716  - 19/12/2025, 4:15:38 p.┬ám.   ERROR [HttpExceptionFilter] GET /test - 400 - Http Exception
+HttpException: Http Exception
+    at Object.<anonymous> (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\src\shared\filters\http-exception.filter.spec.ts:62:25)
+    at Promise.then.completed (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\utils.js:298:28)
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\utils.js:231:10)
+    at _callCircusTest (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:252:3)
+    at _runTestsForDescribeBlock (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:126:9)
+    at _runTestsForDescribeBlock (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:121:9)
+    at _runTestsForDescribeBlock (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:121:9)
+    at run (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:71:3)
+    at runAndTransformResultsToJestFormat (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
+    at jestAdapter (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
+    at runTestInternal (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-runner\build\runTest.js:367:16)
+    at runTest (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-runner\build\runTest.js:444:34)
+    at Object.worker (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-runner\build\testWorker.js:106:12)
+[Nest] 29716  - 19/12/2025, 4:15:38 p.┬ám.   ERROR [HttpExceptionFilter] GET /test - 400 - Custom error
+HttpException: Custom error
+    at Object.<anonymous> (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\src\shared\filters\http-exception.filter.spec.ts:70:25)
+    at Promise.then.completed (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\utils.js:298:28)
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\utils.js:231:10)
+    at _callCircusTest (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:252:3)
+    at _runTestsForDescribeBlock (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:126:9)
+    at _runTestsForDescribeBlock (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:121:9)
+    at _runTestsForDescribeBlock (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:121:9)
+    at run (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:71:3)
+    at runAndTransformResultsToJestFormat (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
+    at jestAdapter (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
+    at runTestInternal (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-runner\build\runTest.js:367:16)
+    at runTest (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-runner\build\runTest.js:444:34)
+    at Object.worker (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-runner\build\testWorker.js:106:12)
+ PASS  src/shared/interceptors/logging.interceptor.spec.ts
+[Nest] 29716  - 19/12/2025, 4:15:38 p.┬ám.   ERROR [HttpExceptionFilter] GET /test - 500 - Generic error
+Error: Generic error
+    at Object.<anonymous> (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\src\shared\filters\http-exception.filter.spec.ts:78:25)
+    at Promise.then.completed (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\utils.js:298:28)
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\utils.js:231:10)
+    at _callCircusTest (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:252:3)
+    at _runTestsForDescribeBlock (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:126:9)
+    at _runTestsForDescribeBlock (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:121:9)
+    at _runTestsForDescribeBlock (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:121:9)
+    at run (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:71:3)
+    at runAndTransformResultsToJestFormat (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
+    at jestAdapter (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
+    at runTestInternal (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-runner\build\runTest.js:367:16)
+    at runTest (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-runner\build\runTest.js:444:34)
+    at Object.worker (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-runner\build\testWorker.js:106:12)
+[Nest] 29716  - 19/12/2025, 4:15:38 p.┬ám.   ERROR [HttpExceptionFilter] GET /test - 500 - Internal error
+Error: Internal error
+    at Object.<anonymous> (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\src\shared\filters\http-exception.filter.spec.ts:95:25)
+    at Promise.then.completed (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\utils.js:298:28)
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\utils.js:231:10)
+    at _callCircusTest (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:252:3)
+    at _runTestsForDescribeBlock (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:126:9)
+    at _runTestsForDescribeBlock (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:121:9)
+    at _runTestsForDescribeBlock (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:121:9)
+    at run (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:71:3)
+    at runAndTransformResultsToJestFormat (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
+    at jestAdapter (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
+    at runTestInternal (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-runner\build\runTest.js:367:16)
+    at runTest (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-runner\build\runTest.js:444:34)
+    at Object.worker (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-runner\build\testWorker.js:106:12)
+[Nest] 29716  - 19/12/2025, 4:15:38 p.┬ám.   ERROR [HttpExceptionFilter] GET /test - 400 - Test error
+HttpException: Test error
+    at Object.<anonymous> (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\src\shared\filters\http-exception.filter.spec.ts:110:25)
+    at Promise.then.completed (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\utils.js:298:28)
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\utils.js:231:10)
+    at _callCircusTest (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at _runTest (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:252:3)
+    at _runTestsForDescribeBlock (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:126:9)
+    at _runTestsForDescribeBlock (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:121:9)
+    at _runTestsForDescribeBlock (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:121:9)
+    at run (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\run.js:71:3)
+    at runAndTransformResultsToJestFormat (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
+    at jestAdapter (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
+    at runTestInternal (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-runner\build\runTest.js:367:16)
+    at runTest (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-runner\build\runTest.js:444:34)
+    at Object.worker (C:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\jest-runner\build\testWorker.js:106:12)
+[Nest] 29716  - 19/12/2025, 4:15:38 p.┬ám.   ERROR [HttpExceptionFilter] GET /test - 500 - Internal server error
+ PASS  src/shared/filters/http-exception.filter.spec.ts
+ PASS  src/shared/exceptions/entity-not-found.exception.spec.ts
+[32m[Nest] 16920  - [39m19/12/2025, 4:15:38 p.┬ám. [32m    LOG[39m [38;5;3m[LoggingInterceptor] [39m[32mIncoming Request: GET /test - Body: {"password":"***REDACTED***","token":"***REDACTED***"} - Query: {"filter":"value"} - Params: {"id":"123"}[39m
+[32m[Nest] 16920  - [39m19/12/2025, 4:15:38 p.┬ám. [32m    LOG[39m [38;5;3m[LoggingInterceptor] [39m[32mOutgoing Response: GET /test - Status: 200 - Time: 3ms[39m
+[32m[Nest] 16920  - [39m19/12/2025, 4:15:38 p.┬ám. [32m    LOG[39m [38;5;3m[LoggingInterceptor] [39m[32mIncoming Request: GET /test - Body: {"password":"***REDACTED***","token":"***REDACTED***"} - Query: {"filter":"value"} - Params: {"id":"123"}[39m
+[32m[Nest] 16920  - [39m19/12/2025, 4:15:38 p.┬ám. [32m    LOG[39m [38;5;3m[LoggingInterceptor] [39m[32mOutgoing Response: GET /test - Status: 200 - Time: 1ms[39m
+[32m[Nest] 16920  - [39m19/12/2025, 4:15:38 p.┬ám. [32m    LOG[39m [38;5;3m[LoggingInterceptor] [39m[32mIncoming Request: GET /test - Body: {"password":"***REDACTED***","token":"***REDACTED***"} - Query: {"filter":"value"} - Params: {"id":"123"}[39m
+[32m[Nest] 16920  - [39m19/12/2025, 4:15:38 p.┬ám. [32m    LOG[39m [38;5;3m[LoggingInterceptor] [39m[32mIncoming Request: GET /test - Body: undefined - Query: {} - Params: {}[39m
+[32m[Nest] 16920  - [39m19/12/2025, 4:15:38 p.┬ám. [32m    LOG[39m [38;5;3m[LoggingInterceptor] [39m[32mOutgoing Response: GET /test - Status: 200 - Time: 0ms[39m
+ PASS  src/shared/decorators/public.decorator.spec.ts
+ FAIL  src/infrastructure/database/repositories/initiatives.repository.spec.ts (10.215 s)
+  ÔùÅ InitiativesRepository ÔÇ║ findById ÔÇ║ should return one initiative
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: {}
+    Received: undefined
+
+      49 |       const result = new Initiative();
+      50 |       mockTypeOrmRepository.findOneBy.mockResolvedValue(result);
+    > 51 |       expect(await repository.findById('1')).toBe(result);
+         |                                              ^
+      52 |     });
+      53 |   });
+      54 |
+
+      at Object.<anonymous> (infrastructure/database/repositories/initiatives.repository.spec.ts:51:46)
+
+  ÔùÅ InitiativesRepository ÔÇ║ update ÔÇ║ should update an initiative
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: {}
+    Received: undefined
+
+      66 |       mockTypeOrmRepository.update.mockResolvedValue(undefined);
+      67 |       mockTypeOrmRepository.findOneBy.mockResolvedValue(initiative);
+    > 68 |       expect(await repository.update('1', {})).toBe(initiative);
+         |                                                ^
+      69 |     });
+      70 |   });
+      71 |
+
+      at Object.<anonymous> (infrastructure/database/repositories/initiatives.repository.spec.ts:68:48)
+
+ FAIL  src/infrastructure/repositories/requirement.repository.spec.ts (10.294 s)
+  ÔùÅ RequirementRepository ÔÇ║ findById ÔÇ║ should return requirement with relations
+
+    expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+    - Expected
+    + Received
+
+    @@ -4,15 +4,16 @@
+          "status",
+          "type",
+          "complexity",
+          "source",
+          "effortType",
+    -     "owner",
+    -     "epic",
+          "riskLevel",
+          "metric",
+    -     "release",
+    +     "verificationMethod",
+    +     "epic",
+    +     "productOwner",
+    +     "approver",
+        ],
+        "where": Object {
+          "requirementId": "req-123",
+        },
+      },
+
+    Number of calls: 1
+
+      65 |
+      66 |       expect(result).toEqual(mockRequirement);
+    > 67 |       expect(typeOrmRepository.findOne).toHaveBeenCalledWith({
+         |                                         ^
+      68 |         where: { requirementId: 'req-123' },
+      69 |         relations: mockRelations,
+      70 |       });
+
+      at Object.<anonymous> (infrastructure/repositories/requirement.repository.spec.ts:67:41)
+
+  ÔùÅ RequirementRepository ÔÇ║ findAll ÔÇ║ should return all requirements with relations
+
+    TypeError: this.repository.createQueryBuilder is not a function
+
+      14 |   async findAll(options: any): Promise<{ items: Requirement[], total: number }> {
+      15 |     const { page, limit } = options;
+    > 16 |     const query = this.repository.createQueryBuilder('req')
+         |                                   ^
+      17 |       .leftJoinAndSelect('req.priority', 'priority')
+      18 |       .leftJoinAndSelect('req.status', 'status')
+      19 |       .leftJoinAndSelect('req.type', 'type')
+
+      at RequirementRepository.findAll (infrastructure/repositories/requirement.repository.ts:16:35)
+      at Object.<anonymous> (infrastructure/repositories/requirement.repository.spec.ts:79:39)
+
+  ÔùÅ RequirementRepository ÔÇ║ findByEpicId ÔÇ║ should return requirements by epic id
+
+    expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+    - Expected
+    + Received
+
+    @@ -4,15 +4,16 @@
+          "status",
+          "type",
+          "complexity",
+          "source",
+          "effortType",
+    -     "owner",
+    -     "epic",
+          "riskLevel",
+          "metric",
+    -     "release",
+    +     "verificationMethod",
+    +     "epic",
+    +     "productOwner",
+    +     "approver",
+        ],
+        "where": Object {
+          "epicId": "epic-123",
+        },
+      },
+
+    Number of calls: 1
+
+      93 |
+      94 |       expect(result).toEqual([mockRequirement]);
+    > 95 |       expect(typeOrmRepository.find).toHaveBeenCalledWith({
+         |                                      ^
+      96 |         where: { epicId: 'epic-123' },
+      97 |         relations: mockRelations,
+      98 |       });
+
+      at Object.<anonymous> (infrastructure/repositories/requirement.repository.spec.ts:95:38)
+
+ FAIL  src/infrastructure/database/repositories/catalogs.repository.spec.ts (10.288 s)
+  ÔùÅ CatalogsRepository ÔÇ║ should be defined
+
+    Nest can't resolve dependencies of the CatalogsRepository (PriorityRepository, LifecycleStatusRepository, RiskLevelRepository, ComplexityRepository, EffortEstimateTypeRepository, RequirementTypeRepository, ?). Please make sure that the argument "VerificationMethodRepository" at index [6] is available in the RootTestModule context.
+
+    Potential solutions:
+    - Is RootTestModule a valid NestJS module?
+    - If "VerificationMethodRepository" is a provider, is it part of the current RootTestModule?
+    - If "VerificationMethodRepository" is exported from a separate @Module, is that module imported within RootTestModule?
+      @Module({
+        imports: [ /* the Module containing "VerificationMethodRepository" */ ]
+      })
+
+      17 |
+      18 |   beforeEach(async () => {
+    > 19 |     const module: TestingModule = await Test.createTestingModule({
+         |                                   ^
+      20 |       providers: [
+      21 |         CatalogsRepository,
+      22 |         { provide: getRepositoryToken(Priority), useValue: mockRepository },
+
+      at TestingInjector.lookupComponentInParentModules (../node_modules/@nestjs/core/injector/injector.js:262:19)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/core/injector/injector.js:215:33)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/testing/testing-injector.js:19:45)
+      at resolveParam (../node_modules/@nestjs/core/injector/injector.js:129:38)
+          at async Promise.all (index 6)
+      at TestingInjector.resolveConstructorParams (../node_modules/@nestjs/core/injector/injector.js:144:27)
+      at TestingInjector.loadInstance (../node_modules/@nestjs/core/injector/injector.js:70:13)
+      at TestingInjector.loadProvider (../node_modules/@nestjs/core/injector/injector.js:98:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:56:13
+          at async Promise.all (index 3)
+      at TestingInstanceLoader.createInstancesOfProviders (../node_modules/@nestjs/core/injector/instance-loader.js:55:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:40:13
+          at async Promise.all (index 1)
+      at TestingInstanceLoader.createInstances (../node_modules/@nestjs/core/injector/instance-loader.js:39:9)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/core/injector/instance-loader.js:22:13)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-instance-loader.js:9:9)
+      at TestingModuleBuilder.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-module.builder.js:118:9)
+      at TestingModuleBuilder.compile (../node_modules/@nestjs/testing/testing-module.builder.js:74:9)
+      at Object.<anonymous> (infrastructure/database/repositories/catalogs.repository.spec.ts:19:35)
+
+  ÔùÅ CatalogsRepository ÔÇ║ findAllPriorities ÔÇ║ should return priorities
+
+    Nest can't resolve dependencies of the CatalogsRepository (PriorityRepository, LifecycleStatusRepository, RiskLevelRepository, ComplexityRepository, EffortEstimateTypeRepository, RequirementTypeRepository, ?). Please make sure that the argument "VerificationMethodRepository" at index [6] is available in the RootTestModule context.
+
+    Potential solutions:
+    - Is RootTestModule a valid NestJS module?
+    - If "VerificationMethodRepository" is a provider, is it part of the current RootTestModule?
+    - If "VerificationMethodRepository" is exported from a separate @Module, is that module imported within RootTestModule?
+      @Module({
+        imports: [ /* the Module containing "VerificationMethodRepository" */ ]
+      })
+
+      17 |
+      18 |   beforeEach(async () => {
+    > 19 |     const module: TestingModule = await Test.createTestingModule({
+         |                                   ^
+      20 |       providers: [
+      21 |         CatalogsRepository,
+      22 |         { provide: getRepositoryToken(Priority), useValue: mockRepository },
+
+      at TestingInjector.lookupComponentInParentModules (../node_modules/@nestjs/core/injector/injector.js:262:19)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/core/injector/injector.js:215:33)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/testing/testing-injector.js:19:45)
+      at resolveParam (../node_modules/@nestjs/core/injector/injector.js:129:38)
+          at async Promise.all (index 6)
+      at TestingInjector.resolveConstructorParams (../node_modules/@nestjs/core/injector/injector.js:144:27)
+      at TestingInjector.loadInstance (../node_modules/@nestjs/core/injector/injector.js:70:13)
+      at TestingInjector.loadProvider (../node_modules/@nestjs/core/injector/injector.js:98:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:56:13
+          at async Promise.all (index 3)
+      at TestingInstanceLoader.createInstancesOfProviders (../node_modules/@nestjs/core/injector/instance-loader.js:55:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:40:13
+          at async Promise.all (index 1)
+      at TestingInstanceLoader.createInstances (../node_modules/@nestjs/core/injector/instance-loader.js:39:9)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/core/injector/instance-loader.js:22:13)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-instance-loader.js:9:9)
+      at TestingModuleBuilder.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-module.builder.js:118:9)
+      at TestingModuleBuilder.compile (../node_modules/@nestjs/testing/testing-module.builder.js:74:9)
+      at Object.<anonymous> (infrastructure/database/repositories/catalogs.repository.spec.ts:19:35)
+
+  ÔùÅ CatalogsRepository ÔÇ║ findAllStatuses ÔÇ║ should return statuses
+
+    Nest can't resolve dependencies of the CatalogsRepository (PriorityRepository, LifecycleStatusRepository, RiskLevelRepository, ComplexityRepository, EffortEstimateTypeRepository, RequirementTypeRepository, ?). Please make sure that the argument "VerificationMethodRepository" at index [6] is available in the RootTestModule context.
+
+    Potential solutions:
+    - Is RootTestModule a valid NestJS module?
+    - If "VerificationMethodRepository" is a provider, is it part of the current RootTestModule?
+    - If "VerificationMethodRepository" is exported from a separate @Module, is that module imported within RootTestModule?
+      @Module({
+        imports: [ /* the Module containing "VerificationMethodRepository" */ ]
+      })
+
+      17 |
+      18 |   beforeEach(async () => {
+    > 19 |     const module: TestingModule = await Test.createTestingModule({
+         |                                   ^
+      20 |       providers: [
+      21 |         CatalogsRepository,
+      22 |         { provide: getRepositoryToken(Priority), useValue: mockRepository },
+
+      at TestingInjector.lookupComponentInParentModules (../node_modules/@nestjs/core/injector/injector.js:262:19)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/core/injector/injector.js:215:33)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/testing/testing-injector.js:19:45)
+      at resolveParam (../node_modules/@nestjs/core/injector/injector.js:129:38)
+          at async Promise.all (index 6)
+      at TestingInjector.resolveConstructorParams (../node_modules/@nestjs/core/injector/injector.js:144:27)
+      at TestingInjector.loadInstance (../node_modules/@nestjs/core/injector/injector.js:70:13)
+      at TestingInjector.loadProvider (../node_modules/@nestjs/core/injector/injector.js:98:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:56:13
+          at async Promise.all (index 3)
+      at TestingInstanceLoader.createInstancesOfProviders (../node_modules/@nestjs/core/injector/instance-loader.js:55:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:40:13
+          at async Promise.all (index 1)
+      at TestingInstanceLoader.createInstances (../node_modules/@nestjs/core/injector/instance-loader.js:39:9)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/core/injector/instance-loader.js:22:13)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-instance-loader.js:9:9)
+      at TestingModuleBuilder.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-module.builder.js:118:9)
+      at TestingModuleBuilder.compile (../node_modules/@nestjs/testing/testing-module.builder.js:74:9)
+      at Object.<anonymous> (infrastructure/database/repositories/catalogs.repository.spec.ts:19:35)
+
+  ÔùÅ CatalogsRepository ÔÇ║ findAllRiskLevels ÔÇ║ should return risk levels
+
+    Nest can't resolve dependencies of the CatalogsRepository (PriorityRepository, LifecycleStatusRepository, RiskLevelRepository, ComplexityRepository, EffortEstimateTypeRepository, RequirementTypeRepository, ?). Please make sure that the argument "VerificationMethodRepository" at index [6] is available in the RootTestModule context.
+
+    Potential solutions:
+    - Is RootTestModule a valid NestJS module?
+    - If "VerificationMethodRepository" is a provider, is it part of the current RootTestModule?
+    - If "VerificationMethodRepository" is exported from a separate @Module, is that module imported within RootTestModule?
+      @Module({
+        imports: [ /* the Module containing "VerificationMethodRepository" */ ]
+      })
+
+      17 |
+      18 |   beforeEach(async () => {
+    > 19 |     const module: TestingModule = await Test.createTestingModule({
+         |                                   ^
+      20 |       providers: [
+      21 |         CatalogsRepository,
+      22 |         { provide: getRepositoryToken(Priority), useValue: mockRepository },
+
+      at TestingInjector.lookupComponentInParentModules (../node_modules/@nestjs/core/injector/injector.js:262:19)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/core/injector/injector.js:215:33)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/testing/testing-injector.js:19:45)
+      at resolveParam (../node_modules/@nestjs/core/injector/injector.js:129:38)
+          at async Promise.all (index 6)
+      at TestingInjector.resolveConstructorParams (../node_modules/@nestjs/core/injector/injector.js:144:27)
+      at TestingInjector.loadInstance (../node_modules/@nestjs/core/injector/injector.js:70:13)
+      at TestingInjector.loadProvider (../node_modules/@nestjs/core/injector/injector.js:98:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:56:13
+          at async Promise.all (index 3)
+      at TestingInstanceLoader.createInstancesOfProviders (../node_modules/@nestjs/core/injector/instance-loader.js:55:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:40:13
+          at async Promise.all (index 1)
+      at TestingInstanceLoader.createInstances (../node_modules/@nestjs/core/injector/instance-loader.js:39:9)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/core/injector/instance-loader.js:22:13)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-instance-loader.js:9:9)
+      at TestingModuleBuilder.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-module.builder.js:118:9)
+      at TestingModuleBuilder.compile (../node_modules/@nestjs/testing/testing-module.builder.js:74:9)
+      at Object.<anonymous> (infrastructure/database/repositories/catalogs.repository.spec.ts:19:35)
+
+  ÔùÅ CatalogsRepository ÔÇ║ findAllComplexities ÔÇ║ should return complexities
+
+    Nest can't resolve dependencies of the CatalogsRepository (PriorityRepository, LifecycleStatusRepository, RiskLevelRepository, ComplexityRepository, EffortEstimateTypeRepository, RequirementTypeRepository, ?). Please make sure that the argument "VerificationMethodRepository" at index [6] is available in the RootTestModule context.
+
+    Potential solutions:
+    - Is RootTestModule a valid NestJS module?
+    - If "VerificationMethodRepository" is a provider, is it part of the current RootTestModule?
+    - If "VerificationMethodRepository" is exported from a separate @Module, is that module imported within RootTestModule?
+      @Module({
+        imports: [ /* the Module containing "VerificationMethodRepository" */ ]
+      })
+
+      17 |
+      18 |   beforeEach(async () => {
+    > 19 |     const module: TestingModule = await Test.createTestingModule({
+         |                                   ^
+      20 |       providers: [
+      21 |         CatalogsRepository,
+      22 |         { provide: getRepositoryToken(Priority), useValue: mockRepository },
+
+      at TestingInjector.lookupComponentInParentModules (../node_modules/@nestjs/core/injector/injector.js:262:19)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/core/injector/injector.js:215:33)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/testing/testing-injector.js:19:45)
+      at resolveParam (../node_modules/@nestjs/core/injector/injector.js:129:38)
+          at async Promise.all (index 6)
+      at TestingInjector.resolveConstructorParams (../node_modules/@nestjs/core/injector/injector.js:144:27)
+      at TestingInjector.loadInstance (../node_modules/@nestjs/core/injector/injector.js:70:13)
+      at TestingInjector.loadProvider (../node_modules/@nestjs/core/injector/injector.js:98:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:56:13
+          at async Promise.all (index 3)
+      at TestingInstanceLoader.createInstancesOfProviders (../node_modules/@nestjs/core/injector/instance-loader.js:55:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:40:13
+          at async Promise.all (index 1)
+      at TestingInstanceLoader.createInstances (../node_modules/@nestjs/core/injector/instance-loader.js:39:9)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/core/injector/instance-loader.js:22:13)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-instance-loader.js:9:9)
+      at TestingModuleBuilder.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-module.builder.js:118:9)
+      at TestingModuleBuilder.compile (../node_modules/@nestjs/testing/testing-module.builder.js:74:9)
+      at Object.<anonymous> (infrastructure/database/repositories/catalogs.repository.spec.ts:19:35)
+
+  ÔùÅ CatalogsRepository ÔÇ║ findAllEffortTypes ÔÇ║ should return effort types
+
+    Nest can't resolve dependencies of the CatalogsRepository (PriorityRepository, LifecycleStatusRepository, RiskLevelRepository, ComplexityRepository, EffortEstimateTypeRepository, RequirementTypeRepository, ?). Please make sure that the argument "VerificationMethodRepository" at index [6] is available in the RootTestModule context.
+
+    Potential solutions:
+    - Is RootTestModule a valid NestJS module?
+    - If "VerificationMethodRepository" is a provider, is it part of the current RootTestModule?
+    - If "VerificationMethodRepository" is exported from a separate @Module, is that module imported within RootTestModule?
+      @Module({
+        imports: [ /* the Module containing "VerificationMethodRepository" */ ]
+      })
+
+      17 |
+      18 |   beforeEach(async () => {
+    > 19 |     const module: TestingModule = await Test.createTestingModule({
+         |                                   ^
+      20 |       providers: [
+      21 |         CatalogsRepository,
+      22 |         { provide: getRepositoryToken(Priority), useValue: mockRepository },
+
+      at TestingInjector.lookupComponentInParentModules (../node_modules/@nestjs/core/injector/injector.js:262:19)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/core/injector/injector.js:215:33)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/testing/testing-injector.js:19:45)
+      at resolveParam (../node_modules/@nestjs/core/injector/injector.js:129:38)
+          at async Promise.all (index 6)
+      at TestingInjector.resolveConstructorParams (../node_modules/@nestjs/core/injector/injector.js:144:27)
+      at TestingInjector.loadInstance (../node_modules/@nestjs/core/injector/injector.js:70:13)
+      at TestingInjector.loadProvider (../node_modules/@nestjs/core/injector/injector.js:98:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:56:13
+          at async Promise.all (index 3)
+      at TestingInstanceLoader.createInstancesOfProviders (../node_modules/@nestjs/core/injector/instance-loader.js:55:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:40:13
+          at async Promise.all (index 1)
+      at TestingInstanceLoader.createInstances (../node_modules/@nestjs/core/injector/instance-loader.js:39:9)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/core/injector/instance-loader.js:22:13)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-instance-loader.js:9:9)
+      at TestingModuleBuilder.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-module.builder.js:118:9)
+      at TestingModuleBuilder.compile (../node_modules/@nestjs/testing/testing-module.builder.js:74:9)
+      at Object.<anonymous> (infrastructure/database/repositories/catalogs.repository.spec.ts:19:35)
+
+  ÔùÅ CatalogsRepository ÔÇ║ findAllTypes ÔÇ║ should return types
+
+    Nest can't resolve dependencies of the CatalogsRepository (PriorityRepository, LifecycleStatusRepository, RiskLevelRepository, ComplexityRepository, EffortEstimateTypeRepository, RequirementTypeRepository, ?). Please make sure that the argument "VerificationMethodRepository" at index [6] is available in the RootTestModule context.
+
+    Potential solutions:
+    - Is RootTestModule a valid NestJS module?
+    - If "VerificationMethodRepository" is a provider, is it part of the current RootTestModule?
+    - If "VerificationMethodRepository" is exported from a separate @Module, is that module imported within RootTestModule?
+      @Module({
+        imports: [ /* the Module containing "VerificationMethodRepository" */ ]
+      })
+
+      17 |
+      18 |   beforeEach(async () => {
+    > 19 |     const module: TestingModule = await Test.createTestingModule({
+         |                                   ^
+      20 |       providers: [
+      21 |         CatalogsRepository,
+      22 |         { provide: getRepositoryToken(Priority), useValue: mockRepository },
+
+      at TestingInjector.lookupComponentInParentModules (../node_modules/@nestjs/core/injector/injector.js:262:19)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/core/injector/injector.js:215:33)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/testing/testing-injector.js:19:45)
+      at resolveParam (../node_modules/@nestjs/core/injector/injector.js:129:38)
+          at async Promise.all (index 6)
+      at TestingInjector.resolveConstructorParams (../node_modules/@nestjs/core/injector/injector.js:144:27)
+      at TestingInjector.loadInstance (../node_modules/@nestjs/core/injector/injector.js:70:13)
+      at TestingInjector.loadProvider (../node_modules/@nestjs/core/injector/injector.js:98:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:56:13
+          at async Promise.all (index 3)
+      at TestingInstanceLoader.createInstancesOfProviders (../node_modules/@nestjs/core/injector/instance-loader.js:55:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:40:13
+          at async Promise.all (index 1)
+      at TestingInstanceLoader.createInstances (../node_modules/@nestjs/core/injector/instance-loader.js:39:9)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/core/injector/instance-loader.js:22:13)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-instance-loader.js:9:9)
+      at TestingModuleBuilder.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-module.builder.js:118:9)
+      at TestingModuleBuilder.compile (../node_modules/@nestjs/testing/testing-module.builder.js:74:9)
+      at Object.<anonymous> (infrastructure/database/repositories/catalogs.repository.spec.ts:19:35)
+
+ PASS  src/application/epics/services/epics.service.spec.ts (10.284 s)
+ PASS  src/shared/pipes/uuid-validation.pipe.spec.ts
+ PASS  src/presentation/requirements/requirements.controller.spec.ts (10.391 s)
+ PASS  src/shared/interceptors/timeout.interceptor.spec.ts
+ PASS  src/infrastructure/repositories/portfolio.repository.spec.ts (10.348 s)
+ PASS  src/presentation/auth/auth.controller.spec.ts (10.407 s)
+ PASS  src/presentation/users/users.controller.spec.ts (10.448 s)
+ PASS  src/presentation/initiatives/initiatives.controller.spec.ts (10.722 s)
+ PASS  src/presentation/epics/epics.controller.spec.ts (10.901 s)
+ FAIL  src/presentation/portfolios/portfolios.controller.spec.ts
+  ÔùÅ Test suite failed to run
+
+    src/presentation/portfolios/portfolios.controller.spec.ts:38:41 - error TS2345: Argument of type 'Portfolio[]' is not assignable to parameter of type '{ items: Portfolio[]; total: number; } | Promise<{ items: Portfolio[]; total: number; }>'.
+
+    38       service.findAll.mockResolvedValue([mockPortfolio]);
+                                               ~~~~~~~~~~~~~~~
+
+ FAIL  src/application/requirements/services/requirements.service.spec.ts
+  ÔùÅ Test suite failed to run
+
+    src/application/requirements/services/requirements.service.spec.ts:50:44 - error TS2345: Argument of type 'Requirement[]' is not assignable to parameter of type '{ items: Requirement[]; total: number; } | Promise<{ items: Requirement[]; total: number; }>'.
+
+    50       repository.findAll.mockResolvedValue([mockRequirement]);
+                                                  ~~~~~~~~~~~~~~~~~
+
+Summary of all failing tests
+ FAIL  infrastructure/auth/guards/jwt-auth.guard.spec.ts (8.419 s)
+  ÔùÅ JwtAuthGuard ÔÇ║ canActivate ÔÇ║ should allow access for public routes
+
+    expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+    Expected: "isPublic", [undefined, undefined]
+
+    Number of calls: 0
+
+      31 |
+      32 |       expect(result).toBe(true);
+    > 33 |       expect(reflector.getAllAndOverride).toHaveBeenCalledWith('isPublic', [
+         |                                           ^
+      34 |         mockContext.getHandler(),
+      35 |         mockContext.getClass(),
+      36 |       ]);
+
+      at Object.<anonymous> (infrastructure/auth/guards/jwt-auth.guard.spec.ts:33:43)
+
+  ÔùÅ JwtAuthGuard ÔÇ║ canActivate ÔÇ║ should call parent canActivate for protected routes
+
+    expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+    Expected: "isPublic", [undefined, undefined]
+
+    Number of calls: 0
+
+      55 |       guard.canActivate(mockContext);
+      56 |
+    > 57 |       expect(reflector.getAllAndOverride).toHaveBeenCalledWith('isPublic', [
+         |                                           ^
+      58 |         mockContext.getHandler(),
+      59 |         mockContext.getClass(),
+      60 |       ]);
+
+      at Object.<anonymous> (infrastructure/auth/guards/jwt-auth.guard.spec.ts:57:43)
+
+ FAIL  infrastructure/database/repositories/epics.repository.spec.ts (9.401 s)
+  ÔùÅ EpicsRepository ÔÇ║ findById ÔÇ║ should return one epic
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: {}
+    Received: undefined
+
+      49 |       const result = new Epic();
+      50 |       mockTypeOrmRepository.findOneBy.mockResolvedValue(result);
+    > 51 |       expect(await repository.findById('1')).toBe(result);
+         |                                              ^
+      52 |     });
+      53 |   });
+      54 |
+
+      at Object.<anonymous> (infrastructure/database/repositories/epics.repository.spec.ts:51:46)
+
+  ÔùÅ EpicsRepository ÔÇ║ update ÔÇ║ should update an epic
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: {}
+    Received: undefined
+
+      66 |       mockTypeOrmRepository.update.mockResolvedValue(undefined);
+      67 |       mockTypeOrmRepository.findOneBy.mockResolvedValue(epic);
+    > 68 |       expect(await repository.update('1', {})).toBe(epic);
+         |                                                ^
+      69 |     });
+      70 |   });
+      71 |
+
+      at Object.<anonymous> (infrastructure/database/repositories/epics.repository.spec.ts:68:48)
+
+ FAIL  infrastructure/database/repositories/initiatives.repository.spec.ts (10.215 s)
+  ÔùÅ InitiativesRepository ÔÇ║ findById ÔÇ║ should return one initiative
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: {}
+    Received: undefined
+
+      49 |       const result = new Initiative();
+      50 |       mockTypeOrmRepository.findOneBy.mockResolvedValue(result);
+    > 51 |       expect(await repository.findById('1')).toBe(result);
+         |                                              ^
+      52 |     });
+      53 |   });
+      54 |
+
+      at Object.<anonymous> (infrastructure/database/repositories/initiatives.repository.spec.ts:51:46)
+
+  ÔùÅ InitiativesRepository ÔÇ║ update ÔÇ║ should update an initiative
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: {}
+    Received: undefined
+
+      66 |       mockTypeOrmRepository.update.mockResolvedValue(undefined);
+      67 |       mockTypeOrmRepository.findOneBy.mockResolvedValue(initiative);
+    > 68 |       expect(await repository.update('1', {})).toBe(initiative);
+         |                                                ^
+      69 |     });
+      70 |   });
+      71 |
+
+      at Object.<anonymous> (infrastructure/database/repositories/initiatives.repository.spec.ts:68:48)
+
+ FAIL  infrastructure/repositories/requirement.repository.spec.ts (10.294 s)
+  ÔùÅ RequirementRepository ÔÇ║ findById ÔÇ║ should return requirement with relations
+
+    expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+    - Expected
+    + Received
+
+    @@ -4,15 +4,16 @@
+          "status",
+          "type",
+          "complexity",
+          "source",
+          "effortType",
+    -     "owner",
+    -     "epic",
+          "riskLevel",
+          "metric",
+    -     "release",
+    +     "verificationMethod",
+    +     "epic",
+    +     "productOwner",
+    +     "approver",
+        ],
+        "where": Object {
+          "requirementId": "req-123",
+        },
+      },
+
+    Number of calls: 1
+
+      65 |
+      66 |       expect(result).toEqual(mockRequirement);
+    > 67 |       expect(typeOrmRepository.findOne).toHaveBeenCalledWith({
+         |                                         ^
+      68 |         where: { requirementId: 'req-123' },
+      69 |         relations: mockRelations,
+      70 |       });
+
+      at Object.<anonymous> (infrastructure/repositories/requirement.repository.spec.ts:67:41)
+
+  ÔùÅ RequirementRepository ÔÇ║ findAll ÔÇ║ should return all requirements with relations
+
+    TypeError: this.repository.createQueryBuilder is not a function
+
+      14 |   async findAll(options: any): Promise<{ items: Requirement[], total: number }> {
+      15 |     const { page, limit } = options;
+    > 16 |     const query = this.repository.createQueryBuilder('req')
+         |                                   ^
+      17 |       .leftJoinAndSelect('req.priority', 'priority')
+      18 |       .leftJoinAndSelect('req.status', 'status')
+      19 |       .leftJoinAndSelect('req.type', 'type')
+
+      at RequirementRepository.findAll (infrastructure/repositories/requirement.repository.ts:16:35)
+      at Object.<anonymous> (infrastructure/repositories/requirement.repository.spec.ts:79:39)
+
+  ÔùÅ RequirementRepository ÔÇ║ findByEpicId ÔÇ║ should return requirements by epic id
+
+    expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+    - Expected
+    + Received
+
+    @@ -4,15 +4,16 @@
+          "status",
+          "type",
+          "complexity",
+          "source",
+          "effortType",
+    -     "owner",
+    -     "epic",
+          "riskLevel",
+          "metric",
+    -     "release",
+    +     "verificationMethod",
+    +     "epic",
+    +     "productOwner",
+    +     "approver",
+        ],
+        "where": Object {
+          "epicId": "epic-123",
+        },
+      },
+
+    Number of calls: 1
+
+      93 |
+      94 |       expect(result).toEqual([mockRequirement]);
+    > 95 |       expect(typeOrmRepository.find).toHaveBeenCalledWith({
+         |                                      ^
+      96 |         where: { epicId: 'epic-123' },
+      97 |         relations: mockRelations,
+      98 |       });
+
+      at Object.<anonymous> (infrastructure/repositories/requirement.repository.spec.ts:95:38)
+
+ FAIL  infrastructure/database/repositories/catalogs.repository.spec.ts (10.288 s)
+  ÔùÅ CatalogsRepository ÔÇ║ should be defined
+
+    Nest can't resolve dependencies of the CatalogsRepository (PriorityRepository, LifecycleStatusRepository, RiskLevelRepository, ComplexityRepository, EffortEstimateTypeRepository, RequirementTypeRepository, ?). Please make sure that the argument "VerificationMethodRepository" at index [6] is available in the RootTestModule context.
+
+    Potential solutions:
+    - Is RootTestModule a valid NestJS module?
+    - If "VerificationMethodRepository" is a provider, is it part of the current RootTestModule?
+    - If "VerificationMethodRepository" is exported from a separate @Module, is that module imported within RootTestModule?
+      @Module({
+        imports: [ /* the Module containing "VerificationMethodRepository" */ ]
+      })
+
+      17 |
+      18 |   beforeEach(async () => {
+    > 19 |     const module: TestingModule = await Test.createTestingModule({
+         |                                   ^
+      20 |       providers: [
+      21 |         CatalogsRepository,
+      22 |         { provide: getRepositoryToken(Priority), useValue: mockRepository },
+
+      at TestingInjector.lookupComponentInParentModules (../node_modules/@nestjs/core/injector/injector.js:262:19)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/core/injector/injector.js:215:33)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/testing/testing-injector.js:19:45)
+      at resolveParam (../node_modules/@nestjs/core/injector/injector.js:129:38)
+          at async Promise.all (index 6)
+      at TestingInjector.resolveConstructorParams (../node_modules/@nestjs/core/injector/injector.js:144:27)
+      at TestingInjector.loadInstance (../node_modules/@nestjs/core/injector/injector.js:70:13)
+      at TestingInjector.loadProvider (../node_modules/@nestjs/core/injector/injector.js:98:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:56:13
+          at async Promise.all (index 3)
+      at TestingInstanceLoader.createInstancesOfProviders (../node_modules/@nestjs/core/injector/instance-loader.js:55:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:40:13
+          at async Promise.all (index 1)
+      at TestingInstanceLoader.createInstances (../node_modules/@nestjs/core/injector/instance-loader.js:39:9)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/core/injector/instance-loader.js:22:13)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-instance-loader.js:9:9)
+      at TestingModuleBuilder.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-module.builder.js:118:9)
+      at TestingModuleBuilder.compile (../node_modules/@nestjs/testing/testing-module.builder.js:74:9)
+      at Object.<anonymous> (infrastructure/database/repositories/catalogs.repository.spec.ts:19:35)
+
+  ÔùÅ CatalogsRepository ÔÇ║ findAllPriorities ÔÇ║ should return priorities
+
+    Nest can't resolve dependencies of the CatalogsRepository (PriorityRepository, LifecycleStatusRepository, RiskLevelRepository, ComplexityRepository, EffortEstimateTypeRepository, RequirementTypeRepository, ?). Please make sure that the argument "VerificationMethodRepository" at index [6] is available in the RootTestModule context.
+
+    Potential solutions:
+    - Is RootTestModule a valid NestJS module?
+    - If "VerificationMethodRepository" is a provider, is it part of the current RootTestModule?
+    - If "VerificationMethodRepository" is exported from a separate @Module, is that module imported within RootTestModule?
+      @Module({
+        imports: [ /* the Module containing "VerificationMethodRepository" */ ]
+      })
+
+      17 |
+      18 |   beforeEach(async () => {
+    > 19 |     const module: TestingModule = await Test.createTestingModule({
+         |                                   ^
+      20 |       providers: [
+      21 |         CatalogsRepository,
+      22 |         { provide: getRepositoryToken(Priority), useValue: mockRepository },
+
+      at TestingInjector.lookupComponentInParentModules (../node_modules/@nestjs/core/injector/injector.js:262:19)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/core/injector/injector.js:215:33)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/testing/testing-injector.js:19:45)
+      at resolveParam (../node_modules/@nestjs/core/injector/injector.js:129:38)
+          at async Promise.all (index 6)
+      at TestingInjector.resolveConstructorParams (../node_modules/@nestjs/core/injector/injector.js:144:27)
+      at TestingInjector.loadInstance (../node_modules/@nestjs/core/injector/injector.js:70:13)
+      at TestingInjector.loadProvider (../node_modules/@nestjs/core/injector/injector.js:98:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:56:13
+          at async Promise.all (index 3)
+      at TestingInstanceLoader.createInstancesOfProviders (../node_modules/@nestjs/core/injector/instance-loader.js:55:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:40:13
+          at async Promise.all (index 1)
+      at TestingInstanceLoader.createInstances (../node_modules/@nestjs/core/injector/instance-loader.js:39:9)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/core/injector/instance-loader.js:22:13)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-instance-loader.js:9:9)
+      at TestingModuleBuilder.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-module.builder.js:118:9)
+      at TestingModuleBuilder.compile (../node_modules/@nestjs/testing/testing-module.builder.js:74:9)
+      at Object.<anonymous> (infrastructure/database/repositories/catalogs.repository.spec.ts:19:35)
+
+  ÔùÅ CatalogsRepository ÔÇ║ findAllStatuses ÔÇ║ should return statuses
+
+    Nest can't resolve dependencies of the CatalogsRepository (PriorityRepository, LifecycleStatusRepository, RiskLevelRepository, ComplexityRepository, EffortEstimateTypeRepository, RequirementTypeRepository, ?). Please make sure that the argument "VerificationMethodRepository" at index [6] is available in the RootTestModule context.
+
+    Potential solutions:
+    - Is RootTestModule a valid NestJS module?
+    - If "VerificationMethodRepository" is a provider, is it part of the current RootTestModule?
+    - If "VerificationMethodRepository" is exported from a separate @Module, is that module imported within RootTestModule?
+      @Module({
+        imports: [ /* the Module containing "VerificationMethodRepository" */ ]
+      })
+
+      17 |
+      18 |   beforeEach(async () => {
+    > 19 |     const module: TestingModule = await Test.createTestingModule({
+         |                                   ^
+      20 |       providers: [
+      21 |         CatalogsRepository,
+      22 |         { provide: getRepositoryToken(Priority), useValue: mockRepository },
+
+      at TestingInjector.lookupComponentInParentModules (../node_modules/@nestjs/core/injector/injector.js:262:19)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/core/injector/injector.js:215:33)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/testing/testing-injector.js:19:45)
+      at resolveParam (../node_modules/@nestjs/core/injector/injector.js:129:38)
+          at async Promise.all (index 6)
+      at TestingInjector.resolveConstructorParams (../node_modules/@nestjs/core/injector/injector.js:144:27)
+      at TestingInjector.loadInstance (../node_modules/@nestjs/core/injector/injector.js:70:13)
+      at TestingInjector.loadProvider (../node_modules/@nestjs/core/injector/injector.js:98:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:56:13
+          at async Promise.all (index 3)
+      at TestingInstanceLoader.createInstancesOfProviders (../node_modules/@nestjs/core/injector/instance-loader.js:55:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:40:13
+          at async Promise.all (index 1)
+      at TestingInstanceLoader.createInstances (../node_modules/@nestjs/core/injector/instance-loader.js:39:9)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/core/injector/instance-loader.js:22:13)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-instance-loader.js:9:9)
+      at TestingModuleBuilder.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-module.builder.js:118:9)
+      at TestingModuleBuilder.compile (../node_modules/@nestjs/testing/testing-module.builder.js:74:9)
+      at Object.<anonymous> (infrastructure/database/repositories/catalogs.repository.spec.ts:19:35)
+
+  ÔùÅ CatalogsRepository ÔÇ║ findAllRiskLevels ÔÇ║ should return risk levels
+
+    Nest can't resolve dependencies of the CatalogsRepository (PriorityRepository, LifecycleStatusRepository, RiskLevelRepository, ComplexityRepository, EffortEstimateTypeRepository, RequirementTypeRepository, ?). Please make sure that the argument "VerificationMethodRepository" at index [6] is available in the RootTestModule context.
+
+    Potential solutions:
+    - Is RootTestModule a valid NestJS module?
+    - If "VerificationMethodRepository" is a provider, is it part of the current RootTestModule?
+    - If "VerificationMethodRepository" is exported from a separate @Module, is that module imported within RootTestModule?
+      @Module({
+        imports: [ /* the Module containing "VerificationMethodRepository" */ ]
+      })
+
+      17 |
+      18 |   beforeEach(async () => {
+    > 19 |     const module: TestingModule = await Test.createTestingModule({
+         |                                   ^
+      20 |       providers: [
+      21 |         CatalogsRepository,
+      22 |         { provide: getRepositoryToken(Priority), useValue: mockRepository },
+
+      at TestingInjector.lookupComponentInParentModules (../node_modules/@nestjs/core/injector/injector.js:262:19)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/core/injector/injector.js:215:33)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/testing/testing-injector.js:19:45)
+      at resolveParam (../node_modules/@nestjs/core/injector/injector.js:129:38)
+          at async Promise.all (index 6)
+      at TestingInjector.resolveConstructorParams (../node_modules/@nestjs/core/injector/injector.js:144:27)
+      at TestingInjector.loadInstance (../node_modules/@nestjs/core/injector/injector.js:70:13)
+      at TestingInjector.loadProvider (../node_modules/@nestjs/core/injector/injector.js:98:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:56:13
+          at async Promise.all (index 3)
+      at TestingInstanceLoader.createInstancesOfProviders (../node_modules/@nestjs/core/injector/instance-loader.js:55:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:40:13
+          at async Promise.all (index 1)
+      at TestingInstanceLoader.createInstances (../node_modules/@nestjs/core/injector/instance-loader.js:39:9)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/core/injector/instance-loader.js:22:13)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-instance-loader.js:9:9)
+      at TestingModuleBuilder.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-module.builder.js:118:9)
+      at TestingModuleBuilder.compile (../node_modules/@nestjs/testing/testing-module.builder.js:74:9)
+      at Object.<anonymous> (infrastructure/database/repositories/catalogs.repository.spec.ts:19:35)
+
+  ÔùÅ CatalogsRepository ÔÇ║ findAllComplexities ÔÇ║ should return complexities
+
+    Nest can't resolve dependencies of the CatalogsRepository (PriorityRepository, LifecycleStatusRepository, RiskLevelRepository, ComplexityRepository, EffortEstimateTypeRepository, RequirementTypeRepository, ?). Please make sure that the argument "VerificationMethodRepository" at index [6] is available in the RootTestModule context.
+
+    Potential solutions:
+    - Is RootTestModule a valid NestJS module?
+    - If "VerificationMethodRepository" is a provider, is it part of the current RootTestModule?
+    - If "VerificationMethodRepository" is exported from a separate @Module, is that module imported within RootTestModule?
+      @Module({
+        imports: [ /* the Module containing "VerificationMethodRepository" */ ]
+      })
+
+      17 |
+      18 |   beforeEach(async () => {
+    > 19 |     const module: TestingModule = await Test.createTestingModule({
+         |                                   ^
+      20 |       providers: [
+      21 |         CatalogsRepository,
+      22 |         { provide: getRepositoryToken(Priority), useValue: mockRepository },
+
+      at TestingInjector.lookupComponentInParentModules (../node_modules/@nestjs/core/injector/injector.js:262:19)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/core/injector/injector.js:215:33)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/testing/testing-injector.js:19:45)
+      at resolveParam (../node_modules/@nestjs/core/injector/injector.js:129:38)
+          at async Promise.all (index 6)
+      at TestingInjector.resolveConstructorParams (../node_modules/@nestjs/core/injector/injector.js:144:27)
+      at TestingInjector.loadInstance (../node_modules/@nestjs/core/injector/injector.js:70:13)
+      at TestingInjector.loadProvider (../node_modules/@nestjs/core/injector/injector.js:98:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:56:13
+          at async Promise.all (index 3)
+      at TestingInstanceLoader.createInstancesOfProviders (../node_modules/@nestjs/core/injector/instance-loader.js:55:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:40:13
+          at async Promise.all (index 1)
+      at TestingInstanceLoader.createInstances (../node_modules/@nestjs/core/injector/instance-loader.js:39:9)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/core/injector/instance-loader.js:22:13)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-instance-loader.js:9:9)
+      at TestingModuleBuilder.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-module.builder.js:118:9)
+      at TestingModuleBuilder.compile (../node_modules/@nestjs/testing/testing-module.builder.js:74:9)
+      at Object.<anonymous> (infrastructure/database/repositories/catalogs.repository.spec.ts:19:35)
+
+  ÔùÅ CatalogsRepository ÔÇ║ findAllEffortTypes ÔÇ║ should return effort types
+
+    Nest can't resolve dependencies of the CatalogsRepository (PriorityRepository, LifecycleStatusRepository, RiskLevelRepository, ComplexityRepository, EffortEstimateTypeRepository, RequirementTypeRepository, ?). Please make sure that the argument "VerificationMethodRepository" at index [6] is available in the RootTestModule context.
+
+    Potential solutions:
+    - Is RootTestModule a valid NestJS module?
+    - If "VerificationMethodRepository" is a provider, is it part of the current RootTestModule?
+    - If "VerificationMethodRepository" is exported from a separate @Module, is that module imported within RootTestModule?
+      @Module({
+        imports: [ /* the Module containing "VerificationMethodRepository" */ ]
+      })
+
+      17 |
+      18 |   beforeEach(async () => {
+    > 19 |     const module: TestingModule = await Test.createTestingModule({
+         |                                   ^
+      20 |       providers: [
+      21 |         CatalogsRepository,
+      22 |         { provide: getRepositoryToken(Priority), useValue: mockRepository },
+
+      at TestingInjector.lookupComponentInParentModules (../node_modules/@nestjs/core/injector/injector.js:262:19)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/core/injector/injector.js:215:33)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/testing/testing-injector.js:19:45)
+      at resolveParam (../node_modules/@nestjs/core/injector/injector.js:129:38)
+          at async Promise.all (index 6)
+      at TestingInjector.resolveConstructorParams (../node_modules/@nestjs/core/injector/injector.js:144:27)
+      at TestingInjector.loadInstance (../node_modules/@nestjs/core/injector/injector.js:70:13)
+      at TestingInjector.loadProvider (../node_modules/@nestjs/core/injector/injector.js:98:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:56:13
+          at async Promise.all (index 3)
+      at TestingInstanceLoader.createInstancesOfProviders (../node_modules/@nestjs/core/injector/instance-loader.js:55:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:40:13
+          at async Promise.all (index 1)
+      at TestingInstanceLoader.createInstances (../node_modules/@nestjs/core/injector/instance-loader.js:39:9)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/core/injector/instance-loader.js:22:13)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-instance-loader.js:9:9)
+      at TestingModuleBuilder.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-module.builder.js:118:9)
+      at TestingModuleBuilder.compile (../node_modules/@nestjs/testing/testing-module.builder.js:74:9)
+      at Object.<anonymous> (infrastructure/database/repositories/catalogs.repository.spec.ts:19:35)
+
+  ÔùÅ CatalogsRepository ÔÇ║ findAllTypes ÔÇ║ should return types
+
+    Nest can't resolve dependencies of the CatalogsRepository (PriorityRepository, LifecycleStatusRepository, RiskLevelRepository, ComplexityRepository, EffortEstimateTypeRepository, RequirementTypeRepository, ?). Please make sure that the argument "VerificationMethodRepository" at index [6] is available in the RootTestModule context.
+
+    Potential solutions:
+    - Is RootTestModule a valid NestJS module?
+    - If "VerificationMethodRepository" is a provider, is it part of the current RootTestModule?
+    - If "VerificationMethodRepository" is exported from a separate @Module, is that module imported within RootTestModule?
+      @Module({
+        imports: [ /* the Module containing "VerificationMethodRepository" */ ]
+      })
+
+      17 |
+      18 |   beforeEach(async () => {
+    > 19 |     const module: TestingModule = await Test.createTestingModule({
+         |                                   ^
+      20 |       providers: [
+      21 |         CatalogsRepository,
+      22 |         { provide: getRepositoryToken(Priority), useValue: mockRepository },
+
+      at TestingInjector.lookupComponentInParentModules (../node_modules/@nestjs/core/injector/injector.js:262:19)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/core/injector/injector.js:215:33)
+      at TestingInjector.resolveComponentInstance (../node_modules/@nestjs/testing/testing-injector.js:19:45)
+      at resolveParam (../node_modules/@nestjs/core/injector/injector.js:129:38)
+          at async Promise.all (index 6)
+      at TestingInjector.resolveConstructorParams (../node_modules/@nestjs/core/injector/injector.js:144:27)
+      at TestingInjector.loadInstance (../node_modules/@nestjs/core/injector/injector.js:70:13)
+      at TestingInjector.loadProvider (../node_modules/@nestjs/core/injector/injector.js:98:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:56:13
+          at async Promise.all (index 3)
+      at TestingInstanceLoader.createInstancesOfProviders (../node_modules/@nestjs/core/injector/instance-loader.js:55:9)
+      at ../node_modules/@nestjs/core/injector/instance-loader.js:40:13
+          at async Promise.all (index 1)
+      at TestingInstanceLoader.createInstances (../node_modules/@nestjs/core/injector/instance-loader.js:39:9)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/core/injector/instance-loader.js:22:13)
+      at TestingInstanceLoader.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-instance-loader.js:9:9)
+      at TestingModuleBuilder.createInstancesOfDependencies (../node_modules/@nestjs/testing/testing-module.builder.js:118:9)
+      at TestingModuleBuilder.compile (../node_modules/@nestjs/testing/testing-module.builder.js:74:9)
+      at Object.<anonymous> (infrastructure/database/repositories/catalogs.repository.spec.ts:19:35)
+
+ FAIL  presentation/portfolios/portfolios.controller.spec.ts
+  ÔùÅ Test suite failed to run
+
+    src/presentation/portfolios/portfolios.controller.spec.ts:38:41 - error TS2345: Argument of type 'Portfolio[]' is not assignable to parameter of type '{ items: Portfolio[]; total: number; } | Promise<{ items: Portfolio[]; total: number; }>'.
+
+    38       service.findAll.mockResolvedValue([mockPortfolio]);
+                                               ~~~~~~~~~~~~~~~
+
+ FAIL  application/requirements/services/requirements.service.spec.ts
+  ÔùÅ Test suite failed to run
+
+    src/application/requirements/services/requirements.service.spec.ts:50:44 - error TS2345: Argument of type 'Requirement[]' is not assignable to parameter of type '{ items: Requirement[]; total: number; } | Promise<{ items: Requirement[]; total: number; }>'.
+
+    50       repository.findAll.mockResolvedValue([mockRequirement]);
+                                                  ~~~~~~~~~~~~~~~~~
+
+
+Test Suites: 7 failed, 28 passed, 35 total
+Tests:       16 failed, 161 passed, 177 total
+Snapshots:   0 total
+Time:        13.341 s
+Ran all test suites.
+
+
+
+ NX   Running target test for project api failed
+
+Failed tasks:
+
+- api:test
+
+Hint: run the command with --verbose for more details.
+
+Warning: command "jest --config jest.config.js" exited with non-zero status code

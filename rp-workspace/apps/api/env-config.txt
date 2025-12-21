@@ -1,0 +1,24 @@
+# Server Configuration
+NODE_ENV=development
+PORT=3000
+
+# Database Configuration
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=postgres
+DB_PASSWORD=demo
+DB_DATABASE=requirements_db
+DB_SYNCHRONIZE=false
+DB_LOGGING=true
+
+# Security (JWT)
+# Explicit 32+ char secret for development
+JWT_SECRET=development_secret_key_needs_to_be_32_chars_long
+JWT_EXPIRES_IN=1d
+
+# Rate Limiting
+THROTTLE_TTL=60
+THROTTLE_LIMIT=100
+
+# Logging
+LOG_LEVEL=debug

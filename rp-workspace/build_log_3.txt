@@ -1,0 +1,61 @@
+
+> nx run portal:build
+
+> npm run build
+
+
+> portal@0.1.0 build
+> next build
+
+ [33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\MySources\RP-Requirements-Web\rp-workspace\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\MySources\RP-Requirements-Web\rp-workspace\apps\portal\package-lock.json
+
+   [1m[38;2;173;127;168m▲ Next.js 16.0.10[39m[22m (Turbopack)
+
+ [37m[1m [22m[39m Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 1 errors:
+./apps/portal/src/components/ui/alert-dialog.tsx:4:1
+[1m[31mModule not found[39m[22m: Can't resolve [32m'@radix-ui/react-alert-dialog'[39m
+[0m [90m 2 |[39m
+ [90m 3 |[39m [36mimport[39m [33m*[39m [36mas[39m [33mReact[39m [36mfrom[39m [32m"react"[39m
+[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m [33m*[39m [36mas[39m [33mAlertDialogPrimitive[39m [36mfrom[39m [32m"@radix-ui/react-alert-dialog"[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 5 |[39m
+ [90m 6 |[39m [36mimport[39m { cn } [36mfrom[39m [32m"@/lib/utils"[39m
+ [90m 7 |[39m [36mimport[39m { buttonVariants } [36mfrom[39m [32m"@/components/ui/button"[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./apps/portal/src/components/ui/alert-dialog.tsx [Client Component Browser]
+    ./apps/portal/src/app/portal/portfolio/page.tsx [Client Component Browser]
+    ./apps/portal/src/app/portal/portfolio/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/portal/src/components/ui/alert-dialog.tsx [Client Component SSR]
+    ./apps/portal/src/app/portal/portfolio/page.tsx [Client Component SSR]
+    ./apps/portal/src/app/portal/portfolio/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (./apps/portal/src/components/ui/alert-dialog.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+Warning: command "npm run build" exited with non-zero status code
+
+
+ NX   Running target build for project portal failed
+
+Failed tasks:
+
+- portal:build
+
+Hint: run the command with --verbose for more details.
+

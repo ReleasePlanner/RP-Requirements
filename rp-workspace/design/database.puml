@@ -1,0 +1,204 @@
+@startuml ERD - Belcorp Requirements Governance
+
+title Belcorp Product Definition & Governance Model
+
+skinparam linetype ortho
+skinparam monochrome true
+
+' ===================================================
+' 1. STRATEGY AND PORTFOLIO
+' ===================================================
+entity Portfolio {
+  * **PortfolioID** (PK) : UUID
+  --
+  Name : VARCHAR(255) ' Big Bet Name
+  CreationDate : DATETIME
+  Status : VARCHAR(100)
+  --
+  SponsorUserID (FK) : UUID
+}
+
+entity Initiative {
+  * **InitiativeID** (PK) : UUID
+  --
+  Title : VARCHAR
+  StrategicGoal : TEXT
+  EstimatedBusinessBenefit : DECIMAL
+  EstimatedCost : DECIMAL
+  EstimatedROI : DECIMAL
+  DateProposed : DATETIME
+  Status : VARCHAR(100)
+  --
+  PortfolioID (FK) : UUID
+  StatusID (FK) : INT
+}
+
+' ===================================================
+' 2. REQUIREMENTS HIERARCHY (Optimized with Belcorp Matrix)
+' ===================================================
+entity Epic {
+  * **EpicID** (PK) : UUID
+  --
+  Name : Vhttps://www.facebook.com/stories/create/ARCHAR
+  Goal : TEXT
+  BusinessCaseLink : VARCHAR
+  ActualCost : DECIMAL
+  StartDate : DATE
+  EndDate : DATE
+  Status : VARCHAR(100)
+  --
+  InitiativeID (FK) : UUID
+  StatusID (FK) : INT
+}
+
+entity Requirement {
+  * **RequirementID** (PK) : UUID
+  --
+  Title : VARCHAR(255)
+  StoryStatement : TEXT
+  AcceptanceCriteria : TEXT
+  
+  ' --- Belcorp Prioritization Matrix (New Fields) ---
+  EstimatedIncrementalSales : INT
+  ExperienceImpactScore : INT
+  CompetitiveBenchmarkScore : INT
+  ValueEffortRatio : DECIMAL
+  CampaignUrgencyScore : INT
+  
+  ' --- Discovery & Execution Controls (New Fields) ---
+  NeedsFunctionalDiscovery : BOOLEAN
+  NeedsExperimentation : BOOLEAN
+  ExternalReferenceLink : VARCHAR(500) ' Jira/Azure DevOps Link
+  TeamDependencies : TEXT
+  ApplicablePhase : VARCHAR(100)
+  
+  ' --- Engineering Metadata ---
+  EffortEstimate : INT ' FIB Points
+  ActualEffort : INT
+  BusinessValue : DECIMAL ' Total Value Score
+  RequirementVersion : VARCHAR(50)
+  IsMandatory : BOOLEAN
+  GoLiveDate : DATE
+  Status : VARCHAR(100)
+
+  ' --- Foreign Keys ---
+  PriorityID (FK) : INT
+  StatusID (FK) : INT
+  TypeID (FK) : INT
+  ComplexityID (FK) : INT
+  SourceID (FK) : INT
+  EffortTypeID (FK) : INT
+  ProductOwnerID (FK) : UUID
+  ApproverUserID (FK) : UUID
+  EpicID (FK) : UUID
+  RiskLevelID (FK) : INT
+  MetricID (FK) : INT
+  VerificationMethodID (FK) : INT
+}
+
+entity RequirementReference {
+  * **ReferenceID** (PK) : UUID
+  --
+  Type : VARCHAR(50)
+  Path : VARCHAR(500)
+  ReferenceName : VARCHAR(255)
+  Description : TEXT
+  Status : VARCHAR(50)
+  CreationDate : DATETIME
+  --
+  RequirementID (FK) : UUID
+}
+
+' ===================================================
+' 3. USERS (Roles)
+' ===================================================
+entity User {
+  * **UserID** (PK) : UUID
+  --
+  Name : VARCHAR
+  Email : VARCHAR
+  Status : VARCHAR(100)
+}
+
+entity ProductOwner {
+  * **ProductOwnerID** (PK) : UUID
+  --
+  FirstName : VARCHAR(100)
+  LastName : VARCHAR(100)
+  Role : VARCHAR(100)
+  Status : VARCHAR(100)
+}
+
+' ===================================================
+' 4. LOOKUP TABLES (CATALOGS)
+' ===================================================
+entity LifecycleStatus {
+  * **StatusID** (PK) : INT
+  --
+  Name : VARCHAR ' (Carry-Over, Must Have 2026, New Feature)
+  Status : VARCHAR(100)
+}
+
+entity Metric {
+  * **MetricID** (PK) : INT
+  --
+  Name : VARCHAR ' (NPS, %CR, Retención 6d6)
+  BaselineValue : VARCHAR
+  TargetGoal : VARCHAR
+  Status : VARCHAR(100)
+}
+
+' Rest of existing catalogs
+entity Priority { 
+  * PriorityID (PK) : INT
+  Name : VARCHAR 
+  Status : VARCHAR(100)
+}
+entity RequirementType { 
+  * TypeID (PK) : INT
+  Name : VARCHAR 
+  Status : VARCHAR(100)
+}
+entity Complexity { 
+  * ComplexityID (PK) : INT
+  Name : VARCHAR 
+  Status : VARCHAR(100)
+}
+entity Source { 
+  * SourceID (PK) : INT
+  Name : VARCHAR 
+  Status : VARCHAR(100)
+}
+entity RiskLevel { 
+  * RiskLevelID (PK) : INT
+  Name : VARCHAR 
+  Status : VARCHAR(100)
+}
+entity VerificationMethod { 
+  * VerificationMethodID (PK) : INT
+  Name : VARCHAR 
+  Status : VARCHAR(100)
+}
+
+' ===================================================
+' 5. RELATIONSHIPS
+' ===================================================
+
+Portfolio "1" -- "0..N" Initiative
+Initiative "1" -- "0..N" Epic
+Epic "1" -- "0..N" Requirement
+Requirement "1" -- "0..N" RequirementReference
+
+User "1" -- "N" Portfolio : sponsors
+User "1" -- "N" Portfolio : sponsors
+ProductOwner "1" -- "N" Requirement : owns (PO)
+User "1" -- "N" Requirement : approves
+
+Priority "1" -- "N" Requirement
+LifecycleStatus "1" -- "N" Requirement
+Metric "1" -- "N" Requirement
+Complexity "1" -- "N" Requirement
+RiskLevel "1" -- "N" Requirement
+VerificationMethod "1" -- "N" Requirement
+
+@enduml

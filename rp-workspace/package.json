@@ -3,13 +3,31 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "prepare": "nx g @nx-dotnet/core:restore"
+    "prepare": "nx g @nx-dotnet/core:restore",
+    "start:api": "nx serve api",
+    "start:portal": "nx serve portal",
+    "build:api": "nx build api",
+    "test:api": "nx test api",
+    "lint:api": "nx lint api",
+    "seed:api": "npx --yes ts-node -r tsconfig-paths/register apps/api/src/infrastructure/database/seed.ts"
   },
   "private": true,
   "devDependencies": {
     "@nx-dotnet/core": "^3.0.2",
     "@nx/js": "22.1.3",
+    "@nx/next": "^22.2.1",
     "@nx/workspace": "22.1.3",
     "nx": "22.1.3"
+  },
+  "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@nestjslatam/ddd-lib": "^1.0.51",
+    "@radix-ui/react-alert-dialog": "^1.1.15",
+    "@types/react-grid-layout": "^1.3.6",
+    "date-fns": "^4.1.0",
+    "react-grid-layout": "^2.1.0",
+    "sonner": "^2.0.7"
   }
 }

@@ -1,0 +1,45 @@
+
+> nx run portal:build
+
+> npm run build
+
+
+> portal@0.1.0 build
+> next build
+
+ [33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\MySources\RP-Requirements-Web\rp-workspace\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\MySources\RP-Requirements-Web\rp-workspace\apps\portal\package-lock.json
+
+   [1m[38;2;173;127;168m▲ Next.js 16.0.10[39m[22m (Turbopack)
+
+ [37m[1m [22m[39m Creating an optimized production build ...
+ [32m[1m✓[22m[39m Compiled successfully in 2.6s
+ [37m[1m [22m[39m Running TypeScript ...
+[31mFailed to compile.
+[39m
+[36m./src/features/initiatives/components/create-initiative-dialog.tsx[39m:[33m50[39m:[33m17[39m
+[31m[1mType error[22m[39m: Object literal may only specify known properties, and 'description' does not exist in type 'CreateInitiativeDto'.
+
+[0m [90m 48 |[39m             [36mawait[39m [33mInitiativesService[39m[33m.[39mcreate({
+ [90m 49 |[39m                 title[33m,[39m
+[31m[1m>[22m[39m[90m 50 |[39m                 description[33m,[39m
+ [90m    |[39m                 [31m[1m^[22m[39m
+ [90m 51 |[39m                 portfolioId[33m:[39m selectedPortfolioId[33m,[39m
+ [90m 52 |[39m                 statusId[33m:[39m undefined [90m// Default[39m
+ [90m 53 |[39m             })[33m;[39m[0m
+Next.js build worker exited with code: 1 and signal: null
+Warning: command "npm run build" exited with non-zero status code
+
+
+ NX   Running target build for project portal failed
+
+Failed tasks:
+
+- portal:build
+
+Hint: run the command with --verbose for more details.
+
