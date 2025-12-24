@@ -1,0 +1,185 @@
+
+ NX   Nx Daemon is not enabled. Assets and package.json files will not be updated when files change.
+
+[2J[3J[H6:15:35 a. m. - Starting compilation in watch mode...
+
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/application/auth/services/auth.service.ts(21,41): error TS2552: Cannot find name 'ISSponsorRepository'. Did you mean 'ISponsorRepository'?
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/application/widgets/widgets.service.ts(33,48): error TS2345: Argument of type 'UpdateWidgetDto' is not assignable to parameter of type '_QueryDeepPartialEntity<Widget>'.
+  Types of property 'config' are incompatible.
+    Type 'WidgetConfig | undefined' is not assignable to type '(() => string) | _QueryDeepPartialEntity<WidgetConfig> | undefined'.
+      Type 'WidgetConfig' is not assignable to type '(() => string) | _QueryDeepPartialEntity<WidgetConfig> | undefined'.
+        Type 'WidgetConfig' is not assignable to type '_QueryDeepPartialEntity<WidgetConfig>'.
+          'string' index signatures are incompatible.
+            Type 'unknown' is not assignable to type '(() => string) | _QueryDeepPartialEntity<unknown> | undefined'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/infrastructure/auth/strategies/jwt.strategy.ts(39,5): error TS2741: Property 'name' is missing in type '{ userId: string; email: string; role: string; }' but required in type 'RequestUser'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/infrastructure/repositories/requirement.repository.ts(27,13): error TS2339: Property 'page' does not exist on type 'FindByEpicOptions | undefined'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/infrastructure/repositories/requirement.repository.ts(27,19): error TS2339: Property 'limit' does not exist on type 'FindByEpicOptions | undefined'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/infrastructure/repositories/requirement.repository.ts(42,9): error TS18048: 'options' is possibly 'undefined'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/infrastructure/repositories/requirement.repository.ts(42,28): error TS18048: 'options' is possibly 'undefined'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/infrastructure/repositories/requirement.repository.ts(43,64): error TS18048: 'options' is possibly 'undefined'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/shared/filters/http-exception.filter.ts(39,7): error TS2322: Type 'string | string[]' is not assignable to type 'string'.
+  Type 'string[]' is not assignable to type 'string'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/shared/utils/index.ts(29,7): error TS2862: Type 'T' is generic and can only be indexed for reading.
+
+6:15:40 a. m. - Found 10 errors. Watching for file changes.
+Build failed, waiting for changes to restart...
+[2J[3J[H6:16:24 a. m. - File change detected. Starting incremental compilation...
+
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/application/widgets/widgets.service.ts(33,48): error TS2345: Argument of type 'UpdateWidgetDto' is not assignable to parameter of type '_QueryDeepPartialEntity<Widget>'.
+  Types of property 'config' are incompatible.
+    Type 'WidgetConfig | undefined' is not assignable to type '(() => string) | _QueryDeepPartialEntity<WidgetConfig> | undefined'.
+      Type 'WidgetConfig' is not assignable to type '(() => string) | _QueryDeepPartialEntity<WidgetConfig> | undefined'.
+        Type 'WidgetConfig' is not assignable to type '_QueryDeepPartialEntity<WidgetConfig>'.
+          'string' index signatures are incompatible.
+            Type 'unknown' is not assignable to type '(() => string) | _QueryDeepPartialEntity<unknown> | undefined'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/infrastructure/auth/strategies/jwt.strategy.ts(39,5): error TS2741: Property 'name' is missing in type '{ userId: string; email: string; role: string; }' but required in type 'RequestUser'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/infrastructure/repositories/requirement.repository.ts(27,13): error TS2339: Property 'page' does not exist on type 'FindByEpicOptions | undefined'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/infrastructure/repositories/requirement.repository.ts(27,19): error TS2339: Property 'limit' does not exist on type 'FindByEpicOptions | undefined'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/infrastructure/repositories/requirement.repository.ts(42,9): error TS18048: 'options' is possibly 'undefined'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/infrastructure/repositories/requirement.repository.ts(42,28): error TS18048: 'options' is possibly 'undefined'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/infrastructure/repositories/requirement.repository.ts(43,64): error TS18048: 'options' is possibly 'undefined'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/shared/filters/http-exception.filter.ts(39,7): error TS2322: Type 'string | string[]' is not assignable to type 'string'.
+  Type 'string[]' is not assignable to type 'string'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/shared/utils/index.ts(29,7): error TS2862: Type 'T' is generic and can only be indexed for reading.
+
+6:16:24 a. m. - Found 9 errors. Watching for file changes.
+[2J[3J[H6:16:25 a. m. - File change detected. Starting incremental compilation...
+
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/application/widgets/widgets.service.ts(33,48): error TS2345: Argument of type 'UpdateWidgetDto' is not assignable to parameter of type '_QueryDeepPartialEntity<Widget>'.
+  Types of property 'config' are incompatible.
+    Type 'WidgetConfig | undefined' is not assignable to type '(() => string) | _QueryDeepPartialEntity<WidgetConfig> | undefined'.
+      Type 'WidgetConfig' is not assignable to type '(() => string) | _QueryDeepPartialEntity<WidgetConfig> | undefined'.
+        Type 'WidgetConfig' is not assignable to type '_QueryDeepPartialEntity<WidgetConfig>'.
+          'string' index signatures are incompatible.
+            Type 'unknown' is not assignable to type '(() => string) | _QueryDeepPartialEntity<unknown> | undefined'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/infrastructure/repositories/requirement.repository.ts(27,13): error TS2339: Property 'page' does not exist on type 'FindByEpicOptions | undefined'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/infrastructure/repositories/requirement.repository.ts(27,19): error TS2339: Property 'limit' does not exist on type 'FindByEpicOptions | undefined'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/infrastructure/repositories/requirement.repository.ts(42,9): error TS18048: 'options' is possibly 'undefined'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/infrastructure/repositories/requirement.repository.ts(42,28): error TS18048: 'options' is possibly 'undefined'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/infrastructure/repositories/requirement.repository.ts(43,64): error TS18048: 'options' is possibly 'undefined'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/shared/filters/http-exception.filter.ts(39,7): error TS2322: Type 'string | string[]' is not assignable to type 'string'.
+  Type 'string[]' is not assignable to type 'string'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/shared/utils/index.ts(29,7): error TS2862: Type 'T' is generic and can only be indexed for reading.
+
+6:16:25 a. m. - Found 8 errors. Watching for file changes.
+Build failed, waiting for changes to restart...
+Build failed, waiting for changes to restart...
+[2J[3J[H6:16:26 a. m. - File change detected. Starting incremental compilation...
+
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/application/widgets/widgets.service.ts(33,48): error TS2345: Argument of type 'UpdateWidgetDto' is not assignable to parameter of type '_QueryDeepPartialEntity<Widget>'.
+  Types of property 'config' are incompatible.
+    Type 'WidgetConfig | undefined' is not assignable to type '(() => string) | _QueryDeepPartialEntity<WidgetConfig> | undefined'.
+      Type 'WidgetConfig' is not assignable to type '(() => string) | _QueryDeepPartialEntity<WidgetConfig> | undefined'.
+        Type 'WidgetConfig' is not assignable to type '_QueryDeepPartialEntity<WidgetConfig>'.
+          'string' index signatures are incompatible.
+            Type 'unknown' is not assignable to type '(() => string) | _QueryDeepPartialEntity<unknown> | undefined'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/shared/filters/http-exception.filter.ts(39,7): error TS2322: Type 'string | string[]' is not assignable to type 'string'.
+  Type 'string[]' is not assignable to type 'string'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/shared/utils/index.ts(29,7): error TS2862: Type 'T' is generic and can only be indexed for reading.
+
+6:16:27 a. m. - Found 3 errors. Watching for file changes.
+Build failed, waiting for changes to restart...
+[2J[3J[H6:16:27 a. m. - File change detected. Starting incremental compilation...
+
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/application/widgets/widgets.service.ts(33,48): error TS2345: Argument of type 'UpdateWidgetDto' is not assignable to parameter of type '_QueryDeepPartialEntity<Widget>'.
+  Types of property 'config' are incompatible.
+    Type 'WidgetConfig | undefined' is not assignable to type '(() => string) | _QueryDeepPartialEntity<WidgetConfig> | undefined'.
+      Type 'WidgetConfig' is not assignable to type '(() => string) | _QueryDeepPartialEntity<WidgetConfig> | undefined'.
+        Type 'WidgetConfig' is not assignable to type '_QueryDeepPartialEntity<WidgetConfig>'.
+          'string' index signatures are incompatible.
+            Type 'unknown' is not assignable to type '(() => string) | _QueryDeepPartialEntity<unknown> | undefined'.
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/shared/utils/index.ts(29,7): error TS2862: Type 'T' is generic and can only be indexed for reading.
+
+6:16:27 a. m. - Found 2 errors. Watching for file changes.
+Build failed, waiting for changes to restart...
+[2J[3J[H6:16:28 a. m. - File change detected. Starting incremental compilation...
+
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/application/widgets/widgets.service.ts(33,48): error TS2345: Argument of type 'UpdateWidgetDto' is not assignable to parameter of type '_QueryDeepPartialEntity<Widget>'.
+  Types of property 'config' are incompatible.
+    Type 'WidgetConfig | undefined' is not assignable to type '(() => string) | _QueryDeepPartialEntity<WidgetConfig> | undefined'.
+      Type 'WidgetConfig' is not assignable to type '(() => string) | _QueryDeepPartialEntity<WidgetConfig> | undefined'.
+        Type 'WidgetConfig' is not assignable to type '_QueryDeepPartialEntity<WidgetConfig>'.
+          'string' index signatures are incompatible.
+            Type 'unknown' is not assignable to type '(() => string) | _QueryDeepPartialEntity<unknown> | undefined'.
+
+6:16:28 a. m. - Found 1 error. Watching for file changes.
+[2J[3J[H6:16:31 a. m. - File change detected. Starting incremental compilation...
+
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/application/widgets/widgets.service.ts(37,48): error TS2345: Argument of type 'Partial<Widget>' is not assignable to parameter of type '_QueryDeepPartialEntity<Widget>'.
+  Types of property 'config' are incompatible.
+    Type 'WidgetConfig | undefined' is not assignable to type '(() => string) | _QueryDeepPartialEntity<WidgetConfig> | undefined'.
+      Type 'WidgetConfig' is not assignable to type '(() => string) | _QueryDeepPartialEntity<WidgetConfig> | undefined'.
+        Type 'WidgetConfig' is not assignable to type '_QueryDeepPartialEntity<WidgetConfig>'.
+          'string' index signatures are incompatible.
+            Type 'unknown' is not assignable to type '(() => string) | _QueryDeepPartialEntity<unknown> | undefined'.
+
+6:16:31 a. m. - Found 1 error. Watching for file changes.
+[2J[3J[H6:17:52 a. m. - File change detected. Starting incremental compilation...
+
+/MySources/RP-Requirements-Web/rp-workspace/apps/api/src/application/widgets/widgets.service.ts(49,48): error TS2345: Argument of type 'Partial<Widget>' is not assignable to parameter of type '_QueryDeepPartialEntity<Widget>'.
+  Types of property 'config' are incompatible.
+    Type 'WidgetConfig | undefined' is not assignable to type '(() => string) | _QueryDeepPartialEntity<WidgetConfig> | undefined'.
+      Type 'WidgetConfig' is not assignable to type '(() => string) | _QueryDeepPartialEntity<WidgetConfig> | undefined'.
+        Type 'WidgetConfig' is not assignable to type '_QueryDeepPartialEntity<WidgetConfig>'.
+          'string' index signatures are incompatible.
+            Type 'unknown' is not assignable to type '(() => string) | _QueryDeepPartialEntity<unknown> | undefined'.
+
+6:17:52 a. m. - Found 1 error. Watching for file changes.
+[2J[3J[H6:18:20 a. m. - File change detected. Starting incremental compilation...
+
+
+6:18:25 a. m. - Found 0 errors. Watching for file changes.
+Debugger listening on ws://localhost:9229/f45b5d5f-ab9d-477d-9396-0157e334ea17
+Debugger listening on ws://localhost:9229/f45b5d5f-ab9d-477d-9396-0157e334ea17
+For help, see: https://nodejs.org/en/docs/inspector
+
+Error: Cannot find module '@domain/entities/sponsor.entity'
+Require stack:
+- c:\MySources\RP-Requirements-Web\rp-workspace\apps\api\dist\src\presentation\sponsors\sponsors.module.js
+- c:\MySources\RP-Requirements-Web\rp-workspace\apps\api\dist\src\app.module.js
+- c:\MySources\RP-Requirements-Web\rp-workspace\apps\api\dist\src\main.js
+    at Function.<anonymous> (node:internal/modules/cjs/loader:1225:15)
+    at Function.Module._resolveFilename (c:\MySources\RP-Requirements-Web\rp-workspace\apps\api\node_modules\tsconfig-paths\src\register.ts:115:36)
+    at Function.<anonymous> (node:internal/modules/cjs/loader:1055:27)
+    at Function.Module._load (c:\MySources\RP-Requirements-Web\rp-workspace\node_modules\@nx\js\src\executors\node\node-with-require-overrides.js:18:31)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:220:24)
+    at Module.require (node:internal/modules/cjs/loader:1311:12)
+    at require (node:internal/modules/helpers:136:16)
+    at Object.<anonymous> (c:\MySources\RP-Requirements-Web\rp-workspace\apps\api\dist\src\presentation\sponsors\sponsors.module.js:12:26)
+    at Module._compile (node:internal/modules/cjs/loader:1554:14)
+
+
+ NX  Process exited with code 1, waiting for changes to restart...
+
+[2J[3J[H6:44:23 a. m. - File change detected. Starting incremental compilation...
+
+
+6:44:24 a. m. - Found 0 errors. Watching for file changes.
+[2J[3J[H6:44:24 a. m. - File change detected. Starting incremental compilation...
+
+
+6:44:24 a. m. - Found 0 errors. Watching for file changes.
+Starting inspector on localhost:9229 failed: address already in use
+
+[2J[3J[H6:44:26 a. m. - File change detected. Starting incremental compilation...
+
+
+6:44:26 a. m. - Found 0 errors. Watching for file changes.
+Debugger listening on ws://localhost:9229/a03ac4d0-01ad-4a75-ad26-3c7f18959d57
+Debugger listening on ws://localhost:9229/a03ac4d0-01ad-4a75-ad26-3c7f18959d57
+For help, see: https://nodejs.org/en/docs/inspector
+
+c:\MySources\RP-Requirements-Web\rp-workspace\node_modules\@nx\js\src\executors\node\node.impl.js:351
+    throw new Error(`Could not find ${fileToRun}. Make sure your build succeeded.`);
+          ^
+
+Error: Could not find c:\MySources\RP-Requirements-Web\rp-workspace\apps\api\dist\src\main.js. Make sure your build succeeded.
+    at fileToRunCorrectPath (c:\MySources\RP-Requirements-Web\rp-workspace\node_modules\@nx\js\src\executors\node\node.impl.js:351:11)
+    at c:\MySources\RP-Requirements-Web\rp-workspace\node_modules\@nx\js\src\executors\node\node.impl.js:122:49
+    at new Promise (<anonymous>)
+    at Object.start (c:\MySources\RP-Requirements-Web\rp-workspace\node_modules\@nx\js\src\executors\node\node.impl.js:113:36)
+    at async processQueue (c:\MySources\RP-Requirements-Web\rp-workspace\node_modules\@nx\js\src\executors\node\node.impl.js:78:13)
+    at async Timeout._onTimeout (c:\MySources\RP-Requirements-Web\rp-workspace\node_modules\@nx\js\src\executors\node\lib\coalescing-debounce.js:24:40)
+
+Node.js v22.14.0

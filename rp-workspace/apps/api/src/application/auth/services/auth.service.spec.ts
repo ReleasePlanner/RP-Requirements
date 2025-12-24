@@ -82,7 +82,7 @@ describe('AuthService', () => {
 
       expect(result).toBeDefined();
       expect(result.sponsorId).toBe(mockSponsor.sponsorId);
-      expect(result.password).toBeUndefined();
+      expect(result).not.toHaveProperty('password');
     });
 
     it('should throw UnauthorizedException when sponsor not found', async () => {

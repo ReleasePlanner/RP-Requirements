@@ -1,9 +1,14 @@
-import { Injectable, Inject, NotFoundException } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException, BadRequestException } from '@nestjs/common';
 import { IInitiativesRepository } from '../interfaces/repositories/initiatives.repository.interface';
 import { CreateInitiativeDto } from '../dtos/create-initiative.dto';
 import { UpdateInitiativeDto } from '../dtos/update-initiative.dto';
 import { Initiative } from '@domain/entities/initiative.entity';
 
+/**
+ * Initiatives Service
+ * 
+ * Handles business logic for initiative management including CRUD operations
+ */
 @Injectable()
 export class InitiativesService {
   constructor(
@@ -11,10 +16,23 @@ export class InitiativesService {
     private readonly initiativesRepository: IInitiativesRepository,
   ) { }
 
+  /**
+   * Retrieves all initiatives with optional filtering by portfolio
+   * 
+   * @param options - Query options including portfolio filter
+   * @returns List of initiatives
+   */
   async findAll(options?: { portfolioId?: string }): Promise<Initiative[]> {
     return this.initiativesRepository.findAll(options);
   }
 
+  /**
+   * Retrieves an initiative by ID
+   * 
+   * @param id - Unique identifier of the initiative
+   * @returns Initiative entity
+   * @throws NotFoundException if initiative not found
+   */
   async findOne(id: string): Promise<Initiative> {
     const initiative = await this.initiativesRepository.findById(id);
     if (!initiative) {
@@ -23,37 +41,37 @@ export class InitiativesService {
     return initiative;
   }
 
+  /**
+   * Creates a new initiative
+   * 
+   * @param createInitiativeDto - Data for creating the initiative
+   * @returns Created initiative entity
+   */
   async create(createInitiativeDto: CreateInitiativeDto): Promise<Initiative> {
     const initiative = new Initiative();
     Object.assign(initiative, createInitiativeDto);
     return this.initiativesRepository.create(initiative);
   }
 
+  /**
+   * Updates an existing initiative
+   * 
+   * @param id - Unique identifier of the initiative to update
+   * @param updateInitiativeDto - Data for updating the initiative
+   * @returns Updated initiative entity
+   * @throws BadRequestException if trying to set inactive with active epics
+   */
   async update(id: string, updateInitiativeDto: UpdateInitiativeDto): Promise<Initiative> {
     const initiative = await this.findOne(id);
 
-    // Validation
-    if (updateInitiativeDto.status_text === 'INACTIVE') { // Assuming DTO uses status_text or mapped
-      // Note: DTO might not have status_text directly mapped if it's just Partial<Initiative>.
-      // Let's assume the controller passes partial update.
-      // Actually UpdateInitiativeDto is imported. Let's check if it has status.
-      // For now, I'll access it safely.
-      const status = (updateInitiativeDto as any).status_text || (updateInitiativeDto as any).status;
+    // Check if trying to set status to INACTIVE
+    const status = (updateInitiativeDto as Partial<Initiative>).status_text || 
+                   (updateInitiativeDto as Partial<Initiative>).status;
 
-      if (status === 'INACTIVE') {
-        const hasActiveEpics = initiative.epics?.some(e => e.status_text === 'ACTIVE');
-        if (hasActiveEpics) {
-          throw new Error('Cannot set initiative to INACTIVE because it has ACTIVE epics.');
-        }
-      }
-    }
-
-    // A cleaner implementation since we know UpdateInitiativeDto should match entity structure mostly
-    // But let's stick to the pattern used in Portfolio service
-    if ((updateInitiativeDto as any).status === 'INACTIVE' || (updateInitiativeDto as any).status_text === 'INACTIVE') {
+    if (status === 'INACTIVE') {
       const hasActiveEpics = initiative.epics?.some(e => e.status_text === 'ACTIVE');
       if (hasActiveEpics) {
-        throw new Error('Cannot set initiative to INACTIVE because it has ACTIVE epics.');
+        throw new BadRequestException('Cannot set initiative to INACTIVE because it has ACTIVE epics.');
       }
     }
 

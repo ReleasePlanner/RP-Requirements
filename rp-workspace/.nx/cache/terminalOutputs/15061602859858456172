@@ -1,0 +1,184 @@
+
+ NX   Nx Daemon is not enabled. Assets and package.json files will not be updated when files change.
+
+[2J[3J[H6:19:14 a. m. - Starting compilation in watch mode...
+
+
+6:19:24 a. m. - Found 0 errors. Watching for file changes.
+Debugger listening on ws://localhost:9229/a204c3c1-0086-402a-8fb8-9b41b1671573
+Debugger listening on ws://localhost:9229/a204c3c1-0086-402a-8fb8-9b41b1671573
+For help, see: https://nodejs.org/en/docs/inspector
+
+[Nest] 33756  - 24/12/2025, 6:19:34 a. m.     LOG [NestFactory] Starting Nest application...
+[Nest] 33756  - 24/12/2025, 6:19:34 a. m.     LOG [InstanceLoader] CoreConfigModule dependencies initialized +97ms
+[Nest] 33756  - 24/12/2025, 6:19:34 a. m.     LOG [InstanceLoader] NotificationsModule dependencies initialized +1ms
+[Nest] 33756  - 24/12/2025, 6:19:34 a. m.     LOG [InstanceLoader] TypeOrmModule dependencies initialized +0ms
+[Nest] 33756  - 24/12/2025, 6:19:34 a. m.     LOG [InstanceLoader] PassportModule dependencies initialized +1ms
+[Nest] 33756  - 24/12/2025, 6:19:34 a. m.     LOG [InstanceLoader] ConfigHostModule dependencies initialized +8ms
+[Nest] 33756  - 24/12/2025, 6:19:34 a. m.     LOG [InstanceLoader] DiscoveryModule dependencies initialized +2ms
+[Nest] 33756  - 24/12/2025, 6:19:34 a. m.     LOG [InstanceLoader] TerminusModule dependencies initialized +2ms
+[Nest] 33756  - 24/12/2025, 6:19:34 a. m.     LOG [InstanceLoader] CommonModule dependencies initialized +0ms
+[Nest] 33756  - 24/12/2025, 6:19:34 a. m.     LOG [InstanceLoader] ConfigModule dependencies initialized +1ms
+[Nest] 33756  - 24/12/2025, 6:19:34 a. m.     LOG [InstanceLoader] ConfigModule dependencies initialized +0ms
+[Nest] 33756  - 24/12/2025, 6:19:34 a. m.     LOG [InstanceLoader] ScheduleModule dependencies initialized +61ms
+[Nest] 33756  - 24/12/2025, 6:19:34 a. m.     LOG [InstanceLoader] HealthModule dependencies initialized +1ms
+[Nest] 33756  - 24/12/2025, 6:19:34 a. m.     LOG [InstanceLoader] JwtModule dependencies initialized +184ms
+[Nest] 33756  - 24/12/2025, 6:19:34 a. m.     LOG [InstanceLoader] ThrottlerModule dependencies initialized +0ms
+[Nest] 33756  - 24/12/2025, 6:19:34 a. m.     LOG [InstanceLoader] WinstonModule dependencies initialized +0ms
+[Nest] 33756  - 24/12/2025, 6:19:34 a. m.     LOG [InstanceLoader] AppModule dependencies initialized +0ms
+query: SELECT version()
+query: SELECT * FROM current_schema()
+query: CREATE EXTENSION IF NOT EXISTS "uuid-ossp"
+query: START TRANSACTION
+query: SELECT * FROM current_schema()
+query: SELECT * FROM current_database()
+query: SELECT "table_schema", "table_name", obj_description(('"' || "table_schema" || '"."' || "table_name" || '"')::regclass, 'pg_class') AS table_comment FROM "information_schema"."tables" WHERE ("table_schema" = 'public' AND "table_name" = 'widgets') OR ("table_schema" = 'public' AND "table_name" = 'Sponsor') OR ("table_schema" = 'public' AND "table_name" = 'Portfolio') OR ("table_schema" = 'public' AND "table_name" = 'LifecycleStatus') OR ("table_schema" = 'public' AND "table_name" = 'Initiative') OR ("table_schema" = 'public' AND "table_name" = 'Epic') OR ("table_schema" = 'public' AND "table_name" = 'Priority') OR ("table_schema" = 'public' AND "table_name" = 'RequirementType') OR ("table_schema" = 'public' AND "table_name" = 'Complexity') OR ("table_schema" = 'public' AND "table_name" = 'Source') OR ("table_schema" = 'public' AND "table_name" = 'EffortEstimateType') OR ("table_schema" = 'public' AND "table_name" = 'RiskLevel') OR ("table_schema" = 'public' AND "table_name" = 'Metric') OR ("table_schema" = 'public' AND "table_name" = 'ProductOwner') OR ("table_schema" = 'public' AND "table_name" = 'Approver') OR ("table_schema" = 'public' AND "table_name" = 'RequirementReference') OR ("table_schema" = 'public' AND "table_name" = 'Requirement') OR ("table_schema" = 'public' AND "table_name" = 'VerificationMethod')
+query: SELECT TRUE FROM information_schema.columns WHERE table_name = 'pg_class' and column_name = 'relispartition'
+query: SELECT columns.*, pg_catalog.col_description(('"' || table_catalog || '"."' || table_schema || '"."' || table_name || '"')::regclass::oid, ordinal_position) AS description, ('"' || "udt_schema" || '"."' || "udt_name" || '"')::"regtype"::text AS "regtype", pg_catalog.format_type("col_attr"."atttypid", "col_attr"."atttypmod") AS "format_type" FROM "information_schema"."columns" LEFT JOIN "pg_catalog"."pg_attribute" AS "col_attr" ON "col_attr"."attname" = "columns"."column_name" AND "col_attr"."attrelid" = ( SELECT "cls"."oid" FROM "pg_catalog"."pg_class" AS "cls" LEFT JOIN "pg_catalog"."pg_namespace" AS "ns" ON "ns"."oid" = "cls"."relnamespace" WHERE "cls"."relname" = "columns"."table_name" AND "ns"."nspname" = "columns"."table_schema" ) WHERE ("table_schema" = 'public' AND "table_name" = 'EffortEstimateType') OR ("table_schema" = 'public' AND "table_name" = 'RiskLevel') OR ("table_schema" = 'public' AND "table_name" = 'Metric') OR ("table_schema" = 'public' AND "table_name" = 'VerificationMethod') OR ("table_schema" = 'public' AND "table_name" = 'ProductOwner') OR ("table_schema" = 'public' AND "table_name" = 'Approver') OR ("table_schema" = 'public' AND "table_name" = 'Sponsor') OR ("table_schema" = 'public' AND "table_name" = 'Portfolio') OR ("table_schema" = 'public' AND "table_name" = 'LifecycleStatus') OR ("table_schema" = 'public' AND "table_name" = 'Initiative') OR ("table_schema" = 'public' AND "table_name" = 'Epic') OR ("table_schema" = 'public' AND "table_name" = 'RequirementType') OR ("table_schema" = 'public' AND "table_name" = 'Complexity') OR ("table_schema" = 'public' AND "table_name" = 'Source') OR ("table_schema" = 'public' AND "table_name" = 'Priority') OR ("table_schema" = 'public' AND "table_name" = 'Requirement') OR ("table_schema" = 'public' AND "table_name" = 'RequirementReference') OR ("table_schema" = 'public' AND "table_name" = 'widgets')
+query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "cnst"."conname" AS "constraint_name", pg_get_constraintdef("cnst"."oid") AS "expression", CASE "cnst"."contype" WHEN 'p' THEN 'PRIMARY' WHEN 'u' THEN 'UNIQUE' WHEN 'c' THEN 'CHECK' WHEN 'x' THEN 'EXCLUDE' END AS "constraint_type", "a"."attname" AS "column_name" FROM "pg_constraint" "cnst" INNER JOIN "pg_class" "t" ON "t"."oid" = "cnst"."conrelid" INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "cnst"."connamespace" LEFT JOIN "pg_attribute" "a" ON "a"."attrelid" = "cnst"."conrelid" AND "a"."attnum" = ANY ("cnst"."conkey") WHERE "t"."relkind" IN ('r', 'p') AND (("ns"."nspname" = 'public' AND "t"."relname" = 'EffortEstimateType') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'RiskLevel') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'Metric') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'VerificationMethod') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'ProductOwner') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'Approver') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'Sponsor') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'Portfolio') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'LifecycleStatus') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'Initiative') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'Epic') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'RequirementType') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'Complexity') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'Source') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'Priority') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'Requirement') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'RequirementReference') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'widgets'))
+query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "i"."relname" AS "constraint_name", "a"."attname" AS "column_name", CASE "ix"."indisunique" WHEN 't' THEN 'TRUE' ELSE'FALSE' END AS "is_unique", pg_get_expr("ix"."indpred", "ix"."indrelid") AS "condition", "types"."typname" AS "type_name", "am"."amname" AS "index_type" FROM "pg_class" "t" INNER JOIN "pg_index" "ix" ON "ix"."indrelid" = "t"."oid" INNER JOIN "pg_attribute" "a" ON "a"."attrelid" = "t"."oid"  AND "a"."attnum" = ANY ("ix"."indkey") INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "t"."relnamespace" INNER JOIN "pg_class" "i" ON "i"."oid" = "ix"."indexrelid" INNER JOIN "pg_type" "types" ON "types"."oid" = "a"."atttypid" INNER JOIN "pg_am" "am" ON "i"."relam" = "am"."oid" LEFT JOIN "pg_constraint" "cnst" ON "cnst"."conname" = "i"."relname" WHERE "t"."relkind" IN ('r', 'p') AND "cnst"."contype" IS NULL AND (("ns"."nspname" = 'public' AND "t"."relname" = 'EffortEstimateType') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'RiskLevel') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'Metric') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'VerificationMethod') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'ProductOwner') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'Approver') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'Sponsor') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'Portfolio') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'LifecycleStatus') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'Initiative') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'Epic') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'RequirementType') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'Complexity') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'Source') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'Priority') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'Requirement') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'RequirementReference') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'widgets'))
+query: SELECT "con"."conname" AS "constraint_name", "con"."nspname" AS "table_schema", "con"."relname" AS "table_name", "att2"."attname" AS "column_name", "ns"."nspname" AS "referenced_table_schema", "cl"."relname" AS "referenced_table_name", "att"."attname" AS "referenced_column_name", "con"."confdeltype" AS "on_delete", "con"."confupdtype" AS "on_update", "con"."condeferrable" AS "deferrable", "con"."condeferred" AS "deferred" FROM ( SELECT UNNEST ("con1"."conkey") AS "parent", UNNEST ("con1"."confkey") AS "child", "con1"."confrelid", "con1"."conrelid", "con1"."conname", "con1"."contype", "ns"."nspname", "cl"."relname", "con1"."condeferrable", CASE WHEN "con1"."condeferred" THEN 'INITIALLY DEFERRED' ELSE 'INITIALLY IMMEDIATE' END as condeferred, CASE "con1"."confdeltype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confdeltype", CASE "con1"."confupdtype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confupdtype" FROM "pg_class" "cl" INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_constraint" "con1" ON "con1"."conrelid" = "cl"."oid" WHERE "con1"."contype" = 'f' AND (("ns"."nspname" = 'public' AND "cl"."relname" = 'EffortEstimateType') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'RiskLevel') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'Metric') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'VerificationMethod') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'ProductOwner') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'Approver') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'Sponsor') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'Portfolio') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'LifecycleStatus') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'Initiative') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'Epic') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'RequirementType') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'Complexity') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'Source') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'Priority') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'Requirement') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'RequirementReference') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'widgets')) ) "con" INNER JOIN "pg_attribute" "att" ON "att"."attrelid" = "con"."confrelid" AND "att"."attnum" = "con"."child" INNER JOIN "pg_class" "cl" ON "cl"."oid" = "con"."confrelid"  AND "cl"."relispartition" = 'f'INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_attribute" "att2" ON "att2"."attrelid" = "con"."conrelid" AND "att2"."attnum" = "con"."parent"
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'widgets' AND "column_name"='type'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'widgets_type_enum'
+query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+query: COMMIT
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [InstanceLoader] TypeOrmCoreModule dependencies initialized +2528ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [InstanceLoader] TypeOrmModule dependencies initialized +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [InstanceLoader] TypeOrmModule dependencies initialized +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [InstanceLoader] TypeOrmModule dependencies initialized +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [InstanceLoader] TypeOrmModule dependencies initialized +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [InstanceLoader] TypeOrmModule dependencies initialized +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [InstanceLoader] TypeOrmModule dependencies initialized +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [InstanceLoader] TypeOrmModule dependencies initialized +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [InstanceLoader] WidgetsModule dependencies initialized +12ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [InstanceLoader] SponsorsModule dependencies initialized +5ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [InstanceLoader] AuthModule dependencies initialized +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [InstanceLoader] PortfoliosModule dependencies initialized +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [InstanceLoader] EpicsModule dependencies initialized +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [InstanceLoader] InitiativesModule dependencies initialized +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [InstanceLoader] RequirementsModule dependencies initialized +3ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [InstanceLoader] CatalogsModule dependencies initialized +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RoutesResolver] AppController {/api} (version: Neutral): +239ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api, GET} (version: Neutral) route +10ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RoutesResolver] AuthController {/api/auth} (version: 1): +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/auth/login, POST} (version: 1) route +3ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/auth/register, POST} (version: 1) route +3ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/auth/admin/test, GET} (version: 1) route +3ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RoutesResolver] SponsorsController {/api/sponsors} (version: 1): +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/sponsors, GET} (version: 1) route +2ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/sponsors/:id, GET} (version: 1) route +2ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/sponsors, POST} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/sponsors/:id, PUT} (version: 1) route +2ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/sponsors/:id, DELETE} (version: 1) route +4ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RoutesResolver] RequirementsController {/api/requirements} (version: 1): +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/requirements/admin/test, GET} (version: 1) route +2ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/requirements, POST} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/requirements, GET} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/requirements/:id, GET} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/requirements/:id, PATCH} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/requirements/:id, DELETE} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RoutesResolver] RequirementReferencesController {/api/requirements/:requirementId/references} (version: 1): +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/requirements/:requirementId/references, POST} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/requirements/:requirementId/references, GET} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/requirements/:requirementId/references/:id, PUT} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/requirements/:requirementId/references/:id, DELETE} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RoutesResolver] PortfoliosController {/api/portfolios} (version: 1): +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/portfolios/admin/test, GET} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/portfolios, GET} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/portfolios/:id, GET} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/portfolios, POST} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/portfolios/:id, PATCH} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/portfolios/:id, DELETE} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RoutesResolver] CatalogsController {/api/catalogs} (version: 1): +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/admin/test, GET} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/priorities, GET} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/priorities, POST} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/priorities/:id, PUT} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/priorities/:id, DELETE} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/statuses, GET} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/statuses, POST} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/statuses/:id, PUT} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/statuses/:id, DELETE} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/risk-levels, GET} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/risk-levels, POST} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/risk-levels/:id, PUT} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/risk-levels/:id, DELETE} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/complexities, GET} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/complexities, POST} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/complexities/:id, PUT} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/complexities/:id, DELETE} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/effort-estimate-types, GET} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/requirement-types, GET} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/requirement-types, POST} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/requirement-types/:id, PUT} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/requirement-types/:id, DELETE} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/verification-methods, GET} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/verification-methods, POST} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/verification-methods/:id, PUT} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/verification-methods/:id, DELETE} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/metrics, GET} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/metrics, POST} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/metrics/:id, PUT} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/product-owners, GET} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/product-owners, POST} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/product-owners/:id, PUT} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/product-owners/:id, DELETE} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/approvers, GET} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/approvers, POST} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/approvers/:id, PUT} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/catalogs/approvers/:id, DELETE} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RoutesResolver] EpicsController {/api/epics} (version: 1): +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/epics/admin/test, GET} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/epics, POST} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/epics, GET} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/epics/:id, GET} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/epics/:id, PATCH} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/epics/:id, DELETE} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RoutesResolver] InitiativesController {/api/initiatives} (version: 1): +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/initiatives, POST} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/initiatives, GET} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/initiatives/:id, GET} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/initiatives/:id, PATCH} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/initiatives/:id, DELETE} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RoutesResolver] HealthController {/api/health} (version: 1): +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/health, GET} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/health/liveness, GET} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/health/readiness, GET} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RoutesResolver] WidgetsController {/api/widgets} (version: 1): +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/widgets, POST} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/widgets, GET} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/widgets/:id, GET} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/widgets/:id, PATCH} (version: 1) route +1ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [RouterExplorer] Mapped {/api/widgets/:id, DELETE} (version: 1) route +0ms
+[Nest] 33756  - 24/12/2025, 6:19:37 a. m.     LOG [NestApplication] Nest application successfully started +18ms
+🚀 Application is running on: http://localhost:3000/api
+📚 Swagger documentation: http://localhost:3000/api/docs
+[2J[3J[H6:44:23 a. m. - File change detected. Starting incremental compilation...
+
+
+6:44:24 a. m. - Found 0 errors. Watching for file changes.
+[2J[3J[H6:44:24 a. m. - File change detected. Starting incremental compilation...
+
+
+6:44:24 a. m. - Found 0 errors. Watching for file changes.
+Starting inspector on localhost:9229 failed: address already in use
+
+[2J[3J[H6:44:26 a. m. - File change detected. Starting incremental compilation...
+
+
+6:44:26 a. m. - Found 0 errors. Watching for file changes.
+Starting inspector on localhost:9229 failed: address already in use
+
+c:\MySources\RP-Requirements-Web\rp-workspace\node_modules\@nx\js\src\executors\node\node.impl.js:351
+    throw new Error(`Could not find ${fileToRun}. Make sure your build succeeded.`);
+          ^
+
+Error: Could not find c:\MySources\RP-Requirements-Web\rp-workspace\apps\api\dist\src\main.js. Make sure your build succeeded.
+    at fileToRunCorrectPath (c:\MySources\RP-Requirements-Web\rp-workspace\node_modules\@nx\js\src\executors\node\node.impl.js:351:11)
+    at c:\MySources\RP-Requirements-Web\rp-workspace\node_modules\@nx\js\src\executors\node\node.impl.js:122:49
+    at new Promise (<anonymous>)
+    at Object.start (c:\MySources\RP-Requirements-Web\rp-workspace\node_modules\@nx\js\src\executors\node\node.impl.js:113:36)
+    at async processQueue (c:\MySources\RP-Requirements-Web\rp-workspace\node_modules\@nx\js\src\executors\node\node.impl.js:78:13)
+    at async Timeout._onTimeout (c:\MySources\RP-Requirements-Web\rp-workspace\node_modules\@nx\js\src\executors\node\lib\coalescing-debounce.js:24:40)
+
+Node.js v22.14.0

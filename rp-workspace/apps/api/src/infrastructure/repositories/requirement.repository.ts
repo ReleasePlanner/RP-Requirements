@@ -3,7 +3,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { IRequirementRepository } from '@application/requirements/interfaces/repositories/requirement.repository.interface';
 import { Requirement } from '@domain/entities/requirement.entity';
+import { FindByEpicOptions } from '@shared/types/repository.types';
 
+/**
+ * Requirement Repository Implementation
+ * 
+ * Handles data persistence for Requirement entities using TypeORM
+ */
 @Injectable()
 export class RequirementRepository implements IRequirementRepository {
   constructor(
@@ -11,8 +17,13 @@ export class RequirementRepository implements IRequirementRepository {
     private readonly repository: Repository<Requirement>
   ) { }
 
-  async findAll(options: any): Promise<{ items: Requirement[], total: number }> {
-    const { page, limit } = options;
+  /**
+   * Finds all requirements with optional pagination and filtering
+   * 
+   * @param options - Query options including pagination, sorting, and epic filters
+   * @returns Paginated list of requirements with total count
+   */
+  async findAll(options?: FindByEpicOptions): Promise<{ items: Requirement[], total: number }> {
     const query = this.repository.createQueryBuilder('req')
       .leftJoinAndSelect('req.priority', 'priority')
       .leftJoinAndSelect('req.status', 'status')
@@ -27,12 +38,12 @@ export class RequirementRepository implements IRequirementRepository {
       .leftJoinAndSelect('req.productOwner', 'productOwner')
       .leftJoinAndSelect('req.approver', 'approver');
 
-    if (options.epicIds && options.epicIds.length > 0) {
+    if (options?.epicIds && options.epicIds.length > 0) {
       query.andWhere('req.epicId IN (:...epicIds)', { epicIds: options.epicIds });
     }
 
-    if (page && limit) {
-      query.skip((page - 1) * limit).take(limit);
+    if (options?.page && options?.limit) {
+      query.skip((options.page - 1) * options.limit).take(options.limit);
     }
 
     const [items, total] = await query.getManyAndCount();

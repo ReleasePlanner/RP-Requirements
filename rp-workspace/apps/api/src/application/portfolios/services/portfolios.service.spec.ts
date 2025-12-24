@@ -11,7 +11,11 @@ describe('PortfoliosService', () => {
   const mockPortfolio: Portfolio = {
     portfolioId: 'portfolio-123',
     name: 'Test Portfolio',
-    sponsorUserId: 'user-123',
+    sponsorId: 'sponsor-123',
+    creationDate: new Date(),
+    status: 'Active',
+    sponsor: null as any,
+    initiatives: [],
   } as Portfolio;
 
   beforeEach(async () => {

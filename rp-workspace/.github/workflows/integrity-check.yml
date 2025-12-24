@@ -1,0 +1,246 @@
+name: Integrity Check
+
+on:
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+    inputs:
+      strict_mode:
+        description: 'Enable strict mode (fail on warnings)'
+        required: false
+        type: boolean
+        default: false
+
+env:
+  NODE_VERSION: '20.x'
+  PNPM_VERSION: '8'
+  COVERAGE_THRESHOLD: 100
+
+jobs:
+  full-integrity-check:
+    name: Full Integrity Check
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: requirements_db_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Linting
+      - name: Run ESLint (API)
+        id: lint-api
+        run: npm run lint:api || echo "lint-api=failed" >> $GITHUB_OUTPUT
+
+      - name: Run ESLint (Portal)
+        id: lint-portal
+        run: cd apps/portal && npm run lint || echo "lint-portal=failed" >> $GITHUB_OUTPUT
+
+      # Type Checking
+      - name: Type Check (API)
+        id: typecheck-api
+        working-directory: apps/api
+        run: |
+          npx tsc --noEmit || echo "typecheck-api=failed" >> $GITHUB_OUTPUT
+
+      - name: Type Check (Portal)
+        id: typecheck-portal
+        working-directory: apps/portal
+        run: |
+          npx tsc --noEmit || echo "typecheck-portal=failed" >> $GITHUB_OUTPUT
+
+      # Testing with Coverage
+      - name: Run tests with coverage
+        id: test-coverage
+        working-directory: apps/api
+        env:
+          NODE_ENV: test
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_USERNAME: postgres
+          DB_PASSWORD: postgres
+          DB_DATABASE: requirements_db_test
+          DB_SYNCHRONIZE: true
+          JWT_SECRET: test-jwt-secret-key-min-32-characters-long
+          JWT_EXPIRES_IN: 1h
+        run: |
+          npm run test:cov:check || echo "test-coverage=failed" >> $GITHUB_OUTPUT
+
+      # Parse Coverage
+      - name: Parse coverage metrics
+        id: coverage
+        working-directory: apps/api
+        if: always()
+        run: |
+          if [ -f "coverage/coverage-summary.json" ]; then
+            LINES=$(node -e "const cov = require('./coverage/coverage-summary.json'); console.log(cov.total.lines.pct)")
+            BRANCHES=$(node -e "const cov = require('./coverage/coverage-summary.json'); console.log(cov.total.branches.pct)")
+            FUNCTIONS=$(node -e "const cov = require('./coverage/coverage-summary.json'); console.log(cov.total.functions.pct)")
+            STATEMENTS=$(node -e "const cov = require('./coverage/coverage-summary.json'); console.log(cov.total.statements.pct)")
+            
+            echo "lines=$LINES" >> $GITHUB_OUTPUT
+            echo "branches=$BRANCHES" >> $GITHUB_OUTPUT
+            echo "functions=$FUNCTIONS" >> $GITHUB_OUTPUT
+            echo "statements=$STATEMENTS" >> $GITHUB_OUTPUT
+            
+            # Check if coverage meets threshold using Node.js
+            THRESHOLD_CHECK=$(node -e "
+              const lines = parseFloat('$LINES');
+              const branches = parseFloat('$BRANCHES');
+              const functions = parseFloat('$FUNCTIONS');
+              const statements = parseFloat('$STATEMENTS');
+              const threshold = ${{ env.COVERAGE_THRESHOLD }};
+              if (lines < threshold || branches < threshold || functions < threshold || statements < threshold) {
+                console.log('failed');
+              } else {
+                console.log('passed');
+              }
+            ")
+            echo "coverage-threshold=$THRESHOLD_CHECK" >> $GITHUB_OUTPUT
+          else
+            echo "coverage-threshold=failed" >> $GITHUB_OUTPUT
+            echo "lines=0" >> $GITHUB_OUTPUT
+            echo "branches=0" >> $GITHUB_OUTPUT
+            echo "functions=0" >> $GITHUB_OUTPUT
+            echo "statements=0" >> $GITHUB_OUTPUT
+          fi
+
+      # Build Verification
+      - name: Build API
+        id: build-api
+        run: npm run build:api || echo "build-api=failed" >> $GITHUB_OUTPUT
+
+      - name: Build Portal
+        id: build-portal
+        working-directory: apps/portal
+        env:
+          NEXT_PUBLIC_API_URL: http://localhost:3000/api/v1
+        run: npm run build || echo "build-portal=failed" >> $GITHUB_OUTPUT
+
+      # Security Checks (optional)
+      - name: Run security audit
+        id: security-audit
+        continue-on-error: true
+        run: |
+          npm audit --audit-level=moderate || echo "security-audit=warnings" >> $GITHUB_OUTPUT
+
+      # Final Integrity Check
+      - name: Verify integrity
+        run: |
+          echo "🔍 Application Integrity Verification"
+          echo "===================================="
+          echo ""
+          
+          FAILED_CHECKS=0
+          
+          # Check linting
+          if [ "${{ steps.lint-api.outputs.lint-api }}" == "failed" ] || [ "${{ steps.lint-portal.outputs.lint-portal }}" == "failed" ]; then
+            echo "❌ Linting failed"
+            FAILED_CHECKS=$((FAILED_CHECKS + 1))
+          else
+            echo "✅ Linting passed"
+          fi
+          
+          # Check type checking
+          if [ "${{ steps.typecheck-api.outputs.typecheck-api }}" == "failed" ] || [ "${{ steps.typecheck-portal.outputs.typecheck-portal }}" == "failed" ]; then
+            echo "❌ Type checking failed"
+            FAILED_CHECKS=$((FAILED_CHECKS + 1))
+          else
+            echo "✅ Type checking passed"
+          fi
+          
+          # Check tests and coverage
+          if [ "${{ steps.test-coverage.outputs.test-coverage }}" == "failed" ] || [ "${{ steps.coverage.outputs.coverage-threshold }}" == "failed" ]; then
+            echo "❌ Tests or coverage threshold failed"
+            FAILED_CHECKS=$((FAILED_CHECKS + 1))
+          else
+            echo "✅ Tests and coverage passed"
+            echo "   Coverage: Lines=${{ steps.coverage.outputs.lines }}%, Branches=${{ steps.coverage.outputs.branches }}%, Functions=${{ steps.coverage.outputs.functions }}%, Statements=${{ steps.coverage.outputs.statements }}%"
+          fi
+          
+          # Check builds
+          if [ "${{ steps.build-api.outputs.build-api }}" == "failed" ] || [ "${{ steps.build-portal.outputs.build-portal }}" == "failed" ]; then
+            echo "❌ Build failed"
+            FAILED_CHECKS=$((FAILED_CHECKS + 1))
+          else
+            echo "✅ Builds successful"
+          fi
+          
+          # Security warnings
+          if [ "${{ steps.security-audit.outputs.security-audit }}" == "warnings" ]; then
+            echo "⚠️ Security audit found warnings"
+            if [ "${{ github.event.inputs.strict_mode }}" == "true" ]; then
+              FAILED_CHECKS=$((FAILED_CHECKS + 1))
+            fi
+          else
+            echo "✅ Security audit passed"
+          fi
+          
+          echo ""
+          echo "===================================="
+          if [ $FAILED_CHECKS -eq 0 ]; then
+            echo "✅ All integrity checks passed - Application is ready for deployment"
+            exit 0
+          else
+            echo "❌ $FAILED_CHECKS check(s) failed - Application is NOT ready for deployment"
+            exit 1
+          fi
+
+      - name: Generate integrity report
+        if: always()
+        run: |
+          echo "## 🔍 Application Integrity Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Code Quality" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| ESLint (API) | ${{ steps.lint-api.outputs.lint-api == 'failed' && '❌ Failed' || '✅ Passed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| ESLint (Portal) | ${{ steps.lint-portal.outputs.lint-portal == 'failed' && '❌ Failed' || '✅ Passed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Type Check (API) | ${{ steps.typecheck-api.outputs.typecheck-api == 'failed' && '❌ Failed' || '✅ Passed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Type Check (Portal) | ${{ steps.typecheck-portal.outputs.typecheck-portal == 'failed' && '❌ Failed' || '✅ Passed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Testing & Coverage" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Coverage | Threshold | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|----------|-----------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Lines | ${{ steps.coverage.outputs.lines }}% | ${{ env.COVERAGE_THRESHOLD }}% | ${{ steps.coverage.outputs.lines >= env.COVERAGE_THRESHOLD && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Branches | ${{ steps.coverage.outputs.branches }}% | ${{ env.COVERAGE_THRESHOLD }}% | ${{ steps.coverage.outputs.branches >= env.COVERAGE_THRESHOLD && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Functions | ${{ steps.coverage.outputs.functions }}% | ${{ env.COVERAGE_THRESHOLD }}% | ${{ steps.coverage.outputs.functions >= env.COVERAGE_THRESHOLD && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Statements | ${{ steps.coverage.outputs.statements }}% | ${{ env.COVERAGE_THRESHOLD }}% | ${{ steps.coverage.outputs.statements >= env.COVERAGE_THRESHOLD && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Build Verification" >> $GITHUB_STEP_SUMMARY
+          echo "| Build | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| API | ${{ steps.build-api.outputs.build-api == 'failed' && '❌ Failed' || '✅ Passed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Portal | ${{ steps.build-portal.outputs.build-portal == 'failed' && '❌ Failed' || '✅ Passed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Security" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Security Audit | ${{ steps.security-audit.outputs.security-audit == 'warnings' && '⚠️ Warnings' || '✅ Passed' }} |" >> $GITHUB_STEP_SUMMARY
+

@@ -263,5 +263,19 @@ export const CatalogsService = {
     deleteApprover: async (id: string): Promise<void> => {
         const response = await fetch(`${API_URL}/catalogs/approvers/${id}`, { method: 'DELETE' });
         if (!response.ok) throw new Error('Failed to delete approver');
+    },
+
+    getEffortTypes: async (): Promise<any[]> => {
+        const response = await fetch(`${API_URL}/catalogs/effort-estimate-types`, { cache: 'no-store' });
+        if (!response.ok) return [];
+        const json = await response.json();
+        return json.data || json;
+    },
+
+    getSources: async (): Promise<any[]> => {
+        const response = await fetch(`${API_URL}/catalogs/sources`, { cache: 'no-store' });
+        if (!response.ok) return [];
+        const json = await response.json();
+        return json.data || json;
     }
 };

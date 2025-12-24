@@ -4,13 +4,41 @@ import { EpicsService } from '@application/epics/services/epics.service';
 import { CreateEpicDto } from '@application/epics/dtos/create-epic.dto';
 import { UpdateEpicDto } from '@application/epics/dtos/update-epic.dto';
 import { Epic } from '@domain/entities/epic.entity';
+import { Public } from '@shared/decorators/public.decorator';
 
+/**
+ * Epics Controller
+ * 
+ * Handles HTTP requests for epic management including CRUD operations and smoke tests
+ */
 @ApiTags('epics')
 @ApiBearerAuth('JWT-auth')
 @Controller('epics')
 export class EpicsController {
   constructor(private readonly epicsService: EpicsService) { }
 
+  /**
+   * Smoke test endpoint for health checks
+   * 
+   * @returns Simple success response
+   */
+  @Public()
+  @Get('admin/test')
+  @ApiOperation({ summary: 'Smoke test endpoint' })
+  @ApiResponse({ status: 200, description: 'Service is operational' })
+  async test(): Promise<{ status: string; timestamp: string }> {
+    return {
+      status: 'ok',
+      timestamp: new Date().toISOString(),
+    };
+  }
+
+  /**
+   * Creates a new epic
+   * 
+   * @param createEpicDto - Data for creating the epic
+   * @returns Created epic entity
+   */
   @Post()
   @ApiOperation({ summary: 'Create a new epic' })
   @ApiResponse({ status: 201, description: 'The epic has been successfully created.', type: Epic })

@@ -37,7 +37,7 @@ export function EditRequirementDialog({ requirement, trigger }: EditRequirementD
     const [effortEstimate, setEffortEstimate] = useState(requirement.effortEstimate?.toString() || '');
     const [acceptanceCriteria, setAcceptanceCriteria] = useState(requirement.acceptanceCriteria || '');
     const [productOwnerId, setProductOwnerId] = useState(requirement.productOwnerId || '');
-    const [approverId, setApproverId] = useState(requirement.approverId || '');
+    const [approverUserId, setApproverUserId] = useState(requirement.approverUserId || '');
 
     // Catalog Data
     const [productOwners, setProductOwners] = useState<any[]>([]);
@@ -68,7 +68,7 @@ export function EditRequirementDialog({ requirement, trigger }: EditRequirementD
                 acceptanceCriteria,
                 effortEstimate: effortEstimate ? parseFloat(effortEstimate) : undefined,
                 productOwnerId: productOwnerId || undefined,
-                approverId: approverId || undefined,
+                approverUserId: approverUserId || undefined,
             });
             setOpen(false);
         } catch (error) {
@@ -118,7 +118,7 @@ export function EditRequirementDialog({ requirement, trigger }: EditRequirementD
                                 </div>
                                 <div className="space-y-2">
                                     <Label>Approver</Label>
-                                    <Select value={approverId} onValueChange={setApproverId}>
+                                    <Select value={approverUserId} onValueChange={setApproverUserId}>
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select Approver" />
                                         </SelectTrigger>

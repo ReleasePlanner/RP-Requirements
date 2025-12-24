@@ -1,0 +1,42 @@
+version: '3.8'
+
+# Docker Compose para desarrollo
+# Uso: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+services:
+  postgres:
+    environment:
+      DB_SYNCHRONIZE: "true"
+      DB_LOGGING: "true"
+    ports:
+      - "5432:5432"
+
+  api:
+    build:
+      target: builder
+    environment:
+      NODE_ENV: development
+      DB_SYNCHRONIZE: "true"
+      DB_LOGGING: "true"
+      LOG_LEVEL: debug
+    volumes:
+      - ./apps/api/src:/app/src:ro
+      - ./apps/api/dist:/app/dist
+    command: npm run start:dev
+    ports:
+      - "3000:3000"
+      - "9229:9229"  # Debug port
+
+  portal:
+    build:
+      target: builder
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./apps/portal:/app/apps/portal
+      - ./apps/portal/.next:/app/apps/portal/.next
+      - /app/apps/portal/node_modules
+    command: npm run dev
+    ports:
+      - "4200:4200"
+

@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { WidgetConfig } from '@shared/types/widget.types';
 
 export enum WidgetType {
     STATS_OVERVIEW = 'STATS_OVERVIEW',
@@ -9,6 +10,11 @@ export enum WidgetType {
     PORTFOLIO_HEALTH = 'PORTFOLIO_HEALTH'
 }
 
+/**
+ * Widget Entity
+ * 
+ * Represents a dashboard widget with configurable display options
+ */
 @Entity('widgets')
 export class Widget {
     @PrimaryGeneratedColumn('uuid')
@@ -25,7 +31,7 @@ export class Widget {
     type: WidgetType;
 
     @Column({ type: 'jsonb', nullable: true })
-    config: any;
+    config: WidgetConfig;
 
     @Column({ default: true })
     isVisible: boolean;

@@ -1,7 +1,7 @@
 import {
   EntityNotFoundException,
   RequirementNotFoundException,
-  UserNotFoundException,
+  SponsorNotFoundException,
   PortfolioNotFoundException,
   ProductNotFoundException,
   EpicNotFoundException,
@@ -34,11 +34,11 @@ describe('EntityNotFoundException', () => {
     });
   });
 
-  describe('UserNotFoundException', () => {
+  describe('SponsorNotFoundException', () => {
     it('should create exception with correct message', () => {
-      const exception = new UserNotFoundException('user-123');
+      const exception = new SponsorNotFoundException('sponsor-123');
 
-      expect(exception.message).toBe("User with ID 'user-123' not found");
+      expect(exception.message).toBe("Sponsor with ID 'sponsor-123' not found");
     });
   });
 

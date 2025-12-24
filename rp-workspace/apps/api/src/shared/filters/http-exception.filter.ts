@@ -7,11 +7,23 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
+import { HttpExceptionResponse } from '@shared/types/exception.types';
 
+/**
+ * Global HTTP Exception Filter
+ * 
+ * Catches all exceptions and formats them into a consistent error response
+ */
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
   private readonly logger = new Logger(HttpExceptionFilter.name);
 
+  /**
+   * Handles exceptions and formats error responses
+   * 
+   * @param exception - The exception that was thrown
+   * @param host - Execution context host
+   */
   catch(exception: unknown, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
@@ -24,14 +36,19 @@ export class HttpExceptionFilter implements ExceptionFilter {
     if (exception instanceof HttpException) {
       status = exception.getStatus();
       const exceptionResponse = exception.getResponse();
+      const responseMessage = typeof exceptionResponse === 'string'
+        ? exceptionResponse
+        : (exceptionResponse as HttpExceptionResponse).message;
       message =
-        typeof exceptionResponse === 'string'
-          ? exceptionResponse
-          : (exceptionResponse as any).message || exception.message;
+        typeof responseMessage === 'string'
+          ? responseMessage
+          : Array.isArray(responseMessage)
+          ? responseMessage.join(', ')
+          : exception.message;
       error =
         typeof exceptionResponse === 'string'
           ? exceptionResponse
-          : (exceptionResponse as any).error || exception.name;
+          : (exceptionResponse as HttpExceptionResponse).error || exception.name;
     } else if (exception instanceof Error) {
       message = exception.message;
       error = exception.name;

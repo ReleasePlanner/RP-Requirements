@@ -83,12 +83,14 @@ export function BacklogList({ data, onSort, currentSort, currentOrder }: Backlog
                                 <div className="flex items-center gap-2">
                                     {item.productOwner ? (
                                         <div className="h-8 w-8 rounded-full bg-zinc-100 text-zinc-500 flex items-center justify-center text-[10px] font-bold border border-white shadow-sm">
-                                            {item.productOwner.name.charAt(0)}
+                                            {item.productOwner.firstName.charAt(0)}
                                         </div>
                                     ) : (
                                         <div className="h-8 w-8 rounded-full border border-dashed border-zinc-200"></div>
                                     )}
-                                    <span className="text-[12px] font-medium text-zinc-500">{item.productOwner?.name || 'Unassigned'}</span>
+                                    <span className="text-[12px] font-medium text-zinc-500">
+                                        {item.productOwner ? `${item.productOwner.firstName} ${item.productOwner.lastName}` : 'Unassigned'}
+                                    </span>
                                 </div>
                             </TableCell>
                             <TableCell className="py-4">

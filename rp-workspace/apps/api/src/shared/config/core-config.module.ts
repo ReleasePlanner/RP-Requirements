@@ -36,10 +36,12 @@ import { configValidationSchema } from './config.validation';
             ),
           }),
           new winston.transports.File({
-            filename: 'logs/error.log',
+            filename: process.env.LOG_DIR ? `${process.env.LOG_DIR}/error.log` : 'logs/error.log',
             level: 'error',
           }),
-          new winston.transports.File({ filename: 'logs/combined.log' }),
+          new winston.transports.File({ 
+            filename: process.env.LOG_DIR ? `${process.env.LOG_DIR}/combined.log` : 'logs/combined.log' 
+          }),
         ],
       }),
       inject: [ConfigService],

@@ -11,7 +11,11 @@ describe('PortfolioRepository', () => {
   const mockPortfolio: Portfolio = {
     portfolioId: 'portfolio-123',
     name: 'Test Portfolio',
-    sponsorUserId: 'user-123',
+    sponsorId: 'sponsor-123',
+    creationDate: new Date(),
+    status: 'Active',
+    sponsor: null as any,
+    initiatives: [],
   } as Portfolio;
 
   beforeEach(async () => {
@@ -76,10 +80,10 @@ describe('PortfolioRepository', () => {
     it('should create portfolio', async () => {
       const portfolioData = {
         name: 'New Portfolio',
-        sponsorUserId: 'user-123',
+        sponsorId: 'sponsor-123',
       };
 
-      typeOrmRepository.create.mockReturnValue(mockPortfolio as Portfolio);
+      typeOrmRepository.create.mockReturnValue(mockPortfolio);
       typeOrmRepository.save.mockResolvedValue(mockPortfolio);
 
       const result = await repository.create(portfolioData);

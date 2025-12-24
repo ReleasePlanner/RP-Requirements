@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import {
-    LayoutDashboard, FolderKanban, CalendarRange, Settings, LogOut, Users, Library, ListTodo, Backpack, Plus, ChevronLeft, ChevronRight, Tags
+    LayoutDashboard, FolderKanban, CalendarRange, Settings, LogOut, Users, Library, ListTodo, Backpack, Plus, ChevronLeft, ChevronRight, Tags, Activity
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -16,6 +16,7 @@ const navItems = [
     { name: 'Dashboard', href: '/portal/dashboard', icon: LayoutDashboard },
     { name: 'Portfolios', href: '/portal/portfolio', icon: FolderKanban },
     { name: 'Requirements', href: '/portal/requirements', icon: Library },
+    { name: 'Monitoring', href: '/portal/monitoring', icon: Activity },
     { name: 'Maintenance', href: '/portal/maintenance', icon: Settings },
 ];
 

@@ -1,0 +1,206 @@
+name: CD - Development
+
+on:
+  push:
+    branches:
+      - develop
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '20.x'
+  PNPM_VERSION: '8'
+  ENVIRONMENT: 'development'
+
+jobs:
+  integrity-verification:
+    name: Pre-Deployment Integrity Check
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: requirements_db_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linting
+        run: |
+          echo "🔍 Running lint checks..."
+          npm run lint:api || exit 1
+          cd apps/portal && npm run lint || exit 1
+          echo "✅ Linting passed"
+
+      - name: Run tests with coverage verification
+        working-directory: apps/api
+        env:
+          NODE_ENV: test
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_USERNAME: postgres
+          DB_PASSWORD: postgres
+          DB_DATABASE: requirements_db_test
+          DB_SYNCHRONIZE: true
+          JWT_SECRET: test-jwt-secret-key-min-32-characters-long
+          JWT_EXPIRES_IN: 1h
+        run: |
+          echo "🧪 Running tests with coverage check..."
+          npm run test:cov:check || {
+            echo "❌ Coverage threshold not met!"
+            exit 1
+          }
+          echo "✅ Tests and coverage passed"
+
+      - name: Verify API build
+        run: |
+          echo "🏗️ Verifying API build..."
+          npm run build:api || exit 1
+          echo "✅ API build successful"
+
+      - name: Verify Portal build
+        working-directory: apps/portal
+        env:
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL_DEV || 'http://localhost:3000/api/v1' }}
+        run: |
+          echo "🏗️ Verifying Portal build..."
+          npm run build || exit 1
+          echo "✅ Portal build successful"
+
+      - name: Integrity check summary
+        run: |
+          echo "## ✅ Pre-Deployment Integrity Check" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "All checks passed - Application is ready for development deployment" >> $GITHUB_STEP_SUMMARY
+
+  deploy-api-dev:
+    name: Deploy API to Development
+    runs-on: ubuntu-latest
+    needs: [integrity-verification]
+    environment:
+      name: development
+      url: ${{ secrets.API_DEV_URL || 'https://api-dev.example.com' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build API
+        run: npm run build:api
+
+      - name: Run database migrations
+        working-directory: apps/api
+        env:
+          NODE_ENV: production
+          DB_HOST: ${{ secrets.DB_DEV_HOST }}
+          DB_PORT: ${{ secrets.DB_DEV_PORT }}
+          DB_USERNAME: ${{ secrets.DB_DEV_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_DEV_PASSWORD }}
+          DB_DATABASE: ${{ secrets.DB_DEV_DATABASE }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        run: npm run migration:run || echo "Migrations already applied"
+
+      - name: Deploy to development server
+        # Aquí agregarías tu comando de deployment específico
+        # Ejemplo: SSH, Docker, Kubernetes, etc.
+        run: |
+          echo "Deploying API to development environment..."
+          # Ejemplo con Docker:
+          # docker build -t api-dev:${{ github.sha }} -f apps/api/Dockerfile .
+          # docker push api-dev:${{ github.sha }}
+          # kubectl set image deployment/api-dev api=api-dev:${{ github.sha }} -n development
+
+      - name: Health check
+        run: |
+          echo "Waiting for API to be ready..."
+          sleep 10
+          # curl -f ${{ secrets.API_DEV_URL }}/api/health || exit 1
+
+  deploy-portal-dev:
+    name: Deploy Portal to Development
+    runs-on: ubuntu-latest
+    needs: [integrity-verification]
+    environment:
+      name: development
+      url: ${{ secrets.PORTAL_DEV_URL || 'https://portal-dev.example.com' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Portal
+        working-directory: apps/portal
+        env:
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL_DEV }}
+        run: npm run build
+
+      - name: Deploy to development server
+        run: |
+          echo "Deploying Portal to development environment..."
+          # Agregar comandos de deployment específicos aquí
+
+  notify:
+    name: Notify Deployment
+    runs-on: ubuntu-latest
+    needs: [deploy-api-dev, deploy-portal-dev]
+    if: always()
+    steps:
+      - name: Send notification
+        run: |
+          if [ "${{ needs.deploy-api-dev.result }}" == "success" ] && \
+             [ "${{ needs.deploy-portal-dev.result }}" == "success" ]; then
+            echo "✅ Deployment to development successful"
+            # Agregar notificaciones (Slack, Teams, Email, etc.)
+          else
+            echo "❌ Deployment to development failed"
+            exit 1
+          fi
+

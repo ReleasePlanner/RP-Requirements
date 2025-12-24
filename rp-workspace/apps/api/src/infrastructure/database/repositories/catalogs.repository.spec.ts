@@ -69,19 +69,19 @@ describe('CatalogsRepository', () => {
     });
   });
 
-  describe('findAllEffortTypes', () => {
+  describe('findAllEffortEstimateTypes', () => {
     it('should return effort types', async () => {
       const result = [new EffortEstimateType()];
       mockRepository.find.mockResolvedValue(result);
-      expect(await repository.findAllEffortTypes()).toBe(result);
+      expect(await repository.findAllEffortEstimateTypes()).toBe(result);
     });
   });
 
-  describe('findAllTypes', () => {
+  describe('findAllRequirementTypes', () => {
     it('should return types', async () => {
       const result = [new RequirementType()];
       mockRepository.find.mockResolvedValue(result);
-      expect(await repository.findAllTypes()).toBe(result);
+      expect(await repository.findAllRequirementTypes()).toBe(result);
     });
   });
 

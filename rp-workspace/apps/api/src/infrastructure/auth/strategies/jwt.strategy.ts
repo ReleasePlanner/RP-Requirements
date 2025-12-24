@@ -3,7 +3,13 @@ import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { ConfigService } from '@nestjs/config';
 import { ISponsorRepository } from '@application/interfaces/repositories/sponsor.repository.interface';
+import { JwtPayload, RequestUser } from '@shared/types';
 
+/**
+ * JWT Strategy
+ * 
+ * Validates JWT tokens and extracts user information from the payload
+ */
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
@@ -18,13 +24,21 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: any) {
+  /**
+   * Validates the JWT payload and returns user information
+   * 
+   * @param payload - Decoded JWT payload
+   * @returns User information object
+   * @throws UnauthorizedException if sponsor not found or inactive
+   */
+  async validate(payload: JwtPayload): Promise<RequestUser> {
     const sponsor = await this.sponsorRepository.findById(payload.sub);
     if (!sponsor || !sponsor.isActive) {
       throw new UnauthorizedException('Sponsor no autorizado');
     }
     return {
       userId: sponsor.sponsorId, // Mapping sponsorId to userId for compatibility
+      name: sponsor.name,
       email: sponsor.email,
       role: sponsor.role,
     };

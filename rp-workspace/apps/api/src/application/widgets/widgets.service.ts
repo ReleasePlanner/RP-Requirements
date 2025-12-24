@@ -30,7 +30,24 @@ export class WidgetsService {
     }
 
     async update(id: string, updateWidgetDto: UpdateWidgetDto): Promise<Widget | null> {
-        await this.widgetRepository.update(id, updateWidgetDto);
+        const updateData: Record<string, unknown> = {};
+        if (updateWidgetDto.title !== undefined) {
+            updateData.title = updateWidgetDto.title;
+        }
+        if (updateWidgetDto.type !== undefined) {
+            updateData.type = updateWidgetDto.type;
+        }
+        if (updateWidgetDto.config !== undefined) {
+            updateData.config = updateWidgetDto.config;
+        }
+        if (updateWidgetDto.isVisible !== undefined) {
+            updateData.isVisible = updateWidgetDto.isVisible;
+        }
+        if (updateWidgetDto.defaultOrder !== undefined) {
+            updateData.defaultOrder = updateWidgetDto.defaultOrder;
+        }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        await this.widgetRepository.update(id, updateData as any);
         return this.findOne(id);
     }
 

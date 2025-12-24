@@ -1,0 +1,172 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: 'Version type (major, minor, patch)'
+        required: true
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+      create_pr:
+        description: 'Create PR instead of direct push'
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  bump-version:
+    name: Bump Version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Get current version
+        id: current-version
+        run: |
+          CURRENT_VERSION=$(node -p "require('./apps/api/package.json').version")
+          echo "current=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          echo "Current version: $CURRENT_VERSION"
+
+      - name: Bump version
+        id: bump-version
+        run: |
+          CURRENT_VERSION=${{ steps.current-version.outputs.current }}
+          VERSION_TYPE=${{ github.event.inputs.version_type }}
+          
+          IFS='.' read -ra VERSION_PARTS <<< "$CURRENT_VERSION"
+          MAJOR=${VERSION_PARTS[0]}
+          MINOR=${VERSION_PARTS[1]}
+          PATCH=${VERSION_PARTS[2]}
+          
+          case $VERSION_TYPE in
+            major)
+              MAJOR=$((MAJOR + 1))
+              MINOR=0
+              PATCH=0
+              ;;
+            minor)
+              MINOR=$((MINOR + 1))
+              PATCH=0
+              ;;
+            patch)
+              PATCH=$((PATCH + 1))
+              ;;
+          esac
+          
+          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+          echo "new=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "New version: $NEW_VERSION"
+
+      - name: Update package.json files
+        run: |
+          NEW_VERSION=${{ steps.bump-version.outputs.new }}
+          
+          # Update API version
+          node -e "
+            const fs = require('fs');
+            const pkg = JSON.parse(fs.readFileSync('apps/api/package.json', 'utf8'));
+            pkg.version = '$NEW_VERSION';
+            fs.writeFileSync('apps/api/package.json', JSON.stringify(pkg, null, 2) + '\n');
+          "
+          
+          # Update Portal version
+          node -e "
+            const fs = require('fs');
+            const pkg = JSON.parse(fs.readFileSync('apps/portal/package.json', 'utf8'));
+            pkg.version = '$NEW_VERSION';
+            fs.writeFileSync('apps/portal/package.json', JSON.stringify(pkg, null, 2) + '\n');
+          "
+          
+          # Update root version if exists
+          if [ -f "package.json" ]; then
+            node -e "
+              const fs = require('fs');
+              const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+              pkg.version = '$NEW_VERSION';
+              fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
+            "
+          fi
+
+      - name: Generate changelog
+        run: |
+          NEW_VERSION=${{ steps.bump-version.outputs.new }}
+          VERSION_TYPE=${{ github.event.inputs.version_type }}
+          
+          # Create changelog entry
+          CHANGELOG_ENTRY="## [$NEW_VERSION] - $(date +%Y-%m-%d)\n\n"
+          CHANGELOG_ENTRY+="### $VERSION_TYPE\n\n"
+          
+          # Get commits since last tag
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -z "$LAST_TAG" ]; then
+            CHANGELOG_ENTRY+="- Initial release\n"
+          else
+            COMMITS=$(git log ${LAST_TAG}..HEAD --pretty=format:"- %s (%h)" | head -20)
+            CHANGELOG_ENTRY+="$COMMITS\n"
+          fi
+          
+          # Append to docs/CHANGELOG.md if exists, otherwise create it
+          if [ -f "docs/CHANGELOG.md" ]; then
+            echo -e "$CHANGELOG_ENTRY\n$(cat docs/CHANGELOG.md)" > docs/CHANGELOG.md
+          else
+            echo -e "# Changelog\n\n$CHANGELOG_ENTRY" > docs/CHANGELOG.md
+          fi
+
+      - name: Create branch
+        if: github.event.inputs.create_pr == 'true'
+        run: |
+          NEW_VERSION=${{ steps.bump-version.outputs.new }}
+          BRANCH_NAME="release/v$NEW_VERSION"
+          git checkout -b $BRANCH_NAME
+          git add .
+          git commit -m "chore: bump version to $NEW_VERSION"
+          git push origin $BRANCH_NAME
+
+      - name: Create Pull Request
+        if: github.event.inputs.create_pr == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          title: "chore: Release v${{ steps.bump-version.outputs.new }}"
+          body: |
+            ## Release v${{ steps.bump-version.outputs.new }}
+            
+            This PR bumps the version to **${{ steps.bump-version.outputs.new }}** (${{ github.event.inputs.version_type }}).
+            
+            ### Changes
+            - Updated version in all package.json files
+            - Generated changelog entry
+            
+            ### Next Steps
+            After merging this PR, create a tag `v${{ steps.bump-version.outputs.new }}` to trigger the production deployment.
+          branch: release/v${{ steps.bump-version.outputs.new }}
+          delete-branch: true
+
+      - name: Create tag and push
+        if: github.event.inputs.create_pr == 'false'
+        run: |
+          NEW_VERSION=${{ steps.bump-version.outputs.new }}
+          git add .
+          git commit -m "chore: bump version to $NEW_VERSION"
+          git tag -a "v$NEW_VERSION" -m "Release v$NEW_VERSION"
+          git push origin main
+          git push origin "v$NEW_VERSION"
+

@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, ParseIntPipe } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { CatalogsService } from '@application/catalogs/services/catalogs.service';
 import { Priority } from '@domain/entities/priority.entity';
@@ -20,14 +20,40 @@ import { CreateProductOwnerDto } from '@application/catalogs/dto/create-product-
 import { UpdateProductOwnerDto } from '@application/catalogs/dto/update-product-owner.dto';
 import { CreateApproverDto, UpdateApproverDto } from '@application/catalogs/dto/create-approver.dto';
 import { Approver } from '../../domain/entities/approver.entity';
-import { Post, Put, Delete, Body, Param, ParseIntPipe } from '@nestjs/common';
+import { Public } from '@shared/decorators/public.decorator';
 
+/**
+ * Catalogs Controller
+ * 
+ * Handles HTTP requests for catalog management including CRUD operations and smoke tests
+ */
 @ApiTags('catalogs')
 @ApiBearerAuth('JWT-auth')
 @Controller({ path: 'catalogs', version: '1' })
 export class CatalogsController {
   constructor(private readonly catalogsService: CatalogsService) { }
 
+  /**
+   * Smoke test endpoint for health checks
+   * 
+   * @returns Simple success response
+   */
+  @Public()
+  @Get('admin/test')
+  @ApiOperation({ summary: 'Smoke test endpoint' })
+  @ApiResponse({ status: 200, description: 'Service is operational' })
+  async test(): Promise<{ status: string; timestamp: string }> {
+    return {
+      status: 'ok',
+      timestamp: new Date().toISOString(),
+    };
+  }
+
+  /**
+   * Retrieves all priorities
+   * 
+   * @returns List of priorities
+   */
   @Get('priorities')
   @ApiOperation({ summary: 'Obtener todas las prioridades' })
   @ApiResponse({

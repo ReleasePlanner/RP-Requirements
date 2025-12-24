@@ -101,6 +101,7 @@ async function bootstrap() {
       .addTag('portfolios', 'Gestión de portafolios')
       .addTag('users', 'Gestión de usuarios')
       .addTag('health', 'Health checks')
+      .addTag('monitoring', 'Monitoring and metrics')
       .build();
 
     const document = SwaggerModule.createDocument(app, config);

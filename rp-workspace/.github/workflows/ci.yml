@@ -1,0 +1,285 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+env:
+  NODE_VERSION: '20.x'
+  PNPM_VERSION: '8'
+
+jobs:
+  lint-and-format:
+    name: Lint & Format Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint (API)
+        run: npm run lint:api
+        continue-on-error: false
+
+      - name: Run ESLint (Portal)
+        run: cd apps/portal && npm run lint
+        continue-on-error: false
+
+  test-api:
+    name: Test API
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: requirements_db_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests (API)
+        working-directory: apps/api
+        env:
+          NODE_ENV: test
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_USERNAME: postgres
+          DB_PASSWORD: postgres
+          DB_DATABASE: requirements_db_test
+          DB_SYNCHRONIZE: true
+          JWT_SECRET: test-jwt-secret-key-min-32-characters-long
+          JWT_EXPIRES_IN: 1h
+        run: npm run test:ci
+
+      - name: Check test coverage threshold
+        working-directory: apps/api
+        env:
+          NODE_ENV: test
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_USERNAME: postgres
+          DB_PASSWORD: postgres
+          DB_DATABASE: requirements_db_test
+          DB_SYNCHRONIZE: true
+          JWT_SECRET: test-jwt-secret-key-min-32-characters-long
+          JWT_EXPIRES_IN: 1h
+        run: |
+          echo "Running coverage check with threshold validation..."
+          npm run test:cov:check || {
+            echo "❌ Coverage threshold not met!"
+            echo "Expected: 100% coverage for branches, functions, lines, and statements"
+            exit 1
+          }
+          echo "✅ Coverage threshold met!"
+
+      - name: Parse coverage report
+        id: coverage
+        working-directory: apps/api
+        run: |
+          if [ -f "coverage/coverage-summary.json" ]; then
+            COVERAGE=$(node -e "const cov = require('./coverage/coverage-summary.json'); console.log(JSON.stringify(cov.total))")
+            echo "coverage<<EOF" >> $GITHUB_OUTPUT
+            echo "$COVERAGE" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            
+            LINES=$(node -e "const cov = require('./coverage/coverage-summary.json'); console.log(cov.total.lines.pct)")
+            BRANCHES=$(node -e "const cov = require('./coverage/coverage-summary.json'); console.log(cov.total.branches.pct)")
+            FUNCTIONS=$(node -e "const cov = require('./coverage/coverage-summary.json'); console.log(cov.total.functions.pct)")
+            STATEMENTS=$(node -e "const cov = require('./coverage/coverage-summary.json'); console.log(cov.total.statements.pct)")
+            
+            echo "lines=$LINES" >> $GITHUB_OUTPUT
+            echo "branches=$BRANCHES" >> $GITHUB_OUTPUT
+            echo "functions=$FUNCTIONS" >> $GITHUB_OUTPUT
+            echo "statements=$STATEMENTS" >> $GITHUB_OUTPUT
+          else
+            echo "⚠️ Coverage report not found"
+            echo "lines=0" >> $GITHUB_OUTPUT
+            echo "branches=0" >> $GITHUB_OUTPUT
+            echo "functions=0" >> $GITHUB_OUTPUT
+            echo "statements=0" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Display coverage summary
+        working-directory: apps/api
+        run: |
+          echo "## 📊 Test Coverage Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Coverage | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|----------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Lines | ${{ steps.coverage.outputs.lines }}% | ${{ steps.coverage.outputs.lines >= 100 && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Branches | ${{ steps.coverage.outputs.branches }}% | ${{ steps.coverage.outputs.branches >= 100 && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Functions | ${{ steps.coverage.outputs.functions }}% | ${{ steps.coverage.outputs.functions >= 100 && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Statements | ${{ steps.coverage.outputs.statements }}% | ${{ steps.coverage.outputs.statements >= 100 && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./apps/api/coverage/coverage-final.json
+          flags: api
+          name: api-coverage
+          fail_ci_if_error: true
+
+  build-api:
+    name: Build API
+    runs-on: ubuntu-latest
+    needs: [lint-and-format, test-api]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build API
+        run: npm run build:api
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-build
+          path: apps/api/dist
+          retention-days: 7
+
+  build-portal:
+    name: Build Portal
+    runs-on: ubuntu-latest
+    needs: [lint-and-format]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Portal
+        working-directory: apps/portal
+        env:
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api/v1' }}
+        run: npm run build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: portal-build
+          path: apps/portal/.next
+          retention-days: 7
+
+  integrity-check:
+    name: Integrity Check
+    runs-on: ubuntu-latest
+    needs: [lint-and-format, test-api, build-api, build-portal]
+    if: always()
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Verify all checks passed
+        run: |
+          echo "🔍 Verifying application integrity..."
+          echo ""
+          
+          # Check linting
+          if [ "${{ needs.lint-and-format.result }}" != "success" ]; then
+            echo "❌ Linting failed"
+            exit 1
+          fi
+          echo "✅ Linting passed"
+          
+          # Check tests
+          if [ "${{ needs.test-api.result }}" != "success" ]; then
+            echo "❌ Tests failed"
+            exit 1
+          fi
+          echo "✅ Tests passed"
+          
+          # Check API build
+          if [ "${{ needs.build-api.result }}" != "success" ]; then
+            echo "❌ API build failed"
+            exit 1
+          fi
+          echo "✅ API build successful"
+          
+          # Check Portal build
+          if [ "${{ needs.build-portal.result }}" != "success" ]; then
+            echo "❌ Portal build failed"
+            exit 1
+          fi
+          echo "✅ Portal build successful"
+          
+          echo ""
+          echo "✅ All integrity checks passed - Application is ready for deployment"
+
+      - name: Create integrity report
+        run: |
+          echo "## ✅ Application Integrity Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Linting | ${{ needs.lint-and-format.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Tests | ${{ needs.test-api.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| API Build | ${{ needs.build-api.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Portal Build | ${{ needs.build-portal.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Overall Status**: ${{ needs.lint-and-format.result == 'success' && needs.test-api.result == 'success' && needs.build-api.result == 'success' && needs.build-portal.result == 'success' && '✅ Ready for Deployment' || '❌ Not Ready' }}"
+

@@ -3,7 +3,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { IInitiativesRepository } from '@application/initiatives/interfaces/repositories/initiatives.repository.interface';
 import { Initiative } from '@domain/entities/initiative.entity';
+import { WhereClause } from '@shared/types/repository.types';
 
+/**
+ * Initiatives Repository Implementation
+ * 
+ * Handles data persistence for Initiative entities using TypeORM
+ */
 @Injectable()
 export class InitiativesRepository implements IInitiativesRepository {
   constructor(
@@ -11,8 +17,14 @@ export class InitiativesRepository implements IInitiativesRepository {
     private readonly initiativeRepository: Repository<Initiative>,
   ) { }
 
+  /**
+   * Finds all initiatives with optional filtering by portfolio
+   * 
+   * @param options - Query options including portfolio filter
+   * @returns List of initiatives
+   */
   async findAll(options?: { portfolioId?: string }): Promise<Initiative[]> {
-    const where: any = {};
+    const where: WhereClause = {};
     if (options?.portfolioId) {
       where.portfolio = { portfolioId: options.portfolioId };
     }

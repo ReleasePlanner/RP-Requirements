@@ -1,0 +1,16 @@
+node_modules
+.next
+.git
+.gitignore
+*.md
+.env*
+.DS_Store
+coverage
+.nyc_output
+.vscode
+.idea
+test
+*.spec.ts
+*.test.ts
+apps/api
+apps/shared

@@ -30,4 +30,8 @@ export const configValidationSchema = Joi.object({
 
   // Logging
   LOG_LEVEL: Joi.string().valid('error', 'warn', 'info', 'debug', 'verbose').default('info'),
+
+  // Monitoring
+  ENABLE_MONITORING: Joi.boolean().default(true),
+  METRICS_RETENTION_MS: Joi.number().default(3600000), // 1 hour
 });

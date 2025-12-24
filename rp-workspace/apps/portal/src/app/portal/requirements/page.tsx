@@ -20,14 +20,14 @@ import {
     DialogContent,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
-    DialogFooter
+    DialogTrigger
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MultiSelect } from "@/components/ui/multi-select";
+import { CreateRequirementForm } from '@/features/requirements/components/create-requirement-form';
+import { toast } from 'sonner';
 
 export default function RequirementsPage() {
     // Filter State
@@ -51,25 +51,19 @@ export default function RequirementsPage() {
     // Create Modal Fields
     const [openCreate, setOpenCreate] = useState(false);
     const [creating, setCreating] = useState(false);
-    const [title, setTitle] = useState('');
-    const [storyStatement, setStoryStatement] = useState('');
-    const [isMandatory, setIsMandatory] = useState(false);
-    const [effortEstimate, setEffortEstimate] = useState('');
-    const [goLiveDate, setGoLiveDate] = useState('');
-    const [changeHistoryLink, setChangeHistoryLink] = useState('');
-    const [requirementVersion, setRequirementVersion] = useState('1.0');
-
-    const [selectedMethodId, setSelectedMethodId] = useState('');
-    const [selectedPriorityId, setSelectedPriorityId] = useState('');
     const [selectedEpicId, setSelectedEpicId] = useState('');
-    const [selectedProductOwnerId, setSelectedProductOwnerId] = useState('');
-    const [selectedApproverId, setSelectedApproverId] = useState('');
 
     // Catalog Data
     const [methods, setMethods] = useState<VerificationMethod[]>([]);
-    const [allEpics, setAllEpics] = useState<Epic[]>([]); // For create modal
+    const [allEpics, setAllEpics] = useState<Epic[]>([]);
     const [users, setUsers] = useState<Sponsor[]>([]);
     const [priorities, setPriorities] = useState<any[]>([]);
+    const [complexities, setComplexities] = useState<any[]>([]);
+    const [riskLevels, setRiskLevels] = useState<any[]>([]);
+    const [effortTypes, setEffortTypes] = useState<any[]>([]);
+    const [metrics, setMetrics] = useState<any[]>([]);
+    const [productOwners, setProductOwners] = useState<any[]>([]);
+    const [approvers, setApprovers] = useState<any[]>([]);
 
     // 1. Fetch Portfolios on Mount
     useEffect(() => {
@@ -148,16 +142,28 @@ export default function RequirementsPage() {
 
     const fetchLookups = async () => {
         try {
-            const [m, p, e, u] = await Promise.all([
+            const [m, p, c, r, et, met, e, u, po, app] = await Promise.all([
                 CatalogsService.getVerificationMethods(),
                 CatalogsService.getPriorities(),
-                EpicsService.getAll({ limit: 100 }), // Keep fetching all for create modal or optimize later
-                SponsorsService.getAll()
+                CatalogsService.getComplexities(),
+                CatalogsService.getRiskLevels(),
+                CatalogsService.getEffortTypes(),
+                CatalogsService.getMetrics(),
+                EpicsService.getAll({ limit: 100 }),
+                SponsorsService.getAll(),
+                CatalogsService.getProductOwners(),
+                CatalogsService.getApprovers()
             ]);
             setMethods(m);
             setPriorities(p);
+            setComplexities(c);
+            setRiskLevels(r);
+            setEffortTypes(et);
+            setMetrics(met);
             setAllEpics(e.items || []);
             setUsers(u || []);
+            setProductOwners(po);
+            setApprovers(app);
         } catch (error) {
             console.error(error);
         }
@@ -172,43 +178,24 @@ export default function RequirementsPage() {
         }
     };
 
-    const handleCreate = async () => {
-        if (!title) return;
+    const handleCreateSuccess = async (data: any) => {
         setCreating(true);
         try {
-            await RequirementsService.create({
-                title,
-                storyStatement,
-                isMandatory,
-                effortEstimate: effortEstimate ? parseFloat(effortEstimate) : undefined,
-                goLiveDate: goLiveDate || undefined,
-                changeHistoryLink,
-                requirementVersion,
-                verificationMethodId: selectedMethodId ? parseInt(selectedMethodId) : undefined,
-                priorityId: selectedPriorityId ? parseInt(selectedPriorityId) : undefined,
-                epicId: selectedEpicId || undefined,
-                productOwnerId: selectedProductOwnerId || undefined,
-                approverId: selectedApproverId || undefined,
-            });
+            await RequirementsService.create(data);
             setOpenCreate(false);
-            // Reset
-            setTitle('');
-            setStoryStatement('');
-            setEffortEstimate('');
-            setGoLiveDate('');
-            setChangeHistoryLink('');
-            setSelectedMethodId('');
-            setSelectedPriorityId('');
             setSelectedEpicId('');
-            setSelectedProductOwnerId('');
-            setSelectedApproverId('');
-
+            toast.success('Requisito creado exitosamente');
+            
             // Refresh if the created requirement belongs to current filter
-            if (selectedContextEpicIds.includes(selectedEpicId)) {
+            if (data.epicId && selectedContextEpicIds.includes(data.epicId)) {
+                fetchData();
+            } else if (selectedContextEpicIds.length > 0) {
                 fetchData();
             }
-        } catch (e) {
-            console.error(e);
+        } catch (error: any) {
+            const errorMessage = error?.response?.data?.message || error?.message || 'Error al crear el requisito';
+            toast.error(errorMessage);
+            throw error;
         } finally {
             setCreating(false);
         }
@@ -293,8 +280,8 @@ export default function RequirementsPage() {
                                 <DialogTitle>Create Requirement</DialogTitle>
                             </DialogHeader>
 
-                            <div className="grid grid-cols-2 gap-x-6 gap-y-4 py-4">
-                                {/* Context Info (Read-Only) */}
+                            {/* Context Info (Read-Only) */}
+                            <div className="grid grid-cols-2 gap-x-6 gap-y-4 mb-4 pb-4 border-b">
                                 <div className="space-y-2">
                                     <Label>Portfolio</Label>
                                     <Input
@@ -313,107 +300,30 @@ export default function RequirementsPage() {
                                         className="bg-zinc-50"
                                     />
                                 </div>
-                                <div className="col-span-2 space-y-2">
-                                    <Label>Epic</Label>
-                                    {selectedContextEpicIds.length === 1 ? (
-                                        <Input
-                                            value={contextEpics.find(e => e.epicId === selectedContextEpicIds[0])?.name || ''}
-                                            readOnly
-                                            disabled
-                                            className="bg-zinc-50"
-                                        />
-                                    ) : (
-                                        <Select value={selectedEpicId} onValueChange={setSelectedEpicId}>
-                                            <SelectTrigger><SelectValue placeholder="Select Epic" /></SelectTrigger>
-                                            <SelectContent>
-                                                {/* Show only epics that are currently selected in the filter context, or all context epics if none selected (fallback) - adhering to user request to choose from selected */}
-                                                {contextEpics
-                                                    .filter(e => selectedContextEpicIds.includes(e.epicId))
-                                                    .map(e => <SelectItem key={e.epicId} value={e.epicId}>{e.name}</SelectItem>)
-                                                }
-                                            </SelectContent>
-                                        </Select>
-                                    )}
-                                </div>
-                                {/* Primary Info */}
-                                <div className="col-span-2 space-y-2">
-                                    <Label>Title *</Label>
-                                    <Input value={title} onChange={e => setTitle(e.target.value)} placeholder="e.g. User Login Page" />
-                                </div>
-                                <div className="col-span-2 space-y-2">
-                                    <Label>Description / Story Statement</Label>
-                                    <Textarea value={storyStatement} onChange={e => setStoryStatement(e.target.value)} placeholder="As a user..." className="h-20" />
-                                </div>
-
-                                {/* Classification */}
-                                <div className="space-y-2">
-                                    <Label>Priority</Label>
-                                    <Select value={selectedPriorityId} onValueChange={setSelectedPriorityId}>
-                                        <SelectTrigger><SelectValue placeholder="Select Priority" /></SelectTrigger>
-                                        <SelectContent>{priorities.map(p => <SelectItem key={p.priorityId} value={p.priorityId?.toString()}>{p.name}</SelectItem>)}</SelectContent>
-                                    </Select>
-                                </div>
-
-                                {/* Governance */}
-                                <div className="space-y-2">
-                                    <Label>Verification Method</Label>
-                                    <Select value={selectedMethodId} onValueChange={setSelectedMethodId}>
-                                        <SelectTrigger><SelectValue placeholder="Select Method" /></SelectTrigger>
-                                        <SelectContent>{methods.map(m => <SelectItem key={m.verificationMethodId} value={m.verificationMethodId?.toString()}>{m.name}</SelectItem>)}</SelectContent>
-                                    </Select>
-                                </div>
-
-                                {/* Roles */}
-                                <div className="space-y-2">
-                                    <Label>Product Owner</Label>
-                                    <Select value={selectedProductOwnerId} onValueChange={setSelectedProductOwnerId}>
-                                        <SelectTrigger><SelectValue placeholder="Select PO" /></SelectTrigger>
-                                        <SelectContent>{users.map(u => <SelectItem key={u.sponsorId} value={u.sponsorId}>{u.name}</SelectItem>)}</SelectContent>
-                                    </Select>
-                                </div>
-                                <div className="space-y-2">
-                                    <Label>Approver</Label>
-                                    <Select value={selectedApproverId} onValueChange={setSelectedApproverId}>
-                                        <SelectTrigger><SelectValue placeholder="Select Approver" /></SelectTrigger>
-                                        <SelectContent>{users.map(u => <SelectItem key={u.sponsorId} value={u.sponsorId}>{u.name}</SelectItem>)}</SelectContent>
-                                    </Select>
-                                </div>
-
-                                {/* Linkage */}
-                                {/* Linkage */}
-                                <div className="space-y-2">
-                                    <Label>Version</Label>
-                                    <Input value={requirementVersion} onChange={e => setRequirementVersion(e.target.value)} />
-                                </div>
-
-                                {/* Metadata */}
-                                <div className="space-y-2">
-                                    <Label>Effort (Points)</Label>
-                                    <Input type="number" value={effortEstimate} onChange={e => setEffortEstimate(e.target.value)} />
-                                </div>
-                                <div className="space-y-2">
-                                    <Label>Go Live Date</Label>
-                                    <Input type="date" value={goLiveDate} onChange={e => setGoLiveDate(e.target.value)} />
-                                </div>
-
-                                <div className="col-span-2 flex items-center gap-2 pt-2">
-                                    <input
-                                        type="checkbox"
-                                        id="mandatory"
-                                        checked={isMandatory}
-                                        onChange={(e) => setIsMandatory(e.target.checked)}
-                                        className="h-4 w-4 rounded border-gray-300 text-black focus:ring-black"
-                                    />
-                                    <Label htmlFor="mandatory">Is Mandatory?</Label>
-                                </div>
                             </div>
-                            <DialogFooter>
-                                <Button variant="ghost" onClick={() => setOpenCreate(false)}>Cancel</Button>
-                                <Button onClick={handleCreate} disabled={creating || !title}>
-                                    {creating && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                                    Create
-                                </Button>
-                            </DialogFooter>
+
+                            <CreateRequirementForm
+                                onSuccess={handleCreateSuccess}
+                                onCancel={() => {
+                                    setOpenCreate(false);
+                                    setSelectedEpicId('');
+                                }}
+                                methods={methods}
+                                priorities={priorities}
+                                complexities={complexities}
+                                riskLevels={riskLevels}
+                                effortTypes={effortTypes}
+                                metrics={metrics}
+                                epics={selectedContextEpicIds.length === 1 
+                                    ? contextEpics.filter(e => selectedContextEpicIds.includes(e.epicId))
+                                    : contextEpics.filter(e => selectedContextEpicIds.includes(e.epicId))
+                                }
+                                users={users}
+                                productOwners={productOwners}
+                                approvers={approvers}
+                                defaultEpicId={selectedContextEpicIds.length === 1 ? selectedContextEpicIds[0] : undefined}
+                                creating={creating}
+                            />
                         </DialogContent>
                     </Dialog>
                 </div>

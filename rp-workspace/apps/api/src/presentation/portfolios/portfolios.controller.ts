@@ -4,13 +4,44 @@ import { PortfoliosService } from '@application/portfolios/services/portfolios.s
 import { Portfolio } from '@domain/entities/portfolio.entity';
 import { CreatePortfolioDto } from '@application/portfolios/dtos/create-portfolio.dto';
 import { UpdatePortfolioDto } from '@application/portfolios/dtos/update-portfolio.dto';
+import { Public } from '@shared/decorators/public.decorator';
 
+/**
+ * Portfolios Controller
+ * 
+ * Handles HTTP requests for portfolio management including CRUD operations and smoke tests
+ */
 @ApiTags('portfolios')
 @ApiBearerAuth('JWT-auth')
 @Controller({ path: 'portfolios', version: '1' })
 export class PortfoliosController {
   constructor(private readonly portfoliosService: PortfoliosService) { }
 
+  /**
+   * Smoke test endpoint for health checks
+   * 
+   * @returns Simple success response
+   */
+  @Public()
+  @Get('admin/test')
+  @ApiOperation({ summary: 'Smoke test endpoint' })
+  @ApiResponse({ status: 200, description: 'Service is operational' })
+  async test(): Promise<{ status: string; timestamp: string }> {
+    return {
+      status: 'ok',
+      timestamp: new Date().toISOString(),
+    };
+  }
+
+  /**
+   * Retrieves all portfolios with optional pagination and sorting
+   * 
+   * @param page - Page number
+   * @param limit - Items per page
+   * @param sortBy - Field to sort by
+   * @param sortOrder - Sort order (ASC or DESC)
+   * @returns List of portfolios
+   */
   @Get()
   @ApiOperation({ summary: 'Obtener todos los portafolios' })
   @ApiResponse({ status: 200, description: 'Lista de portafolios' })
