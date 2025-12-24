@@ -26,6 +26,39 @@
   ],
   "fileMap": {
     "projectFileMap": {
+      "shared-lib-shared-lib-test": [
+        {
+          "file": "libs/shared-lib/shared-lib-test/RpWorkspace.SharedLib.SharedLib.Test.csproj",
+          "hash": "7348442173980500609",
+          "deps": [
+            "libs-shared-lib-shared-lib"
+          ]
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/UnitTest1.cs",
+          "hash": "3940737178873532714"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.dgspec.json",
+          "hash": "16244643420733701690"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.g.props",
+          "hash": "7800595771830664415"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.g.targets",
+          "hash": "14012898149728570202"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/obj/project.assets.json",
+          "hash": "12561845686918671027"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/obj/project.nuget.cache",
+          "hash": "15529805488842866559"
+        }
+      ],
       "api": [
         {
           "file": "apps/api/.dockerignore",
@@ -957,6 +990,50 @@
           "hash": "2101672266034208711"
         }
       ],
+      "libs-shared-lib-shared-lib": [
+        {
+          "file": "libs/shared-lib/shared-lib/.gitignore",
+          "hash": "12821096717990657955"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib/Class1.cs",
+          "hash": "2199511527024579008"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib/RpWorkspace.SharedLib.SharedLib.csproj",
+          "hash": "1884930380395878577"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib/project.json",
+          "hash": "14820539453501141318"
+        }
+      ],
+      "Api..net-backup": [
+        {
+          "file": "apps/api/.net-backup/Api.csproj",
+          "hash": "6669727413477110095"
+        },
+        {
+          "file": "apps/api/.net-backup/Api.http",
+          "hash": "2266458341979145889"
+        },
+        {
+          "file": "apps/api/.net-backup/Program.cs",
+          "hash": "8106322627670471339"
+        },
+        {
+          "file": "apps/api/.net-backup/Properties/launchSettings.json",
+          "hash": "16495177757893513673"
+        },
+        {
+          "file": "apps/api/.net-backup/appsettings.Development.json",
+          "hash": "3339958947771738801"
+        },
+        {
+          "file": "apps/api/.net-backup/appsettings.json",
+          "hash": "8794831988107864270"
+        }
+      ],
       "portal": [
         {
           "file": "apps/portal/.gitignore",
@@ -1565,83 +1642,6 @@
         {
           "file": "apps/portal/tsconfig.json",
           "hash": "5855035559254869289"
-        }
-      ],
-      "libs-shared-lib-shared-lib": [
-        {
-          "file": "libs/shared-lib/shared-lib/.gitignore",
-          "hash": "12821096717990657955"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib/Class1.cs",
-          "hash": "2199511527024579008"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib/RpWorkspace.SharedLib.SharedLib.csproj",
-          "hash": "1884930380395878577"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib/project.json",
-          "hash": "14820539453501141318"
-        }
-      ],
-      "shared-lib-shared-lib-test": [
-        {
-          "file": "libs/shared-lib/shared-lib-test/RpWorkspace.SharedLib.SharedLib.Test.csproj",
-          "hash": "7348442173980500609",
-          "deps": [
-            "libs-shared-lib-shared-lib"
-          ]
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/UnitTest1.cs",
-          "hash": "3940737178873532714"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.dgspec.json",
-          "hash": "16244643420733701690"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.g.props",
-          "hash": "7800595771830664415"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.g.targets",
-          "hash": "14012898149728570202"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/project.assets.json",
-          "hash": "12561845686918671027"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/project.nuget.cache",
-          "hash": "15529805488842866559"
-        }
-      ],
-      "Api..net-backup": [
-        {
-          "file": "apps/api/.net-backup/Api.csproj",
-          "hash": "6669727413477110095"
-        },
-        {
-          "file": "apps/api/.net-backup/Api.http",
-          "hash": "2266458341979145889"
-        },
-        {
-          "file": "apps/api/.net-backup/Program.cs",
-          "hash": "8106322627670471339"
-        },
-        {
-          "file": "apps/api/.net-backup/Properties/launchSettings.json",
-          "hash": "16495177757893513673"
-        },
-        {
-          "file": "apps/api/.net-backup/appsettings.Development.json",
-          "hash": "3339958947771738801"
-        },
-        {
-          "file": "apps/api/.net-backup/appsettings.json",
-          "hash": "8794831988107864270"
         }
       ]
     },

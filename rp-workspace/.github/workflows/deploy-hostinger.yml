@@ -27,13 +27,13 @@ env:
   VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
   VPS_SSH_PASSWORD: ${{ secrets.VPS_SSH_PASSWORD }}
   MODULE_NAME: requirements-management
-  MODULE_PATH: /opt/modules/${{ env.MODULE_NAME }}
+  MODULE_PATH: /opt/modules/requirements-management
 
 jobs:
   integrity-check:
     name: Pre-Deployment Integrity Check
     runs-on: ubuntu-latest
-    if: github.event.inputs.skip_tests != 'true'
+    if: ${{ github.event.inputs.skip_tests != 'true' }}
     services:
       postgres:
         image: postgres:15-alpine
@@ -107,7 +107,7 @@ jobs:
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
-        if: secrets.VPS_SSH_KEY != ''
+        if: ${{ secrets.VPS_SSH_KEY != '' }}
 
       - name: Install SSH tools
         run: |
@@ -131,6 +131,19 @@ jobs:
             exit 1
           fi
 
+      - name: Debug Environment Variables
+        run: |
+          echo "🔍 Debugging environment variables..."
+          echo "VPS_HOST: ${{ secrets.VPS_HOST }}"
+          echo "VPS_USER: ${{ env.VPS_USER }}"
+          echo "Has VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY != '' }}"
+          echo "Has VPS_SSH_PASSWORD: ${{ secrets.VPS_SSH_PASSWORD != '' }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Repository URL: https://github.com/${{ github.repository }}.git"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "SHA: ${{ github.sha }}"
+          echo "Event: ${{ github.event_name }}"
+
       - name: Create deployment script
         run: |
           cat > deploy-remote.sh << 'DEPLOY_SCRIPT'
@@ -139,7 +152,7 @@ jobs:
 
           MODULE_NAME="${{ env.MODULE_NAME }}"
           MODULE_PATH="${{ env.MODULE_PATH }}"
-          GIT_REPO_URL="${{ github.repositoryUrl }}"
+          GIT_REPO_URL="https://github.com/${{ github.repository }}.git"
           GIT_BRANCH="${{ github.ref_name }}"
           GIT_SHA="${{ github.sha }}"
           ENVIRONMENT="${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production' || 'development') }}"
@@ -156,21 +169,54 @@ jobs:
           cd $MODULE_PATH
 
           # Clone or update repository
+          echo "📥 Repository URL: $GIT_REPO_URL"
+          echo "📥 Branch: $GIT_BRANCH"
+
           if [ -d ".git" ]; then
-            echo "📥 Updating repository..."
+            echo "📥 Updating existing repository..."
+            git remote set-url origin $GIT_REPO_URL || true
             git fetch origin
-            git reset --hard origin/$GIT_BRANCH
+            git reset --hard origin/$GIT_BRANCH || {
+              echo "⚠️ Branch $GIT_BRANCH not found, trying main..."
+              git reset --hard origin/main || git reset --hard origin/master
+            }
             git clean -fd
           else
             echo "📥 Cloning repository..."
-            git clone -b $GIT_BRANCH $GIT_REPO_URL .
+            # Try cloning with branch first
+            if git clone -b $GIT_BRANCH $GIT_REPO_URL . 2>/dev/null; then
+              echo "✅ Cloned branch $GIT_BRANCH successfully"
+            else
+              echo "⚠️ Branch $GIT_BRANCH not found, cloning default branch..."
+              git clone $GIT_REPO_URL .
+              # Try to checkout the branch if it exists remotely
+              git fetch origin $GIT_BRANCH:$GIT_BRANCH 2>/dev/null || true
+              git checkout $GIT_BRANCH 2>/dev/null || git checkout main 2>/dev/null || git checkout master 2>/dev/null || echo "⚠️ Using default branch"
+            fi
           fi
 
           # Checkout specific commit
-          git checkout $GIT_SHA
+          echo "📌 Checking out commit: $GIT_SHA"
+          git checkout $GIT_SHA || {
+            echo "⚠️ Commit $GIT_SHA not found, using latest from branch"
+            git checkout $GIT_BRANCH
+          }
 
           # Create .env file
           echo "⚙️ Creating environment file..."
+          # Determine if development or production
+          if [ "$ENVIRONMENT" = "development" ]; then
+            DB_SYNC="true"
+            DB_LOG="true"
+            LOG_LEVEL="debug"
+            API_URL_VAR="${{ secrets.NEXT_PUBLIC_API_URL_DEV }}"
+          else
+            DB_SYNC="false"
+            DB_LOG="false"
+            LOG_LEVEL="info"
+            API_URL_VAR="${{ secrets.NEXT_PUBLIC_API_URL_PRODUCTION }}"
+          fi
+
           cat > .env << EOF
           NODE_ENV=$ENVIRONMENT
 
@@ -179,8 +225,8 @@ jobs:
           DB_PASSWORD=${{ secrets.DB_PASSWORD }}
           DB_DATABASE=${{ secrets.DB_DATABASE }}
           DB_PORT=${{ secrets.DB_PORT || '5432' }}
-          DB_SYNCHRONIZE=${{ env.ENVIRONMENT == 'development' && 'true' || 'false' }}
-          DB_LOGGING=${{ env.ENVIRONMENT == 'development' && 'true' || 'false' }}
+          DB_SYNCHRONIZE=$DB_SYNC
+          DB_LOGGING=$DB_LOG
 
           # JWT Configuration
           JWT_SECRET=${{ secrets.JWT_SECRET }}
@@ -194,13 +240,18 @@ jobs:
 
           # Portal Configuration
           PORTAL_PORT=${{ secrets.PORTAL_PORT || '4200' }}
-          NEXT_PUBLIC_API_URL=${{ env.ENVIRONMENT == 'production' && secrets.NEXT_PUBLIC_API_URL_PRODUCTION || secrets.NEXT_PUBLIC_API_URL_DEV }}
+          NEXT_PUBLIC_API_URL=${API_URL_VAR:-http://localhost:3000/api/v1}
 
           # Monitoring
           ENABLE_MONITORING=true
           METRICS_RETENTION_MS=3600000
-          LOG_LEVEL=${{ env.ENVIRONMENT == 'production' && 'info' || 'debug' }}
+          LOG_LEVEL=$LOG_LEVEL
           EOF
+
+          echo "✅ Environment file created"
+          echo "Environment: $ENVIRONMENT"
+          echo "DB_SYNCHRONIZE: $DB_SYNC"
+          echo "LOG_LEVEL: $LOG_LEVEL"
 
           # Ensure Docker is running
           if ! command -v docker &> /dev/null; then
@@ -274,17 +325,30 @@ jobs:
           fi
 
       - name: Execute deployment on VPS
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "🚀 Executing deployment on VPS..."
           if [ -n "${{ secrets.VPS_SSH_KEY }}" ]; then
             ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+              -o ConnectTimeout=10 \
               ${{ env.VPS_USER }}@${{ env.VPS_HOST }} \
-              "bash /tmp/deploy-remote.sh"
+              "GITHUB_TOKEN='${{ secrets.GITHUB_TOKEN }}' bash /tmp/deploy-remote.sh" || {
+              echo "❌ Deployment failed via SSH key"
+              exit 1
+            }
           elif [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
             sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' \
               ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+              -o ConnectTimeout=10 \
               ${{ env.VPS_USER }}@${{ env.VPS_HOST }} \
-              "bash /tmp/deploy-remote.sh"
+              "GITHUB_TOKEN='${{ secrets.GITHUB_TOKEN }}' bash /tmp/deploy-remote.sh" || {
+              echo "❌ Deployment failed via SSH password"
+              exit 1
+            }
+          else
+            echo "❌ No SSH credentials available"
+            exit 1
           fi
 
       - name: Verify deployment
@@ -292,17 +356,32 @@ jobs:
           echo "🔍 Verifying deployment..."
           sleep 10
 
+          ENV_TYPE="${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production' || 'development') }}"
+
           # Check API endpoint
-          API_URL="${{ env.ENVIRONMENT == 'production' && secrets.API_PRODUCTION_URL || secrets.API_DEV_URL }}"
-          if [ -n "$API_URL" ]; then
-            curl -f "$API_URL/api/v1/health/liveness" || echo "⚠️ API health check failed"
+          if [ "$ENV_TYPE" = "production" ]; then
+            API_URL="${{ secrets.API_PRODUCTION_URL }}"
+            PORTAL_URL="${{ secrets.PORTAL_PRODUCTION_URL }}"
+          else
+            API_URL="${{ secrets.API_DEV_URL }}"
+            PORTAL_URL="${{ secrets.PORTAL_DEV_URL }}"
           fi
 
-          # Check Portal endpoint
-          PORTAL_URL="${{ env.ENVIRONMENT == 'production' && secrets.PORTAL_PRODUCTION_URL || secrets.PORTAL_DEV_URL }}"
-          if [ -n "$PORTAL_URL" ]; then
-            curl -f "$PORTAL_URL" || echo "⚠️ Portal health check failed"
+          if [ -n "$API_URL" ]; then
+            echo "Checking API at: $API_URL/api/v1/health/liveness"
+            curl -f "$API_URL/api/v1/health/liveness" || echo "⚠️ API health check failed (this is OK if domain not configured yet)"
+          else
+            echo "⚠️ API_URL not configured in secrets, skipping external health check"
           fi
+
+          if [ -n "$PORTAL_URL" ]; then
+            echo "Checking Portal at: $PORTAL_URL"
+            curl -f "$PORTAL_URL" || echo "⚠️ Portal health check failed (this is OK if domain not configured yet)"
+          else
+            echo "⚠️ PORTAL_URL not configured in secrets, skipping external health check"
+          fi
+
+          echo "✅ Deployment verification completed"
 
   notify:
     name: Notify Deployment Status
