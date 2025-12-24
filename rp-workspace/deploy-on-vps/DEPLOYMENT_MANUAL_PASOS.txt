@@ -1,0 +1,128 @@
+═══════════════════════════════════════════════════════════
+  DEPLOYMENT MANUAL - Paso a Paso
+═══════════════════════════════════════════════════════════
+
+CONFIGURACIÓN:
+───────────────────────────────────────────────────────────
+VPS IP: 72.60.63.240
+Usuario: root
+Contraseña SSH: Aar-Beto-2026
+Repositorio: https://github.com/ReleasePlanner/RP-Requirements.git
+
+═══════════════════════════════════════════════════════════
+  PASO 1: Conectar al VPS
+═══════════════════════════════════════════════════════════
+
+ssh root@72.60.63.240
+# Contraseña: Aar-Beto-2026
+
+
+═══════════════════════════════════════════════════════════
+  PASO 2: Setup Inicial del VPS
+═══════════════════════════════════════════════════════════
+
+# Desde tu máquina local, copiar script:
+scp scripts/quick-start-vps.sh root@72.60.63.240:/tmp/
+
+# En el VPS, ejecutar:
+bash /tmp/quick-start-vps.sh
+
+# Esto instalará: Docker, Docker Compose, Nginx, Certbot
+
+
+═══════════════════════════════════════════════════════════
+  PASO 3: Clonar Repositorio
+═══════════════════════════════════════════════════════════
+
+cd /opt/modules
+git clone https://github.com/ReleasePlanner/RP-Requirements.git requirements-management
+cd requirements-management
+
+
+═══════════════════════════════════════════════════════════
+  PASO 4: Configurar Variables de Entorno
+═══════════════════════════════════════════════════════════
+
+cp env.docker.example .env
+nano .env
+
+# Generar passwords seguros:
+openssl rand -base64 32  # Copiar para DB_PASSWORD
+openssl rand -base64 48  # Copiar para JWT_SECRET
+
+# Editar .env y cambiar:
+# DB_PASSWORD=<pegar-password-generado>
+# JWT_SECRET=<pegar-secret-generado>
+# CORS_ORIGIN=https://requirements.beyondnet.cloud
+# NEXT_PUBLIC_API_URL=https://requirements-api.beyondnet.cloud/api/v1
+
+# Guardar: Ctrl+O, Enter, Ctrl+X
+
+
+═══════════════════════════════════════════════════════════
+  PASO 5: Build y Deploy
+═══════════════════════════════════════════════════════════
+
+# Usar docker-compose.prod.yml
+cp docker-compose.prod.yml docker-compose.yml
+
+# Build
+docker-compose build
+
+# Deploy
+docker-compose up -d
+
+# Ver logs
+docker-compose logs -f
+
+# En otra terminal, ver estado:
+docker-compose ps
+
+
+═══════════════════════════════════════════════════════════
+  PASO 6: Ejecutar Migraciones
+═══════════════════════════════════════════════════════════
+
+# Esperar a que API esté lista (30-60 segundos)
+sleep 60
+
+# Ejecutar migraciones
+docker-compose exec api npm run migration:run
+
+
+═══════════════════════════════════════════════════════════
+  PASO 7: Verificar
+═══════════════════════════════════════════════════════════
+
+# Ver estado
+docker-compose ps
+
+# Verificar API
+curl http://localhost:3000/api/v1/health/liveness
+
+# Verificar Portal
+curl http://localhost:4200
+
+
+═══════════════════════════════════════════════════════════
+  PASO 8: Configurar Nginx y SSL
+═══════════════════════════════════════════════════════════
+
+# Crear configuración Nginx
+sudo nano /etc/nginx/sites-available/requirements-management.conf
+
+# Pegar configuración (ver docs/QUICK_START_VPS.md)
+
+# Habilitar sitio
+sudo ln -s /etc/nginx/sites-available/requirements-management.conf /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
+
+# Configurar SSL
+sudo certbot --nginx -d requirements.beyondnet.cloud -d requirements-api.beyondnet.cloud
+
+
+═══════════════════════════════════════════════════════════
+
+¡Deployment completado! 🚀
+

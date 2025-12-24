@@ -1,0 +1,81 @@
+═══════════════════════════════════════════════════════════
+  COMANDO FINAL PARA DEPLOYMENT
+═══════════════════════════════════════════════════════════
+
+CONFIGURACIÓN:
+───────────────────────────────────────────────────────────
+VPS IP: 72.60.63.240
+Usuario: root
+Contraseña SSH: Aar-Beto-2026
+Repositorio: https://github.com/ReleasePlanner/RP-Requirements.git
+
+═══════════════════════════════════════════════════════════
+  OPCIÓN 1: Script con Contraseña (Recomendado)
+═══════════════════════════════════════════════════════════
+
+cd /c/MySources/RP-Requirements-Web/rp-workspace
+./EJECUTAR_CON_PASSWORD.sh
+
+Este script incluye la contraseña y te guiará paso a paso.
+
+
+═══════════════════════════════════════════════════════════
+  OPCIÓN 2: Script Original (Pedirá Contraseña)
+═══════════════════════════════════════════════════════════
+
+cd /c/MySources/RP-Requirements-Web/rp-workspace
+
+export VPS_HOST=72.60.63.240
+export VPS_USER=root
+export GIT_REPO_URL=https://github.com/ReleasePlanner/RP-Requirements.git
+
+./scripts/deploy-requirements-vps.sh
+
+Cuando pida la contraseña SSH, ingresa: Aar-Beto-2026
+
+
+═══════════════════════════════════════════════════════════
+  OPCIÓN 3: Instalar sshpass y Usar Automático
+═══════════════════════════════════════════════════════════
+
+# Instalar sshpass (si no lo tienes)
+# Windows: Usar WSL o Git Bash con sshpass
+# Linux: sudo apt install sshpass
+# Mac: brew install sshpass
+
+# Luego usar el script con contraseña
+./EJECUTAR_CON_PASSWORD.sh
+
+
+═══════════════════════════════════════════════════════════
+  VERIFICACIÓN PREVIA
+═══════════════════════════════════════════════════════════
+
+# Probar conexión SSH (te pedirá la contraseña)
+ssh root@72.60.63.240
+# Contraseña: Aar-Beto-2026
+
+# Si conecta correctamente, presiona Ctrl+D para salir
+
+
+═══════════════════════════════════════════════════════════
+  QUÉ ESPERAR
+═══════════════════════════════════════════════════════════
+
+1. El script mostrará la configuración
+2. Te pedirá confirmación → Responde: y
+3. Verificará conexión SSH (usará contraseña automáticamente)
+4. Ejecutará setup inicial (5-10 min)
+5. Clonará repositorio
+6. Te pedirá configurar .env → Edita y guarda
+7. Continuará con build y deploy
+8. Ejecutará migraciones
+9. Verificará deployment
+
+
+═══════════════════════════════════════════════════════════
+
+¡LISTO PARA EJECUTAR! 🚀
+
+Ejecuta: ./EJECUTAR_CON_PASSWORD.sh
+

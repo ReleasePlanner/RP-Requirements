@@ -61,6 +61,36 @@ Workflow manual para crear nuevas versiones.
 - Generación de changelog
 - Creación de PR o tag directo
 
+### Deploy - Full Stack
+
+**Archivo**: `.github/workflows/deploy.yml`
+
+Workflow completo para desplegar todo el stack (API + Portal + Base de Datos) usando Docker Compose.
+
+**Triggers:**
+- Push a `main` o `develop`
+- Manual dispatch con opciones de ambiente
+
+**Características:**
+- ✅ Verificación de integridad pre-deployment
+- ✅ Build de imágenes Docker para API y Portal
+- ✅ Deployment completo con Docker Compose
+- ✅ Health checks para todos los servicios (API, Portal, Database)
+- ✅ Ejecución de migraciones de base de datos
+- ✅ Soporte para desarrollo y producción
+- ✅ Notificaciones de deployment
+
+**Jobs:**
+1. **integrity-check**: Verifica linting, tests y builds
+2. **deploy-stack**: Despliega todo el stack con Docker Compose
+3. **notify**: Envía notificaciones del resultado
+
+**Uso Manual:**
+1. Ir a Actions > Deploy - Full Stack
+2. Click en "Run workflow"
+3. Seleccionar ambiente (development/production)
+4. Opcional: Desactivar deployment de base de datos si ya existe
+
 ### Docker Build
 
 **Archivo**: `.github/workflows/docker-build.yml`
@@ -169,6 +199,34 @@ Las release notes se generan automáticamente desde:
 
 ## 🚢 Deployment
 
+### Deployment Completo con Docker Compose
+
+El workflow `deploy.yml` despliega todo el stack completo:
+
+**Componentes desplegados:**
+- ✅ **API** (NestJS) - Puerto 3000
+- ✅ **Portal** (Next.js) - Puerto 4200
+- ✅ **Base de Datos** (PostgreSQL) - Puerto 5432
+
+**Proceso de deployment:**
+1. Verificación de integridad (lint, tests, builds)
+2. Build de imágenes Docker
+3. Push a registro (si está configurado)
+4. Deployment con Docker Compose
+5. Health checks de todos los servicios
+6. Ejecución de migraciones
+7. Verificación final
+
+**Ejecución automática:**
+- Push a `main` → Deployment a producción
+- Push a `develop` → Deployment a desarrollo
+
+**Ejecución manual:**
+```bash
+# Desde GitHub Actions UI
+Actions > Deploy - Full Stack > Run workflow
+```
+
 ### Desarrollo
 
 El deployment a desarrollo es automático en cada push a `develop`:
@@ -179,6 +237,8 @@ on:
   push:
     branches: [develop]
 ```
+
+También puedes usar el workflow `cd-dev.yml` para deployment individual de servicios.
 
 ### Producción
 

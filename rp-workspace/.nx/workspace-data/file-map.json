@@ -26,693 +26,6 @@
   ],
   "fileMap": {
     "projectFileMap": {
-      "Api..net-backup": [
-        {
-          "file": "apps/api/.net-backup/Api.csproj",
-          "hash": "6669727413477110095"
-        },
-        {
-          "file": "apps/api/.net-backup/Api.http",
-          "hash": "2266458341979145889"
-        },
-        {
-          "file": "apps/api/.net-backup/Program.cs",
-          "hash": "8106322627670471339"
-        },
-        {
-          "file": "apps/api/.net-backup/Properties/launchSettings.json",
-          "hash": "16495177757893513673"
-        },
-        {
-          "file": "apps/api/.net-backup/appsettings.Development.json",
-          "hash": "3339958947771738801"
-        },
-        {
-          "file": "apps/api/.net-backup/appsettings.json",
-          "hash": "8794831988107864270"
-        }
-      ],
-      "portal": [
-        {
-          "file": "apps/portal/.gitignore",
-          "hash": "1867017717006394117"
-        },
-        {
-          "file": "apps/portal/README.md",
-          "hash": "10766794746169900117"
-        },
-        {
-          "file": "apps/portal/components.json",
-          "hash": "5059790963801601477"
-        },
-        {
-          "file": "apps/portal/debug-api.js",
-          "hash": "15313788807032127515",
-          "deps": [
-            "npm:node-fetch"
-          ]
-        },
-        {
-          "file": "apps/portal/eslint.config.mjs",
-          "hash": "11456145150381806295",
-          "deps": [
-            "npm:eslint"
-          ]
-        },
-        {
-          "file": "apps/portal/next.config.ts",
-          "hash": "17157214668998829023",
-          "deps": [
-            "npm:next"
-          ]
-        },
-        {
-          "file": "apps/portal/package-lock.json",
-          "hash": "11577271329902829382"
-        },
-        {
-          "file": "apps/portal/package.json",
-          "hash": "10423678700697552555",
-          "deps": [
-            "npm:@types/node",
-            "npm:@types/react",
-            "npm:eslint",
-            "npm:typescript",
-            "npm:@dnd-kit/core",
-            "npm:@dnd-kit/sortable",
-            "npm:@dnd-kit/utilities",
-            "npm:@radix-ui/react-dialog",
-            "npm:@radix-ui/react-slot",
-            "npm:axios",
-            "npm:clsx",
-            "npm:next",
-            "npm:react",
-            "npm:react-dom"
-          ]
-        },
-        {
-          "file": "apps/portal/postcss.config.mjs",
-          "hash": "12094959087305894889"
-        },
-        {
-          "file": "apps/portal/project.json",
-          "hash": "2672628137325475530"
-        },
-        {
-          "file": "apps/portal/public/file.svg",
-          "hash": "15617830351863523835"
-        },
-        {
-          "file": "apps/portal/public/globe.svg",
-          "hash": "9134466864871335697"
-        },
-        {
-          "file": "apps/portal/public/next.svg",
-          "hash": "8300767200008744458"
-        },
-        {
-          "file": "apps/portal/public/vercel.svg",
-          "hash": "3007623926711696394"
-        },
-        {
-          "file": "apps/portal/public/window.svg",
-          "hash": "16677869292061012332"
-        },
-        {
-          "file": "apps/portal/src/app/favicon.ico",
-          "hash": "9157999678830540297"
-        },
-        {
-          "file": "apps/portal/src/app/globals.css",
-          "hash": "15124471555373055596"
-        },
-        {
-          "file": "apps/portal/src/app/layout.tsx",
-          "hash": "14445884962787967911",
-          "deps": [
-            "npm:next",
-            "npm:sonner"
-          ]
-        },
-        {
-          "file": "apps/portal/src/app/login/page.tsx",
-          "hash": "8200748280265551807"
-        },
-        {
-          "file": "apps/portal/src/app/page.tsx",
-          "hash": "7966944450202793318",
-          "deps": [
-            "npm:next"
-          ]
-        },
-        {
-          "file": "apps/portal/src/app/portal/dashboard/page.tsx",
-          "hash": "9785258838092580084"
-        },
-        {
-          "file": "apps/portal/src/app/portal/epics/page.tsx",
-          "hash": "2327713066248151930",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/app/portal/initiatives/page.tsx",
-          "hash": "11965290936462539391",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/app/portal/layout.tsx",
-          "hash": "10841196667046971598",
-          "deps": [
-            "npm:react",
-            "npm:next"
-          ]
-        },
-        {
-          "file": "apps/portal/src/app/portal/maintenance/page.tsx",
-          "hash": "810293727847842007"
-        },
-        {
-          "file": "apps/portal/src/app/portal/page.tsx",
-          "hash": "11397054428363104699",
-          "deps": [
-            "npm:next"
-          ]
-        },
-        {
-          "file": "apps/portal/src/app/portal/portfolio/page.tsx",
-          "hash": "13475738943253507041",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/app/portal/requirements/page.tsx",
-          "hash": "8149522443045925972",
-          "deps": [
-            "npm:react",
-            "npm:sonner"
-          ]
-        },
-        {
-          "file": "apps/portal/src/components/layout/right-sidebar.tsx",
-          "hash": "9210044850999747770"
-        },
-        {
-          "file": "apps/portal/src/components/layout/sidebar.tsx",
-          "hash": "5170353478161790757",
-          "deps": [
-            "npm:next"
-          ]
-        },
-        {
-          "file": "apps/portal/src/components/ui/alert-dialog.tsx",
-          "hash": "11451871465948543463",
-          "deps": [
-            "npm:react",
-            "npm:@radix-ui/react-alert-dialog"
-          ]
-        },
-        {
-          "file": "apps/portal/src/components/ui/alert.tsx",
-          "hash": "17344341139567208301",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/components/ui/avatar.tsx",
-          "hash": "14751210977726479928",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/components/ui/badge.tsx",
-          "hash": "14557294719969173491",
-          "deps": [
-            "npm:react",
-            "npm:@radix-ui/react-slot"
-          ]
-        },
-        {
-          "file": "apps/portal/src/components/ui/button.tsx",
-          "hash": "11102601549889850093",
-          "deps": [
-            "npm:react",
-            "npm:@radix-ui/react-slot"
-          ]
-        },
-        {
-          "file": "apps/portal/src/components/ui/card.tsx",
-          "hash": "165657870150061051",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/components/ui/dialog.tsx",
-          "hash": "4647226208080921657",
-          "deps": [
-            "npm:react",
-            "npm:@radix-ui/react-dialog"
-          ]
-        },
-        {
-          "file": "apps/portal/src/components/ui/dropdown-menu.tsx",
-          "hash": "10666002256013546505",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/components/ui/form.tsx",
-          "hash": "8432624235832193018",
-          "deps": [
-            "npm:react",
-            "npm:@radix-ui/react-slot"
-          ]
-        },
-        {
-          "file": "apps/portal/src/components/ui/input.tsx",
-          "hash": "2607547172702202989",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/components/ui/label.tsx",
-          "hash": "5904204581463370082",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/components/ui/multi-select.tsx",
-          "hash": "9080468803070351917",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/components/ui/progress.tsx",
-          "hash": "17415392095663097271",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/components/ui/select.tsx",
-          "hash": "2483344822571075687",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/components/ui/table.tsx",
-          "hash": "9236219364163009886",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/components/ui/tabs.tsx",
-          "hash": "11429836154103807707",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/components/ui/textarea.tsx",
-          "hash": "14022426809756853946",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/auth/actions.ts",
-          "hash": "9007972232884697941",
-          "deps": [
-            "npm:next"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/auth/service.mock.ts",
-          "hash": "1773237023644430079"
-        },
-        {
-          "file": "apps/portal/src/features/auth/service.ts",
-          "hash": "9634386634251107819"
-        },
-        {
-          "file": "apps/portal/src/features/board/components/kanban-view.tsx",
-          "hash": "12707311182517224678",
-          "deps": [
-            "npm:react",
-            "npm:@dnd-kit/core",
-            "npm:@dnd-kit/sortable",
-            "npm:@dnd-kit/utilities"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/board/service.mock.ts",
-          "hash": "3462686795189284920"
-        },
-        {
-          "file": "apps/portal/src/features/board/types.ts",
-          "hash": "11549825802581498569"
-        },
-        {
-          "file": "apps/portal/src/features/catalogs/components/CatalogCRUD.tsx",
-          "hash": "14230215330617884857",
-          "deps": [
-            "npm:react",
-            "npm:sonner"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/catalogs/components/RequirementTypeDialog.tsx",
-          "hash": "10321937970359083845",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/catalogs/components/RequirementTypesList.tsx",
-          "hash": "8807074020396903730",
-          "deps": [
-            "npm:react",
-            "npm:sonner"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/catalogs/service.ts",
-          "hash": "7342248941354024163"
-        },
-        {
-          "file": "apps/portal/src/features/catalogs/types.ts",
-          "hash": "5964450465766858608"
-        },
-        {
-          "file": "apps/portal/src/features/dashboard/components/dashboard-content.tsx",
-          "hash": "7920653402664241963",
-          "deps": [
-            "npm:react",
-            "npm:sonner",
-            "npm:react-grid-layout"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/dashboard/components/dashboard-toolbar.tsx",
-          "hash": "17985520772837357175",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/dashboard/components/dashboard-widget.tsx",
-          "hash": "12253111273765690593",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/dashboard/components/portfolio-health-widget.tsx",
-          "hash": "16914523795072313562",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/dashboard/components/priority-chart.tsx",
-          "hash": "12302409936679007748",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/dashboard/components/recent-activity.tsx",
-          "hash": "16884380826923391798",
-          "deps": [
-            "npm:react",
-            "npm:date-fns"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/dashboard/components/requirements-chart.tsx",
-          "hash": "11512111775928274911",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/dashboard/components/sortable-widget.tsx",
-          "hash": "14782170498259239647",
-          "deps": [
-            "npm:react",
-            "npm:@dnd-kit/sortable",
-            "npm:@dnd-kit/utilities"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/dashboard/components/stats-overview.tsx",
-          "hash": "9694059666882845900",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/dashboard/components/value-effort-widget.tsx",
-          "hash": "16082813991567394405",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/dashboard/service.ts",
-          "hash": "161291192936163989"
-        },
-        {
-          "file": "apps/portal/src/features/dashboard/types.ts",
-          "hash": "11325991604869313252"
-        },
-        {
-          "file": "apps/portal/src/features/epics/components/create-epic-dialog.tsx",
-          "hash": "4329217128567370734",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/epics/components/edit-epic-dialog.tsx",
-          "hash": "2455473633779651206",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/epics/components/epic-list.tsx",
-          "hash": "1030093129728290831",
-          "deps": [
-            "npm:next"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/epics/service.ts",
-          "hash": "3552419463099200420"
-        },
-        {
-          "file": "apps/portal/src/features/epics/types.ts",
-          "hash": "7636656795950005871"
-        },
-        {
-          "file": "apps/portal/src/features/initiatives/components/create-initiative-dialog.tsx",
-          "hash": "6310777807925407062",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/initiatives/components/edit-initiative-dialog.tsx",
-          "hash": "3929007441381998026",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/initiatives/components/initiative-list.tsx",
-          "hash": "774558561016629630",
-          "deps": [
-            "npm:next"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/initiatives/service.ts",
-          "hash": "8900187048266804471"
-        },
-        {
-          "file": "apps/portal/src/features/initiatives/types.ts",
-          "hash": "5419383897093005784"
-        },
-        {
-          "file": "apps/portal/src/features/portfolio/components/edit-portfolio-dialog.tsx",
-          "hash": "249894263531712957",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/portfolio/components/portfolio-tree.tsx",
-          "hash": "10579146050866450523"
-        },
-        {
-          "file": "apps/portal/src/features/portfolio/service.ts",
-          "hash": "14524132089524223872"
-        },
-        {
-          "file": "apps/portal/src/features/portfolio/types.ts",
-          "hash": "106501760936603977"
-        },
-        {
-          "file": "apps/portal/src/features/requirements/actions.ts",
-          "hash": "17957247852210107593",
-          "deps": [
-            "npm:next"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/requirements/components/backlog-list.tsx",
-          "hash": "8920274580259950771"
-        },
-        {
-          "file": "apps/portal/src/features/requirements/components/edit-dialog.tsx",
-          "hash": "1056269481441622258",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/requirements/components/references-dialog.tsx",
-          "hash": "14496445823185985383",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/requirements/components/references-tab.tsx",
-          "hash": "10996583775835840801",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/requirements/components/requirement-list.tsx",
-          "hash": "5280022714338541857"
-        },
-        {
-          "file": "apps/portal/src/features/requirements/service.ts",
-          "hash": "9380080371663994665"
-        },
-        {
-          "file": "apps/portal/src/features/requirements/types.ts",
-          "hash": "15218900121580100726"
-        },
-        {
-          "file": "apps/portal/src/features/sponsors/components/SponsorDialog.tsx",
-          "hash": "12679035873808514110",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/sponsors/components/SponsorsList.tsx",
-          "hash": "14672238966911049242",
-          "deps": [
-            "npm:react",
-            "npm:sonner"
-          ]
-        },
-        {
-          "file": "apps/portal/src/features/sponsors/service.ts",
-          "hash": "13513732694856018740"
-        },
-        {
-          "file": "apps/portal/src/lib/axios.ts",
-          "hash": "5400270071187803964",
-          "deps": [
-            "npm:axios"
-          ]
-        },
-        {
-          "file": "apps/portal/src/lib/utils.ts",
-          "hash": "6483145186850064023",
-          "deps": [
-            "npm:clsx"
-          ]
-        },
-        {
-          "file": "apps/portal/src/types/user.ts",
-          "hash": "1761392409622569654"
-        },
-        {
-          "file": "apps/portal/tsconfig.json",
-          "hash": "5855035559254869289"
-        }
-      ],
-      "libs-shared-lib-shared-lib": [
-        {
-          "file": "libs/shared-lib/shared-lib/.gitignore",
-          "hash": "12821096717990657955"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib/Class1.cs",
-          "hash": "2199511527024579008"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib/RpWorkspace.SharedLib.SharedLib.csproj",
-          "hash": "1884930380395878577"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib/project.json",
-          "hash": "14820539453501141318"
-        }
-      ],
-      "shared-lib-shared-lib-test": [
-        {
-          "file": "libs/shared-lib/shared-lib-test/RpWorkspace.SharedLib.SharedLib.Test.csproj",
-          "hash": "7348442173980500609",
-          "deps": [
-            "libs-shared-lib-shared-lib"
-          ]
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/UnitTest1.cs",
-          "hash": "3940737178873532714"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.dgspec.json",
-          "hash": "16244643420733701690"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.g.props",
-          "hash": "7800595771830664415"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.g.targets",
-          "hash": "14012898149728570202"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/project.assets.json",
-          "hash": "12561845686918671027"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/project.nuget.cache",
-          "hash": "15529805488842866559"
-        }
-      ],
       "api": [
         {
           "file": "apps/api/.dockerignore",
@@ -1642,6 +955,693 @@
         {
           "file": "apps/api/tsconfig.json",
           "hash": "2101672266034208711"
+        }
+      ],
+      "portal": [
+        {
+          "file": "apps/portal/.gitignore",
+          "hash": "1867017717006394117"
+        },
+        {
+          "file": "apps/portal/README.md",
+          "hash": "10766794746169900117"
+        },
+        {
+          "file": "apps/portal/components.json",
+          "hash": "5059790963801601477"
+        },
+        {
+          "file": "apps/portal/debug-api.js",
+          "hash": "15313788807032127515",
+          "deps": [
+            "npm:node-fetch"
+          ]
+        },
+        {
+          "file": "apps/portal/eslint.config.mjs",
+          "hash": "11456145150381806295",
+          "deps": [
+            "npm:eslint"
+          ]
+        },
+        {
+          "file": "apps/portal/next.config.ts",
+          "hash": "17157214668998829023",
+          "deps": [
+            "npm:next"
+          ]
+        },
+        {
+          "file": "apps/portal/package-lock.json",
+          "hash": "11577271329902829382"
+        },
+        {
+          "file": "apps/portal/package.json",
+          "hash": "10423678700697552555",
+          "deps": [
+            "npm:@types/node",
+            "npm:@types/react",
+            "npm:eslint",
+            "npm:typescript",
+            "npm:@dnd-kit/core",
+            "npm:@dnd-kit/sortable",
+            "npm:@dnd-kit/utilities",
+            "npm:@radix-ui/react-dialog",
+            "npm:@radix-ui/react-slot",
+            "npm:axios",
+            "npm:clsx",
+            "npm:next",
+            "npm:react",
+            "npm:react-dom"
+          ]
+        },
+        {
+          "file": "apps/portal/postcss.config.mjs",
+          "hash": "12094959087305894889"
+        },
+        {
+          "file": "apps/portal/project.json",
+          "hash": "2672628137325475530"
+        },
+        {
+          "file": "apps/portal/public/file.svg",
+          "hash": "15617830351863523835"
+        },
+        {
+          "file": "apps/portal/public/globe.svg",
+          "hash": "9134466864871335697"
+        },
+        {
+          "file": "apps/portal/public/next.svg",
+          "hash": "8300767200008744458"
+        },
+        {
+          "file": "apps/portal/public/vercel.svg",
+          "hash": "3007623926711696394"
+        },
+        {
+          "file": "apps/portal/public/window.svg",
+          "hash": "16677869292061012332"
+        },
+        {
+          "file": "apps/portal/src/app/favicon.ico",
+          "hash": "9157999678830540297"
+        },
+        {
+          "file": "apps/portal/src/app/globals.css",
+          "hash": "15124471555373055596"
+        },
+        {
+          "file": "apps/portal/src/app/layout.tsx",
+          "hash": "14445884962787967911",
+          "deps": [
+            "npm:next",
+            "npm:sonner"
+          ]
+        },
+        {
+          "file": "apps/portal/src/app/login/page.tsx",
+          "hash": "8200748280265551807"
+        },
+        {
+          "file": "apps/portal/src/app/page.tsx",
+          "hash": "7966944450202793318",
+          "deps": [
+            "npm:next"
+          ]
+        },
+        {
+          "file": "apps/portal/src/app/portal/dashboard/page.tsx",
+          "hash": "9785258838092580084"
+        },
+        {
+          "file": "apps/portal/src/app/portal/epics/page.tsx",
+          "hash": "2327713066248151930",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/app/portal/initiatives/page.tsx",
+          "hash": "11965290936462539391",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/app/portal/layout.tsx",
+          "hash": "10841196667046971598",
+          "deps": [
+            "npm:react",
+            "npm:next"
+          ]
+        },
+        {
+          "file": "apps/portal/src/app/portal/maintenance/page.tsx",
+          "hash": "810293727847842007"
+        },
+        {
+          "file": "apps/portal/src/app/portal/page.tsx",
+          "hash": "11397054428363104699",
+          "deps": [
+            "npm:next"
+          ]
+        },
+        {
+          "file": "apps/portal/src/app/portal/portfolio/page.tsx",
+          "hash": "13475738943253507041",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/app/portal/requirements/page.tsx",
+          "hash": "8149522443045925972",
+          "deps": [
+            "npm:react",
+            "npm:sonner"
+          ]
+        },
+        {
+          "file": "apps/portal/src/components/layout/right-sidebar.tsx",
+          "hash": "9210044850999747770"
+        },
+        {
+          "file": "apps/portal/src/components/layout/sidebar.tsx",
+          "hash": "5170353478161790757",
+          "deps": [
+            "npm:next"
+          ]
+        },
+        {
+          "file": "apps/portal/src/components/ui/alert-dialog.tsx",
+          "hash": "11451871465948543463",
+          "deps": [
+            "npm:react",
+            "npm:@radix-ui/react-alert-dialog"
+          ]
+        },
+        {
+          "file": "apps/portal/src/components/ui/alert.tsx",
+          "hash": "17344341139567208301",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/components/ui/avatar.tsx",
+          "hash": "14751210977726479928",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/components/ui/badge.tsx",
+          "hash": "14557294719969173491",
+          "deps": [
+            "npm:react",
+            "npm:@radix-ui/react-slot"
+          ]
+        },
+        {
+          "file": "apps/portal/src/components/ui/button.tsx",
+          "hash": "11102601549889850093",
+          "deps": [
+            "npm:react",
+            "npm:@radix-ui/react-slot"
+          ]
+        },
+        {
+          "file": "apps/portal/src/components/ui/card.tsx",
+          "hash": "165657870150061051",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/components/ui/dialog.tsx",
+          "hash": "4647226208080921657",
+          "deps": [
+            "npm:react",
+            "npm:@radix-ui/react-dialog"
+          ]
+        },
+        {
+          "file": "apps/portal/src/components/ui/dropdown-menu.tsx",
+          "hash": "10666002256013546505",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/components/ui/form.tsx",
+          "hash": "8432624235832193018",
+          "deps": [
+            "npm:react",
+            "npm:@radix-ui/react-slot"
+          ]
+        },
+        {
+          "file": "apps/portal/src/components/ui/input.tsx",
+          "hash": "2607547172702202989",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/components/ui/label.tsx",
+          "hash": "5904204581463370082",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/components/ui/multi-select.tsx",
+          "hash": "9080468803070351917",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/components/ui/progress.tsx",
+          "hash": "17415392095663097271",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/components/ui/select.tsx",
+          "hash": "2483344822571075687",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/components/ui/table.tsx",
+          "hash": "9236219364163009886",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/components/ui/tabs.tsx",
+          "hash": "11429836154103807707",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/components/ui/textarea.tsx",
+          "hash": "14022426809756853946",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/auth/actions.ts",
+          "hash": "9007972232884697941",
+          "deps": [
+            "npm:next"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/auth/service.mock.ts",
+          "hash": "1773237023644430079"
+        },
+        {
+          "file": "apps/portal/src/features/auth/service.ts",
+          "hash": "9634386634251107819"
+        },
+        {
+          "file": "apps/portal/src/features/board/components/kanban-view.tsx",
+          "hash": "12707311182517224678",
+          "deps": [
+            "npm:react",
+            "npm:@dnd-kit/core",
+            "npm:@dnd-kit/sortable",
+            "npm:@dnd-kit/utilities"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/board/service.mock.ts",
+          "hash": "3462686795189284920"
+        },
+        {
+          "file": "apps/portal/src/features/board/types.ts",
+          "hash": "11549825802581498569"
+        },
+        {
+          "file": "apps/portal/src/features/catalogs/components/CatalogCRUD.tsx",
+          "hash": "14230215330617884857",
+          "deps": [
+            "npm:react",
+            "npm:sonner"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/catalogs/components/RequirementTypeDialog.tsx",
+          "hash": "10321937970359083845",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/catalogs/components/RequirementTypesList.tsx",
+          "hash": "8807074020396903730",
+          "deps": [
+            "npm:react",
+            "npm:sonner"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/catalogs/service.ts",
+          "hash": "7342248941354024163"
+        },
+        {
+          "file": "apps/portal/src/features/catalogs/types.ts",
+          "hash": "5964450465766858608"
+        },
+        {
+          "file": "apps/portal/src/features/dashboard/components/dashboard-content.tsx",
+          "hash": "7920653402664241963",
+          "deps": [
+            "npm:react",
+            "npm:sonner",
+            "npm:react-grid-layout"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/dashboard/components/dashboard-toolbar.tsx",
+          "hash": "17985520772837357175",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/dashboard/components/dashboard-widget.tsx",
+          "hash": "12253111273765690593",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/dashboard/components/portfolio-health-widget.tsx",
+          "hash": "16914523795072313562",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/dashboard/components/priority-chart.tsx",
+          "hash": "12302409936679007748",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/dashboard/components/recent-activity.tsx",
+          "hash": "16884380826923391798",
+          "deps": [
+            "npm:react",
+            "npm:date-fns"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/dashboard/components/requirements-chart.tsx",
+          "hash": "11512111775928274911",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/dashboard/components/sortable-widget.tsx",
+          "hash": "14782170498259239647",
+          "deps": [
+            "npm:react",
+            "npm:@dnd-kit/sortable",
+            "npm:@dnd-kit/utilities"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/dashboard/components/stats-overview.tsx",
+          "hash": "9694059666882845900",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/dashboard/components/value-effort-widget.tsx",
+          "hash": "16082813991567394405",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/dashboard/service.ts",
+          "hash": "161291192936163989"
+        },
+        {
+          "file": "apps/portal/src/features/dashboard/types.ts",
+          "hash": "11325991604869313252"
+        },
+        {
+          "file": "apps/portal/src/features/epics/components/create-epic-dialog.tsx",
+          "hash": "4329217128567370734",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/epics/components/edit-epic-dialog.tsx",
+          "hash": "2455473633779651206",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/epics/components/epic-list.tsx",
+          "hash": "1030093129728290831",
+          "deps": [
+            "npm:next"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/epics/service.ts",
+          "hash": "3552419463099200420"
+        },
+        {
+          "file": "apps/portal/src/features/epics/types.ts",
+          "hash": "7636656795950005871"
+        },
+        {
+          "file": "apps/portal/src/features/initiatives/components/create-initiative-dialog.tsx",
+          "hash": "6310777807925407062",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/initiatives/components/edit-initiative-dialog.tsx",
+          "hash": "3929007441381998026",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/initiatives/components/initiative-list.tsx",
+          "hash": "774558561016629630",
+          "deps": [
+            "npm:next"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/initiatives/service.ts",
+          "hash": "8900187048266804471"
+        },
+        {
+          "file": "apps/portal/src/features/initiatives/types.ts",
+          "hash": "5419383897093005784"
+        },
+        {
+          "file": "apps/portal/src/features/portfolio/components/edit-portfolio-dialog.tsx",
+          "hash": "249894263531712957",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/portfolio/components/portfolio-tree.tsx",
+          "hash": "10579146050866450523"
+        },
+        {
+          "file": "apps/portal/src/features/portfolio/service.ts",
+          "hash": "14524132089524223872"
+        },
+        {
+          "file": "apps/portal/src/features/portfolio/types.ts",
+          "hash": "106501760936603977"
+        },
+        {
+          "file": "apps/portal/src/features/requirements/actions.ts",
+          "hash": "17957247852210107593",
+          "deps": [
+            "npm:next"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/requirements/components/backlog-list.tsx",
+          "hash": "8920274580259950771"
+        },
+        {
+          "file": "apps/portal/src/features/requirements/components/edit-dialog.tsx",
+          "hash": "1056269481441622258",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/requirements/components/references-dialog.tsx",
+          "hash": "14496445823185985383",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/requirements/components/references-tab.tsx",
+          "hash": "10996583775835840801",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/requirements/components/requirement-list.tsx",
+          "hash": "5280022714338541857"
+        },
+        {
+          "file": "apps/portal/src/features/requirements/service.ts",
+          "hash": "9380080371663994665"
+        },
+        {
+          "file": "apps/portal/src/features/requirements/types.ts",
+          "hash": "15218900121580100726"
+        },
+        {
+          "file": "apps/portal/src/features/sponsors/components/SponsorDialog.tsx",
+          "hash": "12679035873808514110",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/sponsors/components/SponsorsList.tsx",
+          "hash": "14672238966911049242",
+          "deps": [
+            "npm:react",
+            "npm:sonner"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/sponsors/service.ts",
+          "hash": "13513732694856018740"
+        },
+        {
+          "file": "apps/portal/src/lib/axios.ts",
+          "hash": "5400270071187803964",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "apps/portal/src/lib/utils.ts",
+          "hash": "6483145186850064023",
+          "deps": [
+            "npm:clsx"
+          ]
+        },
+        {
+          "file": "apps/portal/src/types/user.ts",
+          "hash": "1761392409622569654"
+        },
+        {
+          "file": "apps/portal/tsconfig.json",
+          "hash": "5855035559254869289"
+        }
+      ],
+      "libs-shared-lib-shared-lib": [
+        {
+          "file": "libs/shared-lib/shared-lib/.gitignore",
+          "hash": "12821096717990657955"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib/Class1.cs",
+          "hash": "2199511527024579008"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib/RpWorkspace.SharedLib.SharedLib.csproj",
+          "hash": "1884930380395878577"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib/project.json",
+          "hash": "14820539453501141318"
+        }
+      ],
+      "shared-lib-shared-lib-test": [
+        {
+          "file": "libs/shared-lib/shared-lib-test/RpWorkspace.SharedLib.SharedLib.Test.csproj",
+          "hash": "7348442173980500609",
+          "deps": [
+            "libs-shared-lib-shared-lib"
+          ]
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/UnitTest1.cs",
+          "hash": "3940737178873532714"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.dgspec.json",
+          "hash": "16244643420733701690"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.g.props",
+          "hash": "7800595771830664415"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.g.targets",
+          "hash": "14012898149728570202"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/obj/project.assets.json",
+          "hash": "12561845686918671027"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/obj/project.nuget.cache",
+          "hash": "15529805488842866559"
+        }
+      ],
+      "Api..net-backup": [
+        {
+          "file": "apps/api/.net-backup/Api.csproj",
+          "hash": "6669727413477110095"
+        },
+        {
+          "file": "apps/api/.net-backup/Api.http",
+          "hash": "2266458341979145889"
+        },
+        {
+          "file": "apps/api/.net-backup/Program.cs",
+          "hash": "8106322627670471339"
+        },
+        {
+          "file": "apps/api/.net-backup/Properties/launchSettings.json",
+          "hash": "16495177757893513673"
+        },
+        {
+          "file": "apps/api/.net-backup/appsettings.Development.json",
+          "hash": "3339958947771738801"
+        },
+        {
+          "file": "apps/api/.net-backup/appsettings.json",
+          "hash": "8794831988107864270"
         }
       ]
     },

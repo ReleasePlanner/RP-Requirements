@@ -1,0 +1,45 @@
+═══════════════════════════════════════════════════════════
+  COMANDO PARA EJECUTAR DEPLOYMENT
+═══════════════════════════════════════════════════════════
+
+OPCIÓN 1: Usar el script preparado
+───────────────────────────────────────────────────────────
+./EJECUTAR_DEPLOYMENT.sh
+
+
+OPCIÓN 2: Ejecutar directamente
+───────────────────────────────────────────────────────────
+export VPS_HOST=72.60.63.240
+export VPS_USER=root
+export GIT_REPO_URL=https://github.com/ReleasePlanner/RP-Requirements.git
+./scripts/deploy-requirements-vps.sh
+
+
+OPCIÓN 3: Todo en una línea
+───────────────────────────────────────────────────────────
+VPS_HOST=72.60.63.240 VPS_USER=root GIT_REPO_URL=https://github.com/ReleasePlanner/RP-Requirements.git ./scripts/deploy-requirements-vps.sh
+
+
+═══════════════════════════════════════════════════════════
+  CONFIGURACIÓN
+═══════════════════════════════════════════════════════════
+VPS IP: 72.60.63.240
+Repositorio: https://github.com/ReleasePlanner/RP-Requirements.git
+Usuario: root
+
+
+═══════════════════════════════════════════════════════════
+  ANTES DE EJECUTAR
+═══════════════════════════════════════════════════════════
+1. Asegúrate de estar en la raíz del proyecto:
+   cd /c/MySources/RP-Requirements-Web/rp-workspace
+
+2. Verifica que tienes acceso SSH al VPS:
+   ssh root@72.60.63.240
+
+3. Verifica que el repositorio es accesible:
+   git ls-remote https://github.com/ReleasePlanner/RP-Requirements.git
+
+
+═══════════════════════════════════════════════════════════
+
