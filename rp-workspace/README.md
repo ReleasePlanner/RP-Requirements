@@ -2,55 +2,75 @@
 
 Complete requirements management system built with **NestJS** (API) and **Next.js** (Portal), following Clean Architecture principles, SOLID, and OWASP security best practices.
 
-[![CI](https://github.com/USER/REPO/workflows/CI/badge.svg)](https://github.com/USER/REPO/actions)
-[![CD Production](https://github.com/USER/REPO/workflows/CD%20-%20Production/badge.svg)](https://github.com/USER/REPO/actions)
-[![Deploy](https://github.com/USER/REPO/workflows/Deploy%20-%20Full%20Stack/badge.svg)](https://github.com/USER/REPO/actions)
+**Repository**: [ReleasePlanner/RP-Requirements](https://github.com/ReleasePlanner/RP-Requirements)
 
-## 🎯 Key Features
+[![CI](https://github.com/ReleasePlanner/RP-Requirements/workflows/CI/badge.svg)](https://github.com/ReleasePlanner/RP-Requirements/actions)
+[![Deploy to Hostinger VPS](https://github.com/ReleasePlanner/RP-Requirements/workflows/Deploy%20to%20Hostinger%20VPS/badge.svg)](https://github.com/ReleasePlanner/RP-Requirements/actions)
 
-### 📊 Requirements Management
+---
 
-- ✅ Complete requirements management with Belcorp prioritization matrix
-- ✅ Association with Portfolios, Initiatives, Epics
-- ✅ Effort tracking, business value, and metrics
-- ✅ Functional discovery and experimentation control
-- ✅ External references (Jira, Azure DevOps)
-- ✅ Team dependencies
+## 📑 Tabla de Contenidos
 
-### 🏗️ Architecture
+- [Características Principales](#-características-principales)
+- [Arquitectura del Sistema](#-arquitectura-del-sistema)
+- [Inicio Rápido](#-inicio-rápido)
+- [Deployment](#-deployment)
+- [Documentación](#-documentación)
+- [Testing](#-testing)
+- [Monitoreo](#-monitoreo)
+- [Configuración](#-configuración)
+- [Troubleshooting](#-troubleshooting)
 
-- ✅ **Clean Architecture** with layer separation
-- ✅ **SOLID Principles** applied
+---
+
+## 🎯 Características Principales
+
+### 📊 Gestión de Requisitos
+
+- ✅ Gestión completa de requisitos con matriz de priorización Belcorp
+- ✅ Asociación con Portfolios, Iniciativas, Epics
+- ✅ Seguimiento de esfuerzo, valor de negocio y métricas
+- ✅ Control de descubrimiento funcional y experimentación
+- ✅ Referencias externas (Jira, Azure DevOps)
+- ✅ Dependencias de equipos
+
+### 🏗️ Arquitectura
+
+- ✅ **Clean Architecture** con separación de capas
+- ✅ **Principios SOLID** aplicados
 - ✅ **Domain-Driven Design (DDD)**
-- ✅ **TypeORM** for persistence
-- ✅ **PostgreSQL** as database
+- ✅ **TypeORM** para persistencia
+- ✅ **PostgreSQL** como base de datos
 
-### 🔒 Security
+### 🔒 Seguridad
 
-- ✅ JWT Authentication
+- ✅ Autenticación JWT
 - ✅ Rate Limiting (OWASP)
-- ✅ Input validation
-- ✅ Sensitive data sanitization
-- ✅ CORS configured
-- ✅ Helmet for security headers
+- ✅ Validación de entrada
+- ✅ Sanitización de datos sensibles
+- ✅ CORS configurado
+- ✅ Helmet para headers de seguridad
 
-### 📊 Monitoring
+### 📊 Monitoreo
 
-- ✅ Real-time metrics
-- ✅ Structured logging with Winston
-- ✅ Detailed health checks
-- ✅ Monitoring dashboard in Portal
-- ✅ Performance and error metrics
+- ✅ Métricas en tiempo real
+- ✅ Logging estructurado con Winston
+- ✅ Health checks detallados
+- ✅ Dashboard de monitoreo en Portal
+- ✅ Métricas de rendimiento y errores
 
 ### 🚀 CI/CD
 
-- ✅ GitHub Actions for complete CI/CD
-- ✅ Automated tests with 100% coverage
-- ✅ Automated deployment with Docker Compose
-- ✅ Pre-deployment integrity checks
-- ✅ Automated releases
+- ✅ GitHub Actions para CI/CD completo
+- ✅ Tests automatizados con 100% de cobertura
+- ✅ Deployment automatizado con Docker Compose
+- ✅ Verificaciones de integridad pre-deployment
+- ✅ Releases automatizados
+- ✅ **Deployment automático a VPS Hostinger** 🆕
 
-## 🏛️ System Architecture
+---
+
+## 🏛️ Arquitectura del Sistema
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -58,7 +78,7 @@ Complete requirements management system built with **NestJS** (API) and **Next.j
 │              Port: 4200                                 │
 │  - Dashboard                                            │
 │  - Requirements Management                              │
-│  - Monitoring                                           │
+│  - Monitoring Dashboard                                 │
 └──────────────────┬──────────────────────────────────────┘
                    │ HTTP/REST
 ┌──────────────────▼──────────────────────────────────────┐
@@ -90,72 +110,279 @@ Complete requirements management system built with **NestJS** (API) and **Next.j
 └─────────────────────────────────────────────────────────┘
 ```
 
-## 📋 Prerequisites
+---
 
-- **Node.js** 20.x or higher
-- **npm** 9.x or higher
-- **PostgreSQL** 15.x or higher
-- **Docker** 20.10+ (optional, for deployment)
-- **Docker Compose** 2.0+ (optional, for deployment)
+## 🚀 Inicio Rápido
 
-## 🚀 Quick Start
-
-### Option 1: Docker Compose (Recommended)
+### Opción 1: Docker Compose (Recomendado para Desarrollo Local)
 
 ```bash
-# 1. Clone the repository
-git clone <repository-url>
-cd rp-workspace
+# 1. Clonar repositorio
+git clone https://github.com/ReleasePlanner/RP-Requirements.git
+cd RP-Requirements/rp-workspace
 
-# 2. Configure environment variables
+# 2. Configurar variables de entorno
 cp env.docker.example .env
-# Edit .env with your values
+# Editar .env con tus valores
 
-# 3. Start all services
+# 3. Iniciar todos los servicios
 make up
-# or
+# o
 docker-compose up -d
 
-# 4. Verify everything is working
+# 4. Verificar que todo funciona
 make health
 ```
 
-**Available Services:**
+**Servicios Disponibles:**
 
 - 🌐 Portal: http://localhost:4200
 - 🔌 API: http://localhost:3000/api/v1
 - 📚 Swagger: http://localhost:3000/api/docs
 - 🗄️ PostgreSQL: localhost:5432
 
-### Option 2: Local Development
+### Opción 2: Desarrollo Local
 
 ```bash
-# 1. Install dependencies
+# 1. Instalar dependencias
 npm ci
 
-# 2. Configure PostgreSQL database
-# Create database: requirements_db
-# Configure environment variables in apps/api/.env
+# 2. Configurar base de datos PostgreSQL
+# Crear base de datos: requirements_db
+# Configurar variables de entorno en apps/api/.env
 
-# 3. Run migrations and seed
+# 3. Ejecutar migraciones y seed
 cd apps/api
 npm run migration:run
 npm run seed:run
 
-# 4. Start API
-npm run start:dev
-# In another terminal:
+# 4. Iniciar API
 npm run start:api
 
-# 5. Start Portal
+# 5. En otra terminal, iniciar Portal
 npm run start:portal
 ```
 
-## ⚙️ Configuration
+📖 **Guía Completa**: Ver [docs/QUICK_START_DOCKER.md](docs/QUICK_START_DOCKER.md)
 
-### Environment Variables
+---
 
-#### API (.env or apps/api/.env)
+## 🚀 Deployment
+
+### ⭐ Deployment Automático con GitHub Actions (Recomendado)
+
+El sistema incluye deployment automático a VPS Hostinger mediante GitHub Actions.
+
+#### Configuración Inicial
+
+1. **Configurar Secrets en GitHub**:
+
+   - Ve a: `Settings > Secrets and variables > Actions`
+   - Agrega los secrets requeridos (ver [deploy-on-vps/GITHUB_HOSTINGER_INTEGRATION.md](deploy-on-vps/GITHUB_HOSTINGER_INTEGRATION.md))
+
+2. **Ejecutar Test SSH** (Recomendado primero):
+
+   - Ve a: `Actions > Test SSH Connection > Run workflow`
+   - Verifica que la conexión SSH funcione
+
+3. **Deployment Automático**:
+   - Push a `main` → Deployment a producción
+   - Push a `develop` → Deployment a desarrollo
+   - O ejecuta manualmente: `Actions > Deploy to Hostinger VPS > Run workflow`
+
+📖 **Guía Completa**:
+
+- [GitHub-Hostinger Integration](deploy-on-vps/GITHUB_HOSTINGER_INTEGRATION.md) - Configuración completa
+- [Primer Deployment](deploy-on-vps/PRIMER_DEPLOYMENT.md) - Guía paso a paso
+- [Ejecutar Test SSH](deploy-on-vps/EJECUTAR_TEST_SSH.md) - Verificar conexión
+
+#### Secrets Requeridos
+
+```bash
+# Conexión VPS
+VPS_HOST=72.60.63.240
+VPS_USER=root
+VPS_SSH_PASSWORD=<tu-contraseña-ssh>
+
+# Base de Datos
+DB_USERNAME=requirements_user
+DB_PASSWORD=<tu-password-db>
+DB_DATABASE=requirements_db
+
+# JWT
+JWT_SECRET=<tu-secret-min-32-chars>
+
+# URLs (opcionales)
+NEXT_PUBLIC_API_URL_DEV=http://requirements-api.beyondnet.cloud/api/v1
+NEXT_PUBLIC_API_URL_PRODUCTION=https://requirements-api.beyondnet.cloud/api/v1
+```
+
+### Deployment Manual en VPS
+
+Si prefieres deployment manual, consulta:
+
+- [Plan de Deployment](deploy-on-vps/PLAN_DEPLOYMENT_REQUIREMENTS.md) - Guía completa paso a paso
+- [Quick Start VPS](deploy-on-vps/QUICK_START_VPS.md) - 5 comandos rápidos
+- [Scripts de Deployment](deploy-on-vps/) - Scripts disponibles
+
+### Deployment Local con Docker
+
+```bash
+# 1. Construir imágenes Docker
+docker-compose build
+
+# 2. Iniciar servicios
+docker-compose up -d
+
+# 3. Verificar salud
+curl http://localhost:3000/api/v1/health/liveness
+curl http://localhost:4200
+```
+
+📖 **Documentación Completa**: Ver [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
+
+---
+
+## 📚 Documentación
+
+### 📖 Índice de Documentación
+
+Toda la documentación está organizada en [`docs/`](docs/) y [`deploy-on-vps/`](deploy-on-vps/):
+
+#### 🚀 Guías de Inicio Rápido
+
+- **[QUICK_START_DOCKER.md](docs/QUICK_START_DOCKER.md)** - Inicio rápido con Docker Compose (3 pasos)
+- **[README_DEPLOYMENT.md](docs/README_DEPLOYMENT.md)** - Guía rápida de deployment
+
+#### 🐳 Docker y Deployment
+
+- **[README_DOCKER.md](docs/README_DOCKER.md)** - Guía completa de Docker Setup
+- **[DEPLOYMENT.md](docs/DEPLOYMENT.md)** - Guía completa de deployment y compilación
+
+#### 🔄 CI/CD
+
+- **[README_CI_CD.md](docs/README_CI_CD.md)** - Guía rápida de CI/CD
+- **[CI_CD.md](docs/CI_CD.md)** - Documentación completa de CI/CD
+
+#### 🚀 Deployment en VPS Hostinger
+
+Todos los archivos de deployment están en [`deploy-on-vps/`](deploy-on-vps/):
+
+- **[GITHUB_HOSTINGER_INTEGRATION.md](deploy-on-vps/GITHUB_HOSTINGER_INTEGRATION.md)** - 🔗 **GitHub Actions Integration** - Deployment automático desde GitHub
+- **[PRIMER_DEPLOYMENT.md](deploy-on-vps/PRIMER_DEPLOYMENT.md)** - ⭐ **Guía del Primer Deployment**
+- **[EJECUTAR_TEST_SSH.md](deploy-on-vps/EJECUTAR_TEST_SSH.md)** - 🧪 Ejecutar Test SSH Connection
+- **[PLAN_DEPLOYMENT_REQUIREMENTS.md](deploy-on-vps/PLAN_DEPLOYMENT_REQUIREMENTS.md)** - Plan completo paso a paso
+- **[QUICK_START_VPS.md](deploy-on-vps/QUICK_START_VPS.md)** - ⚡ Guía rápida de 5 comandos
+- **[CHECKLIST_VERIFICACION.md](deploy-on-vps/CHECKLIST_VERIFICACION.md)** - ✅ Checklist de verificación completa
+- **[TROUBLESHOOTING_GITHUB_ACTIONS.md](deploy-on-vps/TROUBLESHOOTING_GITHUB_ACTIONS.md)** - 🔧 Troubleshooting GitHub Actions
+- **[TROUBLESHOOTING_SSH.md](deploy-on-vps/TROUBLESHOOTING_SSH.md)** - 🔧 Troubleshooting SSH
+- Ver [`deploy-on-vps/`](deploy-on-vps/) para todos los scripts y documentación
+
+#### 📊 Monitoreo y Verificación
+
+- **[MONITORING.md](docs/MONITORING.md)** - Sistema de monitoreo completo
+- **[INTEGRITY_CHECKS.md](docs/INTEGRITY_CHECKS.md)** - Verificación de integridad y cobertura
+- **[INTEGRITY_REPORT.md](docs/INTEGRITY_REPORT.md)** - Reporte de integridad del sistema
+- **[INTEGRITY_CHECKLIST.md](docs/INTEGRITY_CHECKLIST.md)** - Checklist de verificación
+
+#### 🗄️ Base de Datos
+
+- **[README-DATABASE.md](docs/README-DATABASE.md)** - Documentación completa de base de datos
+- **[requirements-fields.md](docs/requirements-fields.md)** - Campos de requisitos y modelo de datos
+
+#### 📝 Historial de Cambios
+
+- **[CHANGELOG.md](docs/CHANGELOG.md)** - Historial de cambios del proyecto
+
+### 📖 Documentación por Aplicación
+
+#### API (NestJS)
+
+Ver documentación completa en [`apps/api/docs/`](apps/api/docs/):
+
+- Arquitectura y estructura
+- Guías de testing
+- Reglas de compatibilidad
+- Guías de implementación
+
+#### Portal (Next.js)
+
+Ver [`apps/portal/README.md`](apps/portal/README.md) para documentación del portal.
+
+---
+
+## 🧪 Testing
+
+### Tests Unitarios
+
+```bash
+# Ejecutar todos los tests
+cd apps/api && npm test
+
+# Tests con cobertura
+cd apps/api && npm run test:cov
+
+# Verificar cobertura (100% requerido)
+cd apps/api && npm run test:cov:check
+```
+
+### Test Scenarios y Scripts de Verificación
+
+El proyecto incluye scripts de testing y debugging en [`tests/`](tests/):
+
+- **[test-api.js](tests/test-api.js)** - Tests básicos de API (login, autenticación)
+- **[test-requirements.js](tests/test-requirements.js)** - Tests específicos de requisitos
+- **[verify-full-flow.js](tests/verify-full-flow.js)** - Verificación del flujo completo
+- **[verify-rules.js](tests/verify-rules.js)** - Verificación de reglas y validaciones
+- **[api-debug.js](tests/api-debug.js)** - Scripts de debugging para la API
+
+📖 **Documentación Completa**: Ver [tests/README.md](tests/README.md)
+
+---
+
+## 📊 Monitoreo
+
+### Dashboard de Monitoreo
+
+Accede al dashboard en: **http://localhost:4200/portal/monitoring**
+
+**Métricas Disponibles:**
+
+- Total de requests
+- Tasa de errores
+- Tiempo promedio de respuesta
+- Requests lentos (>500ms)
+- Errores recientes
+- Recursos del sistema (CPU, Memoria)
+
+### Endpoints de Monitoreo
+
+```bash
+# Métricas generales
+GET /api/v1/monitoring/metrics
+
+# Métricas de requests
+GET /api/v1/monitoring/metrics/requests
+
+# Métricas de errores
+GET /api/v1/monitoring/metrics/errors
+
+# Health check detallado
+GET /api/v1/monitoring/health/detailed
+
+# Recursos del sistema
+GET /api/v1/monitoring/system
+```
+
+📖 **Documentación Completa**: Ver [docs/MONITORING.md](docs/MONITORING.md)
+
+---
+
+## ⚙️ Configuración
+
+### Variables de Entorno
+
+#### API (apps/api/.env o .env para Docker)
 
 ```env
 # Server
@@ -190,49 +417,25 @@ LOG_LEVEL=info
 NEXT_PUBLIC_API_URL=http://localhost:3000/api/v1
 ```
 
-See [`env.docker.example`](env.docker.example) for complete Docker configuration.
+📖 **Configuración Completa**: Ver [`env.docker.example`](env.docker.example)
 
-## 📚 Project Structure
+---
 
-```
-rp-workspace/
-├── apps/
-│   ├── api/                 # NestJS API
-│   │   ├── src/
-│   │   │   ├── domain/      # Domain entities
-│   │   │   ├── application/ # Business logic
-│   │   │   ├── infrastructure/ # Repositories, DB
-│   │   │   ├── presentation/ # Controllers, DTOs
-│   │   │   └── shared/      # Shared utilities
-│   │   └── docs/            # API documentation
-│   └── portal/              # Next.js Portal
-│       └── src/
-│           ├── app/         # Next.js routes
-│           ├── features/    # Portal features
-│           └── components/  # UI components
-├── docs/                    # Complete documentation
-├── scripts/                 # Automation scripts
-├── tests/                   # Test scripts and scenarios
-├── .github/workflows/       # CI/CD workflows
-├── docker-compose.yml       # Docker orchestration
-└── Makefile                # Useful commands
-```
+## 🛠️ Comandos Disponibles
 
-## 🛠️ Available Commands
-
-### Development
+### Desarrollo
 
 ```bash
-# Start API in development mode
+# Iniciar API en modo desarrollo
 npm run start:api
 
-# Start Portal in development mode
+# Iniciar Portal en modo desarrollo
 npm run start:portal
 
-# Run tests
+# Ejecutar tests
 npm run test:api
 
-# Run tests with coverage
+# Ejecutar tests con cobertura
 cd apps/api && npm run test:cov
 
 # Linting
@@ -253,16 +456,16 @@ cd apps/portal && npm run build
 ### Docker
 
 ```bash
-# See all available commands
+# Ver todos los comandos disponibles
 make help
 
-# Start services
+# Iniciar servicios
 make up
 
-# Stop services
+# Detener servicios
 make down
 
-# View logs
+# Ver logs
 make logs
 make logs-api
 make logs-portal
@@ -270,340 +473,75 @@ make logs-portal
 # Health checks
 make health
 
-# Run migrations
+# Ejecutar migraciones
 make migrate
 
-# Seed database
+# Seed de base de datos
 make seed
 ```
 
-## 🧪 Testing
+---
 
-### Unit Tests
+## 🗄️ Base de Datos
 
-```bash
-# Run all tests
-cd apps/api && npm test
+### Estructura
 
-# Tests with coverage
-cd apps/api && npm run test:cov
-
-# Verify coverage (100% required)
-cd apps/api && npm run test:cov:check
-```
-
-### Integration Tests & Test Scenarios
-
-The project includes comprehensive test scenarios in the [`tests/`](tests/) directory. These scripts allow you to verify the complete functionality of the system, test API endpoints, and debug issues.
-
-#### Test Scripts
-
-- **[`test-api.js`](tests/test-api.js)** - Basic API tests (login, authentication)
-
-  - Tests user authentication flow
-  - Verifies JWT token generation
-  - Validates API connectivity
-
-- **[`test-requirements.js`](tests/test-requirements.js)** - Requirements-specific tests
-
-  - Tests CRUD operations for requirements
-  - Verifies requirement associations
-  - Tests requirement filtering and pagination
-
-- **[`verify-full-flow.js`](tests/verify-full-flow.js)** - Complete application flow verification
-
-  - End-to-end flow testing
-  - Portfolio → Initiative → Epic → Requirement chain
-  - Validates complete business workflows
-
-- **[`verify-rules.js`](tests/verify-rules.js)** - Rules and validations verification
-
-  - Tests business rules enforcement
-  - Validates data constraints
-  - Verifies validation logic
-
-- **[`verify-update.js`](tests/verify-update.js)** - Update operations verification
-  - Tests PATCH/PUT operations
-  - Verifies update validations
-  - Tests partial updates
-
-#### Debugging Scripts
-
-- **[`api-debug.js`](tests/api-debug.js)** - API debugging scripts
-
-  - Debugs API endpoints
-  - Tests portfolio and initiative endpoints
-  - Verifies API responses
-
-- **[`debug-epics.js`](tests/debug-epics.js)** - Epics-specific debugging
-
-  - Tests epic creation and management
-  - Verifies epic associations
-  - Debugs epic-related issues
-
-- **[`portal-debug-api.js`](tests/portal-debug-api.js)** - Portal debugging with API
-
-  - Tests Portal-API integration
-  - Verifies API calls from Portal
-  - Debugs frontend-backend communication
-
-- **[`check-rgl.js`](tests/check-rgl.js)** - React Grid Layout verification
-  - Verifies react-grid-layout installation
-  - Tests component dependencies
-  - Validates UI library setup
-
-#### Running Test Scenarios
-
-```bash
-# API Tests
-node tests/test-api.js
-
-# Requirements Tests
-node tests/test-requirements.js
-
-# Complete Flow Verification
-node tests/verify-full-flow.js
-
-# Rules Verification
-node tests/verify-rules.js
-
-# Update Operations
-node tests/verify-update.js
-
-# API Debugging
-node tests/api-debug.js
-
-# Epics Debugging
-node tests/debug-epics.js
-
-# Portal Debugging
-node tests/portal-debug-api.js
-```
-
-**Prerequisites for Test Scenarios:**
-
-- API must be running on `http://localhost:3000`
-- Database must be seeded with test data
-- Environment variables must be configured
-
-See **[`tests/README.md`](tests/README.md)** for complete test documentation and detailed usage instructions.
-
-## 🚢 Deployment
-
-### Automated Deployment with GitHub Actions
-
-The system includes complete CI/CD workflows:
-
-#### 1. CI (Continuous Integration)
-
-- Runs on every push/PR
-- Linting, tests, builds
-- Coverage verification (100%)
-
-#### 2. CD - Development
-
-- Runs on push to `develop`
-- Automatic deployment to development
-
-#### 3. CD - Production
-
-- Runs on version tags (`v*.*.*`)
-- Production deployment with verifications
-
-#### 4. Deploy - Full Stack
-
-- Complete deployment with Docker Compose
-- Includes API, Portal, and Database
-- Automatic health checks
-
-See [docs/CI_CD.md](docs/CI_CD.md) for complete documentation.
-
-### Manual Deployment
-
-```bash
-# 1. Build Docker images
-docker-compose build
-
-# 2. Start services
-docker-compose up -d
-
-# 3. Verify health
-curl http://localhost:3000/api/v1/health/liveness
-curl http://localhost:4200
-```
-
-## 📊 Monitoring
-
-### Monitoring Dashboard
-
-Access the dashboard at: http://localhost:4200/portal/monitoring
-
-**Available Metrics:**
-
-- Total requests
-- Error rate
-- Average response time
-- Slow requests (>500ms)
-- Recent errors
-- System resources (CPU, Memory)
-
-### Monitoring Endpoints
-
-```bash
-# General metrics
-GET /api/v1/monitoring/metrics
-
-# Request metrics
-GET /api/v1/monitoring/metrics/requests
-
-# Error metrics
-GET /api/v1/monitoring/metrics/errors
-
-# Detailed health check
-GET /api/v1/monitoring/health/detailed
-
-# System resources
-GET /api/v1/monitoring/system
-```
-
-See [docs/MONITORING.md](docs/MONITORING.md) for more details.
-
-## 🗄️ Database
-
-### Structure
-
-- **18 Main entities**
+- **18 Entidades principales**
 - **PostgreSQL 15+**
-- **TypeORM** for ORM
-- **Automatic migrations**
+- **TypeORM** como ORM
+- **Migraciones automáticas**
 
-### Main Entities
+### Entidades Principales
 
-- `Portfolio` - Strategic portfolios
-- `Initiative` - Initiatives
+- `Portfolio` - Portfolios estratégicos
+- `Initiative` - Iniciativas
 - `Epic` - Epics
-- `Requirement` - Requirements
+- `Requirement` - Requisitos
 - `Sponsor` - Sponsors
 - `ProductOwner` - Product Owners
-- Catalogs (Priority, Status, Complexity, etc.)
+- Catálogos (Priority, Status, Complexity, etc.)
 
-See [docs/README-DATABASE.md](docs/README-DATABASE.md) for complete documentation.
+📖 **Documentación Completa**: Ver [docs/README-DATABASE.md](docs/README-DATABASE.md)
 
-## 📖 Documentation
+---
 
-### Complete Documentation
+## 🔍 Verificación de Integridad
 
-All documentation is available in [`docs/`](docs/):
-
-#### 🚀 Quick Start Guides
-
-- **[README.md](docs/README.md)** - Documentation index
-- **[QUICK_START_DOCKER.md](docs/QUICK_START_DOCKER.md)** - Quick start with Docker Compose (3 steps)
-- **[README_DEPLOYMENT.md](docs/README_DEPLOYMENT.md)** - Quick deployment guide
-
-#### 🐳 Docker & Deployment
-
-- **[README_DOCKER.md](docs/README_DOCKER.md)** - Complete Docker Setup guide
-- **[DEPLOYMENT.md](docs/DEPLOYMENT.md)** - Complete deployment and compilation guide
-
-#### 🔄 CI/CD
-
-- **[README_CI_CD.md](docs/README_CI_CD.md)** - Quick CI/CD guide
-- **[CI_CD.md](docs/CI_CD.md)** - Complete CI/CD documentation
-
-#### 📊 Monitoring & Verification
-
-- **[MONITORING.md](docs/MONITORING.md)** - Complete monitoring system documentation
-- **[INTEGRITY_CHECKS.md](docs/INTEGRITY_CHECKS.md)** - Integrity verification and coverage requirements
-- **[INTEGRITY_REPORT.md](docs/INTEGRITY_REPORT.md)** - System integrity report and status
-- **[INTEGRITY_CHECKLIST.md](docs/INTEGRITY_CHECKLIST.md)** - Complete verification checklist
-
-#### 🗄️ Database
-
-- **[README-DATABASE.md](docs/README-DATABASE.md)** - Complete database documentation
-- **[requirements-fields.md](docs/requirements-fields.md)** - Requirements fields documentation and data model
-
-#### 🚀 VPS Deployment
-
-Todos los archivos de deployment están en [`deploy-on-vps/`](deploy-on-vps/):
-
-- **[README.md](deploy-on-vps/README.md)** - Índice de archivos de deployment
-- **[GITHUB_HOSTINGER_INTEGRATION.md](deploy-on-vps/GITHUB_HOSTINGER_INTEGRATION.md)** - 🔗 **GitHub Actions Integration** - Deployment automático desde GitHub
-- **[PLAN_DEPLOYMENT_REQUIREMENTS.md](deploy-on-vps/PLAN_DEPLOYMENT_REQUIREMENTS.md)** - ⭐ **Start Here** - Simplified deployment plan for Requirements Management module
-- **[QUICK_START_VPS.md](deploy-on-vps/QUICK_START_VPS.md)** - ⚡ **Quick Start** - 5 comandos para empezar rápido
-- **[PLAN_DEPLOYMENT_VPS.md](deploy-on-vps/PLAN_DEPLOYMENT_VPS.md)** - Complete VPS deployment plan (multi-module)
-- **[DEPLOYMENT_MULTI_MODULE.md](deploy-on-vps/DEPLOYMENT_MULTI_MODULE.md)** - Multi-module deployment guide
-- Ver [`deploy-on-vps/`](deploy-on-vps/) para todos los scripts y documentación
-
-#### 📝 Changelog
-
-- **[CHANGELOG.md](docs/CHANGELOG.md)** - Project changelog
-
-### API Documentation
-
-- **Swagger UI**: http://localhost:3000/api/docs
-- **API Documentation**: [`apps/api/docs/`](apps/api/docs/)
-  - Architecture and structure
-  - Testing guides
-  - Compatibility rules
-  - Implementation guides
-
-### Application-Specific Documentation
-
-- **API Documentation**: [`apps/api/docs/`](apps/api/docs/)
-
-  - Architecture and structure
-  - Testing guides
-  - Compatibility rules
-  - Implementation guides
-
-- **Portal Documentation**: [`apps/portal/README.md`](apps/portal/README.md)
-
-### Test Scenarios Documentation
-
-Comprehensive test scenarios and debugging scripts are available in [`tests/`](tests/):
-
-- **[README.md](tests/README.md)** - Complete test scenarios documentation
-  - Test scripts overview
-  - Usage instructions
-  - Prerequisites and requirements
-  - Debugging guides
-
-See the [Testing](#-testing) section above for detailed information about running test scenarios.
-
-## 🔍 Integrity Verification
-
-Run the verification script to ensure everything is correctly configured:
+Ejecuta el script de verificación para asegurar que todo esté correctamente configurado:
 
 ```bash
 ./scripts/verify-integrity.sh
 ```
 
-This script verifies:
+Este script verifica:
 
-- ✅ File structure
-- ✅ Database configuration
-- ✅ Monitoring integration
-- ✅ Docker configuration
-- ✅ CI/CD workflows
+- ✅ Estructura de archivos
+- ✅ Configuración de base de datos
+- ✅ Integración de monitoreo
+- ✅ Configuración de Docker
+- ✅ Workflows de CI/CD
 
-## 🛡️ Security
+📖 **Documentación Completa**: Ver [docs/INTEGRITY_CHECKS.md](docs/INTEGRITY_CHECKS.md)
 
-### Implemented Best Practices
+---
 
-- ✅ **JWT Authentication** with secure tokens
-- ✅ **Rate Limiting** to prevent abuse
-- ✅ **Input Validation** with class-validator
-- ✅ **SQL Injection Protection** with TypeORM
-- ✅ **XSS Protection** with sanitization
-- ✅ **CORS** correctly configured
-- ✅ **Helmet** for security headers
-- ✅ **Secrets Management** with environment variables
+## 🛡️ Seguridad
 
-### Security Configuration
+### Mejores Prácticas Implementadas
+
+- ✅ **Autenticación JWT** con tokens seguros
+- ✅ **Rate Limiting** para prevenir abuso
+- ✅ **Validación de Entrada** con class-validator
+- ✅ **Protección contra SQL Injection** con TypeORM
+- ✅ **Protección XSS** con sanitización
+- ✅ **CORS** correctamente configurado
+- ✅ **Helmet** para headers de seguridad
+- ✅ **Gestión de Secrets** con variables de entorno
+
+### Configuración de Seguridad
 
 ```env
-# JWT Secret (minimum 32 characters)
+# JWT Secret (mínimo 32 caracteres)
 JWT_SECRET=your-super-secret-jwt-key-change-in-production-min-32-chars
 
 # Rate Limiting
@@ -614,122 +552,161 @@ THROTTLE_LIMIT=100
 CORS_ORIGIN=http://localhost:4200
 ```
 
-## 🤝 Contributing
-
-### Contribution Process
-
-1. Create a branch from `develop`
-2. Make changes
-3. Run tests and linting
-4. Create Pull Request
-5. Wait for review and approval
-
-### Code Standards
-
-- ✅ **ESLint** for linting
-- ✅ **Prettier** for formatting
-- ✅ **100% Coverage** required
-- ✅ **Conventional Commits** recommended
-
-## 📝 Useful Scripts
-
-```bash
-# Verify integrity
-./scripts/verify-integrity.sh
-
-# Generate changelog
-node scripts/generate-changelog.js [version]
-
-# Version bump
-node scripts/version-bump.js [major|minor|patch]
-
-# Docker setup
-./scripts/docker-setup.sh
-```
+---
 
 ## 🐛 Troubleshooting
 
-### Common Issues
+### Problemas Comunes
 
-#### API won't start
+#### API no inicia
 
 ```bash
-# Check environment variables
+# Verificar variables de entorno
 cat apps/api/.env
 
-# Check database connection
+# Verificar conexión a base de datos
 psql -h localhost -U postgres -d requirements_db
 
-# View logs
+# Ver logs
 make logs-api
 ```
 
-#### Portal can't connect to API
+#### Portal no puede conectarse a API
 
 ```bash
-# Check NEXT_PUBLIC_API_URL variable
+# Verificar variable NEXT_PUBLIC_API_URL
 echo $NEXT_PUBLIC_API_URL
 
-# Check if API is running
+# Verificar si API está corriendo
 curl http://localhost:3000/api/v1/health/liveness
 ```
 
-#### Database won't connect
+#### Base de datos no conecta
 
 ```bash
-# Check PostgreSQL service
+# Verificar servicio PostgreSQL
 docker-compose ps postgres
 
-# View database logs
+# Ver logs de base de datos
 make logs-db
 
-# Check environment variables
+# Verificar variables de entorno
 docker-compose config
 ```
 
-## 📊 Project Status
+### Troubleshooting Deployment
 
-### ✅ Completed
+- **[Troubleshooting GitHub Actions](deploy-on-vps/TROUBLESHOOTING_GITHUB_ACTIONS.md)** - Problemas con workflows
+- **[Troubleshooting SSH](deploy-on-vps/TROUBLESHOOTING_SSH.md)** - Problemas de conexión SSH
+- **[Checklist de Verificación](deploy-on-vps/CHECKLIST_VERIFICACION.md)** - Verificación completa
 
-- ✅ Complete API with Clean Architecture
-- ✅ Complete Portal with Next.js
-- ✅ Integrated monitoring system
-- ✅ Complete CI/CD with GitHub Actions
-- ✅ Docker Compose for deployment
-- ✅ Tests with 100% coverage
-- ✅ Complete documentation
+---
 
-### 🚧 In Development
+## 📋 Estructura del Proyecto
 
-- Continuous performance improvements
-- New features as per requirements
+```
+rp-workspace/
+├── apps/
+│   ├── api/                 # NestJS API
+│   │   ├── src/
+│   │   │   ├── domain/      # Entidades de dominio
+│   │   │   ├── application/ # Lógica de negocio
+│   │   │   ├── infrastructure/ # Repositorios, DB
+│   │   │   ├── presentation/ # Controladores, DTOs
+│   │   │   └── shared/      # Utilidades compartidas
+│   │   └── docs/            # Documentación de API
+│   └── portal/              # Next.js Portal
+│       └── src/
+│           ├── app/         # Rutas de Next.js
+│           ├── features/    # Features del Portal
+│           └── components/ # Componentes UI
+├── docs/                    # Documentación completa
+├── deploy-on-vps/          # Scripts y docs de deployment VPS
+├── scripts/                 # Scripts de automatización
+├── tests/                   # Scripts de testing y debugging
+├── .github/workflows/       # Workflows de CI/CD
+├── docker-compose.yml       # Orquestación Docker
+└── Makefile                # Comandos útiles
+```
 
-## 📄 License
+---
 
-MIT License - See [LICENSE](LICENSE) for details.
+## 📊 Estado del Proyecto
 
-## 👥 Authors
+### ✅ Completado
 
-Development Team
+- ✅ API completa con Clean Architecture
+- ✅ Portal completo con Next.js
+- ✅ Sistema de monitoreo integrado
+- ✅ CI/CD completo con GitHub Actions
+- ✅ Docker Compose para deployment
+- ✅ Tests con 100% de cobertura
+- ✅ Documentación completa
+- ✅ **Deployment automático a VPS Hostinger** 🆕
 
-## 🔗 Useful Links
+### 🚧 En Desarrollo
 
-### Documentation
+- Mejoras continuas de rendimiento
+- Nuevas features según requerimientos
 
-- [Complete Documentation Index](docs/README.md)
-- [Quick Start Guide](docs/QUICK_START_DOCKER.md)
-- [Deployment Guide](docs/DEPLOYMENT.md)
-- [CI/CD Documentation](docs/CI_CD.md)
-- [Monitoring Documentation](docs/MONITORING.md)
-- [Database Documentation](docs/README-DATABASE.md)
-- [Integrity Checks](docs/INTEGRITY_CHECKS.md)
+---
 
-### Test Scenarios
+## 🤝 Contribuir
 
-- [Test Scenarios Documentation](tests/README.md)
-- [Test Scripts](tests/)
+### Proceso de Contribución
 
-### Application
+1. Crear una rama desde `develop`
+2. Hacer cambios
+3. Ejecutar tests y linting
+4. Crear Pull Request
+5. Esperar revisión y aprobación
+
+### Estándares de Código
+
+- ✅ **ESLint** para linting
+- ✅ **Prettier** para formato
+- ✅ **100% Coverage** requerido
+- ✅ **Conventional Commits** recomendado
+
+---
+
+## 📞 Soporte
+
+Para soporte o preguntas:
+
+- Crear un Issue en GitHub
+- Revisar documentación en [`docs/`](docs/)
+- Revisar documentación de deployment en [`deploy-on-vps/`](deploy-on-vps/)
+- Ver logs: `make logs`
+- Ejecutar test scenarios: [`tests/`](tests/)
+- Verificar integridad: `./scripts/verify-integrity.sh`
+
+---
+
+## 🔗 Enlaces Útiles
+
+### Documentación
+
+- [Índice de Documentación](docs/README.md)
+- [Guía de Inicio Rápido](docs/QUICK_START_DOCKER.md)
+- [Guía de Deployment](docs/DEPLOYMENT.md)
+- [Documentación CI/CD](docs/CI_CD.md)
+- [Documentación de Monitoreo](docs/MONITORING.md)
+- [Documentación de Base de Datos](docs/README-DATABASE.md)
+
+### Deployment
+
+- [GitHub-Hostinger Integration](deploy-on-vps/GITHUB_HOSTINGER_INTEGRATION.md) - ⭐ Deployment automático
+- [Primer Deployment](deploy-on-vps/PRIMER_DEPLOYMENT.md) - Guía paso a paso
+- [Plan de Deployment](deploy-on-vps/PLAN_DEPLOYMENT_REQUIREMENTS.md) - Plan completo
+- [Quick Start VPS](deploy-on-vps/QUICK_START_VPS.md) - 5 comandos rápidos
+
+### Testing
+
+- [Test Scenarios](tests/README.md)
+- [Scripts de Testing](tests/)
+
+### Aplicación
 
 - [API Swagger](http://localhost:3000/api/docs)
 - [Monitoring Dashboard](http://localhost:4200/portal/monitoring)
@@ -737,22 +714,17 @@ Development Team
 
 ### CI/CD
 
-- [GitHub Actions](https://github.com/USER/REPO/actions)
+- [GitHub Actions](https://github.com/ReleasePlanner/RP-Requirements/actions)
 - [CI Workflow](.github/workflows/ci.yml)
-- [CD Production Workflow](.github/workflows/cd-production.yml)
-- [Deploy Full Stack Workflow](.github/workflows/deploy.yml)
-
-## 📞 Support
-
-For support or questions:
-
-- Create an Issue on GitHub
-- Review documentation in [`docs/`](docs/)
-- Check logs: `make logs`
-- Run test scenarios: [`tests/`](tests/)
-- Review test scenarios documentation: [`tests/README.md`](tests/README.md)
-- Check integrity: `./scripts/verify-integrity.sh`
+- [Deploy to Hostinger VPS](.github/workflows/deploy-hostinger.yml) 🆕
+- [Test SSH Connection](.github/workflows/test-ssh-connection.yml) 🆕
 
 ---
 
-**Developed with ❤️ using NestJS, Next.js and PostgreSQL**
+## 📄 Licencia
+
+MIT License - Ver [LICENSE](LICENSE) para detalles.
+
+---
+
+**Desarrollado con ❤️ usando NestJS, Next.js y PostgreSQL**
