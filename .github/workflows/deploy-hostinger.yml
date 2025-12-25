@@ -55,6 +55,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "npm"
+          cache-dependency-path: rp-workspace/package-lock.json
 
       - name: Install dependencies
         working-directory: rp-workspace
