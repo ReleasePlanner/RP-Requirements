@@ -61,16 +61,17 @@ jobs:
         working-directory: rp-workspace
         run: |
           echo "📦 Installing root dependencies..."
+          # Use --ignore-scripts to skip prepare script that requires .NET
           # Try npm ci first, fallback to npm install if lock file is out of sync
           set +e
-          npm ci
+          npm ci --ignore-scripts
           CI_EXIT_CODE=$?
           set -e
 
           if [ $CI_EXIT_CODE -ne 0 ]; then
             echo "⚠️ npm ci failed (exit code: $CI_EXIT_CODE), lock file may be out of sync."
             echo "Running npm install to sync package-lock.json..."
-            npm install
+            npm install --ignore-scripts
           else
             echo "✅ Root dependencies installed with npm ci"
           fi
@@ -79,7 +80,7 @@ jobs:
           echo "📦 Installing API dependencies..."
           if [ -f "apps/api/package.json" ]; then
             cd apps/api
-            npm install --legacy-peer-deps || npm install
+            npm install --ignore-scripts --legacy-peer-deps || npm install --ignore-scripts
             cd ../..
             echo "✅ API dependencies installed"
           fi
@@ -88,7 +89,7 @@ jobs:
           echo "📦 Installing Portal dependencies..."
           if [ -f "apps/portal/package.json" ]; then
             cd apps/portal
-            npm install --legacy-peer-deps || npm install
+            npm install --ignore-scripts --legacy-peer-deps || npm install --ignore-scripts
             cd ../..
             echo "✅ Portal dependencies installed"
           fi
