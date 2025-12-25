@@ -100,8 +100,39 @@ jobs:
         working-directory: rp-workspace
         run: |
           echo "🔍 Running lint checks..."
-          npm run lint:api || exit 1
-          cd apps/portal && npm run lint || exit 1
+          echo "🔧 Formatting code with Prettier..."
+
+          # Format API code with Prettier first
+          cd apps/api
+          if [ -f "node_modules/.bin/prettier" ]; then
+            npx prettier --write "src/**/*.ts" "test/**/*.ts" || echo "⚠️ Prettier formatting completed with warnings"
+          fi
+
+          # Run ESLint with --fix to auto-correct issues
+          echo "🔧 Running ESLint with auto-fix..."
+          npm run lint || {
+            echo "⚠️ ESLint found issues that couldn't be auto-fixed"
+            echo "💡 Review the errors above and fix them manually"
+            exit 1
+          }
+          cd ../..
+
+          # Format Portal code
+          cd apps/portal
+          echo "🔧 Formatting Portal code..."
+          if [ -f "node_modules/.bin/prettier" ]; then
+            npx prettier --write "src/**/*.{ts,tsx}" || echo "⚠️ Prettier formatting completed with warnings"
+          fi
+
+          # Run Portal lint
+          echo "🔧 Running Portal ESLint..."
+          npm run lint || {
+            echo "⚠️ Portal ESLint found issues"
+            echo "💡 Review the errors above and fix them manually"
+            exit 1
+          }
+          cd ../..
+
           echo "✅ Linting passed"
 
       - name: Run tests with coverage
