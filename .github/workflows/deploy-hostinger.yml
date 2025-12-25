@@ -100,17 +100,18 @@ jobs:
         working-directory: rp-workspace
         run: |
           echo "🔍 Running lint checks..."
-          echo "🔧 Formatting code with Prettier..."
 
           # Format API code with Prettier first
+          echo "🔧 Formatting API code with Prettier..."
           cd apps/api
-          if [ -f "node_modules/.bin/prettier" ]; then
-            npx prettier --write "src/**/*.ts" "test/**/*.ts" || echo "⚠️ Prettier formatting completed with warnings"
+          if command -v npx > /dev/null 2>&1 && [ -f "package.json" ]; then
+            npx prettier --write "src/**/*.ts" "test/**/*.ts" 2>&1 || echo "⚠️ Prettier formatting completed with warnings"
           fi
 
           # Run ESLint with --fix to auto-correct issues
+          # API uses legacy .eslintrc.js format, so we need ESLINT_USE_FLAT_CONFIG=false
           echo "🔧 Running ESLint with auto-fix..."
-          npm run lint || {
+          ESLINT_USE_FLAT_CONFIG=false npm run lint 2>&1 || {
             echo "⚠️ ESLint found issues that couldn't be auto-fixed"
             echo "💡 Review the errors above and fix them manually"
             exit 1
@@ -120,13 +121,13 @@ jobs:
           # Format Portal code
           cd apps/portal
           echo "🔧 Formatting Portal code..."
-          if [ -f "node_modules/.bin/prettier" ]; then
-            npx prettier --write "src/**/*.{ts,tsx}" || echo "⚠️ Prettier formatting completed with warnings"
+          if command -v npx > /dev/null 2>&1 && [ -f "package.json" ]; then
+            npx prettier --write "src/**/*.{ts,tsx}" 2>&1 || echo "⚠️ Prettier formatting completed with warnings"
           fi
 
-          # Run Portal lint
+          # Run Portal lint (Portal uses new eslint.config.mjs format)
           echo "🔧 Running Portal ESLint..."
-          npm run lint || {
+          npm run lint 2>&1 || {
             echo "⚠️ Portal ESLint found issues"
             echo "💡 Review the errors above and fix them manually"
             exit 1
