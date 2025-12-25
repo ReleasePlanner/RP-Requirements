@@ -60,13 +60,40 @@ jobs:
       - name: Install dependencies
         working-directory: rp-workspace
         run: |
-          echo "📦 Installing dependencies..."
+          echo "📦 Installing root dependencies..."
           # Try npm ci first, fallback to npm install if lock file is out of sync
-          npm ci || {
-            echo "⚠️ npm ci failed, lock file may be out of sync. Updating lock file..."
+          set +e
+          npm ci
+          CI_EXIT_CODE=$?
+          set -e
+
+          if [ $CI_EXIT_CODE -ne 0 ]; then
+            echo "⚠️ npm ci failed (exit code: $CI_EXIT_CODE), lock file may be out of sync."
+            echo "Running npm install to sync package-lock.json..."
             npm install
-          }
-          echo "✅ Dependencies installed"
+          else
+            echo "✅ Root dependencies installed with npm ci"
+          fi
+
+          # Install API dependencies (ESLint, etc.)
+          echo "📦 Installing API dependencies..."
+          if [ -f "apps/api/package.json" ]; then
+            cd apps/api
+            npm install --legacy-peer-deps || npm install
+            cd ../..
+            echo "✅ API dependencies installed"
+          fi
+
+          # Install Portal dependencies
+          echo "📦 Installing Portal dependencies..."
+          if [ -f "apps/portal/package.json" ]; then
+            cd apps/portal
+            npm install --legacy-peer-deps || npm install
+            cd ../..
+            echo "✅ Portal dependencies installed"
+          fi
+
+          echo "✅ All dependencies installed"
 
       - name: Run linting
         working-directory: rp-workspace
