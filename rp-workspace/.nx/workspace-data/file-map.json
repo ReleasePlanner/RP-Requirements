@@ -26,10 +26,77 @@
   ],
   "fileMap": {
     "projectFileMap": {
+      "shared-lib-shared-lib-test": [
+        {
+          "file": "libs/shared-lib/shared-lib-test/RpWorkspace.SharedLib.SharedLib.Test.csproj",
+          "hash": "7348442173980500609",
+          "deps": [
+            "libs-shared-lib-shared-lib"
+          ]
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/UnitTest1.cs",
+          "hash": "3940737178873532714"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.dgspec.json",
+          "hash": "16244643420733701690"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.g.props",
+          "hash": "7800595771830664415"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.g.targets",
+          "hash": "14012898149728570202"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/obj/project.assets.json",
+          "hash": "12561845686918671027"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/obj/project.nuget.cache",
+          "hash": "15529805488842866559"
+        }
+      ],
+      "Api..net-backup": [
+        {
+          "file": "apps/api/.net-backup/Api.csproj",
+          "hash": "6669727413477110095"
+        },
+        {
+          "file": "apps/api/.net-backup/Api.http",
+          "hash": "2266458341979145889"
+        },
+        {
+          "file": "apps/api/.net-backup/Program.cs",
+          "hash": "8106322627670471339"
+        },
+        {
+          "file": "apps/api/.net-backup/Properties/launchSettings.json",
+          "hash": "16495177757893513673"
+        },
+        {
+          "file": "apps/api/.net-backup/appsettings.Development.json",
+          "hash": "3339958947771738801"
+        },
+        {
+          "file": "apps/api/.net-backup/appsettings.json",
+          "hash": "8794831988107864270"
+        }
+      ],
       "portal": [
+        {
+          "file": "apps/portal/.dockerignore",
+          "hash": "189041282755450607"
+        },
         {
           "file": "apps/portal/.gitignore",
           "hash": "1867017717006394117"
+        },
+        {
+          "file": "apps/portal/Dockerfile",
+          "hash": "15857896951868303781"
         },
         {
           "file": "apps/portal/README.md",
@@ -38,13 +105,6 @@
         {
           "file": "apps/portal/components.json",
           "hash": "5059790963801601477"
-        },
-        {
-          "file": "apps/portal/debug-api.js",
-          "hash": "15313788807032127515",
-          "deps": [
-            "npm:node-fetch"
-          ]
         },
         {
           "file": "apps/portal/eslint.config.mjs",
@@ -170,6 +230,10 @@
           "hash": "810293727847842007"
         },
         {
+          "file": "apps/portal/src/app/portal/monitoring/page.tsx",
+          "hash": "12039881711121547302"
+        },
+        {
           "file": "apps/portal/src/app/portal/page.tsx",
           "hash": "11397054428363104699",
           "deps": [
@@ -185,7 +249,7 @@
         },
         {
           "file": "apps/portal/src/app/portal/requirements/page.tsx",
-          "hash": "8149522443045925972",
+          "hash": "1476985797864229094",
           "deps": [
             "npm:react",
             "npm:sonner"
@@ -197,7 +261,7 @@
         },
         {
           "file": "apps/portal/src/components/layout/sidebar.tsx",
-          "hash": "5170353478161790757",
+          "hash": "7569739612067270521",
           "deps": [
             "npm:next"
           ]
@@ -384,7 +448,7 @@
         },
         {
           "file": "apps/portal/src/features/catalogs/service.ts",
-          "hash": "7342248941354024163"
+          "hash": "9442234103358142729"
         },
         {
           "file": "apps/portal/src/features/catalogs/types.ts",
@@ -532,6 +596,37 @@
           "hash": "5419383897093005784"
         },
         {
+          "file": "apps/portal/src/features/monitoring/components/error-metrics-table.tsx",
+          "hash": "7545137675423098562"
+        },
+        {
+          "file": "apps/portal/src/features/monitoring/components/metrics-cards.tsx",
+          "hash": "15346788427820732130"
+        },
+        {
+          "file": "apps/portal/src/features/monitoring/components/monitoring-dashboard.tsx",
+          "hash": "13757180892318795645",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/portal/src/features/monitoring/components/performance-metrics.tsx",
+          "hash": "16223068555013794993"
+        },
+        {
+          "file": "apps/portal/src/features/monitoring/components/request-metrics-chart.tsx",
+          "hash": "16639934925464006849"
+        },
+        {
+          "file": "apps/portal/src/features/monitoring/components/system-resources.tsx",
+          "hash": "3773102888905823184"
+        },
+        {
+          "file": "apps/portal/src/features/monitoring/service.ts",
+          "hash": "7219901953463913013"
+        },
+        {
           "file": "apps/portal/src/features/portfolio/components/edit-portfolio-dialog.tsx",
           "hash": "249894263531712957",
           "deps": [
@@ -559,11 +654,18 @@
         },
         {
           "file": "apps/portal/src/features/requirements/components/backlog-list.tsx",
-          "hash": "8920274580259950771"
+          "hash": "14188262255932397589"
+        },
+        {
+          "file": "apps/portal/src/features/requirements/components/create-requirement-form.tsx",
+          "hash": "13391620582212521253",
+          "deps": [
+            "npm:sonner"
+          ]
         },
         {
           "file": "apps/portal/src/features/requirements/components/edit-dialog.tsx",
-          "hash": "1056269481441622258",
+          "hash": "18236149473471819718",
           "deps": [
             "npm:react"
           ]
@@ -587,12 +689,16 @@
           "hash": "5280022714338541857"
         },
         {
+          "file": "apps/portal/src/features/requirements/schemas.ts",
+          "hash": "14912459251062184031"
+        },
+        {
           "file": "apps/portal/src/features/requirements/service.ts",
           "hash": "9380080371663994665"
         },
         {
           "file": "apps/portal/src/features/requirements/types.ts",
-          "hash": "15218900121580100726"
+          "hash": "6860208249968963586"
         },
         {
           "file": "apps/portal/src/features/sponsors/components/SponsorDialog.tsx",
@@ -636,32 +742,6 @@
           "hash": "5855035559254869289"
         }
       ],
-      "Api..net-backup": [
-        {
-          "file": "apps/api/.net-backup/Api.csproj",
-          "hash": "6669727413477110095"
-        },
-        {
-          "file": "apps/api/.net-backup/Api.http",
-          "hash": "2266458341979145889"
-        },
-        {
-          "file": "apps/api/.net-backup/Program.cs",
-          "hash": "8106322627670471339"
-        },
-        {
-          "file": "apps/api/.net-backup/Properties/launchSettings.json",
-          "hash": "16495177757893513673"
-        },
-        {
-          "file": "apps/api/.net-backup/appsettings.Development.json",
-          "hash": "3339958947771738801"
-        },
-        {
-          "file": "apps/api/.net-backup/appsettings.json",
-          "hash": "8794831988107864270"
-        }
-      ],
       "libs-shared-lib-shared-lib": [
         {
           "file": "libs/shared-lib/shared-lib/.gitignore",
@@ -680,43 +760,10 @@
           "hash": "14820539453501141318"
         }
       ],
-      "shared-lib-shared-lib-test": [
-        {
-          "file": "libs/shared-lib/shared-lib-test/RpWorkspace.SharedLib.SharedLib.Test.csproj",
-          "hash": "7348442173980500609",
-          "deps": [
-            "libs-shared-lib-shared-lib"
-          ]
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/UnitTest1.cs",
-          "hash": "3940737178873532714"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.dgspec.json",
-          "hash": "16244643420733701690"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.g.props",
-          "hash": "7800595771830664415"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.g.targets",
-          "hash": "14012898149728570202"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/project.assets.json",
-          "hash": "12561845686918671027"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/project.nuget.cache",
-          "hash": "15529805488842866559"
-        }
-      ],
       "api": [
         {
           "file": "apps/api/.dockerignore",
-          "hash": "14922870252614427979"
+          "hash": "15306258142645808558"
         },
         {
           "file": "apps/api/.eslintrc.js",
@@ -732,11 +779,19 @@
         },
         {
           "file": "apps/api/Dockerfile",
-          "hash": "17365367244014914894"
+          "hash": "17077349125732086953"
         },
         {
           "file": "apps/api/docs/ARCHITECTURE.md",
           "hash": "7621531065720401964"
+        },
+        {
+          "file": "apps/api/docs/COMPATIBILITY_REPORT.md",
+          "hash": "7848115952165597741"
+        },
+        {
+          "file": "apps/api/docs/COMPATIBILITY_VERIFICATION.md",
+          "hash": "10694210807195435772"
         },
         {
           "file": "apps/api/docs/IMPLEMENTATION_GUIDE.md",
@@ -745,6 +800,14 @@
         {
           "file": "apps/api/docs/MIGRATION_SUMMARY.md",
           "hash": "1629289250426883525"
+        },
+        {
+          "file": "apps/api/docs/NESTJS_RULES_COMPATIBILITY.md",
+          "hash": "15029660540338044495"
+        },
+        {
+          "file": "apps/api/docs/NESTJS_RULES_COMPATIBILITY_SUMMARY.md",
+          "hash": "8117108786615773254"
         },
         {
           "file": "apps/api/docs/README.md",
@@ -771,20 +834,8 @@
           "hash": "5516941805098813271"
         },
         {
-          "file": "apps/api/env-config.txt",
-          "hash": "10997227537802790504"
-        },
-        {
           "file": "apps/api/jest.config.js",
           "hash": "3694476937588193177"
-        },
-        {
-          "file": "apps/api/migration_log.txt",
-          "hash": "18511207924554972"
-        },
-        {
-          "file": "apps/api/migration_log_2.txt",
-          "hash": "12400049497348131848"
         },
         {
           "file": "apps/api/nest-cli.json",
@@ -832,7 +883,7 @@
         },
         {
           "file": "apps/api/src/app.module.ts",
-          "hash": "11649209454803515478",
+          "hash": "4564165682330753882",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config",
@@ -857,7 +908,7 @@
         },
         {
           "file": "apps/api/src/application/auth/services/auth.service.spec.ts",
-          "hash": "14539583196889672316",
+          "hash": "17646110036593893590",
           "deps": [
             "npm:@nestjs/config",
             "npm:@nestjs/common"
@@ -865,7 +916,7 @@
         },
         {
           "file": "apps/api/src/application/auth/services/auth.service.ts",
-          "hash": "12130716928273465253",
+          "hash": "4590660449289042400",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config"
@@ -913,7 +964,7 @@
         },
         {
           "file": "apps/api/src/application/catalogs/services/catalogs.service.spec.ts",
-          "hash": "13849110553352393464"
+          "hash": "10811058591623114217"
         },
         {
           "file": "apps/api/src/application/catalogs/services/catalogs.service.ts",
@@ -969,7 +1020,7 @@
         },
         {
           "file": "apps/api/src/application/initiatives/services/initiatives.service.ts",
-          "hash": "8250027224930349935",
+          "hash": "2402805168616642616",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -1004,7 +1055,7 @@
         },
         {
           "file": "apps/api/src/application/portfolios/services/portfolios.service.spec.ts",
-          "hash": "9514882074964334018"
+          "hash": "6859486220246226742"
         },
         {
           "file": "apps/api/src/application/portfolios/services/portfolios.service.ts",
@@ -1058,7 +1109,7 @@
         },
         {
           "file": "apps/api/src/application/requirements/services/requirements.service.ts",
-          "hash": "13270755422907947774",
+          "hash": "9053324252492011786",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -1069,7 +1120,7 @@
         },
         {
           "file": "apps/api/src/application/sponsors/dto/update-sponsor.dto.ts",
-          "hash": "2156760788707416055"
+          "hash": "4607633197878605987"
         },
         {
           "file": "apps/api/src/application/sponsors/interfaces/repositories/sponsor.repository.interface.ts",
@@ -1081,14 +1132,14 @@
         },
         {
           "file": "apps/api/src/application/sponsors/services/sponsors.service.ts",
-          "hash": "5943623409210864868",
+          "hash": "12002571316557346712",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/application/widgets/dto/create-widget.dto.ts",
-          "hash": "7881070810945878460"
+          "hash": "4090535499127024072"
         },
         {
           "file": "apps/api/src/application/widgets/dto/update-widget.dto.ts",
@@ -1110,7 +1161,7 @@
         },
         {
           "file": "apps/api/src/application/widgets/widgets.service.ts",
-          "hash": "12288754199072861584",
+          "hash": "1645091590950303798",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -1185,15 +1236,7 @@
         },
         {
           "file": "apps/api/src/domain/entities/widget.entity.ts",
-          "hash": "6273575355948568290"
-        },
-        {
-          "file": "apps/api/src/infrastructure/auth/guards/jwt-auth.guard.spec.ts",
-          "hash": "6027205086456471494"
-        },
-        {
-          "file": "apps/api/src/infrastructure/auth/guards/jwt-auth.guard.ts",
-          "hash": "2505826572569010244"
+          "hash": "7427017304644067859"
         },
         {
           "file": "apps/api/src/infrastructure/auth/strategies/jwt.strategy.spec.ts",
@@ -1205,7 +1248,7 @@
         },
         {
           "file": "apps/api/src/infrastructure/auth/strategies/jwt.strategy.ts",
-          "hash": "4952012026788789433",
+          "hash": "3248115103199417593",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config"
@@ -1227,7 +1270,7 @@
         },
         {
           "file": "apps/api/src/infrastructure/database/database.config.ts",
-          "hash": "13344645151792448410",
+          "hash": "17950517505625121517",
           "deps": [
             "npm:@nestjs/config"
           ]
@@ -1246,7 +1289,7 @@
         },
         {
           "file": "apps/api/src/infrastructure/database/repositories/catalogs.repository.spec.ts",
-          "hash": "10079899022202322590"
+          "hash": "7325062118075690188"
         },
         {
           "file": "apps/api/src/infrastructure/database/repositories/catalogs.repository.ts",
@@ -1261,7 +1304,7 @@
         },
         {
           "file": "apps/api/src/infrastructure/database/repositories/epics.repository.ts",
-          "hash": "6941511514791514729",
+          "hash": "10702182416328376735",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -1272,7 +1315,7 @@
         },
         {
           "file": "apps/api/src/infrastructure/database/repositories/initiatives.repository.ts",
-          "hash": "9265951944322861959",
+          "hash": "14492886967237700657",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -1288,7 +1331,7 @@
         },
         {
           "file": "apps/api/src/infrastructure/repositories/portfolio.repository.spec.ts",
-          "hash": "9371124899603620762"
+          "hash": "11851561592310529259"
         },
         {
           "file": "apps/api/src/infrastructure/repositories/portfolio.repository.ts",
@@ -1310,7 +1353,7 @@
         },
         {
           "file": "apps/api/src/infrastructure/repositories/requirement.repository.ts",
-          "hash": "9583057196656992363",
+          "hash": "6337747020739977841",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -1328,7 +1371,7 @@
         },
         {
           "file": "apps/api/src/main.ts",
-          "hash": "4055396231428970308",
+          "hash": "6612037181416101950",
           "deps": [
             "npm:tsconfig-paths",
             "npm:@nestjs/core",
@@ -1343,14 +1386,14 @@
         },
         {
           "file": "apps/api/src/presentation/auth/auth.controller.ts",
-          "hash": "2051771969339238209",
+          "hash": "13217872828261695828",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/api/src/presentation/auth/auth.module.ts",
-          "hash": "4196976528792061874",
+          "hash": "8672971975350970787",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config",
@@ -1363,7 +1406,7 @@
         },
         {
           "file": "apps/api/src/presentation/catalogs/catalogs.controller.ts",
-          "hash": "17850885042619879518",
+          "hash": "18004492681693872239",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -1381,7 +1424,7 @@
         },
         {
           "file": "apps/api/src/presentation/epics/epics.controller.ts",
-          "hash": "1849575932764625803",
+          "hash": "4725052388716000230",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -1430,12 +1473,27 @@
           ]
         },
         {
+          "file": "apps/api/src/presentation/monitoring/monitoring.controller.ts",
+          "hash": "3535763890030668224",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/presentation/monitoring/monitoring.module.ts",
+          "hash": "7288562381854745406",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core"
+          ]
+        },
+        {
           "file": "apps/api/src/presentation/portfolios/portfolios.controller.spec.ts",
-          "hash": "10362614123972309755"
+          "hash": "8128413160612973926"
         },
         {
           "file": "apps/api/src/presentation/portfolios/portfolios.controller.ts",
-          "hash": "11682187139584997041",
+          "hash": "11341428742213800750",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -1460,7 +1518,7 @@
         },
         {
           "file": "apps/api/src/presentation/requirements/requirements.controller.ts",
-          "hash": "3265115749425546780",
+          "hash": "11846703684648841498",
           "deps": [
             "npm:@nestjs/common"
           ]
@@ -1491,16 +1549,23 @@
           ]
         },
         {
+          "file": "apps/api/src/shared/common.module.ts",
+          "hash": "13788263085259275027",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
           "file": "apps/api/src/shared/config/config.validation.spec.ts",
           "hash": "15685580044872527451"
         },
         {
           "file": "apps/api/src/shared/config/config.validation.ts",
-          "hash": "10359424058284370356"
+          "hash": "15963085464042652484"
         },
         {
           "file": "apps/api/src/shared/config/core-config.module.ts",
-          "hash": "2813898665082805459",
+          "hash": "14045988356523554507",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config"
@@ -1545,7 +1610,7 @@
         },
         {
           "file": "apps/api/src/shared/exceptions/entity-not-found.exception.spec.ts",
-          "hash": "4580434182313217740"
+          "hash": "15808076722842057672"
         },
         {
           "file": "apps/api/src/shared/exceptions/entity-not-found.exception.ts",
@@ -1563,10 +1628,27 @@
         },
         {
           "file": "apps/api/src/shared/filters/http-exception.filter.ts",
-          "hash": "12538427731577016166",
+          "hash": "17223467200021050797",
           "deps": [
             "npm:@nestjs/common",
             "npm:express"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/guards/jwt-auth.guard.spec.ts",
+          "hash": "5416314270882126022",
+          "deps": [
+            "npm:@nestjs/core",
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/guards/jwt-auth.guard.ts",
+          "hash": "2457116827759612356",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core",
+            "npm:rxjs"
           ]
         },
         {
@@ -1580,6 +1662,14 @@
         {
           "file": "apps/api/src/shared/interceptors/logging.interceptor.ts",
           "hash": "11725733584890185394",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/interceptors/metrics.interceptor.ts",
+          "hash": "14198279263765460127",
           "deps": [
             "npm:@nestjs/common",
             "npm:rxjs"
@@ -1618,6 +1708,13 @@
           ]
         },
         {
+          "file": "apps/api/src/shared/notifications/notifications.module.ts",
+          "hash": "9816225396788865762",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
           "file": "apps/api/src/shared/pipes/uuid-validation.pipe.spec.ts",
           "hash": "7909385384227351844",
           "deps": [
@@ -1630,6 +1727,44 @@
           "deps": [
             "npm:@nestjs/common"
           ]
+        },
+        {
+          "file": "apps/api/src/shared/services/index.ts",
+          "hash": "5967667833119944529"
+        },
+        {
+          "file": "apps/api/src/shared/services/metrics.service.ts",
+          "hash": "15348376082345458477",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/services/performance-monitor.service.ts",
+          "hash": "4745298631226657127",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/types/exception.types.ts",
+          "hash": "3439732446154764637"
+        },
+        {
+          "file": "apps/api/src/shared/types/index.ts",
+          "hash": "2631980306996779214"
+        },
+        {
+          "file": "apps/api/src/shared/types/repository.types.ts",
+          "hash": "2845092104594865819"
+        },
+        {
+          "file": "apps/api/src/shared/types/widget.types.ts",
+          "hash": "13831958740772114860"
+        },
+        {
+          "file": "apps/api/src/shared/utils/index.ts",
+          "hash": "14469190514684316477"
         },
         {
           "file": "apps/api/test/setup.ts",
@@ -1651,16 +1786,72 @@
         "hash": "11380184037138673491"
       },
       {
+        "file": ".cursor/rules/nestjs-rules.mdc",
+        "hash": "7081082577025790803"
+      },
+      {
+        "file": ".cursor/rules/nextjs-rules.mdc",
+        "hash": "14168781670438874677"
+      },
+      {
+        "file": ".dockerignore",
+        "hash": "15078179117343470204"
+      },
+      {
         "file": ".editorconfig",
         "hash": "5443105041930014821"
       },
       {
-        "file": ".gitignore",
-        "hash": "18435103667633526488"
+        "file": ".github/ISSUE_TEMPLATE/release.md",
+        "hash": "1730678135600790084"
       },
       {
-        "file": ".vscode/extensions.json",
-        "hash": "3833545590435012078"
+        "file": ".github/dependabot.yml",
+        "hash": "17294533587955821167"
+      },
+      {
+        "file": ".github/workflows/cd-dev.yml",
+        "hash": "14014918389002583205"
+      },
+      {
+        "file": ".github/workflows/cd-production.yml",
+        "hash": "16958072647586128266"
+      },
+      {
+        "file": ".github/workflows/ci.yml",
+        "hash": "13553925958118218488"
+      },
+      {
+        "file": ".github/workflows/dependabot.yml",
+        "hash": "11357885392653408858"
+      },
+      {
+        "file": ".github/workflows/deploy-hostinger.yml",
+        "hash": "8381430554322693944"
+      },
+      {
+        "file": ".github/workflows/deploy.yml",
+        "hash": "10393221542912527844"
+      },
+      {
+        "file": ".github/workflows/docker-build.yml",
+        "hash": "8122340828037614853"
+      },
+      {
+        "file": ".github/workflows/integrity-check.yml",
+        "hash": "15606626247455969604"
+      },
+      {
+        "file": ".github/workflows/release.yml",
+        "hash": "2609658019903224847"
+      },
+      {
+        "file": ".github/workflows/test-ssh-connection.yml",
+        "hash": "17623986467475944376"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "1954926228930955744"
       },
       {
         "file": "Directory.Build.props",
@@ -1671,52 +1862,136 @@
         "hash": "9005165865624102645"
       },
       {
-        "file": "api-debug.js",
-        "hash": "5306502369639909078"
+        "file": "Makefile",
+        "hash": "11251637710775237065"
       },
       {
-        "file": "api_start_output.txt",
-        "hash": "13523597017880029509"
+        "file": "deploy-on-vps/CHECKLIST_VERIFICACION.md",
+        "hash": "3650370405518647811"
       },
       {
-        "file": "build_error.txt",
-        "hash": "812576946557659870"
+        "file": "deploy-on-vps/COMANDOS_A_EJECUTAR.txt",
+        "hash": "4913348233230617429"
       },
       {
-        "file": "build_error_2.txt",
-        "hash": "8994936217643059633"
+        "file": "deploy-on-vps/COMANDO_DEPLOYMENT.txt",
+        "hash": "16054659516067913361"
       },
       {
-        "file": "build_error_3.txt",
-        "hash": "7094056787308713055"
+        "file": "deploy-on-vps/COMANDO_FINAL.txt",
+        "hash": "11069252689434853389"
       },
       {
-        "file": "build_log.txt",
-        "hash": "17425838144070068510"
+        "file": "deploy-on-vps/CONFIGURAR_VARIABLES.md",
+        "hash": "14022375467408119263"
       },
       {
-        "file": "build_log_2.txt",
-        "hash": "8375154941663005539"
+        "file": "deploy-on-vps/DEPLOYMENT_MANUAL_PASOS.txt",
+        "hash": "16448484885741539426"
       },
       {
-        "file": "build_log_3.txt",
-        "hash": "11625453338366229896"
+        "file": "deploy-on-vps/DEPLOYMENT_MULTI_MODULE.md",
+        "hash": "14629931499130535810"
       },
       {
-        "file": "build_log_4.txt",
-        "hash": "8166568850177298333"
+        "file": "deploy-on-vps/DEPLOY_NOW.md",
+        "hash": "13123168316003789291"
       },
       {
-        "file": "check-rgl.js",
-        "hash": "12549065214744575864"
+        "file": "deploy-on-vps/EJECUTAR_AHORA.sh",
+        "hash": "1773665049380079820"
       },
       {
-        "file": "debug-epics.js",
-        "hash": "4849366912004125429"
+        "file": "deploy-on-vps/EJECUTAR_AUTOMATICO.sh",
+        "hash": "17392610655903089384"
       },
       {
-        "file": "debug_epics_log.txt",
-        "hash": "9798145376675461655"
+        "file": "deploy-on-vps/EJECUTAR_CON_PASSWORD.sh",
+        "hash": "8823223655739442428"
+      },
+      {
+        "file": "deploy-on-vps/EJECUTAR_DEPLOYMENT.sh",
+        "hash": "16154057646247460956"
+      },
+      {
+        "file": "deploy-on-vps/EJECUTAR_DEPLOYMENT_COMPLETO.sh",
+        "hash": "8853450340557420009"
+      },
+      {
+        "file": "deploy-on-vps/EJECUTAR_DEPLOYMENT_FINAL.txt",
+        "hash": "17600632064973043886"
+      },
+      {
+        "file": "deploy-on-vps/EJECUTAR_EN_VPS.txt",
+        "hash": "8781316541115087115"
+      },
+      {
+        "file": "deploy-on-vps/EJECUTAR_TEST_SSH.md",
+        "hash": "16514939275177419047"
+      },
+      {
+        "file": "deploy-on-vps/GITHUB_HOSTINGER_INTEGRATION.md",
+        "hash": "9221692646133844874"
+      },
+      {
+        "file": "deploy-on-vps/INICIO_DEPLOYMENT.md",
+        "hash": "9299881820941339486"
+      },
+      {
+        "file": "deploy-on-vps/INSTALAR_SSHPASS.md",
+        "hash": "8531534095477428906"
+      },
+      {
+        "file": "deploy-on-vps/INSTRUCCIONES_DEPLOYMENT.md",
+        "hash": "10956722184453622429"
+      },
+      {
+        "file": "deploy-on-vps/INSTRUCCIONES_FINALES.md",
+        "hash": "11114812563706623933"
+      },
+      {
+        "file": "deploy-on-vps/PLAN_DEPLOYMENT_REQUIREMENTS.md",
+        "hash": "11791048885729114516"
+      },
+      {
+        "file": "deploy-on-vps/PLAN_DEPLOYMENT_VPS.md",
+        "hash": "18420321286124841292"
+      },
+      {
+        "file": "deploy-on-vps/PRIMER_DEPLOYMENT.md",
+        "hash": "1033463021428497780"
+      },
+      {
+        "file": "deploy-on-vps/QUICK_START_VPS.md",
+        "hash": "18069766629984339469"
+      },
+      {
+        "file": "deploy-on-vps/RESUMEN_PLAN_VPS.md",
+        "hash": "3481248398692896326"
+      },
+      {
+        "file": "deploy-on-vps/RESUMEN_VERIFICACION.md",
+        "hash": "15321908183099642227"
+      },
+      {
+        "file": "deploy-on-vps/SSH_SETUP.md",
+        "hash": "4598459823279360757"
+      },
+      {
+        "file": "deploy-on-vps/TROUBLESHOOTING_GITHUB_ACTIONS.md",
+        "hash": "12416897524641767485"
+      },
+      {
+        "file": "deploy-on-vps/TROUBLESHOOTING_SSH.md",
+        "hash": "8988604832382434292"
+      },
+      {
+        "file": "deploy-on-vps/VERIFICAR_HOSTINGER.md",
+        "hash": "6273561259092633345"
+      },
+      {
+        "file": "deploy-on-vps/VERIFICAR_REPOSITORIO.md",
+        "hash": "14324335879979156500"
       },
       {
         "file": "design/database-migration.sql",
@@ -1735,12 +2010,84 @@
         "hash": "1104277424757188960"
       },
       {
+        "file": "docker-compose.dev.yml",
+        "hash": "18398053521492410709"
+      },
+      {
+        "file": "docker-compose.override.yml.example",
+        "hash": "2852045446860369438"
+      },
+      {
+        "file": "docker-compose.prod.yml",
+        "hash": "17736262139169680738"
+      },
+      {
+        "file": "docker-compose.yml",
+        "hash": "16478612476775941995"
+      },
+      {
+        "file": "docs/CHANGELOG.md",
+        "hash": "5869598997492230660"
+      },
+      {
+        "file": "docs/CI_CD.md",
+        "hash": "2881942003723983019"
+      },
+      {
+        "file": "docs/DEPLOYMENT.md",
+        "hash": "17838269653454100839"
+      },
+      {
+        "file": "docs/INTEGRITY_CHECKLIST.md",
+        "hash": "4822690225449347433"
+      },
+      {
+        "file": "docs/INTEGRITY_CHECKS.md",
+        "hash": "1561420550853212940"
+      },
+      {
+        "file": "docs/INTEGRITY_REPORT.md",
+        "hash": "9501198084788860400"
+      },
+      {
+        "file": "docs/MONITORING.md",
+        "hash": "15658323239605695941"
+      },
+      {
+        "file": "docs/QUICK_START_DOCKER.md",
+        "hash": "11147565953061787108"
+      },
+      {
         "file": "docs/README-DATABASE.md",
         "hash": "17424415464664098102"
       },
       {
         "file": "docs/README.md",
-        "hash": "9236749420284343677"
+        "hash": "3158610969927688587"
+      },
+      {
+        "file": "docs/README_CI_CD.md",
+        "hash": "7420106885948828323"
+      },
+      {
+        "file": "docs/README_DEPLOYMENT.md",
+        "hash": "1322282767599395782"
+      },
+      {
+        "file": "docs/README_DOCKER.md",
+        "hash": "11673175946854338773"
+      },
+      {
+        "file": "docs/TROUBLESHOOTING_SSH.md",
+        "hash": "8988604832382434292"
+      },
+      {
+        "file": "docs/VERIFICACION_ESTRUCTURA.md",
+        "hash": "853310348110563187"
+      },
+      {
+        "file": "docs/VERIFICAR_HOSTINGER.md",
+        "hash": "6273561259092633345"
       },
       {
         "file": "docs/requirements-fields.md",
@@ -1767,12 +2114,44 @@
         "hash": "16835660517038180918"
       },
       {
-        "file": "seed_output.txt",
-        "hash": "14194955575558051978"
+        "file": "scripts/build.sh",
+        "hash": "6178325586602611719"
       },
       {
-        "file": "seed_output_2.txt",
-        "hash": "109290848512298836"
+        "file": "scripts/deploy-on-vps.sh",
+        "hash": "4530979998717104003"
+      },
+      {
+        "file": "scripts/deploy-requirements-vps.sh",
+        "hash": "10677578088263221757"
+      },
+      {
+        "file": "scripts/deploy-vps.sh",
+        "hash": "16169592314802848679"
+      },
+      {
+        "file": "scripts/docker-setup.sh",
+        "hash": "17164447653207338688"
+      },
+      {
+        "file": "scripts/generate-changelog.js",
+        "hash": "12191962759981028561"
+      },
+      {
+        "file": "scripts/quick-start-vps.sh",
+        "hash": "1951230902952123057"
+      },
+      {
+        "file": "scripts/setup-vps.sh",
+        "hash": "16366368075958487665"
+      },
+      {
+        "file": "scripts/verify-integrity.sh",
+        "hash": "6491534588807052501"
+      },
+      {
+        "file": "scripts/version-bump.js",
+        "hash": "8536076016928308496"
       },
       {
         "file": "static/environment.js",
@@ -1799,48 +2178,176 @@
         "hash": "16803620677878581351"
       },
       {
-        "file": "test-api.js",
+        "file": "tests/README.md",
+        "hash": "11447544850162850198"
+      },
+      {
+        "file": "tests/api-debug.js",
+        "hash": "5306502369639909078"
+      },
+      {
+        "file": "tests/check-rgl.js",
+        "hash": "12549065214744575864"
+      },
+      {
+        "file": "tests/debug-epics.js",
+        "hash": "4849366912004125429"
+      },
+      {
+        "file": "tests/portal-debug-api.js",
+        "hash": "15313788807032127515"
+      },
+      {
+        "file": "tests/test-api.js",
         "hash": "2021116272610310848"
       },
       {
-        "file": "test-requirements.js",
+        "file": "tests/test-requirements.js",
         "hash": "18416270827802545822"
       },
       {
-        "file": "test_output.txt",
-        "hash": "12370233293942717319"
+        "file": "tests/verify-full-flow.js",
+        "hash": "10882738622842315764"
       },
       {
-        "file": "test_output_2.txt",
-        "hash": "3370506782410582133"
+        "file": "tests/verify-rules.js",
+        "hash": "12582076286274820556"
       },
       {
-        "file": "test_output_3.txt",
-        "hash": "15743703208192216245"
+        "file": "tests/verify-update.js",
+        "hash": "7346191291626498709"
       },
       {
-        "file": "test_output_final.txt",
-        "hash": "16652304366587979963"
+        "file": "tmp/apps/api/serve/tsconfig.generated.027b5bb7-5037-467e-a838-a75d7babf7f0.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.19598f11-4947-4ac4-b84a-f8f301806fec.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.208494d0-f12d-4620-bf61-9eec621ed7d9.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.22fc7050-375e-4a0e-a930-90a7dd50c7b3.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.27e2d87f-58e5-4d2b-a88b-470b832730f7.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.374f47d9-3fe2-418b-8675-b8cd60f14f12.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.42741328-438e-4fd0-9f73-2c0d60bcd68d.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.42993c35-f0df-469f-92e8-08fa865e4953.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.44947768-a14d-43ae-944c-4a9519d3793a.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.48e478c2-b5af-4a48-a998-41b7bb5e9797.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.4be842f1-c803-45d9-b337-1d68be2b48ce.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.51e18a5c-3281-486c-9bd9-e9d5c72bd782.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.5d8a8014-b22d-4a1e-9177-6f7a26a01fae.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.6326bfa4-8419-4b40-8478-99fc3af15080.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.6426009e-5e44-4191-ab76-87343c0b4f6f.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.648d09bd-be47-40ff-8310-8dfebc48fe9c.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.680ce1c2-fc41-4abc-beba-ccd94d2bc706.json",
+        "hash": "16109394665231334489"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.7330aead-d7f5-4066-a0b2-20ccbbb8801c.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.7f2fae09-ac3c-4ade-9f0f-f10bb91719ce.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.7f671f69-e5bf-4dcb-84ea-ecaaa9f4be25.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.7fe684eb-18dc-460f-be69-7f6c66a1289c.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.99aee710-79d6-4f39-8dc1-505cca7e9db0.json",
+        "hash": "16109394665231334489"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.9ca4d1d9-d1d8-4a4d-a20d-d83bf302f196.json",
+        "hash": "16109394665231334489"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.9cf785f2-264b-4a7d-b540-b8d9725be660.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.9ea025fd-d10c-4a39-b485-697ac53eae74.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.a1c1e1a5-ff22-4fef-845e-abd5a156139b.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.bbe9f44b-c39b-4148-b397-42bed1626134.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.c6871e33-79dc-4b6c-81a5-e98cd3a4ce29.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.c96459da-1c70-41da-b865-6e6e6800c384.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.d24ffa5c-c918-4ef9-b02e-9c26e88ba3fc.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.dc7ff877-c503-45b4-b0c8-5dbd6c3cd17f.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.dfa640b5-7c61-4b3e-b613-ff6653185025.json",
+        "hash": "9089623116635460020"
       },
       {
         "file": "tsconfig.base.json",
         "hash": "11302388006518204609"
-      },
-      {
-        "file": "verify-full-flow.js",
-        "hash": "10882738622842315764"
-      },
-      {
-        "file": "verify-rules.js",
-        "hash": "12582076286274820556"
-      },
-      {
-        "file": "verify-update.js",
-        "hash": "7346191291626498709"
-      },
-      {
-        "file": "verify_log.txt",
-        "hash": "6341232287689827431"
       }
     ]
   },

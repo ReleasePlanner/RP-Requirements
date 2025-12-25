@@ -12372,11 +12372,6 @@
     "portal": [
       {
         "source": "portal",
-        "target": "npm:node-fetch",
-        "type": "static"
-      },
-      {
-        "source": "portal",
         "target": "npm:eslint",
         "type": "static"
       },
@@ -28517,5 +28512,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1766671770917
+  "computedAt": 1766673615330
 }

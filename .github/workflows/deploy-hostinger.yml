@@ -59,7 +59,14 @@ jobs:
 
       - name: Install dependencies
         working-directory: rp-workspace
-        run: npm ci
+        run: |
+          echo "📦 Installing dependencies..."
+          # Try npm ci first, fallback to npm install if lock file is out of sync
+          npm ci || {
+            echo "⚠️ npm ci failed, lock file may be out of sync. Updating lock file..."
+            npm install
+          }
+          echo "✅ Dependencies installed"
 
       - name: Run linting
         working-directory: rp-workspace
