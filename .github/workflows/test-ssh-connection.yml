@@ -1,0 +1,104 @@
+name: Test SSH Connection
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-ssh:
+    name: Test SSH Connection to VPS
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install SSH tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openssh-client sshpass || true
+
+      - name: Debug Secrets
+        run: |
+          echo "🔍 Checking secrets..."
+          echo "VPS_HOST configured: ${{ secrets.VPS_HOST != '' }}"
+          echo "VPS_USER configured: ${{ secrets.VPS_USER != '' }}"
+          echo "VPS_SSH_KEY configured: ${{ secrets.VPS_SSH_KEY != '' }}"
+          echo "VPS_SSH_PASSWORD configured: ${{ secrets.VPS_SSH_PASSWORD != '' }}"
+          
+          if [ -z "${{ secrets.VPS_HOST }}" ]; then
+            echo "❌ VPS_HOST secret is not configured"
+            exit 1
+          fi
+          
+          if [ -z "${{ secrets.VPS_USER }}" ]; then
+            echo "⚠️ VPS_USER not configured, will use 'root'"
+          fi
+
+      - name: Test SSH with Key
+        if: secrets.VPS_SSH_KEY != ''
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
+
+      - name: Test SSH Connection
+        run: |
+          VPS_HOST="${{ secrets.VPS_HOST }}"
+          VPS_USER="${{ secrets.VPS_USER || 'root' }}"
+          
+          echo "🔐 Testing SSH connection to $VPS_USER@$VPS_HOST..."
+          
+          if [ -n "${{ secrets.VPS_SSH_KEY }}" ]; then
+            echo "Using SSH key authentication..."
+            ssh -o StrictHostKeyChecking=no \
+                -o UserKnownHostsFile=/dev/null \
+                -o ConnectTimeout=10 \
+                -v \
+                $VPS_USER@$VPS_HOST \
+                "echo '✅ SSH connection successful!' && uname -a && docker --version 2>/dev/null || echo '⚠️ Docker not installed'"
+          elif [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
+            echo "Using SSH password authentication..."
+            sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' \
+              ssh -o StrictHostKeyChecking=no \
+                  -o UserKnownHostsFile=/dev/null \
+                  -o ConnectTimeout=10 \
+                  -v \
+                  $VPS_USER@$VPS_HOST \
+                  "echo '✅ SSH connection successful!' && uname -a && docker --version 2>/dev/null || echo '⚠️ Docker not installed'"
+          else
+            echo "❌ No SSH credentials provided"
+            echo "Please configure either VPS_SSH_KEY or VPS_SSH_PASSWORD in GitHub Secrets"
+            exit 1
+          fi
+
+      - name: Test Docker Installation
+        run: |
+          VPS_HOST="${{ secrets.VPS_HOST }}"
+          VPS_USER="${{ secrets.VPS_USER || 'root' }}"
+          
+          echo "🐳 Testing Docker installation..."
+          
+          if [ -n "${{ secrets.VPS_SSH_KEY }}" ]; then
+            ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+              $VPS_USER@$VPS_HOST \
+              "docker --version && docker-compose --version || echo '⚠️ Docker Compose not installed'"
+          elif [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
+            sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' \
+              ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+              $VPS_USER@$VPS_HOST \
+              "docker --version && docker-compose --version || echo '⚠️ Docker Compose not installed'"
+          fi
+
+      - name: Test Directory Permissions
+        run: |
+          VPS_HOST="${{ secrets.VPS_HOST }}"
+          VPS_USER="${{ secrets.VPS_USER || 'root' }}"
+          
+          echo "📁 Testing directory permissions..."
+          
+          if [ -n "${{ secrets.VPS_SSH_KEY }}" ]; then
+            ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+              $VPS_USER@$VPS_HOST \
+              "mkdir -p /opt/modules && ls -la /opt/modules && echo '✅ Directory accessible'"
+          elif [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
+            sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' \
+              ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+              $VPS_USER@$VPS_HOST \
+              "mkdir -p /opt/modules && ls -la /opt/modules && echo '✅ Directory accessible'"
+          fi
+

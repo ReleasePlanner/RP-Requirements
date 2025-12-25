@@ -720,9 +720,9 @@ Para soporte o preguntas:
 ### CI/CD
 
 - [GitHub Actions](https://github.com/ReleasePlanner/RP-Requirements/actions)
-- [CI Workflow](.github/workflows/ci.yml) (si existe en la raíz del repositorio)
-- [Deploy to Hostinger VPS](.github/workflows/deploy-hostinger.yml) 🆕 (si existe en la raíz del repositorio)
-- [Test SSH Connection](.github/workflows/test-ssh-connection.yml) 🆕 (si existe en la raíz del repositorio)
+- [Deploy to Hostinger VPS](.github/workflows/deploy-hostinger.yml) 🆕 - Deployment automático al VPS
+- [Test SSH Connection](.github/workflows/test-ssh-connection.yml) 🆕 - Probar conexión SSH
+- [Workflows README](.github/workflows/README.md) - Documentación de workflows
 
 ---
 
