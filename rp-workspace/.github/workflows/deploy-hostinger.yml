@@ -259,6 +259,17 @@ jobs:
             exit 1
           fi
 
+          # Determine workspace directory (handle nested structure)
+          WORKSPACE_DIR="."
+          if [ -d "rp-workspace" ]; then
+            echo "📁 Detected nested structure, using rp-workspace directory"
+            WORKSPACE_DIR="rp-workspace"
+          fi
+
+          # Change to workspace directory
+          cd $WORKSPACE_DIR
+          echo "📂 Working directory: $(pwd)"
+
           # Stop existing containers
           echo "🛑 Stopping existing containers..."
           docker-compose down || true
