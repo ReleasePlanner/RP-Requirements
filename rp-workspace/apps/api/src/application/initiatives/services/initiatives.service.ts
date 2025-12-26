@@ -6,7 +6,7 @@ import { Initiative } from '@domain/entities/initiative.entity';
 
 /**
  * Initiatives Service
- * 
+ *
  * Handles business logic for initiative management including CRUD operations
  */
 @Injectable()
@@ -14,11 +14,11 @@ export class InitiativesService {
   constructor(
     @Inject('IInitiativesRepository')
     private readonly initiativesRepository: IInitiativesRepository,
-  ) { }
+  ) {}
 
   /**
    * Retrieves all initiatives with optional filtering by portfolio
-   * 
+   *
    * @param options - Query options including portfolio filter
    * @returns List of initiatives
    */
@@ -28,7 +28,7 @@ export class InitiativesService {
 
   /**
    * Retrieves an initiative by ID
-   * 
+   *
    * @param id - Unique identifier of the initiative
    * @returns Initiative entity
    * @throws NotFoundException if initiative not found
@@ -43,7 +43,7 @@ export class InitiativesService {
 
   /**
    * Creates a new initiative
-   * 
+   *
    * @param createInitiativeDto - Data for creating the initiative
    * @returns Created initiative entity
    */
@@ -55,7 +55,7 @@ export class InitiativesService {
 
   /**
    * Updates an existing initiative
-   * 
+   *
    * @param id - Unique identifier of the initiative to update
    * @param updateInitiativeDto - Data for updating the initiative
    * @returns Updated initiative entity
@@ -65,13 +65,16 @@ export class InitiativesService {
     const initiative = await this.findOne(id);
 
     // Check if trying to set status to INACTIVE
-    const status = (updateInitiativeDto as Partial<Initiative>).status_text || 
-                   (updateInitiativeDto as Partial<Initiative>).status;
+    const status =
+      (updateInitiativeDto as Partial<Initiative>).status_text ||
+      (updateInitiativeDto as Partial<Initiative>).status;
 
     if (status === 'INACTIVE') {
-      const hasActiveEpics = initiative.epics?.some(e => e.status_text === 'ACTIVE');
+      const hasActiveEpics = initiative.epics?.some((e) => e.status_text === 'ACTIVE');
       if (hasActiveEpics) {
-        throw new BadRequestException('Cannot set initiative to INACTIVE because it has ACTIVE epics.');
+        throw new BadRequestException(
+          'Cannot set initiative to INACTIVE because it has ACTIVE epics.',
+        );
       }
     }
 
@@ -80,7 +83,7 @@ export class InitiativesService {
 
   async remove(id: string): Promise<void> {
     const initiative = await this.findOne(id);
-    const hasActiveEpics = initiative.epics?.some(e => e.status_text === 'ACTIVE');
+    const hasActiveEpics = initiative.epics?.some((e) => e.status_text === 'ACTIVE');
 
     if (hasActiveEpics) {
       throw new Error('Cannot delete initiative with ACTIVE epics.');

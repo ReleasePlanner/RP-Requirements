@@ -4,7 +4,6 @@ import { Sponsor } from '@domain/entities/sponsor.entity';
 import { SponsorsController } from './sponsors.controller';
 import { SponsorsService } from '@application/sponsors/services/sponsors.service';
 import { SponsorRepository } from '@infrastructure/repositories/sponsor.repository';
-import { ISponsorRepository } from '@application/interfaces/repositories/sponsor.repository.interface';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Sponsor])],
@@ -18,4 +17,4 @@ import { ISponsorRepository } from '@application/interfaces/repositories/sponsor
   ],
   exports: [SponsorsService],
 })
-export class SponsorsModule { }
+export class SponsorsModule {}

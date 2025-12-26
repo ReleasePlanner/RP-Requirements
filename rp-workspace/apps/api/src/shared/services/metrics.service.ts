@@ -28,12 +28,12 @@ export interface PerformanceMetrics {
 @Injectable()
 export class MetricsService {
   private readonly logger = new Logger(MetricsService.name);
-  
+
   // In-memory storage for metrics (in production, use Redis or time-series DB)
   private requestMetrics: RequestMetrics[] = [];
   private errorMetrics: ErrorMetrics[] = [];
   private performanceMetrics: PerformanceMetrics[] = [];
-  
+
   // Counters
   private requestCounts: Map<string, number> = new Map();
   private errorCounts: Map<string, number> = new Map();
@@ -49,7 +49,7 @@ export class MetricsService {
    */
   recordRequest(metric: RequestMetrics): void {
     const key = `${metric.method}:${metric.endpoint}`;
-    
+
     // Update counters
     this.requestCounts.set(key, (this.requestCounts.get(key) || 0) + 1);
     this.responseTimeSum.set(key, (this.responseTimeSum.get(key) || 0) + metric.responseTime);
@@ -57,7 +57,7 @@ export class MetricsService {
 
     // Store metric
     this.requestMetrics.push(metric);
-    
+
     // Keep only recent metrics
     if (this.requestMetrics.length > this.MAX_METRICS_HISTORY) {
       this.requestMetrics.shift();
@@ -79,7 +79,7 @@ export class MetricsService {
     this.errorCounts.set(key, (this.errorCounts.get(key) || 0) + 1);
 
     this.errorMetrics.push(error);
-    
+
     if (this.errorMetrics.length > this.MAX_ERROR_HISTORY) {
       this.errorMetrics.shift();
     }
@@ -95,7 +95,7 @@ export class MetricsService {
   recordPerformance(): void {
     const usage = process.cpuUsage();
     const memUsage = process.memoryUsage();
-    
+
     const metric: PerformanceMetrics = {
       cpuUsage: usage.user + usage.system,
       memoryUsage: memUsage.rss,
@@ -105,7 +105,7 @@ export class MetricsService {
     };
 
     this.performanceMetrics.push(metric);
-    
+
     if (this.performanceMetrics.length > 100) {
       this.performanceMetrics.shift();
     }
@@ -122,10 +122,8 @@ export class MetricsService {
   } {
     const now = Date.now();
     const window = timeWindow ? now - timeWindow : 0;
-    
-    const filtered = this.requestMetrics.filter(
-      (m) => m.timestamp.getTime() >= window,
-    );
+
+    const filtered = this.requestMetrics.filter((m) => m.timestamp.getTime() >= window);
 
     const stats = {
       total: filtered.length,
@@ -136,14 +134,14 @@ export class MetricsService {
 
     filtered.forEach((metric) => {
       const key = `${metric.method}:${metric.endpoint}`;
-      
+
       if (!stats.byEndpoint[key]) {
         stats.byEndpoint[key] = { count: 0, avgResponseTime: 0, errors: 0 };
       }
-      
+
       stats.byEndpoint[key].count++;
       stats.byEndpoint[key].avgResponseTime += metric.responseTime;
-      
+
       if (metric.statusCode >= 400) {
         stats.byEndpoint[key].errors++;
       }
@@ -174,10 +172,8 @@ export class MetricsService {
   } {
     const now = Date.now();
     const window = timeWindow ? now - timeWindow : 0;
-    
-    const filtered = this.errorMetrics.filter(
-      (e) => e.timestamp.getTime() >= window,
-    );
+
+    const filtered = this.errorMetrics.filter((e) => e.timestamp.getTime() >= window);
 
     const stats = {
       total: filtered.length,
@@ -220,7 +216,7 @@ export class MetricsService {
     }
 
     const current = this.performanceMetrics[this.performanceMetrics.length - 1];
-    
+
     const avg = this.performanceMetrics.reduce(
       (acc, m) => ({
         cpuUsage: acc.cpuUsage + m.cpuUsage,
@@ -277,4 +273,3 @@ export class MetricsService {
     this.responseTimeCount.clear();
   }
 }
-

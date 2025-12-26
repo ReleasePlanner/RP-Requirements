@@ -5,9 +5,9 @@ import { WidgetsController } from './widgets.controller';
 import { Widget } from '../../domain/entities/widget.entity';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Widget])],
-    controllers: [WidgetsController],
-    providers: [WidgetsService],
-    exports: [WidgetsService],
+  imports: [TypeOrmModule.forFeature([Widget])],
+  controllers: [WidgetsController],
+  providers: [WidgetsService],
+  exports: [WidgetsService],
 })
-export class WidgetsModule { }
+export class WidgetsModule {}

@@ -10,32 +10,33 @@ import { RequirementType } from '@domain/entities/requirement-type.entity';
 import { VerificationMethod } from '@domain/entities/verification-method.entity';
 import { Metric } from '@domain/entities/metric.entity';
 import { ProductOwner } from '@domain/entities/product-owner.entity';
-import { CreateRequirementTypeDto } from '@application/catalogs/dto/create-requirement-type.dto';
-import { UpdateRequirementTypeDto } from '@application/catalogs/dto/update-requirement-type.dto';
 import { CreateCatalogDto } from '@application/catalogs/dto/create-catalog.dto';
 import { UpdateCatalogDto } from '@application/catalogs/dto/update-catalog.dto';
 import { CreateMetricDto } from '@application/catalogs/dto/create-metric.dto';
 import { UpdateMetricDto } from '@application/catalogs/dto/update-metric.dto';
 import { CreateProductOwnerDto } from '@application/catalogs/dto/create-product-owner.dto';
 import { UpdateProductOwnerDto } from '@application/catalogs/dto/update-product-owner.dto';
-import { CreateApproverDto, UpdateApproverDto } from '@application/catalogs/dto/create-approver.dto';
+import {
+  CreateApproverDto,
+  UpdateApproverDto,
+} from '@application/catalogs/dto/create-approver.dto';
 import { Approver } from '../../domain/entities/approver.entity';
 import { Public } from '@shared/decorators/public.decorator';
 
 /**
  * Catalogs Controller
- * 
+ *
  * Handles HTTP requests for catalog management including CRUD operations and smoke tests
  */
 @ApiTags('catalogs')
 @ApiBearerAuth('JWT-auth')
 @Controller({ path: 'catalogs', version: '1' })
 export class CatalogsController {
-  constructor(private readonly catalogsService: CatalogsService) { }
+  constructor(private readonly catalogsService: CatalogsService) {}
 
   /**
    * Smoke test endpoint for health checks
-   * 
+   *
    * @returns Simple success response
    */
   @Public()
@@ -51,7 +52,7 @@ export class CatalogsController {
 
   /**
    * Retrieves all priorities
-   * 
+   *
    * @returns List of priorities
    */
   @Get('priorities')
@@ -223,9 +224,7 @@ export class CatalogsController {
     description: 'Tipo de requerimiento creado',
     type: RequirementType,
   })
-  async createType(
-    @Body() type: Partial<RequirementType>,
-  ): Promise<RequirementType> {
+  async createType(@Body() type: Partial<RequirementType>): Promise<RequirementType> {
     return this.catalogsService.createRequirementType(type);
   }
 
@@ -263,14 +262,22 @@ export class CatalogsController {
 
   @Post('verification-methods')
   @ApiOperation({ summary: 'Crear método de verificación' })
-  @ApiResponse({ status: 201, description: 'Método de verificación creado', type: VerificationMethod })
+  @ApiResponse({
+    status: 201,
+    description: 'Método de verificación creado',
+    type: VerificationMethod,
+  })
   async createVerificationMethod(@Body() createDto: CreateCatalogDto): Promise<VerificationMethod> {
     return this.catalogsService.createVerificationMethod(createDto);
   }
 
   @Put('verification-methods/:id')
   @ApiOperation({ summary: 'Actualizar método de verificación' })
-  @ApiResponse({ status: 200, description: 'Método de verificación actualizado', type: VerificationMethod })
+  @ApiResponse({
+    status: 200,
+    description: 'Método de verificación actualizado',
+    type: VerificationMethod,
+  })
   async updateVerificationMethod(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateDto: UpdateCatalogDto,

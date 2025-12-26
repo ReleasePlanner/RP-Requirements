@@ -8,7 +8,7 @@ import { FindByEpicOptions } from '@shared/types/repository.types';
 
 /**
  * Requirements Service
- * 
+ *
  * Handles business logic for requirement management including CRUD operations
  */
 @Injectable()
@@ -16,11 +16,11 @@ export class RequirementsService {
   constructor(
     @Inject('IRequirementRepository')
     private readonly requirementRepository: IRequirementRepository,
-  ) { }
+  ) {}
 
   /**
    * Retrieves all requirements with optional pagination and filtering
-   * 
+   *
    * @param options - Query options including pagination, sorting, and epic filters
    * @returns Paginated list of requirements with total count
    */
@@ -30,7 +30,7 @@ export class RequirementsService {
 
   /**
    * Retrieves a requirement by ID
-   * 
+   *
    * @param requirementId - Unique identifier of the requirement
    * @returns Requirement entity
    * @throws RequirementNotFoundException if requirement not found
@@ -45,7 +45,7 @@ export class RequirementsService {
 
   /**
    * Retrieves all requirements for a specific epic
-   * 
+   *
    * @param epicId - Unique identifier of the epic
    * @returns List of requirements for the epic
    */
@@ -55,7 +55,7 @@ export class RequirementsService {
 
   /**
    * Creates a new requirement
-   * 
+   *
    * @param createDto - Data for creating the requirement
    * @returns Created requirement entity
    */
@@ -65,7 +65,7 @@ export class RequirementsService {
 
   /**
    * Updates an existing requirement
-   * 
+   *
    * @param requirementId - Unique identifier of the requirement to update
    * @param updateDto - Data for updating the requirement
    * @returns Updated requirement entity
@@ -78,7 +78,7 @@ export class RequirementsService {
 
   /**
    * Deletes a requirement by ID
-   * 
+   *
    * @param requirementId - Unique identifier of the requirement to delete
    * @throws RequirementNotFoundException if requirement not found
    */

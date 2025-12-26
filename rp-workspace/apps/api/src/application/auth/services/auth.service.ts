@@ -11,7 +11,7 @@ import { parseDurationToSeconds } from '@shared/utils';
 
 /**
  * Authentication Service
- * 
+ *
  * Handles user authentication, registration, and JWT token generation
  */
 @Injectable()
@@ -21,17 +21,20 @@ export class AuthService {
     private readonly sponsorRepository: ISponsorRepository,
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
-  ) { }
+  ) {}
 
   /**
    * Validates user credentials
-   * 
+   *
    * @param email - User email address
    * @param password - User password (plain text)
    * @returns User information without password
    * @throws UnauthorizedException if credentials are invalid or user is inactive
    */
-  async validateUser(email: string, password: string): Promise<Omit<RequestUser, 'userId'> & { sponsorId: string }> {
+  async validateUser(
+    email: string,
+    password: string,
+  ): Promise<Omit<RequestUser, 'userId'> & { sponsorId: string }> {
     const sponsor = await this.sponsorRepository.findByEmail(email);
     if (!sponsor) {
       throw new UnauthorizedException('Credenciales inválidas');
@@ -46,13 +49,14 @@ export class AuthService {
       throw new UnauthorizedException('Credenciales inválidas');
     }
 
-    const { password: _, ...result } = sponsor;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...result } = sponsor;
     return result;
   }
 
   /**
    * Authenticates a user and returns a JWT token
-   * 
+   *
    * @param loginDto - User credentials (email and password)
    * @returns Authentication response with access token and user data
    * @throws UnauthorizedException if credentials are invalid
@@ -84,7 +88,7 @@ export class AuthService {
 
   /**
    * Registers a new user and returns a JWT token
-   * 
+   *
    * @param registerDto - User registration data
    * @returns Authentication response with access token and user data
    * @throws ConflictException if email is already registered

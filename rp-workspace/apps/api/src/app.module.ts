@@ -21,7 +21,7 @@ import { AppController } from './app.controller';
 
 /**
  * Application Root Module
- * 
+ *
  * Main module that imports all feature modules and configures global providers
  */
 @Module({
@@ -77,4 +77,4 @@ import { AppController } from './app.controller';
     },
   ],
 })
-export class AppModule { }
+export class AppModule {}

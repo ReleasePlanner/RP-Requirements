@@ -1,4 +1,13 @@
-import { IsString, IsNotEmpty, IsOptional, IsInt, IsNumber, IsBoolean, IsDateString, IsUUID } from 'class-validator';
+import {
+  IsString,
+  IsNotEmpty,
+  IsOptional,
+  IsInt,
+  IsNumber,
+  IsBoolean,
+  IsDateString,
+  IsUUID,
+} from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateRequirementDto {

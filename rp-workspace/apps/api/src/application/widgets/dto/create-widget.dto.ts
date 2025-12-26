@@ -6,21 +6,21 @@ import { WidgetConfig } from '@shared/types/widget.types';
  * DTO for creating a widget
  */
 export class CreateWidgetDto {
-    @IsString()
-    title: string;
+  @IsString()
+  title: string;
 
-    @IsEnum(WidgetType)
-    type: WidgetType;
+  @IsEnum(WidgetType)
+  type: WidgetType;
 
-    @IsOptional()
-    @IsObject()
-    config?: WidgetConfig;
+  @IsOptional()
+  @IsObject()
+  config?: WidgetConfig;
 
-    @IsOptional()
-    @IsBoolean()
-    isVisible?: boolean;
+  @IsOptional()
+  @IsBoolean()
+  isVisible?: boolean;
 
-    @IsOptional()
-    @IsInt()
-    defaultOrder?: number;
+  @IsOptional()
+  @IsInt()
+  defaultOrder?: number;
 }

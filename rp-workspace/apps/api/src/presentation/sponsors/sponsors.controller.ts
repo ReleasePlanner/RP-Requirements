@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { SponsorsService } from '@application/sponsors/services/sponsors.service';
 import { Sponsor } from '@domain/entities/sponsor.entity';
@@ -9,7 +9,7 @@ import { UpdateSponsorDto } from '@application/sponsors/dto/update-sponsor.dto';
 @ApiBearerAuth('JWT-auth')
 @Controller({ path: 'sponsors', version: '1' })
 export class SponsorsController {
-  constructor(private readonly sponsorsService: SponsorsService) { }
+  constructor(private readonly sponsorsService: SponsorsService) {}
 
   @Get()
   @ApiOperation({ summary: 'Obtener todos los sponsors' })
@@ -37,7 +37,10 @@ export class SponsorsController {
   @ApiOperation({ summary: 'Actualizar sponsor' })
   @ApiResponse({ status: 200, description: 'Sponsor actualizado', type: Sponsor })
   @ApiResponse({ status: 404, description: 'Sponsor no encontrado' })
-  async update(@Param('id') id: string, @Body() updateSponsorDto: UpdateSponsorDto): Promise<Sponsor> {
+  async update(
+    @Param('id') id: string,
+    @Body() updateSponsorDto: UpdateSponsorDto,
+  ): Promise<Sponsor> {
     return this.sponsorsService.update(id, updateSponsorDto);
   }
 

@@ -1,6 +1,6 @@
 /**
  * Widget configuration types
- * 
+ *
  * Types for widget configuration objects
  */
 
@@ -28,4 +28,3 @@ export interface ChartConfig extends WidgetConfig {
   dataSource?: string;
   showLegend?: boolean;
 }
-

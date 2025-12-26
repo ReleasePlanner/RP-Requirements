@@ -10,9 +10,6 @@ import {
 describe('HealthController', () => {
   let controller: HealthController;
   let healthCheckService: jest.Mocked<HealthCheckService>;
-  let dbHealthIndicator: jest.Mocked<TypeOrmHealthIndicator>;
-  let memoryHealthIndicator: jest.Mocked<MemoryHealthIndicator>;
-  let diskHealthIndicator: jest.Mocked<DiskHealthIndicator>;
 
   beforeEach(async () => {
     const mockHealthCheckService = {

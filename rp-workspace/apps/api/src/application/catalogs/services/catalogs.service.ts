@@ -15,8 +15,8 @@ import { Approver } from '../../../domain/entities/approver.entity';
 export class CatalogsService {
   constructor(
     @Inject('ICatalogsRepository')
-    private readonly catalogsRepository: ICatalogsRepository
-  ) { }
+    private readonly catalogsRepository: ICatalogsRepository,
+  ) {}
 
   async findAllPriorities(): Promise<Priority[]> {
     return this.catalogsRepository.findAllPriorities();
@@ -90,7 +90,10 @@ export class CatalogsService {
     return this.catalogsRepository.createEffortEstimateType(type);
   }
 
-  async updateEffortEstimateType(id: number, type: Partial<EffortEstimateType>): Promise<EffortEstimateType> {
+  async updateEffortEstimateType(
+    id: number,
+    type: Partial<EffortEstimateType>,
+  ): Promise<EffortEstimateType> {
     return this.catalogsRepository.updateEffortEstimateType(id, type);
   }
 
@@ -106,7 +109,10 @@ export class CatalogsService {
     return this.catalogsRepository.createRequirementType(type);
   }
 
-  async updateRequirementType(id: number, type: Partial<RequirementType>): Promise<RequirementType> {
+  async updateRequirementType(
+    id: number,
+    type: Partial<RequirementType>,
+  ): Promise<RequirementType> {
     return this.catalogsRepository.updateRequirementType(id, type);
   }
 
@@ -122,7 +128,10 @@ export class CatalogsService {
     return this.catalogsRepository.createVerificationMethod(method);
   }
 
-  async updateVerificationMethod(id: number, method: Partial<VerificationMethod>): Promise<VerificationMethod> {
+  async updateVerificationMethod(
+    id: number,
+    method: Partial<VerificationMethod>,
+  ): Promise<VerificationMethod> {
     return this.catalogsRepository.updateVerificationMethod(id, method);
   }
 

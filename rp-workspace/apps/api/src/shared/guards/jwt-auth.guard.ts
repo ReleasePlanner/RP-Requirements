@@ -5,10 +5,10 @@ import { Observable } from 'rxjs';
 
 /**
  * JWT Authentication Guard
- * 
+ *
  * Protects routes by validating JWT tokens.
  * Currently configured as a mock guard that injects a mock user.
- * 
+ *
  * @example
  * ```typescript
  * @UseGuards(JwtAuthGuard)
@@ -26,7 +26,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 
   /**
    * Determines if the route can be activated
-   * 
+   *
    * @param context - Execution context containing request information
    * @returns True if route can be accessed, false otherwise
    */
@@ -57,4 +57,3 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     */
   }
 }
-

@@ -1,9 +1,4 @@
-import {
-  Injectable,
-  NestInterceptor,
-  ExecutionContext,
-  CallHandler,
-} from '@nestjs/common';
+import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { MetricsService, RequestMetrics, ErrorMetrics } from '../services/metrics.service';
@@ -16,13 +11,13 @@ export class MetricsInterceptor implements NestInterceptor {
     const request = context.switchToHttp().getRequest();
     const response = context.switchToHttp().getResponse();
     const { method, url, route } = request;
-    
+
     // Get endpoint path (use route.path if available, otherwise parse from url)
     const endpoint = route?.path || url.split('?')[0];
     const startTime = Date.now();
 
     return next.handle().pipe(
-      tap((data) => {
+      tap((_data) => {
         const responseTime = Date.now() - startTime;
         const statusCode = response.statusCode;
 
@@ -66,4 +61,3 @@ export class MetricsInterceptor implements NestInterceptor {
     );
   }
 }
-

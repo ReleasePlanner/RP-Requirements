@@ -8,18 +8,18 @@ import { Public } from '@shared/decorators/public.decorator';
 
 /**
  * Requirements Controller
- * 
+ *
  * Handles HTTP requests for requirement management including CRUD operations and smoke tests
  */
 @ApiTags('requirements')
 @ApiBearerAuth('JWT-auth')
 @Controller({ path: 'requirements', version: '1' })
 export class RequirementsController {
-  constructor(private readonly requirementsService: RequirementsService) { }
+  constructor(private readonly requirementsService: RequirementsService) {}
 
   /**
    * Smoke test endpoint for health checks
-   * 
+   *
    * @returns Simple success response
    */
   @Public()
@@ -35,7 +35,7 @@ export class RequirementsController {
 
   /**
    * Creates a new requirement
-   * 
+   *
    * @param createRequirementDto - Data for creating the requirement
    * @returns Created requirement entity
    */
@@ -52,7 +52,7 @@ export class RequirementsController {
 
   /**
    * Retrieves all requirements with optional pagination and filtering
-   * 
+   *
    * @param page - Page number (default: 1)
    * @param limit - Items per page (default: 10)
    * @param sortBy - Field to sort by
@@ -89,7 +89,7 @@ export class RequirementsController {
 
   /**
    * Retrieves a requirement by ID
-   * 
+   *
    * @param id - Unique identifier of the requirement
    * @returns Requirement entity
    */
@@ -107,7 +107,7 @@ export class RequirementsController {
 
   /**
    * Updates an existing requirement
-   * 
+   *
    * @param id - Unique identifier of the requirement to update
    * @param updateRequirementDto - Data for updating the requirement
    * @returns Updated requirement entity
@@ -129,7 +129,7 @@ export class RequirementsController {
 
   /**
    * Deletes a requirement by ID
-   * 
+   *
    * @param id - Unique identifier of the requirement to delete
    */
   @Delete(':id')

@@ -8,7 +8,6 @@ import { Sponsor } from '@domain/entities/sponsor.entity';
 describe('JwtStrategy', () => {
   let strategy: JwtStrategy;
   let sponsorRepository: jest.Mocked<ISponsorRepository>;
-  let configService: jest.Mocked<ConfigService>;
 
   const mockSponsor: Sponsor = {
     sponsorId: 'sponsor-123',

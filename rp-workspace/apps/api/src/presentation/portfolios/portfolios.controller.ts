@@ -8,18 +8,18 @@ import { Public } from '@shared/decorators/public.decorator';
 
 /**
  * Portfolios Controller
- * 
+ *
  * Handles HTTP requests for portfolio management including CRUD operations and smoke tests
  */
 @ApiTags('portfolios')
 @ApiBearerAuth('JWT-auth')
 @Controller({ path: 'portfolios', version: '1' })
 export class PortfoliosController {
-  constructor(private readonly portfoliosService: PortfoliosService) { }
+  constructor(private readonly portfoliosService: PortfoliosService) {}
 
   /**
    * Smoke test endpoint for health checks
-   * 
+   *
    * @returns Simple success response
    */
   @Public()
@@ -35,7 +35,7 @@ export class PortfoliosController {
 
   /**
    * Retrieves all portfolios with optional pagination and sorting
-   * 
+   *
    * @param page - Page number
    * @param limit - Items per page
    * @param sortBy - Field to sort by
@@ -59,7 +59,7 @@ export class PortfoliosController {
       page: page ? +page : undefined,
       limit: limit ? +limit : undefined,
       sortBy,
-      sortOrder
+      sortOrder,
     });
   }
 

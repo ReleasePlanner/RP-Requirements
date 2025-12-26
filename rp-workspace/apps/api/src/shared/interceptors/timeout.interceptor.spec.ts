@@ -1,7 +1,7 @@
 import { RequestTimeoutException } from '@nestjs/common';
 import { TimeoutInterceptor } from './timeout.interceptor';
 import { ExecutionContext, CallHandler } from '@nestjs/common';
-import { of, throwError, TimeoutError } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 describe('TimeoutInterceptor', () => {

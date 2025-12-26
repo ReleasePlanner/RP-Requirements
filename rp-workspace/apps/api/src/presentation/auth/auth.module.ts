@@ -7,7 +7,6 @@ import { Sponsor } from '@domain/entities/sponsor.entity';
 import { AuthController } from './auth.controller';
 import { AuthService } from '@application/auth/services/auth.service';
 import { SponsorRepository } from '@infrastructure/repositories/sponsor.repository';
-import { ISponsorRepository } from '@application/interfaces/repositories/sponsor.repository.interface';
 import { JwtStrategy } from '@infrastructure/auth/strategies/jwt.strategy';
 import { JwtAuthGuard } from '@shared/guards/jwt-auth.guard';
 import { APP_GUARD } from '@nestjs/core';
@@ -42,4 +41,4 @@ import { APP_GUARD } from '@nestjs/core';
   ],
   exports: [AuthService, 'ISponsorRepository'],
 })
-export class AuthModule { }
+export class AuthModule {}

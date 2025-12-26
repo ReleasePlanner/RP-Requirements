@@ -7,7 +7,7 @@ import { JwtPayload, RequestUser } from '@shared/types';
 
 /**
  * JWT Strategy
- * 
+ *
  * Validates JWT tokens and extracts user information from the payload
  */
 @Injectable()
@@ -26,7 +26,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   /**
    * Validates the JWT payload and returns user information
-   * 
+   *
    * @param payload - Decoded JWT payload
    * @returns User information object
    * @throws UnauthorizedException if sponsor not found or inactive

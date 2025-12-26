@@ -7,7 +7,7 @@ import { UpdateSponsorDto } from '../dto/update-sponsor.dto';
 
 /**
  * Sponsors Service
- * 
+ *
  * Handles business logic for sponsor management including CRUD operations
  */
 @Injectable()
@@ -15,11 +15,11 @@ export class SponsorsService {
   constructor(
     @Inject('ISponsorRepository')
     private readonly sponsorRepository: ISponsorRepository,
-  ) { }
+  ) {}
 
   /**
    * Retrieves all sponsors
-   * 
+   *
    * @returns List of all sponsors
    */
   async findAll(): Promise<Sponsor[]> {
@@ -28,7 +28,7 @@ export class SponsorsService {
 
   /**
    * Retrieves a sponsor by ID
-   * 
+   *
    * @param sponsorId - Unique identifier of the sponsor
    * @returns Sponsor entity
    * @throws EntityNotFoundException if sponsor not found
@@ -43,7 +43,7 @@ export class SponsorsService {
 
   /**
    * Creates a new sponsor
-   * 
+   *
    * @param createSponsorDto - Data for creating the sponsor
    * @returns Created sponsor entity
    */
@@ -53,7 +53,7 @@ export class SponsorsService {
 
   /**
    * Updates an existing sponsor
-   * 
+   *
    * @param sponsorId - Unique identifier of the sponsor to update
    * @param updateSponsorDto - Data for updating the sponsor
    * @returns Updated sponsor entity
@@ -69,7 +69,7 @@ export class SponsorsService {
 
   /**
    * Deletes a sponsor by ID
-   * 
+   *
    * @param sponsorId - Unique identifier of the sponsor to delete
    * @throws EntityNotFoundException if sponsor not found
    */

@@ -18,4 +18,3 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
   exports: [MetricsService, PerformanceMonitorService],
 })
 export class MonitoringModule {}
-

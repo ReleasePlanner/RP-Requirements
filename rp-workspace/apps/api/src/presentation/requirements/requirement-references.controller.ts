@@ -5,31 +5,28 @@ import { UpdateRequirementReferenceDto } from '@application/requirements/dto/upd
 
 @Controller('requirements/:requirementId/references')
 export class RequirementReferencesController {
-    constructor(private readonly service: RequirementReferencesService) { }
+  constructor(private readonly service: RequirementReferencesService) {}
 
-    @Post()
-    create(
-        @Param('requirementId', ParseUUIDPipe) requirementId: string,
-        @Body() dto: CreateRequirementReferenceDto
-    ) {
-        return this.service.create({ ...dto, requirementId });
-    }
+  @Post()
+  create(
+    @Param('requirementId', ParseUUIDPipe) requirementId: string,
+    @Body() dto: CreateRequirementReferenceDto,
+  ) {
+    return this.service.create({ ...dto, requirementId });
+  }
 
-    @Get()
-    findByRequirement(@Param('requirementId', ParseUUIDPipe) requirementId: string) {
-        return this.service.findByRequirementId(requirementId);
-    }
+  @Get()
+  findByRequirement(@Param('requirementId', ParseUUIDPipe) requirementId: string) {
+    return this.service.findByRequirementId(requirementId);
+  }
 
-    @Put(':id')
-    update(
-        @Param('id', ParseUUIDPipe) id: string,
-        @Body() dto: UpdateRequirementReferenceDto
-    ) {
-        return this.service.update(id, dto);
-    }
+  @Put(':id')
+  update(@Param('id', ParseUUIDPipe) id: string, @Body() dto: UpdateRequirementReferenceDto) {
+    return this.service.update(id, dto);
+  }
 
-    @Delete(':id')
-    delete(@Param('id', ParseUUIDPipe) id: string) {
-        return this.service.delete(id);
-    }
+  @Delete(':id')
+  delete(@Param('id', ParseUUIDPipe) id: string) {
+    return this.service.delete(id);
+  }
 }

@@ -11,7 +11,7 @@ import { HttpExceptionResponse } from '@shared/types/exception.types';
 
 /**
  * Global HTTP Exception Filter
- * 
+ *
  * Catches all exceptions and formats them into a consistent error response
  */
 @Catch()
@@ -20,7 +20,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
   /**
    * Handles exceptions and formats error responses
-   * 
+   *
    * @param exception - The exception that was thrown
    * @param host - Execution context host
    */
@@ -36,15 +36,16 @@ export class HttpExceptionFilter implements ExceptionFilter {
     if (exception instanceof HttpException) {
       status = exception.getStatus();
       const exceptionResponse = exception.getResponse();
-      const responseMessage = typeof exceptionResponse === 'string'
-        ? exceptionResponse
-        : (exceptionResponse as HttpExceptionResponse).message;
+      const responseMessage =
+        typeof exceptionResponse === 'string'
+          ? exceptionResponse
+          : (exceptionResponse as HttpExceptionResponse).message;
       message =
         typeof responseMessage === 'string'
           ? responseMessage
           : Array.isArray(responseMessage)
-          ? responseMessage.join(', ')
-          : exception.message;
+            ? responseMessage.join(', ')
+            : exception.message;
       error =
         typeof exceptionResponse === 'string'
           ? exceptionResponse

@@ -157,11 +157,8 @@ export function KanbanView({ initialData }: KanbanViewProps) {
         setActiveId(null);
     };
 
-    const [isMounted, setIsMounted] = useState(false);
-
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
+    // Use useState with initial value to avoid setState in effect
+    const [isMounted] = useState(true);
 
     if (!isMounted) return null;
 

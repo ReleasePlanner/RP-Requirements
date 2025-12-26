@@ -24,7 +24,7 @@ import { Widget } from '../../domain/entities/widget.entity';
 
 export const databaseConfig = (configService: ConfigService): TypeOrmModuleOptions => {
   const isProduction = configService.get<string>('NODE_ENV') === 'production';
-  
+
   return {
     type: 'postgres',
     host: configService.get<string>('DB_HOST'),

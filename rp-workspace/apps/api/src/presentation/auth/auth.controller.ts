@@ -8,7 +8,7 @@ import { Public } from '@shared/decorators/public.decorator';
 
 /**
  * Authentication Controller
- * 
+ *
  * Handles user authentication endpoints including login, registration, and smoke tests
  */
 @ApiTags('auth')
@@ -18,7 +18,7 @@ export class AuthController {
 
   /**
    * Authenticates a user and returns a JWT token
-   * 
+   *
    * @param loginDto - User credentials (email and password)
    * @returns Authentication response with access token
    */
@@ -38,7 +38,7 @@ export class AuthController {
 
   /**
    * Registers a new user and returns a JWT token
-   * 
+   *
    * @param registerDto - User registration data
    * @returns Authentication response with access token
    */
@@ -58,7 +58,7 @@ export class AuthController {
 
   /**
    * Smoke test endpoint for health checks
-   * 
+   *
    * @returns Simple success response
    */
   @Public()

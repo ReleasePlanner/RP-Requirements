@@ -21,17 +21,18 @@ interface EpicListProps {
     currentOrder?: 'ASC' | 'DESC';
 }
 
+// SortIcon component moved outside to avoid recreating during render
+function SortIcon({ field, currentSort, currentOrder }: { field: string; currentSort?: string; currentOrder?: 'ASC' | 'DESC' }) {
+    if (currentSort !== field) return <div className="ml-1 w-3 h-3 opacity-0 group-hover:opacity-30 inline-block bg-zinc-300 rounded-sm" />;
+    return (
+        <span className="ml-1 text-zinc-800 text-[9px]">
+            {currentOrder === 'ASC' ? '▲' : '▼'}
+        </span>
+    );
+}
+
 export function EpicList({ data, onSort, currentSort, currentOrder }: EpicListProps) {
     const router = useRouter();
-
-    const SortIcon = ({ field }: { field: string }) => {
-        if (currentSort !== field) return <div className="ml-1 w-3 h-3 opacity-0 group-hover:opacity-30 inline-block bg-zinc-300 rounded-sm" />;
-        return (
-            <span className="ml-1 text-zinc-800 text-[9px]">
-                {currentOrder === 'ASC' ? '▲' : '▼'}
-            </span>
-        );
-    };
 
     const handleDelete = async (id: string) => {
         if (confirm('Are you sure you want to delete this epic?')) {
@@ -55,7 +56,7 @@ export function EpicList({ data, onSort, currentSort, currentOrder }: EpicListPr
                 <TableHeader>
                     <TableRow className="border-b border-zinc-100/50 hover:bg-transparent sticky top-0 bg-zinc-50/95 backdrop-blur z-10">
                         <TableHead className="w-[300px] text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] pl-6 pb-4 pt-6 cursor-pointer" onClick={() => onSort?.('name')}>
-                            Name <SortIcon field="name" />
+                            Name <SortIcon field="name" currentSort={currentSort} currentOrder={currentOrder} />
                         </TableHead>
                         <TableHead className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] pb-4 pt-6">Initiative</TableHead>
 

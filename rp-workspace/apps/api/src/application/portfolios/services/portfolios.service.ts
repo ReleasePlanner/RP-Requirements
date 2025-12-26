@@ -8,7 +8,7 @@ export class PortfoliosService {
   constructor(
     @Inject('IPortfolioRepository')
     private readonly portfolioRepository: IPortfolioRepository,
-  ) { }
+  ) {}
 
   async findAll(options?: {
     page?: number;
@@ -36,7 +36,7 @@ export class PortfoliosService {
 
     // Validation: Cannot deactivate if active initiatives exist
     if (data.status === 'INACTIVE' && portfolio.status !== 'INACTIVE') {
-      const hasActiveInitiatives = portfolio.initiatives?.some(i => i.status_text === 'ACTIVE');
+      const hasActiveInitiatives = portfolio.initiatives?.some((i) => i.status_text === 'ACTIVE');
       if (hasActiveInitiatives) {
         throw new Error('Cannot set portfolio to INACTIVE because it has ACTIVE initiatives.');
       }
@@ -47,7 +47,7 @@ export class PortfoliosService {
 
   async remove(id: string): Promise<void> {
     const portfolio = await this.findOne(id);
-    const hasActiveInitiatives = portfolio.initiatives?.some(i => i.status_text === 'ACTIVE');
+    const hasActiveInitiatives = portfolio.initiatives?.some((i) => i.status_text === 'ACTIVE');
 
     if (hasActiveInitiatives) {
       // Using BadRequestException directly as it maps to 400

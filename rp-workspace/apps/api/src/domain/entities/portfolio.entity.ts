@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany, CreateDateColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+  OneToMany,
+  CreateDateColumn,
+} from 'typeorm';
 import { Sponsor } from './sponsor.entity';
 import { Initiative } from './initiative.entity';
 

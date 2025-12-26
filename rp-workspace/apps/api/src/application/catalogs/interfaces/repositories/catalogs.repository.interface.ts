@@ -23,7 +23,10 @@ export interface ICatalogsRepository {
 
   findAllEffortEstimateTypes(): Promise<EffortEstimateType[]>;
   createEffortEstimateType(type: Partial<EffortEstimateType>): Promise<EffortEstimateType>;
-  updateEffortEstimateType(id: number, type: Partial<EffortEstimateType>): Promise<EffortEstimateType>;
+  updateEffortEstimateType(
+    id: number,
+    type: Partial<EffortEstimateType>,
+  ): Promise<EffortEstimateType>;
   deleteEffortEstimateType(id: number): Promise<void>;
 
   findAllRiskLevels(): Promise<RiskLevel[]>;
@@ -48,7 +51,10 @@ export interface ICatalogsRepository {
 
   findAllVerificationMethods(): Promise<VerificationMethod[]>;
   createVerificationMethod(method: Partial<VerificationMethod>): Promise<VerificationMethod>;
-  updateVerificationMethod(id: number, method: Partial<VerificationMethod>): Promise<VerificationMethod>;
+  updateVerificationMethod(
+    id: number,
+    method: Partial<VerificationMethod>,
+  ): Promise<VerificationMethod>;
   deleteVerificationMethod(id: number): Promise<void>;
 
   findAllRequirementTypes(): Promise<RequirementType[]>;

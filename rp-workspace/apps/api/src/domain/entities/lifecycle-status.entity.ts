@@ -5,21 +5,21 @@ import { Initiative } from './initiative.entity';
 
 @Entity('LifecycleStatus')
 export class LifecycleStatus {
-    @PrimaryGeneratedColumn()
-    statusId: number;
+  @PrimaryGeneratedColumn()
+  statusId: number;
 
-    @Column({ type: 'varchar', length: 100 })
-    name: string;
+  @Column({ type: 'varchar', length: 100 })
+  name: string;
 
-    @Column({ type: 'varchar', length: 100, nullable: true })
-    status: string;
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  status: string;
 
-    @OneToMany(() => Requirement, (requirement) => requirement.status)
-    requirements: Requirement[];
+  @OneToMany(() => Requirement, (requirement) => requirement.status)
+  requirements: Requirement[];
 
-    @OneToMany(() => Epic, (epic) => epic.status)
-    epics: Epic[];
+  @OneToMany(() => Epic, (epic) => epic.status)
+  epics: Epic[];
 
-    @OneToMany(() => Initiative, (initiative) => initiative.status)
-    initiatives: Initiative[];
+  @OneToMany(() => Initiative, (initiative) => initiative.status)
+  initiatives: Initiative[];
 }

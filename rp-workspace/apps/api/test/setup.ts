@@ -1,5 +1,3 @@
-import { Test } from '@nestjs/testing';
-
 // Mock de Winston para tests
 jest.mock('nest-winston', () => ({
   WinstonModule: {

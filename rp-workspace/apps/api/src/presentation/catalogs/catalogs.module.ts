@@ -41,4 +41,4 @@ import { Source } from '@domain/entities/source.entity';
   ],
   exports: [CatalogsService],
 })
-export class CatalogsModule { }
+export class CatalogsModule {}

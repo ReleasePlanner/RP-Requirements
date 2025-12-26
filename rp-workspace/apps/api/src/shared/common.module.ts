@@ -5,7 +5,7 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
 
 /**
  * Common Module (@app/common)
- * 
+ *
  * Shared, reusable code across the application including:
  * - Configs: Global configuration settings
  * - Decorators: Custom decorators for reusability
@@ -25,4 +25,3 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
   exports: [CoreConfigModule, NotificationsModule, JwtAuthGuard],
 })
 export class CommonModule {}
-

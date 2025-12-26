@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 
 /**
  * Notifications Module
- * 
+ *
  * Handles app-wide notifications including:
  * - Email notifications
  * - In-app notifications
@@ -15,4 +15,3 @@ import { Module } from '@nestjs/common';
   exports: [],
 })
 export class NotificationsModule {}
-

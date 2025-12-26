@@ -47,7 +47,7 @@ export class PerformanceMonitorService implements OnModuleInit, OnModuleDestroy 
   getSystemResources() {
     const memUsage = process.memoryUsage();
     const cpuUsage = process.cpuUsage();
-    
+
     return {
       memory: {
         rss: memUsage.rss,
@@ -67,4 +67,3 @@ export class PerformanceMonitorService implements OnModuleInit, OnModuleDestroy 
     };
   }
 }
-

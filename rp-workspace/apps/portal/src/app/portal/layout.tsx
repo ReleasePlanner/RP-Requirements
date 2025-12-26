@@ -19,7 +19,11 @@ export default function PortalLayout({
 
     // Close mobile menu on route change
     useEffect(() => {
-        setMobileMenuOpen(false);
+        // Use setTimeout to avoid cascading renders
+        const timer = setTimeout(() => {
+            setMobileMenuOpen(false);
+        }, 0);
+        return () => clearTimeout(timer);
     }, [pathname]);
 
     // Handle responsive collapse

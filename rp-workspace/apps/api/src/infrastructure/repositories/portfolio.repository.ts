@@ -9,7 +9,7 @@ export class PortfolioRepository implements IPortfolioRepository {
   constructor(
     @InjectRepository(Portfolio)
     private readonly repository: Repository<Portfolio>,
-  ) { }
+  ) {}
 
   async findById(portfolioId: string): Promise<Portfolio | null> {
     return this.repository.findOne({
@@ -26,7 +26,8 @@ export class PortfolioRepository implements IPortfolioRepository {
   }): Promise<{ items: Portfolio[]; total: number }> {
     const { page, limit, sortBy, sortOrder } = options || {};
 
-    const query = this.repository.createQueryBuilder('portfolio')
+    const query = this.repository
+      .createQueryBuilder('portfolio')
       .leftJoinAndSelect('portfolio.initiatives', 'initiatives')
       .leftJoinAndSelect('portfolio.sponsor', 'sponsor');
 

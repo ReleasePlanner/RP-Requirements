@@ -8,18 +8,18 @@ import { Public } from '@shared/decorators/public.decorator';
 
 /**
  * Epics Controller
- * 
+ *
  * Handles HTTP requests for epic management including CRUD operations and smoke tests
  */
 @ApiTags('epics')
 @ApiBearerAuth('JWT-auth')
 @Controller('epics')
 export class EpicsController {
-  constructor(private readonly epicsService: EpicsService) { }
+  constructor(private readonly epicsService: EpicsService) {}
 
   /**
    * Smoke test endpoint for health checks
-   * 
+   *
    * @returns Simple success response
    */
   @Public()
@@ -35,7 +35,7 @@ export class EpicsController {
 
   /**
    * Creates a new epic
-   * 
+   *
    * @param createEpicDto - Data for creating the epic
    * @returns Created epic entity
    */

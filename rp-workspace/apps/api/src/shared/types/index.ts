@@ -1,6 +1,6 @@
 /**
  * Common TypeScript types and interfaces
- * 
+ *
  * Shared types used across multiple modules
  */
 
@@ -62,4 +62,3 @@ export * from './exception.types';
 
 // Export widget types
 export * from './widget.types';
-

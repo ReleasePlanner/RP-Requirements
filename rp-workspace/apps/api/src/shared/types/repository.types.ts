@@ -1,6 +1,6 @@
 /**
  * Repository types and interfaces
- * 
+ *
  * Common types used by repositories across the application
  */
 
@@ -36,4 +36,3 @@ export interface FindByInitiativeOptions {
 export interface WhereClause {
   [key: string]: unknown;
 }
-

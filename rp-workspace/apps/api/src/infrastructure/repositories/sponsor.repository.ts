@@ -9,7 +9,7 @@ export class SponsorRepository implements ISponsorRepository {
   constructor(
     @InjectRepository(Sponsor)
     private readonly repository: Repository<Sponsor>,
-  ) { }
+  ) {}
 
   async findById(sponsorId: string): Promise<Sponsor | null> {
     return this.repository.findOne({ where: { sponsorId } });

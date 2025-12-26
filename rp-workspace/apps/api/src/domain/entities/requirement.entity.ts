@@ -8,7 +8,6 @@ import {
   OneToMany,
 } from 'typeorm';
 import { Epic } from './epic.entity';
-import { Sponsor } from './sponsor.entity';
 import { Priority } from './priority.entity';
 import { LifecycleStatus } from './lifecycle-status.entity';
 import { RequirementType } from './requirement-type.entity';

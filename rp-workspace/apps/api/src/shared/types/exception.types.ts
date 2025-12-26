@@ -1,6 +1,6 @@
 /**
  * Exception types
- * 
+ *
  * Types for exception handling
  */
 
@@ -13,4 +13,3 @@ export interface HttpExceptionResponse {
   statusCode?: number;
   [key: string]: unknown;
 }
-

@@ -7,7 +7,7 @@ import { WhereClause } from '@shared/types/repository.types';
 
 /**
  * Epics Repository Implementation
- * 
+ *
  * Handles data persistence for Epic entities using TypeORM
  */
 @Injectable()
@@ -15,11 +15,11 @@ export class EpicsRepository implements IEpicsRepository {
   constructor(
     @InjectRepository(Epic)
     private readonly epicRepository: Repository<Epic>,
-  ) { }
+  ) {}
 
   /**
    * Finds all epics with optional filtering by initiative
-   * 
+   *
    * @param options - Query options including initiative filter
    * @returns List of epics
    */

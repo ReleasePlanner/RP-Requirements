@@ -1,6 +1,6 @@
 import { ApiPaginatedResponse } from './api-paginated-response.decorator';
 import { applyDecorators } from '@nestjs/common';
-import { ApiOkResponse, getSchemaPath } from '@nestjs/swagger';
+import { getSchemaPath } from '@nestjs/swagger';
 import { PaginatedResponseDto } from '../dto/pagination.dto';
 
 jest.mock('@nestjs/common', () => ({

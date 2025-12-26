@@ -5,7 +5,6 @@ import { ExecutionContext } from '@nestjs/common';
 
 describe('JwtAuthGuard', () => {
   let guard: JwtAuthGuard;
-  let reflector: Reflector;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -43,4 +42,3 @@ describe('JwtAuthGuard', () => {
     expect((request as any).user.userId).toBe('mock-sys-admin');
   });
 });
-

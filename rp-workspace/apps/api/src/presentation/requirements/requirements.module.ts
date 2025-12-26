@@ -8,7 +8,6 @@ import { RequirementReference } from '@domain/entities/requirement-reference.ent
 import { RequirementReferencesController } from './requirement-references.controller';
 import { RequirementReferencesService } from '@application/requirements/services/requirement-references.service';
 import { RequirementReferenceRepository } from '@infrastructure/repositories/requirement-reference.repository';
-import { IRequirementRepository } from '@application/interfaces/repositories/requirement.repository.interface';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Requirement, RequirementReference])],
@@ -27,4 +26,4 @@ import { IRequirementRepository } from '@application/interfaces/repositories/req
   ],
   exports: [RequirementsService],
 })
-export class RequirementsModule { }
+export class RequirementsModule {}

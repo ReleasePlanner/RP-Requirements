@@ -7,24 +7,25 @@ import { FindByEpicOptions } from '@shared/types/repository.types';
 
 /**
  * Requirement Repository Implementation
- * 
+ *
  * Handles data persistence for Requirement entities using TypeORM
  */
 @Injectable()
 export class RequirementRepository implements IRequirementRepository {
   constructor(
     @InjectRepository(Requirement)
-    private readonly repository: Repository<Requirement>
-  ) { }
+    private readonly repository: Repository<Requirement>,
+  ) {}
 
   /**
    * Finds all requirements with optional pagination and filtering
-   * 
+   *
    * @param options - Query options including pagination, sorting, and epic filters
    * @returns Paginated list of requirements with total count
    */
-  async findAll(options?: FindByEpicOptions): Promise<{ items: Requirement[], total: number }> {
-    const query = this.repository.createQueryBuilder('req')
+  async findAll(options?: FindByEpicOptions): Promise<{ items: Requirement[]; total: number }> {
+    const query = this.repository
+      .createQueryBuilder('req')
       .leftJoinAndSelect('req.priority', 'priority')
       .leftJoinAndSelect('req.status', 'status')
       .leftJoinAndSelect('req.type', 'type')
@@ -54,9 +55,19 @@ export class RequirementRepository implements IRequirementRepository {
     return this.repository.findOne({
       where: { requirementId: id },
       relations: [
-        'priority', 'status', 'type', 'complexity', 'source', 'effortType',
-        'riskLevel', 'metric', 'verificationMethod', 'epic', 'productOwner', 'approver'
-      ]
+        'priority',
+        'status',
+        'type',
+        'complexity',
+        'source',
+        'effortType',
+        'riskLevel',
+        'metric',
+        'verificationMethod',
+        'epic',
+        'productOwner',
+        'approver',
+      ],
     });
   }
 
@@ -64,9 +75,19 @@ export class RequirementRepository implements IRequirementRepository {
     return this.repository.find({
       where: { epicId },
       relations: [
-        'priority', 'status', 'type', 'complexity', 'source', 'effortType',
-        'riskLevel', 'metric', 'verificationMethod', 'epic', 'productOwner', 'approver'
-      ]
+        'priority',
+        'status',
+        'type',
+        'complexity',
+        'source',
+        'effortType',
+        'riskLevel',
+        'metric',
+        'verificationMethod',
+        'epic',
+        'productOwner',
+        'approver',
+      ],
     });
   }
 

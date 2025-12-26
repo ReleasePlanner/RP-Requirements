@@ -1,5 +1,5 @@
-import { Controller, Get, Query, UseGuards } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import { Controller, Get, Query } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { MetricsService } from '@shared/services/metrics.service';
 import { PerformanceMonitorService } from '@shared/services/performance-monitor.service';
 import { Public } from '@shared/decorators/public.decorator';
@@ -90,4 +90,3 @@ export class MonitoringController {
     return this.performanceMonitor.getSystemResources();
   }
 }
-

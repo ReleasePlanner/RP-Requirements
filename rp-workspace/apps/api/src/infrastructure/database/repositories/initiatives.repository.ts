@@ -7,7 +7,7 @@ import { WhereClause } from '@shared/types/repository.types';
 
 /**
  * Initiatives Repository Implementation
- * 
+ *
  * Handles data persistence for Initiative entities using TypeORM
  */
 @Injectable()
@@ -15,11 +15,11 @@ export class InitiativesRepository implements IInitiativesRepository {
   constructor(
     @InjectRepository(Initiative)
     private readonly initiativeRepository: Repository<Initiative>,
-  ) { }
+  ) {}
 
   /**
    * Finds all initiatives with optional filtering by portfolio
-   * 
+   *
    * @param options - Query options including portfolio filter
    * @returns List of initiatives
    */

@@ -39,7 +39,7 @@ export class CatalogsRepository implements ICatalogsRepository {
     private readonly approverRepo: Repository<Approver>,
     @InjectRepository(Source)
     private readonly sourceRepo: Repository<Source>,
-  ) { }
+  ) {}
 
   async findAllPriorities(): Promise<Priority[]> {
     return this.priorityRepo.find();
@@ -86,7 +86,10 @@ export class CatalogsRepository implements ICatalogsRepository {
     return this.effortTypeRepo.save(newType);
   }
 
-  async updateEffortEstimateType(id: number, type: Partial<EffortEstimateType>): Promise<EffortEstimateType> {
+  async updateEffortEstimateType(
+    id: number,
+    type: Partial<EffortEstimateType>,
+  ): Promise<EffortEstimateType> {
     await this.effortTypeRepo.update(id, type);
     return this.effortTypeRepo.findOneByOrFail({ effortTypeId: id });
   }
@@ -158,7 +161,10 @@ export class CatalogsRepository implements ICatalogsRepository {
     return this.verificationRepo.save(newMethod);
   }
 
-  async updateVerificationMethod(id: number, method: Partial<VerificationMethod>): Promise<VerificationMethod> {
+  async updateVerificationMethod(
+    id: number,
+    method: Partial<VerificationMethod>,
+  ): Promise<VerificationMethod> {
     await this.verificationRepo.update(id, method);
     return this.verificationRepo.findOneByOrFail({ verificationMethodId: id });
   }
@@ -176,7 +182,10 @@ export class CatalogsRepository implements ICatalogsRepository {
     return this.typeRepo.save(newType);
   }
 
-  async updateRequirementType(id: number, type: Partial<RequirementType>): Promise<RequirementType> {
+  async updateRequirementType(
+    id: number,
+    type: Partial<RequirementType>,
+  ): Promise<RequirementType> {
     await this.typeRepo.update(id, type);
     return this.typeRepo.findOneByOrFail({ typeId: id });
   }

@@ -9,7 +9,7 @@ export class EpicsService {
   constructor(
     @Inject('IEpicsRepository')
     private readonly epicsRepository: IEpicsRepository,
-  ) { }
+  ) {}
 
   async findAll(options?: { initiativeId?: string }): Promise<Epic[]> {
     return this.epicsRepository.findAll(options);

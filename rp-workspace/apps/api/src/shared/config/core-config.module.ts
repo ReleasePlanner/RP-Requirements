@@ -39,8 +39,10 @@ import { configValidationSchema } from './config.validation';
             filename: process.env.LOG_DIR ? `${process.env.LOG_DIR}/error.log` : 'logs/error.log',
             level: 'error',
           }),
-          new winston.transports.File({ 
-            filename: process.env.LOG_DIR ? `${process.env.LOG_DIR}/combined.log` : 'logs/combined.log' 
+          new winston.transports.File({
+            filename: process.env.LOG_DIR
+              ? `${process.env.LOG_DIR}/combined.log`
+              : 'logs/combined.log',
           }),
         ],
       }),

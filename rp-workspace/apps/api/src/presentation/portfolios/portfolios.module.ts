@@ -4,7 +4,6 @@ import { Portfolio } from '@domain/entities/portfolio.entity';
 import { PortfoliosController } from './portfolios.controller';
 import { PortfoliosService } from '@application/portfolios/services/portfolios.service';
 import { PortfolioRepository } from '@infrastructure/repositories/portfolio.repository';
-import { IPortfolioRepository } from '@application/interfaces/repositories/portfolio.repository.interface';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Portfolio])],

@@ -22,15 +22,17 @@ interface RequirementListProps {
     currentOrder?: 'ASC' | 'DESC';
 }
 
+// SortIcon component moved outside to avoid recreating during render
+function SortIcon({ field, currentSort, currentOrder }: { field: string; currentSort?: string; currentOrder?: 'ASC' | 'DESC' }) {
+    if (currentSort !== field) return <div className="ml-1 w-3 h-3 opacity-0 group-hover:opacity-30 inline-block bg-zinc-300 rounded-sm" />;
+    return (
+        <span className="ml-1 text-zinc-800 text-[9px]">
+            {currentOrder === 'ASC' ? '▲' : '▼'}
+        </span>
+    );
+}
+
 export function RequirementList({ data, onSort, currentSort, currentOrder }: RequirementListProps) {
-    const SortIcon = ({ field }: { field: string }) => {
-        if (currentSort !== field) return <div className="ml-1 w-3 h-3 opacity-0 group-hover:opacity-30 inline-block bg-zinc-300 rounded-sm" />;
-        return (
-            <span className="ml-1 text-zinc-800 text-[9px]">
-                {currentOrder === 'ASC' ? '▲' : '▼'}
-            </span>
-        );
-    };
 
     if (!data || data.length === 0) {
         return <div className="p-12 text-center text-zinc-400 text-sm italic font-serif">No requirements found</div>;
@@ -45,13 +47,13 @@ export function RequirementList({ data, onSort, currentSort, currentOrder }: Req
                             className="w-[80px] text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] pl-6 pb-4 pt-6 cursor-pointer group hover:text-black transition-colors"
                             onClick={() => onSort?.('code')}
                         >
-                            ID <SortIcon field="code" />
+                            ID <SortIcon field="code" currentSort={currentSort} currentOrder={currentOrder} />
                         </TableHead>
                         <TableHead
                             className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] pb-4 pt-6 cursor-pointer group hover:text-black transition-colors"
                             onClick={() => onSort?.('title')}
                         >
-                            Requirement <SortIcon field="title" />
+                            Requirement <SortIcon field="title" currentSort={currentSort} currentOrder={currentOrder} />
                         </TableHead>
                         <TableHead className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] pb-4 pt-6 cursor-pointer group hover:text-black transition-colors">Priority</TableHead>
                         <TableHead className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] pb-4 pt-6 cursor-pointer group hover:text-black transition-colors">Effort</TableHead>

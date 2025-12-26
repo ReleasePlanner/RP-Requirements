@@ -9,7 +9,7 @@ import { Initiative } from '@domain/entities/initiative.entity';
 @ApiBearerAuth('JWT-auth')
 @Controller('initiatives')
 export class InitiativesController {
-  constructor(private readonly initiativesService: InitiativesService) { }
+  constructor(private readonly initiativesService: InitiativesService) {}
 
   @Post()
   @ApiOperation({ summary: 'Create a new initiative' })

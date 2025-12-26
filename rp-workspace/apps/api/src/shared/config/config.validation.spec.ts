@@ -1,4 +1,3 @@
-import * as Joi from 'joi';
 import { configValidationSchema } from './config.validation';
 
 describe('configValidationSchema', () => {

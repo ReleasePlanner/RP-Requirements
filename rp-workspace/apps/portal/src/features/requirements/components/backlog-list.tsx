@@ -20,15 +20,17 @@ interface BacklogListProps {
     currentOrder?: 'ASC' | 'DESC';
 }
 
+// SortIcon component moved outside to avoid recreating during render
+function SortIcon({ field, currentSort, currentOrder }: { field: string; currentSort?: string; currentOrder?: 'ASC' | 'DESC' }) {
+    if (currentSort !== field) return <div className="ml-1 w-3 h-3 opacity-0 group-hover:opacity-30 inline-block bg-zinc-300 rounded-sm" />;
+    return (
+        <span className="ml-1 text-zinc-800 text-[9px]">
+            {currentOrder === 'ASC' ? '▲' : '▼'}
+        </span>
+    );
+}
+
 export function BacklogList({ data, onSort, currentSort, currentOrder }: BacklogListProps) {
-    const SortIcon = ({ field }: { field: string }) => {
-        if (currentSort !== field) return <div className="ml-1 w-3 h-3 opacity-0 group-hover:opacity-30 inline-block bg-zinc-300 rounded-sm" />;
-        return (
-            <span className="ml-1 text-zinc-800 text-[9px]">
-                {currentOrder === 'ASC' ? '▲' : '▼'}
-            </span>
-        );
-    };
 
     if (!data || data.length === 0) {
         return <div className="p-12 text-center text-zinc-400 text-sm italic font-serif">No items in the backlog</div>;
@@ -43,16 +45,16 @@ export function BacklogList({ data, onSort, currentSort, currentOrder }: Backlog
                             className="w-[80px] text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] pl-6 pb-4 pt-6 cursor-pointer group hover:text-black transition-colors"
                             onClick={() => onSort?.('id')}
                         >
-                            ID <SortIcon field="id" />
+                            ID <SortIcon field="id" currentSort={currentSort} currentOrder={currentOrder} />
                         </TableHead>
                         <TableHead
                             className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] pb-4 pt-6 cursor-pointer group hover:text-black transition-colors"
                             onClick={() => onSort?.('name')}
                         >
-                            Requirement <SortIcon field="name" />
+                            Requirement <SortIcon field="name" currentSort={currentSort} currentOrder={currentOrder} />
                         </TableHead>
-                        <TableHead className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] pb-4 pt-6 cursor-pointer group hover:text-black transition-colors" onClick={() => onSort?.('priority')}>Priority <SortIcon field="priority" /></TableHead>
-                        <TableHead className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] pb-4 pt-6 cursor-pointer group hover:text-black transition-colors" onClick={() => onSort?.('effortEstimate')}>Effort <SortIcon field="effortEstimate" /></TableHead>
+                        <TableHead className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] pb-4 pt-6 cursor-pointer group hover:text-black transition-colors" onClick={() => onSort?.('priority')}>Priority <SortIcon field="priority" currentSort={currentSort} currentOrder={currentOrder} /></TableHead>
+                        <TableHead className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] pb-4 pt-6 cursor-pointer group hover:text-black transition-colors" onClick={() => onSort?.('effortEstimate')}>Effort <SortIcon field="effortEstimate" currentSort={currentSort} currentOrder={currentOrder} /></TableHead>
                         <TableHead className="text-right text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em] pr-6 pb-4 pt-6">Edit</TableHead>
                     </TableRow>
                 </TableHeader>

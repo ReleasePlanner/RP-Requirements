@@ -1,6 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CatalogsService } from './catalogs.service';
-import { ICatalogsRepository } from '../interfaces/repositories/catalogs.repository.interface';
 
 const mockCatalogsRepository = {
   findAllPriorities: jest.fn(),
