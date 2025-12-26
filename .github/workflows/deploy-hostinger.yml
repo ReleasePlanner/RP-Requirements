@@ -307,6 +307,13 @@ jobs:
           if [ "$USE_PASSWORD" == "true" ]; then
             echo "🔑 Using SSH password authentication..."
             
+            # Guardar contraseña en variable de entorno de forma segura
+            export SSHPASS='${{ secrets.VPS_SSH_PASSWORD }}'
+            
+            # Debugging (sin mostrar la contraseña)
+            PASSWORD_LENGTH=$(echo -n "$SSHPASS" | wc -c)
+            echo "🔍 Password length: $PASSWORD_LENGTH characters"
+            
             # Deshabilitar completamente el agente SSH para evitar intentar usar claves
             unset SSH_AUTH_SOCK
             unset SSH_AGENT_PID
@@ -320,8 +327,8 @@ jobs:
             rm -f ~/.ssh/id_* 2>/dev/null || true
             rm -f ~/.ssh/known_hosts 2>/dev/null || true
             
-            sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' \
-              ssh -v \
+            # Usar sshpass con variable de entorno (más seguro para caracteres especiales)
+            sshpass -e ssh -v \
               -o StrictHostKeyChecking=no \
               -o UserKnownHostsFile=/dev/null \
               -o ConnectTimeout=10 \
@@ -337,14 +344,17 @@ jobs:
               -o GSSAPIAuthentication=no \
               -o HostbasedAuthentication=no \
               ${{ env.VPS_USER }}@${{ env.VPS_HOST }} \
-              "echo 'SSH connection successful'" || {
+              "echo 'SSH connection successful'" 2>&1 | tee /tmp/ssh-test.log || {
               echo "❌ SSH connection test failed with password"
+              echo "📋 Last 20 lines of SSH debug output:"
+              tail -20 /tmp/ssh-test.log || true
               echo ""
               echo "🔍 Troubleshooting:"
-              echo "   1. Verify VPS_SSH_PASSWORD is correct in GitHub Secrets"
-              echo "   2. Test manually: ssh root@${{ env.VPS_HOST }}"
-              echo "   3. Verify VPS_USER is correct (usually 'root')"
-              echo "   4. Check if server allows password authentication"
+              echo "   1. Verify VPS_SSH_PASSWORD is EXACTLY the same as when you manually connect"
+              echo "   2. Test manually: ssh ${{ env.VPS_USER }}@${{ env.VPS_HOST }}"
+              echo "   3. Check for hidden characters or spaces in the password"
+              echo "   4. Verify VPS_USER is correct (usually 'root')"
+              echo "   5. Verify the server allows password authentication"
               exit 0
             }
           elif [ "${{ steps.check-ssh.outputs.has_ssh_key }}" == "true" ]; then
@@ -605,6 +615,17 @@ jobs:
             echo "🔍 Verifying sshpass is available..."
             which sshpass || (echo "⚠️ sshpass not found, installing..." && sudo apt-get update && sudo apt-get install -y sshpass)
             
+            # Guardar contraseña en variable de entorno de forma segura
+            export SSHPASS='${{ secrets.VPS_SSH_PASSWORD }}'
+            
+            # Debugging (sin mostrar la contraseña)
+            PASSWORD_LENGTH=$(echo -n "$SSHPASS" | wc -c)
+            echo "🔍 Password length: $PASSWORD_LENGTH characters"
+            echo "🔍 Password starts with: $(echo -n "$SSHPASS" | head -c 1)***"
+            echo "🔍 Password ends with: ***$(echo -n "$SSHPASS" | tail -c 1)"
+            echo "🔍 User: ${{ env.VPS_USER }}"
+            echo "🔍 Host: ${{ env.VPS_HOST }}"
+            
             # Deshabilitar completamente el agente SSH para evitar intentar usar claves
             unset SSH_AUTH_SOCK
             unset SSH_AGENT_PID
@@ -618,9 +639,9 @@ jobs:
             rm -f ~/.ssh/id_* 2>/dev/null || true
             rm -f ~/.ssh/known_hosts 2>/dev/null || true
             
-            # Usar sshpass con opciones MÁS ESTRICTAS para forzar solo contraseña
-            sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' \
-              scp -v \
+            # Probar primero con ssh para verificar que la contraseña funciona
+            echo "🧪 Testing SSH connection first..."
+            sshpass -e ssh -v \
               -o StrictHostKeyChecking=no \
               -o UserKnownHostsFile=/dev/null \
               -o ConnectTimeout=10 \
@@ -631,9 +652,39 @@ jobs:
               -o NumberOfPasswordPrompts=1 \
               -o IdentitiesOnly=yes \
               -o IdentityFile=/dev/null \
-              -o IdentitiesOnly=yes \
-              -o PasswordAuthentication=yes \
+              -o KbdInteractiveAuthentication=no \
+              -o ChallengeResponseAuthentication=no \
+              -o GSSAPIAuthentication=no \
+              -o HostbasedAuthentication=no \
+              ${{ env.VPS_USER }}@${{ env.VPS_HOST }} \
+              "echo 'SSH test successful'" 2>&1 | tee /tmp/ssh-test.log || {
+              echo "❌ SSH connection test failed"
+              echo "📋 Last 20 lines of SSH debug output:"
+              tail -20 /tmp/ssh-test.log || true
+              echo ""
+              echo "💡 Troubleshooting:"
+              echo "   1. Verify VPS_SSH_PASSWORD is EXACTLY the same as when you manually connect"
+              echo "   2. Test manually: ssh ${{ env.VPS_USER }}@${{ env.VPS_HOST }}"
+              echo "   3. Check for hidden characters or spaces in the password"
+              echo "   4. Verify VPS_USER is correct (usually 'root')"
+              echo "   5. Verify the server allows password authentication"
+              exit 1
+            }
+            
+            echo "✅ SSH connection test passed, proceeding with SCP..."
+            
+            # Usar sshpass con variable de entorno (más seguro para caracteres especiales)
+            sshpass -e scp -v \
+              -o StrictHostKeyChecking=no \
+              -o UserKnownHostsFile=/dev/null \
+              -o ConnectTimeout=10 \
+              -o PreferredAuthentications=password \
               -o PubkeyAuthentication=no \
+              -o PasswordAuthentication=yes \
+              -o BatchMode=yes \
+              -o NumberOfPasswordPrompts=1 \
+              -o IdentitiesOnly=yes \
+              -o IdentityFile=/dev/null \
               -o KbdInteractiveAuthentication=no \
               -o ChallengeResponseAuthentication=no \
               -o GSSAPIAuthentication=no \
@@ -695,6 +746,9 @@ jobs:
           if [ "$USE_PASSWORD" == "true" ]; then
             echo "🔑 Deploying using SSH password..."
             
+            # Guardar contraseña en variable de entorno de forma segura
+            export SSHPASS='${{ secrets.VPS_SSH_PASSWORD }}'
+            
             # Deshabilitar completamente el agente SSH para evitar intentar usar claves
             unset SSH_AUTH_SOCK
             unset SSH_AGENT_PID
@@ -708,8 +762,8 @@ jobs:
             rm -f ~/.ssh/id_* 2>/dev/null || true
             rm -f ~/.ssh/known_hosts 2>/dev/null || true
             
-            sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' \
-              ssh -v \
+            # Usar sshpass con variable de entorno (más seguro para caracteres especiales)
+            sshpass -e ssh -v \
               -o StrictHostKeyChecking=no \
               -o UserKnownHostsFile=/dev/null \
               -o ConnectTimeout=10 \

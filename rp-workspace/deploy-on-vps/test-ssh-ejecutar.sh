@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "=========================================="
-echo "  Test SSH Connection - Interactivo"
+echo "  Test SSH Connection - Ejecución Directa"
 echo "=========================================="
 echo ""
 
@@ -15,21 +15,25 @@ NC='\033[0m' # No Color
 # Valores por defecto (pueden ser sobrescritos)
 VPS_HOST="${VPS_HOST:-72.60.63.240}"
 VPS_USER="${VPS_USER:-root}"
+VPS_SSH_PASSWORD="${VPS_SSH_PASSWORD:-}"
 
 echo "🔍 Configuración actual:"
 echo "  VPS_HOST: $VPS_HOST"
 echo "  VPS_USER: $VPS_USER"
-echo ""
-
-# Solicitar contraseña de forma segura
-read -sp "🔐 Ingresa la contraseña SSH (no se mostrará): " VPS_SSH_PASSWORD
-echo ""
-echo ""
-
-if [ -z "$VPS_SSH_PASSWORD" ]; then
-    echo -e "${RED}❌ No se ingresó contraseña${NC}"
+if [ -n "$VPS_SSH_PASSWORD" ]; then
+    echo "  VPS_SSH_PASSWORD: (configurada desde variable de entorno)"
+else
+    echo "  VPS_SSH_PASSWORD: (NO configurada)"
+    echo ""
+    echo -e "${YELLOW}💡 Para usar este script, configura la variable de entorno:${NC}"
+    echo "   export VPS_SSH_PASSWORD='tu_contraseña'"
+    echo "   bash rp-workspace/deploy-on-vps/test-ssh-ejecutar.sh"
+    echo ""
+    echo -e "${YELLOW}O usa el script interactivo:${NC}"
+    echo "   bash rp-workspace/deploy-on-vps/test-ssh-interactivo.sh"
     exit 1
 fi
+echo ""
 
 # Verificar que sshpass esté instalado
 if ! command -v sshpass &> /dev/null; then
@@ -62,11 +66,8 @@ if ! command -v sshpass &> /dev/null; then
         echo "   1. Instala Chocolatey si no lo tienes"
         echo "   2. Ejecuta: choco install sshpass"
         echo ""
-        echo "   Opción 4: Usar expect (alternativa)"
-        echo "   Si tienes expect instalado, podemos modificar el script"
-        echo ""
-        echo -e "${YELLOW}💡 Mientras tanto, puedes usar el script manualmente con expect o conectarte directamente:${NC}"
-        echo "   ssh $VPS_USER@$VPS_HOST"
+        echo -e "${YELLOW}💡 Mientras tanto, puedes usar el script interactivo que maneja mejor Windows:${NC}"
+        echo "   bash rp-workspace/deploy-on-vps/test-ssh-interactivo.sh"
         echo ""
         exit 1
     else
@@ -100,6 +101,8 @@ unset SSH_AGENT_PID
 export SSH_AUTH_SOCK=""
 export SSH_AGENT_PID=""
 ssh-add -D 2>/dev/null || true
+rm -f ~/.ssh/id_* 2>/dev/null || true
+rm -f ~/.ssh/known_hosts 2>/dev/null || true
 echo -e "${GREEN}✅ Agente SSH deshabilitado${NC}"
 echo ""
 
@@ -125,7 +128,7 @@ if sshpass -p "$VPS_SSH_PASSWORD" \
         -o HostbasedAuthentication=no \
         "$VPS_USER@$VPS_HOST" \
         "echo '✅ SSH connection successful!' && echo 'Hostname:' && hostname && echo 'Uptime:' && uptime" 2>&1; then
-
+    
     echo ""
     echo -e "${GREEN}=========================================="
     echo "  ✅ CONEXIÓN SSH EXITOSA"
@@ -133,9 +136,9 @@ if sshpass -p "$VPS_SSH_PASSWORD" \
     echo ""
     echo "La contraseña funciona correctamente."
     echo ""
-
+    
     echo -e "${BLUE}[4/4] Probando comandos adicionales...${NC}"
-
+    
     # Probar docker
     echo "Verificando Docker..."
     DOCKER_OUTPUT=$(sshpass -p "$VPS_SSH_PASSWORD" \
@@ -149,14 +152,14 @@ if sshpass -p "$VPS_SSH_PASSWORD" \
             -o IdentityFile=/dev/null \
             "$VPS_USER@$VPS_HOST" \
             "docker --version 2>&1" 2>/dev/null)
-
+    
     if [ $? -eq 0 ]; then
         echo -e "${GREEN}✅ Docker instalado:${NC}"
         echo "$DOCKER_OUTPUT"
     else
         echo -e "${YELLOW}⚠️ Docker no está instalado o no está accesible${NC}"
     fi
-
+    
     # Probar docker-compose
     echo ""
     echo "Verificando Docker Compose..."
@@ -171,14 +174,14 @@ if sshpass -p "$VPS_SSH_PASSWORD" \
             -o IdentityFile=/dev/null \
             "$VPS_USER@$VPS_HOST" \
             "docker-compose --version 2>&1 || docker compose version 2>&1" 2>/dev/null)
-
+    
     if [ $? -eq 0 ]; then
         echo -e "${GREEN}✅ Docker Compose instalado:${NC}"
         echo "$COMPOSE_OUTPUT"
     else
         echo -e "${YELLOW}⚠️ Docker Compose no está instalado${NC}"
     fi
-
+    
     # Probar directorio
     echo ""
     echo "Verificando directorio de deployment..."
@@ -193,14 +196,14 @@ if sshpass -p "$VPS_SSH_PASSWORD" \
             -o IdentityFile=/dev/null \
             "$VPS_USER@$VPS_HOST" \
             "mkdir -p /opt/modules/requirements-management && ls -la /opt/modules 2>&1" 2>/dev/null)
-
+    
     if [ $? -eq 0 ]; then
         echo -e "${GREEN}✅ Directorio accesible:${NC}"
         echo "$DIR_OUTPUT"
     else
         echo -e "${YELLOW}⚠️ No se pudo acceder al directorio${NC}"
     fi
-
+    
     echo ""
     echo -e "${GREEN}=========================================="
     echo "  ✅ TODAS LAS PRUEBAS PASARON"
@@ -215,7 +218,7 @@ if sshpass -p "$VPS_SSH_PASSWORD" \
     echo "🔗 GitHub Secrets:"
     echo "   https://github.com/TU_USUARIO/TU_REPO/settings/secrets/actions"
     echo ""
-
+    
 else
     ERROR_OUTPUT=$?
     echo ""
