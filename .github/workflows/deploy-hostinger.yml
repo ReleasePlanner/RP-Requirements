@@ -288,8 +288,14 @@ jobs:
           elif [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
             echo "🔑 Using SSH password authentication..."
             sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' \
-              ssh -v -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+              ssh -v -o StrictHostKeyChecking=no \
+              -o UserKnownHostsFile=/dev/null \
               -o ConnectTimeout=10 \
+              -o PreferredAuthentications=password \
+              -o PubkeyAuthentication=no \
+              -o PasswordAuthentication=yes \
+              -o BatchMode=yes \
+              -o NumberOfPasswordPrompts=1 \
               ${{ env.VPS_USER }}@${{ env.VPS_HOST }} \
               "echo 'SSH connection successful'" || {
               echo "❌ SSH connection test failed with password"
@@ -511,15 +517,24 @@ jobs:
           # Priorizar contraseña si está configurada (más confiable cuando está configurada)
           if [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
             echo "📤 Copying deployment script using SSH password..."
+            echo "🔍 Verifying sshpass is available..."
+            which sshpass || echo "⚠️ sshpass not found, will be installed"
+            
+            # Usar sshpass con opciones para evitar autenticación interactiva
             sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' \
-              scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+              scp -o StrictHostKeyChecking=no \
+              -o UserKnownHostsFile=/dev/null \
               -o ConnectTimeout=10 \
               -o PreferredAuthentications=password \
               -o PubkeyAuthentication=no \
+              -o PasswordAuthentication=yes \
+              -o BatchMode=yes \
+              -o NumberOfPasswordPrompts=1 \
               deploy-remote.sh ${{ env.VPS_USER }}@${{ env.VPS_HOST }}:/tmp/deploy-remote.sh || {
               echo "❌ Failed to copy deployment script via SSH password"
               echo "💡 Verify VPS_SSH_PASSWORD is correct in GitHub Secrets"
               echo "💡 Verify VPS_USER is correct (usually 'root')"
+              echo "💡 Verify VPS_HOST is correct"
               exit 1
             }
           elif [ -n "${{ secrets.VPS_SSH_KEY }}" ]; then
@@ -565,14 +580,19 @@ jobs:
           if [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
             echo "🔑 Deploying using SSH password..."
             sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' \
-              ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+              ssh -o StrictHostKeyChecking=no \
+              -o UserKnownHostsFile=/dev/null \
               -o ConnectTimeout=10 \
               -o PreferredAuthentications=password \
               -o PubkeyAuthentication=no \
+              -o PasswordAuthentication=yes \
+              -o BatchMode=yes \
+              -o NumberOfPasswordPrompts=1 \
               ${{ env.VPS_USER }}@${{ env.VPS_HOST }} \
               "GITHUB_TOKEN='${{ secrets.GITHUB_TOKEN }}' bash /tmp/deploy-remote.sh" || {
               echo "❌ Deployment failed via SSH password"
               echo "💡 Verify VPS_SSH_PASSWORD is correct in GitHub Secrets"
+              echo "💡 Verify VPS_USER is correct (usually 'root')"
               exit 1
             }
           elif [ -n "${{ secrets.VPS_SSH_KEY }}" ]; then
