@@ -412,6 +412,11 @@ jobs:
           # Stop existing containers
           echo "🛑 Stopping existing containers..."
           docker-compose down || true
+          
+          # Note: If you see "role root does not exist" errors, it may be due to:
+          # 1. Old volume data with different user configuration
+          # 2. Healthcheck running before PostgreSQL is fully initialized
+          # Solution: Remove old volumes if needed: docker volume rm rp-requirements-postgres-data
 
           # Pull latest images if using registry
           if [ -n "${{ secrets.DOCKER_REGISTRY }}" ]; then

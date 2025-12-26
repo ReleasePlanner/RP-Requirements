@@ -5,6 +5,8 @@ jest.mock('nest-winston', () => ({
   },
 }));
 
+// Nota: bcrypt está mockeado en __mocks__/bcrypt.js para evitar problemas con módulos nativos en CI
+
 // Configuración global de tests
 beforeAll(async () => {
   // Configuración inicial si es necesaria

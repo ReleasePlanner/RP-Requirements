@@ -9,8 +9,6 @@ import { LoginDto } from '../dto/login.dto';
 import { RegisterDto } from '../dto/register.dto';
 import { Sponsor } from '@domain/entities/sponsor.entity';
 
-jest.mock('bcrypt');
-
 describe('AuthService', () => {
   let service: AuthService;
   let sponsorRepository: jest.Mocked<ISponsorRepository>;
