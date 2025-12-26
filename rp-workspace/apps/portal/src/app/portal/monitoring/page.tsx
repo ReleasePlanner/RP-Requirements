@@ -2,6 +2,9 @@
 
 import { MonitoringDashboard } from '@/features/monitoring/components/monitoring-dashboard';
 
+// Force dynamic rendering to avoid prerendering issues with React Query
+export const dynamic = 'force-dynamic';
+
 export default function MonitoringPage() {
     return (
         <div className="space-y-6">
