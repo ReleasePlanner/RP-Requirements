@@ -245,15 +245,34 @@ jobs:
       - name: Check SSH credentials
         id: check-ssh
         run: |
+          echo "🔍 Checking SSH credentials..."
+          
+          # Verificar si hay clave SSH
           if [ -n "${{ secrets.VPS_SSH_KEY }}" ]; then
+            echo "✅ VPS_SSH_KEY is configured"
             echo "has_ssh_key=true" >> $GITHUB_OUTPUT
           else
+            echo "⚠️ VPS_SSH_KEY is not configured"
             echo "has_ssh_key=false" >> $GITHUB_OUTPUT
           fi
+          
+          # Verificar si hay contraseña SSH (PRIORITARIO)
           if [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
+            echo "✅ VPS_SSH_PASSWORD is configured (WILL BE USED)"
             echo "has_ssh_password=true" >> $GITHUB_OUTPUT
           else
+            echo "⚠️ VPS_SSH_PASSWORD is not configured"
             echo "has_ssh_password=false" >> $GITHUB_OUTPUT
+          fi
+          
+          # Mostrar resumen
+          echo "📋 Authentication method will be:"
+          if [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
+            echo "   🔑 PASSWORD (prioritized)"
+          elif [ -n "${{ secrets.VPS_SSH_KEY }}" ]; then
+            echo "   🔐 SSH KEY"
+          else
+            echo "   ❌ NONE (will fail)"
           fi
 
       - name: Setup SSH
@@ -541,6 +560,13 @@ jobs:
             echo "❌ VPS_HOST secret is not configured. Cannot deploy."
             exit 1
           fi
+
+          # Debug: Mostrar valores de outputs
+          echo "🔍 Debug SSH credentials check:"
+          echo "  has_ssh_password: '${{ steps.check-ssh.outputs.has_ssh_password }}'"
+          echo "  has_ssh_key: '${{ steps.check-ssh.outputs.has_ssh_key }}'"
+          echo "  VPS_SSH_PASSWORD configured: ${{ secrets.VPS_SSH_PASSWORD != '' }}"
+          echo "  VPS_SSH_KEY configured: ${{ secrets.VPS_SSH_KEY != '' }}"
 
           # Priorizar contraseña si está configurada (más confiable cuando está configurada)
           if [ "${{ steps.check-ssh.outputs.has_ssh_password }}" == "true" ]; then
