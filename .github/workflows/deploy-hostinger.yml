@@ -243,8 +243,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup SSH
+        if: ${{ secrets.VPS_SSH_KEY != '' }}
         uses: webfactory/ssh-agent@v0.9.0
-        continue-on-error: true
         with:
           ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
 
@@ -264,21 +264,36 @@ jobs:
           
           if [ -n "${{ secrets.VPS_SSH_KEY }}" ]; then
             echo "🔑 Using SSH key authentication..."
-            ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+            echo "📋 Verifying SSH key format..."
+            if ! ssh-add -l 2>/dev/null | grep -q "The agent has no identities"; then
+              echo "✅ SSH key loaded in agent"
+              ssh-add -l
+            else
+              echo "⚠️ SSH key not loaded in agent (this is OK if using password)"
+            fi
+            
+            ssh -v -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
               -o ConnectTimeout=10 \
               ${{ env.VPS_USER }}@${{ env.VPS_HOST }} \
               "echo 'SSH connection successful'" || {
-              echo "⚠️ SSH connection test failed with SSH key"
+              echo "❌ SSH connection test failed with SSH key"
+              echo "💡 Troubleshooting steps:"
+              echo "   1. Verify VPS_SSH_KEY in GitHub Secrets includes BEGIN and END lines"
+              echo "   2. Verify the public key is in ~/.ssh/authorized_keys on the VPS"
+              echo "   3. Check file permissions: chmod 600 ~/.ssh/authorized_keys"
+              echo "   4. Verify VPS_USER is correct (usually 'root')"
+              echo "   5. Try using VPS_SSH_PASSWORD instead for testing"
               exit 0
             }
           elif [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
             echo "🔑 Using SSH password authentication..."
             sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' \
-              ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+              ssh -v -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
               -o ConnectTimeout=10 \
               ${{ env.VPS_USER }}@${{ env.VPS_HOST }} \
               "echo 'SSH connection successful'" || {
-              echo "⚠️ SSH connection test failed with password"
+              echo "❌ SSH connection test failed with password"
+              echo "💡 Verify VPS_SSH_PASSWORD is correct in GitHub Secrets"
               exit 0
             }
           else
@@ -495,9 +510,26 @@ jobs:
           
           if [ -n "${{ secrets.VPS_SSH_KEY }}" ]; then
             echo "📤 Copying deployment script using SSH key..."
-            scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+            echo "🔍 Verifying SSH agent has key..."
+            ssh-add -l || echo "⚠️ SSH agent may not have key loaded"
+            
+            scp -v -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
               -o ConnectTimeout=10 \
-              deploy-remote.sh ${{ env.VPS_USER }}@${{ env.VPS_HOST }}:/tmp/deploy-remote.sh
+              deploy-remote.sh ${{ env.VPS_USER }}@${{ env.VPS_HOST }}:/tmp/deploy-remote.sh || {
+              echo "❌ Failed to copy deployment script via SSH key"
+              echo "💡 Common issues:"
+              echo "   1. SSH key not authorized on server"
+              echo "   2. Public key missing from ~/.ssh/authorized_keys"
+              echo "   3. Wrong permissions on ~/.ssh/authorized_keys (should be 600)"
+              echo "   4. Wrong user (VPS_USER should match the user with authorized_keys)"
+              echo ""
+              echo "🔧 Fix steps:"
+              echo "   1. Connect to VPS: ssh root@${{ env.VPS_HOST }}"
+              echo "   2. Add public key: echo 'PUBLIC_KEY' >> ~/.ssh/authorized_keys"
+              echo "   3. Fix permissions: chmod 600 ~/.ssh/authorized_keys"
+              echo "   4. Verify: chmod 700 ~/.ssh"
+              exit 1
+            }
           elif [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
             echo "📤 Copying deployment script using SSH password..."
             sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' \

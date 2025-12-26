@@ -313,6 +313,15 @@ Si quieres tener diferentes secrets para desarrollo y producción:
 
 ## 🆘 Troubleshooting
 
+### Error: "Permission denied (publickey,password)"
+
+Este es el error más común. Ver la guía completa: [Troubleshooting SSH Permission Denied](TROUBLESHOOTING_SSH_PERMISSION_DENIED.md)
+
+**Solución rápida:**
+1. Verifica que la clave SSH en GitHub Secrets tenga el formato correcto (BEGIN/END)
+2. Agrega la clave pública al VPS: `ssh-copy-id -i KEY.pub root@IP`
+3. Ajusta permisos: `chmod 600 ~/.ssh/authorized_keys` y `chmod 700 ~/.ssh`
+
 ### Error: "No SSH credentials provided"
 
 **Causa**: No has configurado `VPS_SSH_KEY` ni `VPS_SSH_PASSWORD`

@@ -294,6 +294,7 @@ Todos los archivos de deployment están en [`deploy-on-vps/`](rp-workspace/deplo
 - **[CHECKLIST_VERIFICACION.md](rp-workspace/deploy-on-vps/CHECKLIST_VERIFICACION.md)** - ✅ Checklist de verificación completa
 - **[TROUBLESHOOTING_GITHUB_ACTIONS.md](rp-workspace/deploy-on-vps/TROUBLESHOOTING_GITHUB_ACTIONS.md)** - 🔧 Troubleshooting GitHub Actions
 - **[TROUBLESHOOTING_SSH.md](rp-workspace/deploy-on-vps/TROUBLESHOOTING_SSH.md)** - 🔧 Troubleshooting SSH
+- **[TROUBLESHOOTING_SSH_PERMISSION_DENIED.md](rp-workspace/deploy-on-vps/TROUBLESHOOTING_SSH_PERMISSION_DENIED.md)** - 🔧 **Permission denied (publickey,password)** - Solución paso a paso
 - Ver [`deploy-on-vps/`](rp-workspace/deploy-on-vps/) para todos los scripts y documentación
 
 #### 📊 Monitoreo y Verificación
