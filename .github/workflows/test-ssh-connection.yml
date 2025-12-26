@@ -30,8 +30,22 @@ jobs:
             echo "⚠️ VPS_USER not configured, will use 'root'"
           fi
 
+      - name: Check SSH credentials
+        id: check-ssh
+        run: |
+          if [ -n "${{ secrets.VPS_SSH_KEY }}" ]; then
+            echo "has_ssh_key=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_ssh_key=false" >> $GITHUB_OUTPUT
+          fi
+          if [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
+            echo "has_ssh_password=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_ssh_password=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Setup SSH Key (only if no password)
-        if: secrets.VPS_SSH_KEY != ''
+        if: steps.check-ssh.outputs.has_ssh_key == 'true' && steps.check-ssh.outputs.has_ssh_password == 'false'
         continue-on-error: true
         uses: webfactory/ssh-agent@v0.9.0
         with:
