@@ -254,21 +254,39 @@ jobs:
           sudo apt-get install -y openssh-client sshpass || true
 
       - name: Test SSH connection
+        continue-on-error: true
         run: |
           echo "🔐 Testing SSH connection..."
+          if [ -z "${{ secrets.VPS_HOST }}" ]; then
+            echo "⚠️ VPS_HOST secret is not configured. Skipping SSH connection test."
+            exit 0
+          fi
+          
           if [ -n "${{ secrets.VPS_SSH_KEY }}" ]; then
+            echo "🔑 Using SSH key authentication..."
             ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+              -o ConnectTimeout=10 \
               ${{ env.VPS_USER }}@${{ env.VPS_HOST }} \
-              "echo 'SSH connection successful'"
+              "echo 'SSH connection successful'" || {
+              echo "⚠️ SSH connection test failed with SSH key"
+              exit 0
+            }
           elif [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
+            echo "🔑 Using SSH password authentication..."
             sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' \
               ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+              -o ConnectTimeout=10 \
               ${{ env.VPS_USER }}@${{ env.VPS_HOST }} \
-              "echo 'SSH connection successful'"
+              "echo 'SSH connection successful'" || {
+              echo "⚠️ SSH connection test failed with password"
+              exit 0
+            }
           else
-            echo "❌ No SSH credentials provided"
-            exit 1
+            echo "⚠️ No SSH credentials (VPS_SSH_KEY or VPS_SSH_PASSWORD) provided. Skipping SSH connection test."
+            echo "💡 This is OK if you're testing the build process without deployment."
+            exit 0
           fi
+          echo "✅ SSH connection test successful"
 
       - name: Debug Environment Variables
         run: |
@@ -470,21 +488,41 @@ jobs:
 
       - name: Copy deployment script to VPS
         run: |
+          if [ -z "${{ secrets.VPS_HOST }}" ]; then
+            echo "❌ VPS_HOST secret is not configured. Cannot deploy."
+            exit 1
+          fi
+          
           if [ -n "${{ secrets.VPS_SSH_KEY }}" ]; then
+            echo "📤 Copying deployment script using SSH key..."
             scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+              -o ConnectTimeout=10 \
               deploy-remote.sh ${{ env.VPS_USER }}@${{ env.VPS_HOST }}:/tmp/deploy-remote.sh
           elif [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
+            echo "📤 Copying deployment script using SSH password..."
             sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' \
               scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+              -o ConnectTimeout=10 \
               deploy-remote.sh ${{ env.VPS_USER }}@${{ env.VPS_HOST }}:/tmp/deploy-remote.sh
+          else
+            echo "❌ No SSH credentials (VPS_SSH_KEY or VPS_SSH_PASSWORD) provided."
+            echo "💡 Please configure VPS_SSH_KEY or VPS_SSH_PASSWORD in GitHub Secrets to enable deployment."
+            exit 1
           fi
+          echo "✅ Deployment script copied successfully"
 
       - name: Execute deployment on VPS
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "🚀 Executing deployment on VPS..."
+          if [ -z "${{ secrets.VPS_HOST }}" ]; then
+            echo "❌ VPS_HOST secret is not configured. Cannot deploy."
+            exit 1
+          fi
+          
           if [ -n "${{ secrets.VPS_SSH_KEY }}" ]; then
+            echo "🔑 Deploying using SSH key..."
             ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
               -o ConnectTimeout=10 \
               ${{ env.VPS_USER }}@${{ env.VPS_HOST }} \
@@ -493,6 +531,7 @@ jobs:
               exit 1
             }
           elif [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
+            echo "🔑 Deploying using SSH password..."
             sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' \
               ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
               -o ConnectTimeout=10 \
@@ -502,9 +541,11 @@ jobs:
               exit 1
             }
           else
-            echo "❌ No SSH credentials available"
+            echo "❌ No SSH credentials (VPS_SSH_KEY or VPS_SSH_PASSWORD) provided."
+            echo "💡 Please configure VPS_SSH_KEY or VPS_SSH_PASSWORD in GitHub Secrets to enable deployment."
             exit 1
           fi
+          echo "✅ Deployment executed successfully"
 
       - name: Verify deployment
         run: |

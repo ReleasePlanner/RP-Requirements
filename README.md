@@ -182,8 +182,10 @@ El sistema incluye deployment automático a VPS Hostinger mediante GitHub Action
 
 1. **Configurar Secrets en GitHub**:
 
-   - Ve a: `Settings > Secrets and variables > Actions`
-   - Agrega los secrets requeridos (ver [deploy-on-vps/GITHUB_HOSTINGER_INTEGRATION.md](rp-workspace/deploy-on-vps/GITHUB_HOSTINGER_INTEGRATION.md))
+   - ⚡ **Resumen Rápido**: [Resumen Configuración Secrets](rp-workspace/deploy-on-vps/RESUMEN_CONFIGURACION_SECRETS.md) (5 minutos)
+   - 📖 **Guía Completa**: [Configurar Secrets en GitHub](rp-workspace/deploy-on-vps/CONFIGURAR_SECRETS_GITHUB.md) ⭐ (guía detallada paso a paso)
+   - Ve a: `Settings > Secrets and variables > Actions` en tu repositorio
+   - Agrega los secrets requeridos (ver guías arriba)
 
 2. **Ejecutar Test SSH** (Recomendado primero):
 
@@ -203,24 +205,33 @@ El sistema incluye deployment automático a VPS Hostinger mediante GitHub Action
 
 #### Secrets Requeridos
 
-```bash
-# Conexión VPS
-VPS_HOST=72.60.63.240
-VPS_USER=root
-VPS_SSH_PASSWORD=<tu-contraseña-ssh>
+**📖 Guía Completa**: Ver [Configurar Secrets en GitHub](rp-workspace/deploy-on-vps/CONFIGURAR_SECRETS_GITHUB.md)
 
-# Base de Datos
-DB_USERNAME=requirements_user
-DB_PASSWORD=<tu-password-db>
-DB_DATABASE=requirements_db
+**Configuración Rápida:**
 
-# JWT
-JWT_SECRET=<tu-secret-min-32-chars>
+1. Ve a: `Settings > Secrets and variables > Actions` en tu repositorio GitHub
+2. Agrega los siguientes secrets:
 
-# URLs (opcionales)
-NEXT_PUBLIC_API_URL_DEV=http://requirements-api.beyondnet.cloud/api/v1
-NEXT_PUBLIC_API_URL_PRODUCTION=https://requirements-api.beyondnet.cloud/api/v1
-```
+**🔴 Obligatorios:**
+
+- `VPS_HOST` - IP o dominio de tu VPS (ej: `72.60.63.240`)
+- `VPS_USER` - Usuario SSH (ej: `root`)
+- `VPS_SSH_KEY` **O** `VPS_SSH_PASSWORD` - Credenciales SSH (recomendado: usar SSH Key)
+- `DB_USERNAME` - Usuario PostgreSQL (ej: `requirements_user`)
+- `DB_PASSWORD` - Contraseña PostgreSQL
+- `DB_DATABASE` - Nombre de BD (ej: `requirements_db`)
+- `JWT_SECRET` - Secret JWT (mínimo 32 caracteres)
+
+**🟡 Opcionales:**
+
+- `DB_PORT` - Puerto PostgreSQL (default: `5432`)
+- `JWT_EXPIRES_IN` - Expiración token (default: `1d`)
+- `NEXT_PUBLIC_API_URL_DEV` - URL API desarrollo
+- `NEXT_PUBLIC_API_URL_PRODUCTION` - URL API producción
+- `API_DEV_URL`, `API_PRODUCTION_URL` - URLs completas para health checks
+- `PORTAL_DEV_URL`, `PORTAL_PRODUCTION_URL` - URLs del Portal
+
+**💡 Tip**: Usa SSH Key en lugar de contraseña para mayor seguridad. Ver la guía completa para instrucciones detalladas.
 
 ### Deployment Manual en VPS
 
@@ -273,6 +284,8 @@ Toda la documentación está organizada en [`docs/`](rp-workspace/docs/) y [`dep
 
 Todos los archivos de deployment están en [`deploy-on-vps/`](rp-workspace/deploy-on-vps/):
 
+- **[RESUMEN_CONFIGURACION_SECRETS.md](rp-workspace/deploy-on-vps/RESUMEN_CONFIGURACION_SECRETS.md)** - ⚡ **Resumen Rápido** - Configuración en 5 minutos
+- **[CONFIGURAR_SECRETS_GITHUB.md](rp-workspace/deploy-on-vps/CONFIGURAR_SECRETS_GITHUB.md)** - 🔐 **⭐ CÓMO CONFIGURAR SECRETS EN GITHUB** - Guía paso a paso completa
 - **[GITHUB_HOSTINGER_INTEGRATION.md](rp-workspace/deploy-on-vps/GITHUB_HOSTINGER_INTEGRATION.md)** - 🔗 **GitHub Actions Integration** - Deployment automático desde GitHub
 - **[PRIMER_DEPLOYMENT.md](rp-workspace/deploy-on-vps/PRIMER_DEPLOYMENT.md)** - ⭐ **Guía del Primer Deployment**
 - **[EJECUTAR_TEST_SSH.md](rp-workspace/deploy-on-vps/EJECUTAR_TEST_SSH.md)** - 🧪 Ejecutar Test SSH Connection
