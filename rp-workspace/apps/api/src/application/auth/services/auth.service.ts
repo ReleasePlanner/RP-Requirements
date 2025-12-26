@@ -50,7 +50,7 @@ export class AuthService {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password, ...result } = sponsor;
+    const { password: _unusedPassword, ...result } = sponsor;
     return result;
   }
 

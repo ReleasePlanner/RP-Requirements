@@ -7,8 +7,8 @@ const mockCatalogsService = {
   findAllStatuses: jest.fn(),
   findAllRiskLevels: jest.fn(),
   findAllComplexities: jest.fn(),
-  findAllEffortTypes: jest.fn(),
-  findAllTypes: jest.fn(),
+  findAllEffortEstimateTypes: jest.fn(),
+  findAllRequirementTypes: jest.fn(),
 };
 
 describe('CatalogsController', () => {
@@ -58,13 +58,13 @@ describe('CatalogsController', () => {
 
   it('should return effort types', async () => {
     const result = [{ effortEstimateTypeId: 1, name: 'Points' }];
-    mockCatalogsService.findAllEffortTypes.mockResolvedValue(result);
+    mockCatalogsService.findAllEffortEstimateTypes.mockResolvedValue(result);
     expect(await controller.findAllEffortTypes()).toBe(result);
   });
 
   it('should return types', async () => {
     const result = [{ typeId: 1, name: 'Bug' }];
-    mockCatalogsService.findAllTypes.mockResolvedValue(result);
+    mockCatalogsService.findAllRequirementTypes.mockResolvedValue(result);
     expect(await controller.findAllTypes()).toBe(result);
   });
 });

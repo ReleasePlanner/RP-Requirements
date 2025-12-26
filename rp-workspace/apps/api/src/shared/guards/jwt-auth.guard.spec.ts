@@ -5,6 +5,7 @@ import { ExecutionContext } from '@nestjs/common';
 
 describe('JwtAuthGuard', () => {
   let guard: JwtAuthGuard;
+  let reflector: Reflector;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -28,17 +29,17 @@ describe('JwtAuthGuard', () => {
   });
 
   it('should inject mock user and return true', () => {
+    const mockRequest: any = {};
     const mockContext = {
       switchToHttp: () => ({
-        getRequest: () => ({}),
+        getRequest: () => mockRequest,
       }),
     } as ExecutionContext;
 
     const result = guard.canActivate(mockContext);
-    const request = mockContext.switchToHttp().getRequest();
 
     expect(result).toBe(true);
-    expect((request as any).user).toBeDefined();
-    expect((request as any).user.userId).toBe('mock-sys-admin');
+    expect(mockRequest.user).toBeDefined();
+    expect(mockRequest.user.userId).toBe('mock-sys-admin');
   });
 });

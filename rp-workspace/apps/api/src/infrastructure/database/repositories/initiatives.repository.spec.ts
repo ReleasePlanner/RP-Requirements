@@ -15,6 +15,7 @@ const mockTypeOrmRepository = {
 
 describe('InitiativesRepository', () => {
   let repository: InitiativesRepository;
+  let typeOrmRepository: Repository<Initiative>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({

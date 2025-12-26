@@ -8,6 +8,10 @@ import { Complexity } from '@domain/entities/complexity.entity';
 import { EffortEstimateType } from '@domain/entities/effort-estimate-type.entity';
 import { RequirementType } from '@domain/entities/requirement-type.entity';
 import { VerificationMethod } from '@domain/entities/verification-method.entity';
+import { Metric } from '@domain/entities/metric.entity';
+import { ProductOwner } from '@domain/entities/product-owner.entity';
+import { Approver } from '@domain/entities/approver.entity';
+import { Source } from '@domain/entities/source.entity';
 
 const mockRepository = {
   find: jest.fn(),
@@ -27,6 +31,10 @@ describe('CatalogsRepository', () => {
         { provide: getRepositoryToken(EffortEstimateType), useValue: mockRepository },
         { provide: getRepositoryToken(RequirementType), useValue: mockRepository },
         { provide: getRepositoryToken(VerificationMethod), useValue: mockRepository },
+        { provide: getRepositoryToken(Metric), useValue: mockRepository },
+        { provide: getRepositoryToken(ProductOwner), useValue: mockRepository },
+        { provide: getRepositoryToken(Approver), useValue: mockRepository },
+        { provide: getRepositoryToken(Source), useValue: mockRepository },
       ],
     }).compile();
 

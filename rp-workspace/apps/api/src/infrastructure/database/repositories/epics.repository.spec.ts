@@ -15,6 +15,7 @@ const mockTypeOrmRepository = {
 
 describe('EpicsRepository', () => {
   let repository: EpicsRepository;
+  let typeOrmRepository: Repository<Epic>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({

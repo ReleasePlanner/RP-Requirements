@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { ISponsorRepository } from '../interfaces/repositories/sponsor.repository.interface';
 import { Sponsor } from '@domain/entities/sponsor.entity';
-import { EntityNotFoundException } from '@shared/exceptions/entity-not-found.exception';
+import { SponsorNotFoundException } from '@shared/exceptions/entity-not-found.exception';
 import { CreateSponsorDto } from '../dto/create-sponsor.dto';
 import { UpdateSponsorDto } from '../dto/update-sponsor.dto';
 
@@ -36,7 +36,7 @@ export class SponsorsService {
   async findOne(sponsorId: string): Promise<Sponsor> {
     const sponsor = await this.sponsorRepository.findById(sponsorId);
     if (!sponsor) {
-      throw new EntityNotFoundException('Sponsor', sponsorId);
+      throw new SponsorNotFoundException(sponsorId);
     }
     return sponsor;
   }
@@ -62,7 +62,7 @@ export class SponsorsService {
   async update(sponsorId: string, updateSponsorDto: UpdateSponsorDto): Promise<Sponsor> {
     const sponsor = await this.sponsorRepository.findById(sponsorId);
     if (!sponsor) {
-      throw new EntityNotFoundException('Sponsor', sponsorId);
+      throw new SponsorNotFoundException(sponsorId);
     }
     return this.sponsorRepository.update(sponsorId, updateSponsorDto);
   }
@@ -76,7 +76,7 @@ export class SponsorsService {
   async delete(sponsorId: string): Promise<void> {
     const sponsor = await this.sponsorRepository.findById(sponsorId);
     if (!sponsor) {
-      throw new EntityNotFoundException('Sponsor', sponsorId);
+      throw new SponsorNotFoundException(sponsorId);
     }
     return this.sponsorRepository.delete(sponsorId);
   }
