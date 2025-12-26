@@ -1,144 +1,104 @@
-# 🧪 Ejecutar Test SSH Connection
+# 🧪 Ejecutar Test SSH con Valores de GitHub Secrets
 
-Guía paso a paso para ejecutar el workflow de prueba de conexión SSH.
+## 📋 Propósito
 
-## 🎯 Objetivo
+Este script prueba la conexión SSH usando los mismos valores y opciones que GitHub Actions, para verificar que la contraseña funciona antes de ejecutar el workflow.
 
-Este workflow prueba **solo la conexión SSH** sin ejecutar el deployment completo. Es útil para diagnosticar problemas antes de intentar el deployment.
+## 🚀 Cómo Usar
 
-## 📋 Pasos para Ejecutar
+### Opción 1: Script Bash (Linux/Mac/Git Bash)
 
-### Paso 1: Ir a GitHub Actions
+```bash
+# Configurar variables de entorno
+export VPS_HOST="72.60.63.240"
+export VPS_USER="root"
+export VPS_SSH_PASSWORD="tu_contraseña_aquí"
 
-1. Abre tu navegador y ve a:
-   ```
-   https://github.com/ReleasePlanner/RP-Requirements
-   ```
-
-2. Click en la pestaña **"Actions"** (arriba del repositorio)
-
-### Paso 2: Seleccionar el Workflow
-
-1. En el menú lateral izquierdo, busca **"Test SSH Connection"**
-2. Click en **"Test SSH Connection"**
-
-### Paso 3: Ejecutar el Workflow
-
-1. Click en el botón azul **"Run workflow"** (arriba a la derecha)
-2. Selecciona:
-   - **Use workflow from**: `main` (o la rama donde está el workflow)
-   - No hay inputs adicionales necesarios
-3. Click en **"Run workflow"** (botón verde)
-
-### Paso 4: Monitorear la Ejecución
-
-El workflow ejecutará estos pasos:
-
-1. **Install SSH tools** ✅
-   - Instala `openssh-client` y `sshpass`
-
-2. **Debug Secrets** ✅
-   - Verifica que los secrets estén configurados
-   - Muestra qué secrets están disponibles (sin mostrar valores)
-
-3. **Test SSH with Key** (si aplica) ✅
-   - Configura la clave SSH si está disponible
-
-4. **Test SSH Connection** ✅
-   - Intenta conectarse al VPS
-   - Muestra información del sistema (`uname -a`)
-   - Verifica si Docker está instalado
-
-5. **Test Docker Installation** ✅
-   - Verifica versión de Docker
-   - Verifica versión de Docker Compose
-
-6. **Test Directory Permissions** ✅
-   - Verifica que `/opt/modules` existe
-   - Verifica permisos de escritura
-
-## ✅ Resultados Esperados
-
-### Si Todo Está Correcto
-
-Verás mensajes como:
+# Ejecutar script
+bash rp-workspace/deploy-on-vps/test-ssh-with-github-secrets.sh
 ```
+
+### Opción 2: Script Batch (Windows)
+
+```cmd
+REM Configurar variables de entorno
+set VPS_HOST=72.60.63.240
+set VPS_USER=root
+set VPS_SSH_PASSWORD=tu_contraseña_aquí
+
+REM Ejecutar script
+rp-workspace\deploy-on-vps\test-ssh-with-github-secrets.bat
+```
+
+### Opción 3: Una Línea (Bash)
+
+```bash
+VPS_HOST="72.60.63.240" VPS_USER="root" VPS_SSH_PASSWORD="tu_contraseña" bash rp-workspace/deploy-on-vps/test-ssh-with-github-secrets.sh
+```
+
+## ✅ Qué Hace el Script
+
+1. **Verifica sshpass** - Instala si no está disponible
+2. **Deshabilita agente SSH** - Igual que GitHub Actions
+3. **Prueba conexión SSH** - Con las mismas opciones que GitHub Actions
+4. **Verifica Docker** - Comprueba que Docker esté instalado
+5. **Verifica directorio** - Comprueba acceso a `/opt/modules/requirements-management`
+
+## 📊 Resultado Esperado
+
+### Si Funciona:
+```
+✅ CONEXIÓN SSH EXITOSA
 ✅ SSH connection successful!
-Linux ... (información del sistema)
-Docker version ...
-docker-compose version ...
+✅ Docker version ...
 ✅ Directory accessible
 ```
 
-### Si Hay Problemas
+### Si Falla:
+```
+❌ CONEXIÓN SSH FALLIDA
+Permission denied (publickey,password)
+```
 
-#### Error: "VPS_HOST secret is not configured"
-- **Solución**: Configura el secret `VPS_HOST` en GitHub Settings > Secrets
+## 🔍 Troubleshooting
 
-#### Error: "No SSH credentials provided"
-- **Solución**: Configura `VPS_SSH_PASSWORD` o `VPS_SSH_KEY` en GitHub Secrets
+### Error: "sshpass: command not found"
 
-#### Error: "ssh: connect to host ... port 22: Connection refused"
-- **Solución**: 
-  - Verifica que la IP del VPS sea correcta
-  - Verifica que el VPS esté encendido
-  - Verifica que el puerto SSH sea 22 (o configúralo)
+**Linux:**
+```bash
+sudo apt-get update && sudo apt-get install -y sshpass
+```
 
-#### Error: "Permission denied"
-- **Solución**: 
-  - Verifica que la contraseña SSH sea correcta
-  - Verifica que el usuario SSH sea correcto (`root` o el que uses)
+**Mac:**
+```bash
+brew install sshpass
+```
 
-#### Error: "Docker not installed"
-- **Solución**: Instala Docker en el VPS:
-  ```bash
-  ssh root@72.60.63.240
-  curl -fsSL https://get.docker.com -o get-docker.sh
-  sh get-docker.sh
-  ```
+**Windows:**
+- Usa Git Bash (viene con sshpass)
+- O instala WSL y usa el script .sh
 
-## 🔍 Interpretar los Resultados
+### Error: "Permission denied"
 
-### ✅ Todo Verde
-- **Significado**: La conexión SSH funciona correctamente
-- **Próximo paso**: Puedes ejecutar el deployment completo
+1. Verifica que la contraseña sea correcta
+2. Verifica que el usuario sea correcto (`root`)
+3. Prueba manualmente: `ssh root@72.60.63.240`
 
-### ⚠️ Algunos Warnings
-- **Significado**: Algo no está configurado pero no es crítico
-- **Próximo paso**: Revisa los warnings y corrige si es necesario
+### Error: "Connection refused"
 
-### ❌ Errores Rojos
-- **Significado**: Hay un problema que debe resolverse
-- **Próximo paso**: Revisa la sección de troubleshooting arriba
+1. Verifica que el servidor esté accesible
+2. Verifica que el puerto SSH (22) esté abierto
+3. Verifica que `VPS_HOST` sea correcto
 
-## 📊 Checklist de Verificación
+## 💡 Uso Recomendado
 
-Antes de ejecutar, verifica:
+1. **Primero:** Ejecuta este script localmente para verificar la contraseña
+2. **Si funciona:** Actualiza `VPS_SSH_PASSWORD` en GitHub Secrets con la misma contraseña
+3. **Luego:** Ejecuta "Test SSH Connection" en GitHub Actions
+4. **Finalmente:** Ejecuta el deployment completo
 
-- [ ] Secrets configurados en GitHub:
-  - [ ] `VPS_HOST`
-  - [ ] `VPS_USER` (o se usará 'root' por defecto)
-  - [ ] `VPS_SSH_PASSWORD` o `VPS_SSH_KEY`
-- [ ] Puedes conectarte manualmente: `ssh root@72.60.63.240`
-- [ ] El workflow está en la rama correcta
+## 🔗 Referencias
 
-## 🚀 Después del Test Exitoso
-
-Si el test SSH es exitoso:
-
-1. ✅ La conexión SSH funciona
-2. ✅ Docker está instalado (o sabes que necesitas instalarlo)
-3. ✅ Los permisos son correctos
-
-**Próximo paso**: Ejecuta el deployment completo con "Deploy to Hostinger VPS"
-
-## 🔗 Enlaces Útiles
-
-- [Troubleshooting SSH](TROUBLESHOOTING_SSH.md)
-- [Troubleshooting GitHub Actions](TROUBLESHOOTING_GITHUB_ACTIONS.md)
-- [Checklist de Verificación](CHECKLIST_VERIFICACION.md)
-
----
-
-**¡Ejecuta el test y comparte los resultados si hay algún problema!** 🚀
+- [Solución Definitiva Permission Denied](SOLUCION_DEFINITIVA_PERMISSION_DENIED.md)
+- [Próximos Pasos a Ejecutar](PROXIMOS_PASOS_EJECUTAR.md)
 

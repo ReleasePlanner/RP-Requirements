@@ -791,12 +791,41 @@ jobs:
     steps:
       - name: Send notification
         run: |
-          if [ "${{ needs.deploy-to-vps.result }}" == "success" ]; then
+          DEPLOY_RESULT="${{ needs.deploy-to-vps.result }}"
+          ENVIRONMENT="${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production' || 'development') }}"
+          
+          echo "📊 Deployment Status Summary:"
+          echo "  Result: $DEPLOY_RESULT"
+          echo "  Environment: $ENVIRONMENT"
+          echo "  Commit: ${{ github.sha }}"
+          echo "  Branch: ${{ github.ref_name }}"
+          echo ""
+          
+          if [ "$DEPLOY_RESULT" == "success" ]; then
             echo "✅ Deployment to Hostinger VPS successful!"
-            echo "Environment: ${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production' || 'development') }}"
-            echo "Commit: ${{ github.sha }}"
-            echo "Branch: ${{ github.ref_name }}"
+            echo ""
+            echo "🎉 Your application has been deployed successfully!"
+            echo "   Environment: $ENVIRONMENT"
+            echo "   Commit: ${{ github.sha }}"
+            echo "   Branch: ${{ github.ref_name }}"
           else
             echo "❌ Deployment to Hostinger VPS failed!"
+            echo ""
+            echo "🔍 Troubleshooting steps:"
+            echo "   1. Check the 'Deploy to Hostinger VPS' job logs above"
+            echo "   2. Look for errors in:"
+            echo "      - Test SSH connection"
+            echo "      - Copy deployment script to VPS"
+            echo "      - Execute deployment on VPS"
+            echo "   3. Common issues:"
+            echo "      - SSH password incorrect (verify VPS_SSH_PASSWORD in Secrets)"
+            echo "      - SSH user incorrect (verify VPS_USER in Secrets)"
+            echo "      - Missing secrets (DB_USERNAME, DB_PASSWORD, JWT_SECRET, etc.)"
+            echo "      - Docker not running on VPS"
+            echo "      - Ports already in use"
+            echo ""
+            echo "📚 See documentation:"
+            echo "   - rp-workspace/deploy-on-vps/DIAGNOSTICO_FINAL_SSH.md"
+            echo "   - rp-workspace/deploy-on-vps/VERIFICAR_CONTRASENA_SSH.md"
             exit 1
           fi
