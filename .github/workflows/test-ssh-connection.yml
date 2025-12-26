@@ -31,7 +31,7 @@ jobs:
           fi
 
       - name: Setup SSH Key (only if no password)
-        if: ${{ secrets.VPS_SSH_KEY != '' && secrets.VPS_SSH_PASSWORD == '' }}
+        if: secrets.VPS_SSH_KEY != ''
         continue-on-error: true
         uses: webfactory/ssh-agent@v0.9.0
         with:
