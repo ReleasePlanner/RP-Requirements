@@ -667,8 +667,22 @@ jobs:
             echo "🔍 Password length: $PASSWORD_LENGTH characters"
             echo "🔍 Password starts with: $(echo -n "$SSHPASS" | head -c 1)***"
             echo "🔍 Password ends with: ***$(echo -n "$SSHPASS" | tail -c 1)"
+            echo "🔍 Password contains special chars: $(echo -n "$SSHPASS" | grep -o '[^a-zA-Z0-9]' | sort -u | tr -d '\n' || echo 'none')"
             echo "🔍 User: ${{ env.VPS_USER }}"
             echo "🔍 Host: ${{ env.VPS_HOST }}"
+            
+            # Verificar que la contraseña no esté vacía o solo espacios
+            if [ -z "$SSHPASS" ] || [ "$(echo -n "$SSHPASS" | tr -d ' ')" == "" ]; then
+              echo "❌ ERROR: La contraseña está vacía o solo contiene espacios"
+              echo "💡 Verifica que VPS_SSH_PASSWORD en GitHub Secrets tenga un valor"
+              exit 1
+            fi
+            
+            # Verificar longitud mínima
+            if [ "$PASSWORD_LENGTH" -lt 1 ]; then
+              echo "❌ ERROR: La contraseña tiene longitud 0"
+              exit 1
+            fi
             
             # Deshabilitar completamente el agente SSH para evitar intentar usar claves
             unset SSH_AUTH_SOCK
