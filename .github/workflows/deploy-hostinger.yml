@@ -296,7 +296,15 @@ jobs:
             exit 0
           fi
 
-          if [ "${{ steps.check-ssh.outputs.has_ssh_password }}" == "true" ]; then
+          # Verificar directamente el secret (más confiable)
+          USE_PASSWORD=false
+          if [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
+            USE_PASSWORD=true
+            echo "✅ VPS_SSH_PASSWORD is configured - WILL USE PASSWORD"
+          fi
+
+          # Priorizar contraseña si está configurada (verificar directamente el secret)
+          if [ "$USE_PASSWORD" == "true" ]; then
             echo "🔑 Using SSH password authentication..."
             
             # Deshabilitar completamente el agente SSH para evitar intentar usar claves
@@ -567,9 +575,19 @@ jobs:
           echo "  has_ssh_key: '${{ steps.check-ssh.outputs.has_ssh_key }}'"
           echo "  VPS_SSH_PASSWORD configured: ${{ secrets.VPS_SSH_PASSWORD != '' }}"
           echo "  VPS_SSH_KEY configured: ${{ secrets.VPS_SSH_KEY != '' }}"
+          
+          # Verificar directamente el secret (más confiable que outputs)
+          USE_PASSWORD=false
+          if [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
+            USE_PASSWORD=true
+            echo "✅ Direct check: VPS_SSH_PASSWORD is configured - WILL USE PASSWORD"
+          else
+            echo "❌ Direct check: VPS_SSH_PASSWORD is NOT configured"
+          fi
 
-          # Priorizar contraseña si está configurada (más confiable cuando está configurada)
-          if [ "${{ steps.check-ssh.outputs.has_ssh_password }}" == "true" ]; then
+          # Priorizar contraseña si está configurada (verificar directamente el secret)
+          if [ "$USE_PASSWORD" == "true" ]; then
+            echo "🔑 Using SSH password authentication (prioritized)"
             echo "📤 Copying deployment script using SSH password..."
             echo "🔍 Verifying sshpass is available..."
             which sshpass || (echo "⚠️ sshpass not found, installing..." && sudo apt-get update && sudo apt-get install -y sshpass)
@@ -641,8 +659,15 @@ jobs:
             exit 1
           fi
 
-          # Priorizar contraseña si está configurada (más confiable cuando está configurada)
-          if [ "${{ steps.check-ssh.outputs.has_ssh_password }}" == "true" ]; then
+          # Verificar directamente el secret (más confiable)
+          USE_PASSWORD=false
+          if [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
+            USE_PASSWORD=true
+            echo "✅ VPS_SSH_PASSWORD is configured - WILL USE PASSWORD"
+          fi
+
+          # Priorizar contraseña si está configurada (verificar directamente el secret)
+          if [ "$USE_PASSWORD" == "true" ]; then
             echo "🔑 Deploying using SSH password..."
             
             # Deshabilitar completamente el agente SSH para evitar intentar usar claves
