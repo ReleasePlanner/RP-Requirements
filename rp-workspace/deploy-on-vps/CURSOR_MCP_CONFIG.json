@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "hostinger-vps": {
+      "command": "node",
+      "args": [
+        "C:/Users/beyon/AppData/Roaming/npm/node_modules/mcp-ssh-manager/src/index.js"
+      ],
+      "env": {
+        "SSH_MANAGER_ENV": "C:/Users/beyon/.ssh/mcp-ssh-manager.env"
+      }
+    }
+  }
+}
+
+

@@ -243,6 +243,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup SSH
+        if: ${{ secrets.VPS_SSH_KEY != '' && secrets.VPS_SSH_PASSWORD == '' }}
         continue-on-error: true
         uses: webfactory/ssh-agent@v0.9.0
         with:
@@ -287,6 +288,11 @@ jobs:
             }
           elif [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
             echo "🔑 Using SSH password authentication..."
+            
+            # Deshabilitar agente SSH para evitar intentar usar claves
+            unset SSH_AUTH_SOCK
+            unset SSH_AGENT_PID
+            
             sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' \
               ssh -v -o StrictHostKeyChecking=no \
               -o UserKnownHostsFile=/dev/null \
@@ -296,10 +302,12 @@ jobs:
               -o PasswordAuthentication=yes \
               -o BatchMode=yes \
               -o NumberOfPasswordPrompts=1 \
+              -o IdentitiesOnly=yes \
               ${{ env.VPS_USER }}@${{ env.VPS_HOST }} \
               "echo 'SSH connection successful'" || {
               echo "❌ SSH connection test failed with password"
               echo "💡 Verify VPS_SSH_PASSWORD is correct in GitHub Secrets"
+              echo "💡 Verify VPS_USER is correct (usually 'root')"
               exit 0
             }
           else
@@ -520,6 +528,10 @@ jobs:
             echo "🔍 Verifying sshpass is available..."
             which sshpass || echo "⚠️ sshpass not found, will be installed"
             
+            # Deshabilitar agente SSH para evitar intentar usar claves
+            unset SSH_AUTH_SOCK
+            unset SSH_AGENT_PID
+            
             # Usar sshpass con opciones para evitar autenticación interactiva
             sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' \
               scp -o StrictHostKeyChecking=no \
@@ -530,6 +542,7 @@ jobs:
               -o PasswordAuthentication=yes \
               -o BatchMode=yes \
               -o NumberOfPasswordPrompts=1 \
+              -o IdentitiesOnly=yes \
               deploy-remote.sh ${{ env.VPS_USER }}@${{ env.VPS_HOST }}:/tmp/deploy-remote.sh || {
               echo "❌ Failed to copy deployment script via SSH password"
               echo "💡 Verify VPS_SSH_PASSWORD is correct in GitHub Secrets"
@@ -579,6 +592,11 @@ jobs:
           # Priorizar contraseña si está configurada (más confiable cuando está configurada)
           if [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
             echo "🔑 Deploying using SSH password..."
+            
+            # Deshabilitar agente SSH para evitar intentar usar claves
+            unset SSH_AUTH_SOCK
+            unset SSH_AGENT_PID
+            
             sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' \
               ssh -o StrictHostKeyChecking=no \
               -o UserKnownHostsFile=/dev/null \
@@ -588,6 +606,7 @@ jobs:
               -o PasswordAuthentication=yes \
               -o BatchMode=yes \
               -o NumberOfPasswordPrompts=1 \
+              -o IdentitiesOnly=yes \
               ${{ env.VPS_USER }}@${{ env.VPS_HOST }} \
               "GITHUB_TOKEN='${{ secrets.GITHUB_TOKEN }}' bash /tmp/deploy-remote.sh" || {
               echo "❌ Deployment failed via SSH password"
