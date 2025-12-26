@@ -21,1089 +21,15 @@
   "nxJsonPlugins": [
     {
       "name": "@nx-dotnet/core",
-      "version": "^3.0.2"
+      "version": "^3.0.2",
+      "options": {
+        "inferProjects": true,
+        "inferProjectTargets": true
+      }
     }
   ],
   "fileMap": {
     "projectFileMap": {
-      "api": [
-        {
-          "file": "apps/api/.dockerignore",
-          "hash": "15306258142645808558"
-        },
-        {
-          "file": "apps/api/.eslintrc.js",
-          "hash": "8888368515426364477"
-        },
-        {
-          "file": "apps/api/.gitignore",
-          "hash": "12624026247813428404"
-        },
-        {
-          "file": "apps/api/.prettierrc",
-          "hash": "17927754387530337703"
-        },
-        {
-          "file": "apps/api/Dockerfile",
-          "hash": "17077349125732086953"
-        },
-        {
-          "file": "apps/api/docs/ARCHITECTURE.md",
-          "hash": "7621531065720401964"
-        },
-        {
-          "file": "apps/api/docs/COMPATIBILITY_REPORT.md",
-          "hash": "7848115952165597741"
-        },
-        {
-          "file": "apps/api/docs/COMPATIBILITY_VERIFICATION.md",
-          "hash": "10694210807195435772"
-        },
-        {
-          "file": "apps/api/docs/IMPLEMENTATION_GUIDE.md",
-          "hash": "5369844033014904641"
-        },
-        {
-          "file": "apps/api/docs/MIGRATION_SUMMARY.md",
-          "hash": "1629289250426883525"
-        },
-        {
-          "file": "apps/api/docs/NESTJS_RULES_COMPATIBILITY.md",
-          "hash": "15029660540338044495"
-        },
-        {
-          "file": "apps/api/docs/NESTJS_RULES_COMPATIBILITY_SUMMARY.md",
-          "hash": "8117108786615773254"
-        },
-        {
-          "file": "apps/api/docs/README.md",
-          "hash": "18430097118549808338"
-        },
-        {
-          "file": "apps/api/docs/REFACTORING_EXAMPLES.md",
-          "hash": "2778629505389972613"
-        },
-        {
-          "file": "apps/api/docs/REFACTORING_PROPOSAL.md",
-          "hash": "12448276655173231896"
-        },
-        {
-          "file": "apps/api/docs/STRUCTURE_VERIFICATION.md",
-          "hash": "12443625114073491304"
-        },
-        {
-          "file": "apps/api/docs/TESTING.md",
-          "hash": "16541200560132849419"
-        },
-        {
-          "file": "apps/api/docs/TEST_COVERAGE_SUMMARY.md",
-          "hash": "5516941805098813271"
-        },
-        {
-          "file": "apps/api/jest.config.js",
-          "hash": "3694476937588193177"
-        },
-        {
-          "file": "apps/api/nest-cli.json",
-          "hash": "15092248172411499952"
-        },
-        {
-          "file": "apps/api/package-lock.json",
-          "hash": "7586219293736199927"
-        },
-        {
-          "file": "apps/api/package.json",
-          "hash": "736271445218778361",
-          "deps": [
-            "npm:@nestjs/schematics",
-            "npm:@types/express",
-            "npm:@types/node",
-            "npm:eslint",
-            "npm:source-map-support@0.5.21",
-            "npm:ts-loader",
-            "npm:typescript",
-            "npm:@nestjs/common",
-            "npm:@nestjs/config",
-            "npm:@nestjs/core",
-            "npm:compression",
-            "npm:reflect-metadata",
-            "npm:rxjs",
-            "npm:uuid",
-            "npm:tsconfig-paths"
-          ]
-        },
-        {
-          "file": "apps/api/project.json",
-          "hash": "17589400777308430610"
-        },
-        {
-          "file": "apps/api/src/app.controller.spec.ts",
-          "hash": "441659975006072023"
-        },
-        {
-          "file": "apps/api/src/app.controller.ts",
-          "hash": "16432776686825147997",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/app.module.ts",
-          "hash": "15250586413753252158",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/config",
-            "npm:@nestjs/core"
-          ]
-        },
-        {
-          "file": "apps/api/src/application/auth/dto/auth-response.dto.ts",
-          "hash": "5873945203057087008"
-        },
-        {
-          "file": "apps/api/src/application/auth/dto/login.dto.ts",
-          "hash": "13262613306431335083"
-        },
-        {
-          "file": "apps/api/src/application/auth/dto/register.dto.ts",
-          "hash": "17910781045582832294"
-        },
-        {
-          "file": "apps/api/src/application/auth/interfaces/repositories/sponsor.repository.interface.ts",
-          "hash": "8774109109102969936"
-        },
-        {
-          "file": "apps/api/src/application/auth/services/auth.service.spec.ts",
-          "hash": "17646110036593893590",
-          "deps": [
-            "npm:@nestjs/config",
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/application/auth/services/auth.service.ts",
-          "hash": "15234250585434663795",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/config"
-          ]
-        },
-        {
-          "file": "apps/api/src/application/catalogs/dto/create-approver.dto.ts",
-          "hash": "11257654658149400611"
-        },
-        {
-          "file": "apps/api/src/application/catalogs/dto/create-catalog.dto.ts",
-          "hash": "15885530219196792616"
-        },
-        {
-          "file": "apps/api/src/application/catalogs/dto/create-metric.dto.ts",
-          "hash": "11269677326579931024"
-        },
-        {
-          "file": "apps/api/src/application/catalogs/dto/create-product-owner.dto.ts",
-          "hash": "9298011884054192754"
-        },
-        {
-          "file": "apps/api/src/application/catalogs/dto/create-requirement-type.dto.ts",
-          "hash": "8526439060603580121"
-        },
-        {
-          "file": "apps/api/src/application/catalogs/dto/update-catalog.dto.ts",
-          "hash": "9427391213218215176"
-        },
-        {
-          "file": "apps/api/src/application/catalogs/dto/update-metric.dto.ts",
-          "hash": "7100179775847846510"
-        },
-        {
-          "file": "apps/api/src/application/catalogs/dto/update-product-owner.dto.ts",
-          "hash": "3336442413502187340"
-        },
-        {
-          "file": "apps/api/src/application/catalogs/dto/update-requirement-type.dto.ts",
-          "hash": "401616534086206399"
-        },
-        {
-          "file": "apps/api/src/application/catalogs/interfaces/repositories/catalogs.repository.interface.ts",
-          "hash": "14514080527896608283"
-        },
-        {
-          "file": "apps/api/src/application/catalogs/services/catalogs.service.spec.ts",
-          "hash": "18031289127663918743"
-        },
-        {
-          "file": "apps/api/src/application/catalogs/services/catalogs.service.ts",
-          "hash": "16388577454317040552",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/application/epics/dtos/create-epic.dto.ts",
-          "hash": "2567253887767057330"
-        },
-        {
-          "file": "apps/api/src/application/epics/dtos/update-epic.dto.ts",
-          "hash": "3312002524585032466"
-        },
-        {
-          "file": "apps/api/src/application/epics/interfaces/repositories/epics.repository.interface.ts",
-          "hash": "14112947831646870531"
-        },
-        {
-          "file": "apps/api/src/application/epics/services/epics.service.spec.ts",
-          "hash": "5860809271545432641",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/application/epics/services/epics.service.ts",
-          "hash": "416739776562986387",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/application/initiatives/dtos/create-initiative.dto.ts",
-          "hash": "13476500969872900078"
-        },
-        {
-          "file": "apps/api/src/application/initiatives/dtos/update-initiative.dto.ts",
-          "hash": "15168963618134014652"
-        },
-        {
-          "file": "apps/api/src/application/initiatives/interfaces/repositories/initiatives.repository.interface.ts",
-          "hash": "16251236288929542325"
-        },
-        {
-          "file": "apps/api/src/application/initiatives/services/initiatives.service.spec.ts",
-          "hash": "13280273749366772143",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/application/initiatives/services/initiatives.service.ts",
-          "hash": "3589561696816217932",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/application/interfaces/repositories/portfolio.repository.interface.ts",
-          "hash": "6350492225913695374"
-        },
-        {
-          "file": "apps/api/src/application/interfaces/repositories/repository.tokens.ts",
-          "hash": "12192408842018877845"
-        },
-        {
-          "file": "apps/api/src/application/interfaces/repositories/requirement.repository.interface.ts",
-          "hash": "1413983348992550141"
-        },
-        {
-          "file": "apps/api/src/application/interfaces/repositories/sponsor.repository.interface.ts",
-          "hash": "14543322285843351359"
-        },
-        {
-          "file": "apps/api/src/application/portfolios/dtos/create-portfolio.dto.ts",
-          "hash": "13951137113790431230"
-        },
-        {
-          "file": "apps/api/src/application/portfolios/dtos/update-portfolio.dto.ts",
-          "hash": "4792842007095562888"
-        },
-        {
-          "file": "apps/api/src/application/portfolios/interfaces/repositories/portfolio.repository.interface.ts",
-          "hash": "90572600449069563"
-        },
-        {
-          "file": "apps/api/src/application/portfolios/services/portfolios.service.spec.ts",
-          "hash": "6859486220246226742"
-        },
-        {
-          "file": "apps/api/src/application/portfolios/services/portfolios.service.ts",
-          "hash": "16299423866607217927",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/application/requirements/dto/create-requirement-reference.dto.ts",
-          "hash": "1145412090700786264"
-        },
-        {
-          "file": "apps/api/src/application/requirements/dto/create-requirement.dto.ts",
-          "hash": "12571948550785114734"
-        },
-        {
-          "file": "apps/api/src/application/requirements/dto/requirement-query.dto.ts",
-          "hash": "17531179449792621117"
-        },
-        {
-          "file": "apps/api/src/application/requirements/dto/requirement-response.dto.ts",
-          "hash": "15469272672135508246"
-        },
-        {
-          "file": "apps/api/src/application/requirements/dto/update-requirement-reference.dto.ts",
-          "hash": "13278546442295587499"
-        },
-        {
-          "file": "apps/api/src/application/requirements/dto/update-requirement.dto.ts",
-          "hash": "11435300724344892532"
-        },
-        {
-          "file": "apps/api/src/application/requirements/interfaces/repositories/requirement-reference.repository.interface.ts",
-          "hash": "10795494916555412753"
-        },
-        {
-          "file": "apps/api/src/application/requirements/interfaces/repositories/requirement.repository.interface.ts",
-          "hash": "18150352177473016791"
-        },
-        {
-          "file": "apps/api/src/application/requirements/services/requirement-references.service.ts",
-          "hash": "11874110473350624013",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/application/requirements/services/requirements.service.spec.ts",
-          "hash": "14321910096811042434"
-        },
-        {
-          "file": "apps/api/src/application/requirements/services/requirements.service.ts",
-          "hash": "18038216223936135248",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/application/sponsors/dto/create-sponsor.dto.ts",
-          "hash": "4096758922238754275"
-        },
-        {
-          "file": "apps/api/src/application/sponsors/dto/update-sponsor.dto.ts",
-          "hash": "5431225166478055710"
-        },
-        {
-          "file": "apps/api/src/application/sponsors/interfaces/repositories/sponsor.repository.interface.ts",
-          "hash": "8774109109102969936"
-        },
-        {
-          "file": "apps/api/src/application/sponsors/services/sponsors.service.spec.ts",
-          "hash": "1744083333920753334"
-        },
-        {
-          "file": "apps/api/src/application/sponsors/services/sponsors.service.ts",
-          "hash": "6306808155818301234",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/application/widgets/dto/create-widget.dto.ts",
-          "hash": "13374998419455704807"
-        },
-        {
-          "file": "apps/api/src/application/widgets/dto/update-widget.dto.ts",
-          "hash": "7163683489428489211"
-        },
-        {
-          "file": "apps/api/src/application/widgets/widgets.controller.ts",
-          "hash": "10097064722676469861",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/application/widgets/widgets.module.ts",
-          "hash": "16524663653245424605",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/application/widgets/widgets.service.ts",
-          "hash": "1426434961448696014",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/domain/entities/approver.entity.ts",
-          "hash": "13961816484409076360"
-        },
-        {
-          "file": "apps/api/src/domain/entities/complexity.entity.ts",
-          "hash": "12828615286987959351"
-        },
-        {
-          "file": "apps/api/src/domain/entities/effort-estimate-type.entity.ts",
-          "hash": "15808145480507342210"
-        },
-        {
-          "file": "apps/api/src/domain/entities/epic.entity.ts",
-          "hash": "4676312721983833424"
-        },
-        {
-          "file": "apps/api/src/domain/entities/initiative.entity.ts",
-          "hash": "4481373375664655382"
-        },
-        {
-          "file": "apps/api/src/domain/entities/lifecycle-status.entity.ts",
-          "hash": "6169416300244764125"
-        },
-        {
-          "file": "apps/api/src/domain/entities/metric.entity.ts",
-          "hash": "6468035039141426431"
-        },
-        {
-          "file": "apps/api/src/domain/entities/portfolio.entity.ts",
-          "hash": "10574839074486527275"
-        },
-        {
-          "file": "apps/api/src/domain/entities/priority.entity.ts",
-          "hash": "5103161314133345132"
-        },
-        {
-          "file": "apps/api/src/domain/entities/product-owner.entity.ts",
-          "hash": "3520807584456443148"
-        },
-        {
-          "file": "apps/api/src/domain/entities/requirement-reference.entity.ts",
-          "hash": "14747853647413663264"
-        },
-        {
-          "file": "apps/api/src/domain/entities/requirement-type.entity.ts",
-          "hash": "11946590407380265285"
-        },
-        {
-          "file": "apps/api/src/domain/entities/requirement.entity.ts",
-          "hash": "8474413904139640850"
-        },
-        {
-          "file": "apps/api/src/domain/entities/risk-level.entity.ts",
-          "hash": "1539505859438169136"
-        },
-        {
-          "file": "apps/api/src/domain/entities/source.entity.ts",
-          "hash": "13285827803427739538"
-        },
-        {
-          "file": "apps/api/src/domain/entities/sponsor.entity.ts",
-          "hash": "17638342151573178403"
-        },
-        {
-          "file": "apps/api/src/domain/entities/verification-method.entity.ts",
-          "hash": "7165622532522995971"
-        },
-        {
-          "file": "apps/api/src/domain/entities/widget.entity.ts",
-          "hash": "4487311258353044938"
-        },
-        {
-          "file": "apps/api/src/infrastructure/auth/strategies/jwt.strategy.spec.ts",
-          "hash": "14785440582385159247",
-          "deps": [
-            "npm:@nestjs/config",
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/infrastructure/auth/strategies/jwt.strategy.ts",
-          "hash": "13683183540073386871",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/config"
-          ]
-        },
-        {
-          "file": "apps/api/src/infrastructure/database/data-source.ts",
-          "hash": "6159306728813214251",
-          "deps": [
-            "npm:dotenv"
-          ]
-        },
-        {
-          "file": "apps/api/src/infrastructure/database/database.config.spec.ts",
-          "hash": "6365428176207013529",
-          "deps": [
-            "npm:@nestjs/config"
-          ]
-        },
-        {
-          "file": "apps/api/src/infrastructure/database/database.config.ts",
-          "hash": "152388389742608939",
-          "deps": [
-            "npm:@nestjs/config"
-          ]
-        },
-        {
-          "file": "apps/api/src/infrastructure/database/database.module.ts",
-          "hash": "1490152954587171940",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/config"
-          ]
-        },
-        {
-          "file": "apps/api/src/infrastructure/database/migrations/1766064361824-InitialSchema.ts",
-          "hash": "2927652059571544656"
-        },
-        {
-          "file": "apps/api/src/infrastructure/database/repositories/catalogs.repository.spec.ts",
-          "hash": "7325062118075690188"
-        },
-        {
-          "file": "apps/api/src/infrastructure/database/repositories/catalogs.repository.ts",
-          "hash": "10583863246383696462",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/infrastructure/database/repositories/epics.repository.spec.ts",
-          "hash": "9552277412220607644"
-        },
-        {
-          "file": "apps/api/src/infrastructure/database/repositories/epics.repository.ts",
-          "hash": "8547742776004584043",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/infrastructure/database/repositories/initiatives.repository.spec.ts",
-          "hash": "9428484850084619421"
-        },
-        {
-          "file": "apps/api/src/infrastructure/database/repositories/initiatives.repository.ts",
-          "hash": "12019232649395328157",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/infrastructure/database/seed.ts",
-          "hash": "15611464754149440075",
-          "deps": [
-            "npm:reflect-metadata",
-            "npm:dotenv",
-            "npm:uuid"
-          ]
-        },
-        {
-          "file": "apps/api/src/infrastructure/repositories/portfolio.repository.spec.ts",
-          "hash": "11851561592310529259"
-        },
-        {
-          "file": "apps/api/src/infrastructure/repositories/portfolio.repository.ts",
-          "hash": "8391576602381746180",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/infrastructure/repositories/requirement-reference.repository.ts",
-          "hash": "5874810961684341428",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/infrastructure/repositories/requirement.repository.spec.ts",
-          "hash": "18402932327179159100"
-        },
-        {
-          "file": "apps/api/src/infrastructure/repositories/requirement.repository.ts",
-          "hash": "9087192035301674723",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/infrastructure/repositories/sponsor.repository.spec.ts",
-          "hash": "4859407968124707687"
-        },
-        {
-          "file": "apps/api/src/infrastructure/repositories/sponsor.repository.ts",
-          "hash": "17451357712280005350",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/main.ts",
-          "hash": "6612037181416101950",
-          "deps": [
-            "npm:tsconfig-paths",
-            "npm:@nestjs/core",
-            "npm:@nestjs/common",
-            "npm:@nestjs/config",
-            "npm:compression"
-          ]
-        },
-        {
-          "file": "apps/api/src/presentation/auth/auth.controller.spec.ts",
-          "hash": "2517463950457086084"
-        },
-        {
-          "file": "apps/api/src/presentation/auth/auth.controller.ts",
-          "hash": "14323509040220194407",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/presentation/auth/auth.module.ts",
-          "hash": "10692153831290300715",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/config",
-            "npm:@nestjs/core"
-          ]
-        },
-        {
-          "file": "apps/api/src/presentation/catalogs/catalogs.controller.spec.ts",
-          "hash": "1929754758531829817"
-        },
-        {
-          "file": "apps/api/src/presentation/catalogs/catalogs.controller.ts",
-          "hash": "12575044222890874640",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/presentation/catalogs/catalogs.module.ts",
-          "hash": "8796893811129783643",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/presentation/epics/epics.controller.spec.ts",
-          "hash": "2170020981686472753"
-        },
-        {
-          "file": "apps/api/src/presentation/epics/epics.controller.ts",
-          "hash": "1128404641724664310",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/presentation/epics/epics.module.ts",
-          "hash": "12271850391248670728",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/presentation/health/health.controller.spec.ts",
-          "hash": "12013273751609272060"
-        },
-        {
-          "file": "apps/api/src/presentation/health/health.controller.ts",
-          "hash": "12628968938984244180",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/presentation/health/health.module.ts",
-          "hash": "3842842342661664588",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/presentation/initiatives/initiatives.controller.spec.ts",
-          "hash": "15302646796695397867"
-        },
-        {
-          "file": "apps/api/src/presentation/initiatives/initiatives.controller.ts",
-          "hash": "17558404408978524479",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/presentation/initiatives/initiatives.module.ts",
-          "hash": "10605710060347199814",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/presentation/monitoring/monitoring.controller.ts",
-          "hash": "7247678187846248892",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/presentation/monitoring/monitoring.module.ts",
-          "hash": "10943587909842579521",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/core"
-          ]
-        },
-        {
-          "file": "apps/api/src/presentation/portfolios/portfolios.controller.spec.ts",
-          "hash": "8128413160612973926"
-        },
-        {
-          "file": "apps/api/src/presentation/portfolios/portfolios.controller.ts",
-          "hash": "14258564698715287246",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/presentation/portfolios/portfolios.module.ts",
-          "hash": "16011860241408108225",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/presentation/requirements/requirement-references.controller.ts",
-          "hash": "3809162611137529069",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/presentation/requirements/requirements.controller.spec.ts",
-          "hash": "7069291736338648885"
-        },
-        {
-          "file": "apps/api/src/presentation/requirements/requirements.controller.ts",
-          "hash": "3258613301335483207",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/presentation/requirements/requirements.module.ts",
-          "hash": "8715989558175932595",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/presentation/sponsors/sponsors.controller.spec.ts",
-          "hash": "3468539131910134494"
-        },
-        {
-          "file": "apps/api/src/presentation/sponsors/sponsors.controller.ts",
-          "hash": "7761397023599418672",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/presentation/sponsors/sponsors.module.ts",
-          "hash": "9192570004385458483",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/common.module.ts",
-          "hash": "7891132967985281334",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/config/config.validation.spec.ts",
-          "hash": "6385103303246471915"
-        },
-        {
-          "file": "apps/api/src/shared/config/config.validation.ts",
-          "hash": "15963085464042652484"
-        },
-        {
-          "file": "apps/api/src/shared/config/core-config.module.ts",
-          "hash": "6944958965310438343",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/config"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/config/env.example",
-          "hash": "7010458724724570193"
-        },
-        {
-          "file": "apps/api/src/shared/decorators/api-paginated-response.decorator.spec.ts",
-          "hash": "15538139784190536969",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/decorators/api-paginated-response.decorator.ts",
-          "hash": "7753140714483877508",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/decorators/public.decorator.spec.ts",
-          "hash": "15316461910353478033"
-        },
-        {
-          "file": "apps/api/src/shared/decorators/public.decorator.ts",
-          "hash": "17960535925631508594",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/dto/pagination.dto.spec.ts",
-          "hash": "400815525780216643"
-        },
-        {
-          "file": "apps/api/src/shared/dto/pagination.dto.ts",
-          "hash": "15201389203132604689"
-        },
-        {
-          "file": "apps/api/src/shared/exceptions/entity-not-found.exception.spec.ts",
-          "hash": "15808076722842057672"
-        },
-        {
-          "file": "apps/api/src/shared/exceptions/entity-not-found.exception.ts",
-          "hash": "14218226900540546593",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/filters/http-exception.filter.spec.ts",
-          "hash": "11668567641291961686",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/filters/http-exception.filter.ts",
-          "hash": "3350760375236256013",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:express"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/guards/jwt-auth.guard.spec.ts",
-          "hash": "12494644642135966155",
-          "deps": [
-            "npm:@nestjs/core",
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/guards/jwt-auth.guard.ts",
-          "hash": "15493771372751419147",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/core",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/interceptors/logging.interceptor.spec.ts",
-          "hash": "12852461494770230003",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/interceptors/logging.interceptor.ts",
-          "hash": "132316959191521327",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/interceptors/metrics.interceptor.ts",
-          "hash": "10412773123890101170",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/interceptors/timeout.interceptor.spec.ts",
-          "hash": "2895466118395734524",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/interceptors/timeout.interceptor.ts",
-          "hash": "13911305488713153381",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/interceptors/transform.interceptor.spec.ts",
-          "hash": "15545810770163486705",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/interceptors/transform.interceptor.ts",
-          "hash": "13289467451933076728",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/notifications/notifications.module.ts",
-          "hash": "15608019774914292760",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/pipes/uuid-validation.pipe.spec.ts",
-          "hash": "7909385384227351844",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/pipes/uuid-validation.pipe.ts",
-          "hash": "5723562594345866594",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/services/index.ts",
-          "hash": "4537036183753692428"
-        },
-        {
-          "file": "apps/api/src/shared/services/metrics.service.ts",
-          "hash": "15214692399543317895",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/services/performance-monitor.service.ts",
-          "hash": "8581473161121215464",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/api/src/shared/types/exception.types.ts",
-          "hash": "13591758152807712255"
-        },
-        {
-          "file": "apps/api/src/shared/types/index.ts",
-          "hash": "10932704027915710560"
-        },
-        {
-          "file": "apps/api/src/shared/types/repository.types.ts",
-          "hash": "209380301966144041"
-        },
-        {
-          "file": "apps/api/src/shared/types/widget.types.ts",
-          "hash": "7530021966203478548"
-        },
-        {
-          "file": "apps/api/src/shared/utils/index.ts",
-          "hash": "12334791122894114671"
-        },
-        {
-          "file": "apps/api/test/setup.ts",
-          "hash": "10017393627883243994"
-        },
-        {
-          "file": "apps/api/tsconfig.build.json",
-          "hash": "12053353750734385006"
-        },
-        {
-          "file": "apps/api/tsconfig.json",
-          "hash": "2101672266034208711"
-        }
-      ],
-      "shared-lib-shared-lib-test": [
-        {
-          "file": "libs/shared-lib/shared-lib-test/RpWorkspace.SharedLib.SharedLib.Test.csproj",
-          "hash": "7348442173980500609",
-          "deps": [
-            "libs-shared-lib-shared-lib"
-          ]
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/UnitTest1.cs",
-          "hash": "3940737178873532714"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.dgspec.json",
-          "hash": "16244643420733701690"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.g.props",
-          "hash": "7800595771830664415"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.g.targets",
-          "hash": "14012898149728570202"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/project.assets.json",
-          "hash": "12561845686918671027"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/project.nuget.cache",
-          "hash": "15529805488842866559"
-        }
-      ],
-      "Api..net-backup": [
-        {
-          "file": "apps/api/.net-backup/Api.csproj",
-          "hash": "6669727413477110095"
-        },
-        {
-          "file": "apps/api/.net-backup/Api.http",
-          "hash": "2266458341979145889"
-        },
-        {
-          "file": "apps/api/.net-backup/Program.cs",
-          "hash": "8106322627670471339"
-        },
-        {
-          "file": "apps/api/.net-backup/Properties/launchSettings.json",
-          "hash": "16495177757893513673"
-        },
-        {
-          "file": "apps/api/.net-backup/appsettings.Development.json",
-          "hash": "3339958947771738801"
-        },
-        {
-          "file": "apps/api/.net-backup/appsettings.json",
-          "hash": "8794831988107864270"
-        }
-      ],
       "portal": [
         {
           "file": "apps/portal/.dockerignore",
@@ -1643,7 +569,7 @@
         },
         {
           "file": "apps/portal/src/features/monitoring/service.ts",
-          "hash": "7219901953463913013"
+          "hash": "65353081642474951"
         },
         {
           "file": "apps/portal/src/features/portfolio/components/edit-portfolio-dialog.tsx",
@@ -1761,6 +687,1101 @@
           "hash": "5855035559254869289"
         }
       ],
+      "api": [
+        {
+          "file": "apps/api/.dockerignore",
+          "hash": "15306258142645808558"
+        },
+        {
+          "file": "apps/api/.eslintrc.js",
+          "hash": "8888368515426364477"
+        },
+        {
+          "file": "apps/api/.gitignore",
+          "hash": "795007940816399583"
+        },
+        {
+          "file": "apps/api/.prettierrc",
+          "hash": "17927754387530337703"
+        },
+        {
+          "file": "apps/api/Dockerfile",
+          "hash": "17077349125732086953"
+        },
+        {
+          "file": "apps/api/__mocks__/bcrypt.js",
+          "hash": "16914622406631763973"
+        },
+        {
+          "file": "apps/api/docs/ARCHITECTURE.md",
+          "hash": "7621531065720401964"
+        },
+        {
+          "file": "apps/api/docs/COMPATIBILITY_REPORT.md",
+          "hash": "7848115952165597741"
+        },
+        {
+          "file": "apps/api/docs/COMPATIBILITY_VERIFICATION.md",
+          "hash": "10694210807195435772"
+        },
+        {
+          "file": "apps/api/docs/IMPLEMENTATION_GUIDE.md",
+          "hash": "5369844033014904641"
+        },
+        {
+          "file": "apps/api/docs/MIGRATION_SUMMARY.md",
+          "hash": "1629289250426883525"
+        },
+        {
+          "file": "apps/api/docs/NESTJS_RULES_COMPATIBILITY.md",
+          "hash": "15029660540338044495"
+        },
+        {
+          "file": "apps/api/docs/NESTJS_RULES_COMPATIBILITY_SUMMARY.md",
+          "hash": "8117108786615773254"
+        },
+        {
+          "file": "apps/api/docs/README.md",
+          "hash": "18430097118549808338"
+        },
+        {
+          "file": "apps/api/docs/REFACTORING_EXAMPLES.md",
+          "hash": "2778629505389972613"
+        },
+        {
+          "file": "apps/api/docs/REFACTORING_PROPOSAL.md",
+          "hash": "12448276655173231896"
+        },
+        {
+          "file": "apps/api/docs/STRUCTURE_VERIFICATION.md",
+          "hash": "12443625114073491304"
+        },
+        {
+          "file": "apps/api/docs/TESTING.md",
+          "hash": "16541200560132849419"
+        },
+        {
+          "file": "apps/api/docs/TEST_COVERAGE_SUMMARY.md",
+          "hash": "5516941805098813271"
+        },
+        {
+          "file": "apps/api/jest.config.js",
+          "hash": "5599410744012038211"
+        },
+        {
+          "file": "apps/api/nest-cli.json",
+          "hash": "15092248172411499952"
+        },
+        {
+          "file": "apps/api/package-lock.json",
+          "hash": "7586219293736199927"
+        },
+        {
+          "file": "apps/api/package.json",
+          "hash": "13940280024492047544",
+          "deps": [
+            "npm:@nestjs/schematics",
+            "npm:@types/express",
+            "npm:@types/node",
+            "npm:eslint",
+            "npm:source-map-support@0.5.21",
+            "npm:ts-loader",
+            "npm:typescript",
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:@nestjs/core",
+            "npm:compression",
+            "npm:reflect-metadata",
+            "npm:rxjs",
+            "npm:uuid",
+            "npm:tsconfig-paths"
+          ]
+        },
+        {
+          "file": "apps/api/project.json",
+          "hash": "17589400777308430610"
+        },
+        {
+          "file": "apps/api/src/__mocks__/bcrypt.js",
+          "hash": "16914622406631763973"
+        },
+        {
+          "file": "apps/api/src/app.controller.spec.ts",
+          "hash": "441659975006072023"
+        },
+        {
+          "file": "apps/api/src/app.controller.ts",
+          "hash": "16432776686825147997",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/app.module.ts",
+          "hash": "15250586413753252158",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "apps/api/src/application/auth/dto/auth-response.dto.ts",
+          "hash": "5873945203057087008"
+        },
+        {
+          "file": "apps/api/src/application/auth/dto/login.dto.ts",
+          "hash": "13262613306431335083"
+        },
+        {
+          "file": "apps/api/src/application/auth/dto/register.dto.ts",
+          "hash": "17910781045582832294"
+        },
+        {
+          "file": "apps/api/src/application/auth/interfaces/repositories/sponsor.repository.interface.ts",
+          "hash": "8774109109102969936"
+        },
+        {
+          "file": "apps/api/src/application/auth/services/auth.service.spec.ts",
+          "hash": "13280768669947190508",
+          "deps": [
+            "npm:@nestjs/config",
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/application/auth/services/auth.service.ts",
+          "hash": "8669639887261049724",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config"
+          ]
+        },
+        {
+          "file": "apps/api/src/application/catalogs/dto/create-approver.dto.ts",
+          "hash": "11257654658149400611"
+        },
+        {
+          "file": "apps/api/src/application/catalogs/dto/create-catalog.dto.ts",
+          "hash": "15885530219196792616"
+        },
+        {
+          "file": "apps/api/src/application/catalogs/dto/create-metric.dto.ts",
+          "hash": "11269677326579931024"
+        },
+        {
+          "file": "apps/api/src/application/catalogs/dto/create-product-owner.dto.ts",
+          "hash": "9298011884054192754"
+        },
+        {
+          "file": "apps/api/src/application/catalogs/dto/create-requirement-type.dto.ts",
+          "hash": "8526439060603580121"
+        },
+        {
+          "file": "apps/api/src/application/catalogs/dto/update-catalog.dto.ts",
+          "hash": "9427391213218215176"
+        },
+        {
+          "file": "apps/api/src/application/catalogs/dto/update-metric.dto.ts",
+          "hash": "7100179775847846510"
+        },
+        {
+          "file": "apps/api/src/application/catalogs/dto/update-product-owner.dto.ts",
+          "hash": "3336442413502187340"
+        },
+        {
+          "file": "apps/api/src/application/catalogs/dto/update-requirement-type.dto.ts",
+          "hash": "401616534086206399"
+        },
+        {
+          "file": "apps/api/src/application/catalogs/interfaces/repositories/catalogs.repository.interface.ts",
+          "hash": "14514080527896608283"
+        },
+        {
+          "file": "apps/api/src/application/catalogs/services/catalogs.service.spec.ts",
+          "hash": "18042534681487507284"
+        },
+        {
+          "file": "apps/api/src/application/catalogs/services/catalogs.service.ts",
+          "hash": "16388577454317040552",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/application/epics/dtos/create-epic.dto.ts",
+          "hash": "2567253887767057330"
+        },
+        {
+          "file": "apps/api/src/application/epics/dtos/update-epic.dto.ts",
+          "hash": "3312002524585032466"
+        },
+        {
+          "file": "apps/api/src/application/epics/interfaces/repositories/epics.repository.interface.ts",
+          "hash": "14112947831646870531"
+        },
+        {
+          "file": "apps/api/src/application/epics/services/epics.service.spec.ts",
+          "hash": "5860809271545432641",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/application/epics/services/epics.service.ts",
+          "hash": "416739776562986387",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/application/initiatives/dtos/create-initiative.dto.ts",
+          "hash": "13476500969872900078"
+        },
+        {
+          "file": "apps/api/src/application/initiatives/dtos/update-initiative.dto.ts",
+          "hash": "15168963618134014652"
+        },
+        {
+          "file": "apps/api/src/application/initiatives/interfaces/repositories/initiatives.repository.interface.ts",
+          "hash": "16251236288929542325"
+        },
+        {
+          "file": "apps/api/src/application/initiatives/services/initiatives.service.spec.ts",
+          "hash": "5400604599861694656",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/application/initiatives/services/initiatives.service.ts",
+          "hash": "3589561696816217932",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/application/interfaces/repositories/portfolio.repository.interface.ts",
+          "hash": "6350492225913695374"
+        },
+        {
+          "file": "apps/api/src/application/interfaces/repositories/repository.tokens.ts",
+          "hash": "12192408842018877845"
+        },
+        {
+          "file": "apps/api/src/application/interfaces/repositories/requirement.repository.interface.ts",
+          "hash": "1413983348992550141"
+        },
+        {
+          "file": "apps/api/src/application/interfaces/repositories/sponsor.repository.interface.ts",
+          "hash": "14543322285843351359"
+        },
+        {
+          "file": "apps/api/src/application/portfolios/dtos/create-portfolio.dto.ts",
+          "hash": "13951137113790431230"
+        },
+        {
+          "file": "apps/api/src/application/portfolios/dtos/update-portfolio.dto.ts",
+          "hash": "4792842007095562888"
+        },
+        {
+          "file": "apps/api/src/application/portfolios/interfaces/repositories/portfolio.repository.interface.ts",
+          "hash": "90572600449069563"
+        },
+        {
+          "file": "apps/api/src/application/portfolios/services/portfolios.service.spec.ts",
+          "hash": "5081179863769523185"
+        },
+        {
+          "file": "apps/api/src/application/portfolios/services/portfolios.service.ts",
+          "hash": "16299423866607217927",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/application/requirements/dto/create-requirement-reference.dto.ts",
+          "hash": "1145412090700786264"
+        },
+        {
+          "file": "apps/api/src/application/requirements/dto/create-requirement.dto.ts",
+          "hash": "12571948550785114734"
+        },
+        {
+          "file": "apps/api/src/application/requirements/dto/requirement-query.dto.ts",
+          "hash": "17531179449792621117"
+        },
+        {
+          "file": "apps/api/src/application/requirements/dto/requirement-response.dto.ts",
+          "hash": "15469272672135508246"
+        },
+        {
+          "file": "apps/api/src/application/requirements/dto/update-requirement-reference.dto.ts",
+          "hash": "13278546442295587499"
+        },
+        {
+          "file": "apps/api/src/application/requirements/dto/update-requirement.dto.ts",
+          "hash": "11435300724344892532"
+        },
+        {
+          "file": "apps/api/src/application/requirements/interfaces/repositories/requirement-reference.repository.interface.ts",
+          "hash": "10795494916555412753"
+        },
+        {
+          "file": "apps/api/src/application/requirements/interfaces/repositories/requirement.repository.interface.ts",
+          "hash": "18150352177473016791"
+        },
+        {
+          "file": "apps/api/src/application/requirements/services/requirement-references.service.spec.ts",
+          "hash": "16853091731517000855"
+        },
+        {
+          "file": "apps/api/src/application/requirements/services/requirement-references.service.ts",
+          "hash": "11874110473350624013",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/application/requirements/services/requirements.service.spec.ts",
+          "hash": "14321910096811042434"
+        },
+        {
+          "file": "apps/api/src/application/requirements/services/requirements.service.ts",
+          "hash": "18038216223936135248",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/application/sponsors/dto/create-sponsor.dto.ts",
+          "hash": "4096758922238754275"
+        },
+        {
+          "file": "apps/api/src/application/sponsors/dto/update-sponsor.dto.ts",
+          "hash": "5431225166478055710"
+        },
+        {
+          "file": "apps/api/src/application/sponsors/interfaces/repositories/sponsor.repository.interface.ts",
+          "hash": "8774109109102969936"
+        },
+        {
+          "file": "apps/api/src/application/sponsors/services/sponsors.service.spec.ts",
+          "hash": "6426389909511319659"
+        },
+        {
+          "file": "apps/api/src/application/sponsors/services/sponsors.service.ts",
+          "hash": "11599346587164484938",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/application/widgets/dto/create-widget.dto.ts",
+          "hash": "13374998419455704807"
+        },
+        {
+          "file": "apps/api/src/application/widgets/dto/update-widget.dto.ts",
+          "hash": "7163683489428489211"
+        },
+        {
+          "file": "apps/api/src/application/widgets/widgets.controller.spec.ts",
+          "hash": "7544195143478025159",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/application/widgets/widgets.controller.ts",
+          "hash": "10097064722676469861",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/application/widgets/widgets.module.ts",
+          "hash": "16524663653245424605",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/application/widgets/widgets.service.spec.ts",
+          "hash": "4942540657051807925"
+        },
+        {
+          "file": "apps/api/src/application/widgets/widgets.service.ts",
+          "hash": "1426434961448696014",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/domain/entities/approver.entity.ts",
+          "hash": "13961816484409076360"
+        },
+        {
+          "file": "apps/api/src/domain/entities/complexity.entity.ts",
+          "hash": "12828615286987959351"
+        },
+        {
+          "file": "apps/api/src/domain/entities/effort-estimate-type.entity.ts",
+          "hash": "15808145480507342210"
+        },
+        {
+          "file": "apps/api/src/domain/entities/epic.entity.ts",
+          "hash": "4676312721983833424"
+        },
+        {
+          "file": "apps/api/src/domain/entities/initiative.entity.ts",
+          "hash": "4481373375664655382"
+        },
+        {
+          "file": "apps/api/src/domain/entities/lifecycle-status.entity.ts",
+          "hash": "6169416300244764125"
+        },
+        {
+          "file": "apps/api/src/domain/entities/metric.entity.ts",
+          "hash": "6468035039141426431"
+        },
+        {
+          "file": "apps/api/src/domain/entities/portfolio.entity.ts",
+          "hash": "10574839074486527275"
+        },
+        {
+          "file": "apps/api/src/domain/entities/priority.entity.ts",
+          "hash": "5103161314133345132"
+        },
+        {
+          "file": "apps/api/src/domain/entities/product-owner.entity.ts",
+          "hash": "3520807584456443148"
+        },
+        {
+          "file": "apps/api/src/domain/entities/requirement-reference.entity.ts",
+          "hash": "14747853647413663264"
+        },
+        {
+          "file": "apps/api/src/domain/entities/requirement-type.entity.ts",
+          "hash": "11946590407380265285"
+        },
+        {
+          "file": "apps/api/src/domain/entities/requirement.entity.ts",
+          "hash": "8474413904139640850"
+        },
+        {
+          "file": "apps/api/src/domain/entities/risk-level.entity.ts",
+          "hash": "1539505859438169136"
+        },
+        {
+          "file": "apps/api/src/domain/entities/source.entity.ts",
+          "hash": "13285827803427739538"
+        },
+        {
+          "file": "apps/api/src/domain/entities/sponsor.entity.ts",
+          "hash": "17638342151573178403"
+        },
+        {
+          "file": "apps/api/src/domain/entities/verification-method.entity.ts",
+          "hash": "7165622532522995971"
+        },
+        {
+          "file": "apps/api/src/domain/entities/widget.entity.ts",
+          "hash": "4487311258353044938"
+        },
+        {
+          "file": "apps/api/src/infrastructure/auth/strategies/jwt.strategy.spec.ts",
+          "hash": "14667531593863484885",
+          "deps": [
+            "npm:@nestjs/config",
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/infrastructure/auth/strategies/jwt.strategy.ts",
+          "hash": "13683183540073386871",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config"
+          ]
+        },
+        {
+          "file": "apps/api/src/infrastructure/database/data-source.ts",
+          "hash": "6159306728813214251",
+          "deps": [
+            "npm:dotenv"
+          ]
+        },
+        {
+          "file": "apps/api/src/infrastructure/database/database.config.spec.ts",
+          "hash": "6365428176207013529",
+          "deps": [
+            "npm:@nestjs/config"
+          ]
+        },
+        {
+          "file": "apps/api/src/infrastructure/database/database.config.ts",
+          "hash": "152388389742608939",
+          "deps": [
+            "npm:@nestjs/config"
+          ]
+        },
+        {
+          "file": "apps/api/src/infrastructure/database/database.module.ts",
+          "hash": "1490152954587171940",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config"
+          ]
+        },
+        {
+          "file": "apps/api/src/infrastructure/database/migrations/1766064361824-InitialSchema.ts",
+          "hash": "2927652059571544656"
+        },
+        {
+          "file": "apps/api/src/infrastructure/database/repositories/catalogs.repository.spec.ts",
+          "hash": "765620964538907984"
+        },
+        {
+          "file": "apps/api/src/infrastructure/database/repositories/catalogs.repository.ts",
+          "hash": "10583863246383696462",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/infrastructure/database/repositories/epics.repository.spec.ts",
+          "hash": "16526108487884971173"
+        },
+        {
+          "file": "apps/api/src/infrastructure/database/repositories/epics.repository.ts",
+          "hash": "8547742776004584043",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/infrastructure/database/repositories/initiatives.repository.spec.ts",
+          "hash": "13320816379218857375"
+        },
+        {
+          "file": "apps/api/src/infrastructure/database/repositories/initiatives.repository.ts",
+          "hash": "12019232649395328157",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/infrastructure/database/seed.ts",
+          "hash": "15611464754149440075",
+          "deps": [
+            "npm:reflect-metadata",
+            "npm:dotenv",
+            "npm:uuid"
+          ]
+        },
+        {
+          "file": "apps/api/src/infrastructure/repositories/portfolio.repository.spec.ts",
+          "hash": "11851561592310529259"
+        },
+        {
+          "file": "apps/api/src/infrastructure/repositories/portfolio.repository.ts",
+          "hash": "8391576602381746180",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/infrastructure/repositories/requirement-reference.repository.spec.ts",
+          "hash": "6369871713824540116"
+        },
+        {
+          "file": "apps/api/src/infrastructure/repositories/requirement-reference.repository.ts",
+          "hash": "5874810961684341428",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/infrastructure/repositories/requirement.repository.spec.ts",
+          "hash": "18402932327179159100"
+        },
+        {
+          "file": "apps/api/src/infrastructure/repositories/requirement.repository.ts",
+          "hash": "9087192035301674723",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/infrastructure/repositories/sponsor.repository.spec.ts",
+          "hash": "4859407968124707687"
+        },
+        {
+          "file": "apps/api/src/infrastructure/repositories/sponsor.repository.ts",
+          "hash": "17451357712280005350",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/main.ts",
+          "hash": "6612037181416101950",
+          "deps": [
+            "npm:tsconfig-paths",
+            "npm:@nestjs/core",
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:compression"
+          ]
+        },
+        {
+          "file": "apps/api/src/presentation/auth/auth.controller.spec.ts",
+          "hash": "2517463950457086084"
+        },
+        {
+          "file": "apps/api/src/presentation/auth/auth.controller.ts",
+          "hash": "14323509040220194407",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/presentation/auth/auth.module.ts",
+          "hash": "10692153831290300715",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "apps/api/src/presentation/catalogs/catalogs.controller.spec.ts",
+          "hash": "15543616045747683490"
+        },
+        {
+          "file": "apps/api/src/presentation/catalogs/catalogs.controller.ts",
+          "hash": "12575044222890874640",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/presentation/catalogs/catalogs.module.ts",
+          "hash": "8796893811129783643",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/presentation/epics/epics.controller.spec.ts",
+          "hash": "2170020981686472753"
+        },
+        {
+          "file": "apps/api/src/presentation/epics/epics.controller.ts",
+          "hash": "1128404641724664310",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/presentation/epics/epics.module.ts",
+          "hash": "12271850391248670728",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/presentation/health/health.controller.spec.ts",
+          "hash": "11108168522839700648"
+        },
+        {
+          "file": "apps/api/src/presentation/health/health.controller.ts",
+          "hash": "12628968938984244180",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/presentation/health/health.module.ts",
+          "hash": "3842842342661664588",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/presentation/initiatives/initiatives.controller.spec.ts",
+          "hash": "15302646796695397867"
+        },
+        {
+          "file": "apps/api/src/presentation/initiatives/initiatives.controller.ts",
+          "hash": "17558404408978524479",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/presentation/initiatives/initiatives.module.ts",
+          "hash": "10605710060347199814",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/presentation/monitoring/monitoring.controller.ts",
+          "hash": "7247678187846248892",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/presentation/monitoring/monitoring.module.ts",
+          "hash": "10943587909842579521",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "apps/api/src/presentation/portfolios/portfolios.controller.spec.ts",
+          "hash": "12892753301871227167"
+        },
+        {
+          "file": "apps/api/src/presentation/portfolios/portfolios.controller.ts",
+          "hash": "14258564698715287246",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/presentation/portfolios/portfolios.module.ts",
+          "hash": "16011860241408108225",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/presentation/requirements/requirement-references.controller.ts",
+          "hash": "3809162611137529069",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/presentation/requirements/requirements.controller.spec.ts",
+          "hash": "7069291736338648885"
+        },
+        {
+          "file": "apps/api/src/presentation/requirements/requirements.controller.ts",
+          "hash": "3258613301335483207",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/presentation/requirements/requirements.module.ts",
+          "hash": "8715989558175932595",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/presentation/sponsors/sponsors.controller.spec.ts",
+          "hash": "3468539131910134494"
+        },
+        {
+          "file": "apps/api/src/presentation/sponsors/sponsors.controller.ts",
+          "hash": "7761397023599418672",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/presentation/sponsors/sponsors.module.ts",
+          "hash": "9192570004385458483",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/common.module.ts",
+          "hash": "7891132967985281334",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/config/config.validation.spec.ts",
+          "hash": "6385103303246471915"
+        },
+        {
+          "file": "apps/api/src/shared/config/config.validation.ts",
+          "hash": "15963085464042652484"
+        },
+        {
+          "file": "apps/api/src/shared/config/core-config.module.ts",
+          "hash": "6944958965310438343",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/config/env.example",
+          "hash": "7010458724724570193"
+        },
+        {
+          "file": "apps/api/src/shared/decorators/api-paginated-response.decorator.spec.ts",
+          "hash": "15538139784190536969",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/decorators/api-paginated-response.decorator.ts",
+          "hash": "7753140714483877508",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/decorators/public.decorator.spec.ts",
+          "hash": "15316461910353478033"
+        },
+        {
+          "file": "apps/api/src/shared/decorators/public.decorator.ts",
+          "hash": "17960535925631508594",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/dto/pagination.dto.spec.ts",
+          "hash": "400815525780216643"
+        },
+        {
+          "file": "apps/api/src/shared/dto/pagination.dto.ts",
+          "hash": "15201389203132604689"
+        },
+        {
+          "file": "apps/api/src/shared/exceptions/entity-not-found.exception.spec.ts",
+          "hash": "15808076722842057672"
+        },
+        {
+          "file": "apps/api/src/shared/exceptions/entity-not-found.exception.ts",
+          "hash": "14218226900540546593",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/filters/http-exception.filter.spec.ts",
+          "hash": "11668567641291961686",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/filters/http-exception.filter.ts",
+          "hash": "3350760375236256013",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:express"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/guards/jwt-auth.guard.spec.ts",
+          "hash": "10925878036046268902",
+          "deps": [
+            "npm:@nestjs/core",
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/guards/jwt-auth.guard.ts",
+          "hash": "15493771372751419147",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/interceptors/logging.interceptor.spec.ts",
+          "hash": "12852461494770230003",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/interceptors/logging.interceptor.ts",
+          "hash": "132316959191521327",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/interceptors/metrics.interceptor.spec.ts",
+          "hash": "1775296131186630420",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/interceptors/metrics.interceptor.ts",
+          "hash": "10412773123890101170",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/interceptors/timeout.interceptor.spec.ts",
+          "hash": "2895466118395734524",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/interceptors/timeout.interceptor.ts",
+          "hash": "13911305488713153381",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/interceptors/transform.interceptor.spec.ts",
+          "hash": "15545810770163486705",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/interceptors/transform.interceptor.ts",
+          "hash": "13289467451933076728",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/notifications/notifications.module.ts",
+          "hash": "15608019774914292760",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/pipes/uuid-validation.pipe.spec.ts",
+          "hash": "7909385384227351844",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/pipes/uuid-validation.pipe.ts",
+          "hash": "5723562594345866594",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/services/index.ts",
+          "hash": "4537036183753692428"
+        },
+        {
+          "file": "apps/api/src/shared/services/metrics.service.spec.ts",
+          "hash": "2344574655015680114"
+        },
+        {
+          "file": "apps/api/src/shared/services/metrics.service.ts",
+          "hash": "15214692399543317895",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/services/performance-monitor.service.spec.ts",
+          "hash": "13959062084605423389"
+        },
+        {
+          "file": "apps/api/src/shared/services/performance-monitor.service.ts",
+          "hash": "8581473161121215464",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/shared/types/exception.types.ts",
+          "hash": "13591758152807712255"
+        },
+        {
+          "file": "apps/api/src/shared/types/index.ts",
+          "hash": "10932704027915710560"
+        },
+        {
+          "file": "apps/api/src/shared/types/repository.types.ts",
+          "hash": "209380301966144041"
+        },
+        {
+          "file": "apps/api/src/shared/types/widget.types.ts",
+          "hash": "7530021966203478548"
+        },
+        {
+          "file": "apps/api/src/shared/utils/index.ts",
+          "hash": "12334791122894114671"
+        },
+        {
+          "file": "apps/api/test/setup.ts",
+          "hash": "5493305425186310022"
+        },
+        {
+          "file": "apps/api/tsconfig.build.json",
+          "hash": "12053353750734385006"
+        },
+        {
+          "file": "apps/api/tsconfig.json",
+          "hash": "2101672266034208711"
+        }
+      ],
+      "shared-lib-shared-lib-test": [
+        {
+          "file": "libs/shared-lib/shared-lib-test/RpWorkspace.SharedLib.SharedLib.Test.csproj",
+          "hash": "7348442173980500609",
+          "deps": [
+            "libs-shared-lib-shared-lib"
+          ]
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/UnitTest1.cs",
+          "hash": "3940737178873532714"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.dgspec.json",
+          "hash": "16244643420733701690"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.g.props",
+          "hash": "7800595771830664415"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.g.targets",
+          "hash": "14012898149728570202"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/obj/project.assets.json",
+          "hash": "12561845686918671027"
+        },
+        {
+          "file": "libs/shared-lib/shared-lib-test/obj/project.nuget.cache",
+          "hash": "15529805488842866559"
+        }
+      ],
       "libs-shared-lib-shared-lib": [
         {
           "file": "libs/shared-lib/shared-lib/.gitignore",
@@ -1851,7 +1872,11 @@
       },
       {
         "file": ".gitignore",
-        "hash": "1954926228930955744"
+        "hash": "9852263929439946417"
+      },
+      {
+        "file": ".nxignore",
+        "hash": "3295098562631848944"
       },
       {
         "file": "Directory.Build.props",
@@ -2019,11 +2044,11 @@
       },
       {
         "file": "docker-compose.prod.yml",
-        "hash": "17736262139169680738"
+        "hash": "7722790298173329246"
       },
       {
         "file": "docker-compose.yml",
-        "hash": "16478612476775941995"
+        "hash": "9342295024675914381"
       },
       {
         "file": "docs/CHANGELOG.md",
@@ -2099,7 +2124,7 @@
       },
       {
         "file": "nx.json",
-        "hash": "11887166922595370863"
+        "hash": "15646319930655109309"
       },
       {
         "file": "package-lock.json",

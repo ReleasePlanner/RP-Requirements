@@ -42,3 +42,6 @@ tests/*.tmp
 # Temporary files
 *.tmp
 *.temp
+
+# .NET backup files
+.net-backup/

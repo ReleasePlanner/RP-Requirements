@@ -74,7 +74,6 @@ export interface DetailedHealth {
       memoryUsage: number;
       heapUsed: number;
       heapTotal: number;
-      heapUsed: number;
     };
   };
   requests: {
