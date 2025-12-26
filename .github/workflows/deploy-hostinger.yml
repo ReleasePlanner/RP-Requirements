@@ -243,7 +243,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup SSH
-        if: ${{ secrets.VPS_SSH_KEY != '' }}
+        continue-on-error: true
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
@@ -261,7 +261,7 @@ jobs:
             echo "⚠️ VPS_HOST secret is not configured. Skipping SSH connection test."
             exit 0
           fi
-          
+
           if [ -n "${{ secrets.VPS_SSH_KEY }}" ]; then
             echo "🔑 Using SSH key authentication..."
             echo "📋 Verifying SSH key format..."
@@ -445,7 +445,7 @@ jobs:
           # Stop existing containers
           echo "🛑 Stopping existing containers..."
           docker-compose down || true
-          
+
           # Note: If you see "role root does not exist" errors, it may be due to:
           # 1. Old volume data with different user configuration
           # 2. Healthcheck running before PostgreSQL is fully initialized
@@ -507,7 +507,7 @@ jobs:
             echo "❌ VPS_HOST secret is not configured. Cannot deploy."
             exit 1
           fi
-          
+
           if [ -n "${{ secrets.VPS_SSH_KEY }}" ]; then
             echo "📤 Copying deployment script using SSH key..."
             echo "🔍 Verifying SSH agent has key..."
@@ -552,7 +552,7 @@ jobs:
             echo "❌ VPS_HOST secret is not configured. Cannot deploy."
             exit 1
           fi
-          
+
           if [ -n "${{ secrets.VPS_SSH_KEY }}" ]; then
             echo "🔑 Deploying using SSH key..."
             ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
