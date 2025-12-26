@@ -90,11 +90,11 @@ describe('CatalogsController', () => {
   });
 
   describe('Priorities', () => {
-    it('should return priorities', async () => {
+  it('should return priorities', async () => {
       const result = [{ priorityId: 1, name: 'High' }] as Priority[];
-      mockCatalogsService.findAllPriorities.mockResolvedValue(result);
-      expect(await controller.findAllPriorities()).toBe(result);
-    });
+    mockCatalogsService.findAllPriorities.mockResolvedValue(result);
+    expect(await controller.findAllPriorities()).toBe(result);
+  });
 
     it('should create a priority', async () => {
       const createDto = { name: 'High' };
@@ -120,11 +120,11 @@ describe('CatalogsController', () => {
   });
 
   describe('Statuses', () => {
-    it('should return statuses', async () => {
+  it('should return statuses', async () => {
       const result = [{ statusId: 1, name: 'Open' }] as LifecycleStatus[];
-      mockCatalogsService.findAllStatuses.mockResolvedValue(result);
-      expect(await controller.findAllStatuses()).toBe(result);
-    });
+    mockCatalogsService.findAllStatuses.mockResolvedValue(result);
+    expect(await controller.findAllStatuses()).toBe(result);
+  });
 
     it('should create a status', async () => {
       const createDto = { name: 'Open' };
@@ -150,11 +150,11 @@ describe('CatalogsController', () => {
   });
 
   describe('RiskLevels', () => {
-    it('should return risk levels', async () => {
+  it('should return risk levels', async () => {
       const result = [{ riskLevelId: 1, name: 'High' }] as RiskLevel[];
-      mockCatalogsService.findAllRiskLevels.mockResolvedValue(result);
-      expect(await controller.findAllRiskLevels()).toBe(result);
-    });
+    mockCatalogsService.findAllRiskLevels.mockResolvedValue(result);
+    expect(await controller.findAllRiskLevels()).toBe(result);
+  });
 
     it('should create a risk level', async () => {
       const createDto = { name: 'High' };
@@ -180,11 +180,11 @@ describe('CatalogsController', () => {
   });
 
   describe('Complexities', () => {
-    it('should return complexities', async () => {
+  it('should return complexities', async () => {
       const result = [{ complexityId: 1, name: 'Complex' }] as Complexity[];
-      mockCatalogsService.findAllComplexities.mockResolvedValue(result);
-      expect(await controller.findAllComplexities()).toBe(result);
-    });
+    mockCatalogsService.findAllComplexities.mockResolvedValue(result);
+    expect(await controller.findAllComplexities()).toBe(result);
+  });
 
     it('should create a complexity', async () => {
       const createDto = { name: 'Complex' };
@@ -210,18 +210,18 @@ describe('CatalogsController', () => {
   });
 
   describe('EffortEstimateTypes', () => {
-    it('should return effort types', async () => {
+  it('should return effort types', async () => {
       const result = [{ effortTypeId: 1, name: 'Points' }] as EffortEstimateType[];
       mockCatalogsService.findAllEffortEstimateTypes.mockResolvedValue(result);
-      expect(await controller.findAllEffortTypes()).toBe(result);
+    expect(await controller.findAllEffortTypes()).toBe(result);
     });
   });
 
   describe('RequirementTypes', () => {
-    it('should return types', async () => {
+  it('should return types', async () => {
       const result = [{ typeId: 1, name: 'Bug' }] as RequirementType[];
       mockCatalogsService.findAllRequirementTypes.mockResolvedValue(result);
-      expect(await controller.findAllTypes()).toBe(result);
+    expect(await controller.findAllTypes()).toBe(result);
     });
 
     it('should create a requirement type', async () => {

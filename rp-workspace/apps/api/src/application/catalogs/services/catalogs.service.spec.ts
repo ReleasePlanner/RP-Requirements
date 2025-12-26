@@ -80,11 +80,11 @@ describe('CatalogsService', () => {
   });
 
   describe('Priorities', () => {
-    it('should return all priorities', async () => {
+  it('should return all priorities', async () => {
       const result = [{ priorityId: 1, name: 'High' }] as Priority[];
-      mockCatalogsRepository.findAllPriorities.mockResolvedValue(result);
-      expect(await service.findAllPriorities()).toBe(result);
-    });
+    mockCatalogsRepository.findAllPriorities.mockResolvedValue(result);
+    expect(await service.findAllPriorities()).toBe(result);
+  });
 
     it('should create a priority', async () => {
       const priority = { name: 'High' };
@@ -110,11 +110,11 @@ describe('CatalogsService', () => {
   });
 
   describe('Statuses', () => {
-    it('should return all statuses', async () => {
+  it('should return all statuses', async () => {
       const result = [{ statusId: 1, name: 'Open' }] as LifecycleStatus[];
-      mockCatalogsRepository.findAllStatuses.mockResolvedValue(result);
-      expect(await service.findAllStatuses()).toBe(result);
-    });
+    mockCatalogsRepository.findAllStatuses.mockResolvedValue(result);
+    expect(await service.findAllStatuses()).toBe(result);
+  });
 
     it('should create a status', async () => {
       const status = { name: 'Open' };
@@ -140,11 +140,11 @@ describe('CatalogsService', () => {
   });
 
   describe('RiskLevels', () => {
-    it('should return all risk levels', async () => {
+  it('should return all risk levels', async () => {
       const result = [{ riskLevelId: 1, name: 'High' }] as RiskLevel[];
-      mockCatalogsRepository.findAllRiskLevels.mockResolvedValue(result);
-      expect(await service.findAllRiskLevels()).toBe(result);
-    });
+    mockCatalogsRepository.findAllRiskLevels.mockResolvedValue(result);
+    expect(await service.findAllRiskLevels()).toBe(result);
+  });
 
     it('should create a risk level', async () => {
       const riskLevel = { name: 'High' };
@@ -170,11 +170,11 @@ describe('CatalogsService', () => {
   });
 
   describe('Complexities', () => {
-    it('should return all complexities', async () => {
+  it('should return all complexities', async () => {
       const result = [{ complexityId: 1, name: 'Complex' }] as Complexity[];
-      mockCatalogsRepository.findAllComplexities.mockResolvedValue(result);
-      expect(await service.findAllComplexities()).toBe(result);
-    });
+    mockCatalogsRepository.findAllComplexities.mockResolvedValue(result);
+    expect(await service.findAllComplexities()).toBe(result);
+  });
 
     it('should create a complexity', async () => {
       const complexity = { name: 'Complex' };
@@ -200,11 +200,11 @@ describe('CatalogsService', () => {
   });
 
   describe('EffortEstimateTypes', () => {
-    it('should return all effort types', async () => {
+  it('should return all effort types', async () => {
       const result = [{ effortTypeId: 1, name: 'Points' }] as EffortEstimateType[];
-      mockCatalogsRepository.findAllEffortEstimateTypes.mockResolvedValue(result);
-      expect(await service.findAllEffortEstimateTypes()).toBe(result);
-    });
+    mockCatalogsRepository.findAllEffortEstimateTypes.mockResolvedValue(result);
+    expect(await service.findAllEffortEstimateTypes()).toBe(result);
+  });
 
     it('should create an effort estimate type', async () => {
       const type = { name: 'Points' };
@@ -230,10 +230,10 @@ describe('CatalogsService', () => {
   });
 
   describe('RequirementTypes', () => {
-    it('should return all types', async () => {
+  it('should return all types', async () => {
       const result = [{ typeId: 1, name: 'Bug' }] as RequirementType[];
-      mockCatalogsRepository.findAllRequirementTypes.mockResolvedValue(result);
-      expect(await service.findAllRequirementTypes()).toBe(result);
+    mockCatalogsRepository.findAllRequirementTypes.mockResolvedValue(result);
+    expect(await service.findAllRequirementTypes()).toBe(result);
     });
 
     it('should create a requirement type', async () => {
