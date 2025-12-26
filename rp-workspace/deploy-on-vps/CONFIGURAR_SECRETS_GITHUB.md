@@ -368,10 +368,11 @@ Este es el error más común. Ver la guía completa: [Troubleshooting SSH Permis
 
 ## 📚 Referencias
 
+- **[Mejores Prácticas SSH](MEJORES_PRACTICAS_SSH_GITHUB_ACTIONS.md)** - ⭐ Configuración automática permanente y segura
 - [GitHub Docs: Encrypted secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets)
 - [GitHub Docs: Using environments for deployment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment)
-- [Documentación de Deployment](rp-workspace/deploy-on-vps/GITHUB_HOSTINGER_INTEGRATION.md)
-- [Troubleshooting GitHub Actions](rp-workspace/deploy-on-vps/TROUBLESHOOTING_GITHUB_ACTIONS.md)
+- [Documentación de Deployment](GITHUB_HOSTINGER_INTEGRATION.md)
+- [Troubleshooting GitHub Actions](TROUBLESHOOTING_GITHUB_ACTIONS.md)
 
 ---
 
