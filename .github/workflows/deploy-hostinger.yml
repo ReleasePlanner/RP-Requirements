@@ -508,7 +508,21 @@ jobs:
             exit 1
           fi
 
-          if [ -n "${{ secrets.VPS_SSH_KEY }}" ]; then
+          # Priorizar contraseña si está configurada (más confiable cuando está configurada)
+          if [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
+            echo "📤 Copying deployment script using SSH password..."
+            sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' \
+              scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+              -o ConnectTimeout=10 \
+              -o PreferredAuthentications=password \
+              -o PubkeyAuthentication=no \
+              deploy-remote.sh ${{ env.VPS_USER }}@${{ env.VPS_HOST }}:/tmp/deploy-remote.sh || {
+              echo "❌ Failed to copy deployment script via SSH password"
+              echo "💡 Verify VPS_SSH_PASSWORD is correct in GitHub Secrets"
+              echo "💡 Verify VPS_USER is correct (usually 'root')"
+              exit 1
+            }
+          elif [ -n "${{ secrets.VPS_SSH_KEY }}" ]; then
             echo "📤 Copying deployment script using SSH key..."
             echo "🔍 Verifying SSH agent has key..."
             ssh-add -l || echo "⚠️ SSH agent may not have key loaded"
@@ -530,12 +544,6 @@ jobs:
               echo "   4. Verify: chmod 700 ~/.ssh"
               exit 1
             }
-          elif [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
-            echo "📤 Copying deployment script using SSH password..."
-            sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' \
-              scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
-              -o ConnectTimeout=10 \
-              deploy-remote.sh ${{ env.VPS_USER }}@${{ env.VPS_HOST }}:/tmp/deploy-remote.sh
           else
             echo "❌ No SSH credentials (VPS_SSH_KEY or VPS_SSH_PASSWORD) provided."
             echo "💡 Please configure VPS_SSH_KEY or VPS_SSH_PASSWORD in GitHub Secrets to enable deployment."
@@ -553,23 +561,27 @@ jobs:
             exit 1
           fi
 
-          if [ -n "${{ secrets.VPS_SSH_KEY }}" ]; then
+          # Priorizar contraseña si está configurada (más confiable cuando está configurada)
+          if [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
+            echo "🔑 Deploying using SSH password..."
+            sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' \
+              ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+              -o ConnectTimeout=10 \
+              -o PreferredAuthentications=password \
+              -o PubkeyAuthentication=no \
+              ${{ env.VPS_USER }}@${{ env.VPS_HOST }} \
+              "GITHUB_TOKEN='${{ secrets.GITHUB_TOKEN }}' bash /tmp/deploy-remote.sh" || {
+              echo "❌ Deployment failed via SSH password"
+              echo "💡 Verify VPS_SSH_PASSWORD is correct in GitHub Secrets"
+              exit 1
+            }
+          elif [ -n "${{ secrets.VPS_SSH_KEY }}" ]; then
             echo "🔑 Deploying using SSH key..."
             ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
               -o ConnectTimeout=10 \
               ${{ env.VPS_USER }}@${{ env.VPS_HOST }} \
               "GITHUB_TOKEN='${{ secrets.GITHUB_TOKEN }}' bash /tmp/deploy-remote.sh" || {
               echo "❌ Deployment failed via SSH key"
-              exit 1
-            }
-          elif [ -n "${{ secrets.VPS_SSH_PASSWORD }}" ]; then
-            echo "🔑 Deploying using SSH password..."
-            sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' \
-              ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
-              -o ConnectTimeout=10 \
-              ${{ env.VPS_USER }}@${{ env.VPS_HOST }} \
-              "GITHUB_TOKEN='${{ secrets.GITHUB_TOKEN }}' bash /tmp/deploy-remote.sh" || {
-              echo "❌ Deployment failed via SSH password"
               exit 1
             }
           else
