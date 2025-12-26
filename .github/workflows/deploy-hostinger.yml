@@ -287,6 +287,50 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y openssh-client sshpass || true
 
+      - name: Test SSH server configuration
+        continue-on-error: true
+        run: |
+          echo "🔍 Testing SSH server capabilities..."
+          echo "Checking if server allows password authentication..."
+          
+          VPS_HOST="${{ secrets.VPS_HOST }}"
+          VPS_USER="${{ env.VPS_USER }}"
+          
+          if [ -z "$VPS_HOST" ]; then
+            echo "⚠️ VPS_HOST not configured, skipping server test"
+            exit 0
+          fi
+          
+          # Probe server to see what authentication methods it offers
+          echo "Probing SSH server: $VPS_USER@$VPS_HOST"
+          ssh -v -o PreferredAuthentications=password \
+            -o PubkeyAuthentication=no \
+            -o StrictHostKeyChecking=no \
+            -o UserKnownHostsFile=/dev/null \
+            -o ConnectTimeout=10 \
+            -o BatchMode=yes \
+            $VPS_USER@$VPS_HOST 2>&1 | tee /tmp/ssh-probe.log || true
+          
+          echo ""
+          echo "📋 Authentication methods offered by server:"
+          if grep -i "Authentications that can continue" /tmp/ssh-probe.log; then
+            AUTH_METHODS=$(grep -i "Authentications that can continue" /tmp/ssh-probe.log | head -1)
+            echo "   $AUTH_METHODS"
+            
+            if echo "$AUTH_METHODS" | grep -qi "password"; then
+              echo "✅ Server DOES support password authentication"
+            else
+              echo "❌ Server DOES NOT support password authentication"
+              echo "💡 Check /etc/ssh/sshd_config on VPS for: PasswordAuthentication yes"
+            fi
+          else
+            echo "⚠️ Could not determine authentication methods"
+          fi
+          
+          echo ""
+          echo "📋 Server SSH version:"
+          grep -i "SSH-" /tmp/ssh-probe.log | head -3 || echo "   Could not determine SSH version"
+
       - name: Test SSH connection
         continue-on-error: true
         run: |
@@ -639,6 +683,26 @@ jobs:
             rm -f ~/.ssh/id_* 2>/dev/null || true
             rm -f ~/.ssh/known_hosts 2>/dev/null || true
             
+            # Verificar primero si el servidor permite autenticación por contraseña
+            echo "🔍 Checking if server allows password authentication..."
+            SERVER_AUTH_CHECK=$(timeout 5 ssh -v -o PreferredAuthentications=password \
+              -o PubkeyAuthentication=no \
+              -o StrictHostKeyChecking=no \
+              -o UserKnownHostsFile=/dev/null \
+              -o ConnectTimeout=5 \
+              -o BatchMode=yes \
+              ${{ env.VPS_USER }}@${{ env.VPS_HOST }} 2>&1 | grep -i "Authentications that can continue" || echo "")
+            
+            if echo "$SERVER_AUTH_CHECK" | grep -qi "password"; then
+              echo "✅ Server supports password authentication"
+            else
+              echo "⚠️ Warning: Server may not support password authentication"
+              echo "   Check /etc/ssh/sshd_config on VPS for: PasswordAuthentication yes"
+              echo "   If disabled, run on VPS: sudo sed -i 's/#PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config"
+              echo "   Then restart: sudo systemctl restart sshd"
+            fi
+            echo ""
+            
             # Probar primero con ssh para verificar que la contraseña funciona
             echo "🧪 Testing SSH connection first..."
             sshpass -e ssh -v \
@@ -667,7 +731,13 @@ jobs:
               echo "   2. Test manually: ssh ${{ env.VPS_USER }}@${{ env.VPS_HOST }}"
               echo "   3. Check for hidden characters or spaces in the password"
               echo "   4. Verify VPS_USER is correct (usually 'root')"
-              echo "   5. Verify the server allows password authentication"
+              echo "   5. Verify the server allows password authentication:"
+              echo "      ssh ${{ env.VPS_USER }}@${{ env.VPS_HOST }}"
+              echo "      sudo cat /etc/ssh/sshd_config | grep PasswordAuthentication"
+              echo "      Should show: PasswordAuthentication yes"
+              echo "   6. If PasswordAuthentication is 'no', enable it:"
+              echo "      sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config"
+              echo "      sudo systemctl restart sshd"
               exit 1
             }
             
