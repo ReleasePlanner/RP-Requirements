@@ -1,6 +1,6 @@
 # 🔍 Integrity Checks & Coverage Verification
 
-Este documento describe el sistema de verificación de integridad y cobertura implementado en el pipeline de CI/CD.
+Este documento describe el sistema de verificación de integridad y cobertura del proyecto.
 
 ## 📋 Resumen
 

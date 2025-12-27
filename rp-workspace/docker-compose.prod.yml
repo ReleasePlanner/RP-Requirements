@@ -27,6 +27,77 @@ services:
       start_period: 10s
     # Sin mapeo de puerto externo - solo acceso interno
 
+  # RabbitMQ Message Broker
+  rabbitmq:
+    image: rabbitmq:3.12-management-alpine
+    container_name: rp-requirements-rabbitmq
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-admin}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-admin123}
+      RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_VHOST:-/}
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - rp-network
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    # Sin mapeo de puerto externo - solo acceso interno
+
+  # Prometheus - Metrics Collection
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: rp-requirements-prometheus
+    restart: unless-stopped
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+      - '--storage.tsdb.retention.time=30d'
+      - '--web.enable-lifecycle'
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    networks:
+      - rp-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9090/-/healthy"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    # Sin mapeo de puerto externo - solo acceso interno o vía Nginx
+
+  # Grafana - Metrics Visualization
+  grafana:
+    image: grafana/grafana:latest
+    container_name: rp-requirements-grafana
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin123}
+      GF_USERS_ALLOW_SIGN_UP: false
+      GF_SERVER_ROOT_URL: ${GRAFANA_ROOT_URL:-https://grafana.beyondnet.cloud}
+      GF_INSTALL_PLUGINS: grafana-clock-panel,grafana-simple-json-datasource
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    networks:
+      - rp-network
+    depends_on:
+      - prometheus
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    # Sin mapeo de puerto externo - Nginx hace proxy
+
   # API Service (NestJS)
   api:
     build:
@@ -36,6 +107,8 @@ services:
     restart: unless-stopped
     depends_on:
       postgres:
+        condition: service_healthy
+      rabbitmq:
         condition: service_healthy
     environment:
       # Server
@@ -50,6 +123,14 @@ services:
       DB_DATABASE: ${DB_DATABASE:-requirements_db}
       DB_SYNCHRONIZE: ${DB_SYNCHRONIZE:-false}
       DB_LOGGING: ${DB_LOGGING:-false}
+      
+      # RabbitMQ
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USER: ${RABBITMQ_USER:-admin}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-admin123}
+      RABBITMQ_VHOST: ${RABBITMQ_VHOST:-/}
+      RABBITMQ_QUEUE: ${RABBITMQ_QUEUE:-requirements_queue}
       
       # JWT
       JWT_SECRET: ${JWT_SECRET:-your-super-secret-jwt-key-change-in-production-min-32-chars}
@@ -71,6 +152,8 @@ services:
       # Monitoring
       ENABLE_MONITORING: ${ENABLE_MONITORING:-true}
       METRICS_RETENTION_MS: ${METRICS_RETENTION_MS:-3600000}
+      PROMETHEUS_ENABLED: ${PROMETHEUS_ENABLED:-true}
+      PROMETHEUS_PATH: ${PROMETHEUS_PATH:-/metrics}
     networks:
       - rp-network
     healthcheck:
@@ -84,7 +167,7 @@ services:
     # Sin mapeo de puerto externo - Nginx hace proxy a localhost:3000
     command: >
       sh -c "
-        echo 'Waiting for database to be ready...' &&
+        echo 'Waiting for services to be ready...' &&
         sleep 5 &&
         echo 'Starting API...' &&
         node dist/main
@@ -125,7 +208,15 @@ volumes:
   postgres_data:
     name: rp-requirements-postgres-data
     driver: local
+  rabbitmq_data:
+    name: rp-requirements-rabbitmq-data
+    driver: local
+  prometheus_data:
+    name: rp-requirements-prometheus-data
+    driver: local
+  grafana_data:
+    name: rp-requirements-grafana-data
+    driver: local
   api_logs:
     name: rp-requirements-api-logs
     driver: local
-

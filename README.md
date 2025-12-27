@@ -4,8 +4,6 @@ Complete requirements management system built with **NestJS** (API) and **Next.j
 
 **Repository**: [ReleasePlanner/RP-Requirements](https://github.com/ReleasePlanner/RP-Requirements)
 
-[![CI](https://github.com/ReleasePlanner/RP-Requirements/workflows/CI/badge.svg)](https://github.com/ReleasePlanner/RP-Requirements/actions)
-[![Deploy to Hostinger VPS](https://github.com/ReleasePlanner/RP-Requirements/workflows/Deploy%20to%20Hostinger%20VPS/badge.svg)](https://github.com/ReleasePlanner/RP-Requirements/actions)
 
 ---
 
@@ -59,14 +57,11 @@ Complete requirements management system built with **NestJS** (API) and **Next.j
 - ✅ Dashboard de monitoreo en Portal
 - ✅ Métricas de rendimiento y errores
 
-### 🚀 CI/CD
+### 🚀 Testing
 
-- ✅ GitHub Actions para CI/CD completo
 - ✅ Tests automatizados con 100% de cobertura
-- ✅ Deployment automatizado con Docker Compose
+- ✅ Deployment con Docker Compose
 - ✅ Verificaciones de integridad pre-deployment
-- ✅ Releases automatizados
-- ✅ **Deployment automático a VPS Hostinger** 🆕
 
 ---
 
@@ -174,73 +169,6 @@ npm run start:portal
 
 ## 🚀 Deployment
 
-### ⭐ Deployment Automático con GitHub Actions (Recomendado)
-
-El sistema incluye deployment automático a VPS Hostinger mediante GitHub Actions.
-
-#### Configuración Inicial
-
-1. **Configurar Secrets en GitHub**:
-
-   - ⚡ **Resumen Rápido**: [Resumen Configuración Secrets](rp-workspace/deploy-on-vps/RESUMEN_CONFIGURACION_SECRETS.md) (5 minutos)
-   - 📖 **Guía Completa**: [Configurar Secrets en GitHub](rp-workspace/deploy-on-vps/CONFIGURAR_SECRETS_GITHUB.md) ⭐ (guía detallada paso a paso)
-   - Ve a: `Settings > Secrets and variables > Actions` en tu repositorio
-   - Agrega los secrets requeridos (ver guías arriba)
-
-2. **Ejecutar Test SSH** (Recomendado primero):
-
-   - Ve a: `Actions > Test SSH Connection > Run workflow`
-   - Verifica que la conexión SSH funcione
-
-3. **Deployment Automático**:
-   - Push a `main` → Deployment a producción
-   - Push a `develop` → Deployment a desarrollo
-   - O ejecuta manualmente: `Actions > Deploy to Hostinger VPS > Run workflow`
-
-📖 **Guía Completa**:
-
-- [GitHub-Hostinger Integration](rp-workspace/deploy-on-vps/GITHUB_HOSTINGER_INTEGRATION.md) - Configuración completa
-- [Primer Deployment](rp-workspace/deploy-on-vps/PRIMER_DEPLOYMENT.md) - Guía paso a paso
-- [Ejecutar Test SSH](rp-workspace/deploy-on-vps/EJECUTAR_TEST_SSH.md) - Verificar conexión
-
-#### Secrets Requeridos
-
-**📖 Guía Completa**: Ver [Configurar Secrets en GitHub](rp-workspace/deploy-on-vps/CONFIGURAR_SECRETS_GITHUB.md)
-
-**Configuración Rápida:**
-
-1. Ve a: `Settings > Secrets and variables > Actions` en tu repositorio GitHub
-2. Agrega los siguientes secrets:
-
-**🔴 Obligatorios:**
-
-- `VPS_HOST` - IP o dominio de tu VPS (ej: `72.60.63.240`)
-- `VPS_USER` - Usuario SSH (ej: `root`)
-- `VPS_SSH_KEY` **O** `VPS_SSH_PASSWORD` - Credenciales SSH (recomendado: usar SSH Key)
-- `DB_USERNAME` - Usuario PostgreSQL (ej: `requirements_user`)
-- `DB_PASSWORD` - Contraseña PostgreSQL
-- `DB_DATABASE` - Nombre de BD (ej: `requirements_db`)
-- `JWT_SECRET` - Secret JWT (mínimo 32 caracteres)
-
-**🟡 Opcionales:**
-
-- `DB_PORT` - Puerto PostgreSQL (default: `5432`)
-- `JWT_EXPIRES_IN` - Expiración token (default: `1d`)
-- `NEXT_PUBLIC_API_URL_DEV` - URL API desarrollo
-- `NEXT_PUBLIC_API_URL_PRODUCTION` - URL API producción
-- `API_DEV_URL`, `API_PRODUCTION_URL` - URLs completas para health checks
-- `PORTAL_DEV_URL`, `PORTAL_PRODUCTION_URL` - URLs del Portal
-
-**💡 Tip**: Usa SSH Key en lugar de contraseña para mayor seguridad. Ver la guía completa para instrucciones detalladas.
-
-### Deployment Manual en VPS
-
-Si prefieres deployment manual, consulta:
-
-- [Plan de Deployment](rp-workspace/deploy-on-vps/PLAN_DEPLOYMENT_REQUIREMENTS.md) - Guía completa paso a paso
-- [Quick Start VPS](rp-workspace/deploy-on-vps/QUICK_START_VPS.md) - 5 comandos rápidos
-- [Scripts de Deployment](rp-workspace/deploy-on-vps/) - Scripts disponibles
-
 ### Deployment Local con Docker
 
 ```bash
@@ -263,7 +191,7 @@ curl http://localhost:4200
 
 ### 📖 Índice de Documentación
 
-Toda la documentación está organizada en [`docs/`](rp-workspace/docs/) y [`deploy-on-vps/`](rp-workspace/deploy-on-vps/):
+Toda la documentación está organizada en [`docs/`](rp-workspace/docs/):
 
 #### 🚀 Guías de Inicio Rápido
 
@@ -275,37 +203,10 @@ Toda la documentación está organizada en [`docs/`](rp-workspace/docs/) y [`dep
 - **[README_DOCKER.md](rp-workspace/docs/README_DOCKER.md)** - Guía completa de Docker Setup
 - **[DEPLOYMENT.md](rp-workspace/docs/DEPLOYMENT.md)** - Guía completa de deployment y compilación
 
-#### 🔄 CI/CD
-
-- **[README_CI_CD.md](rp-workspace/docs/README_CI_CD.md)** - Guía rápida de CI/CD
-- **[CI_CD.md](rp-workspace/docs/CI_CD.md)** - Documentación completa de CI/CD
-
-#### 🚀 Deployment en VPS Hostinger
-
-Todos los archivos de deployment están en [`deploy-on-vps/`](rp-workspace/deploy-on-vps/):
-
-- **[RESUMEN_CONFIGURACION_SECRETS.md](rp-workspace/deploy-on-vps/RESUMEN_CONFIGURACION_SECRETS.md)** - ⚡ **Resumen Rápido** - Configuración en 5 minutos
-- **[CONFIGURAR_SECRETS_GITHUB.md](rp-workspace/deploy-on-vps/CONFIGURAR_SECRETS_GITHUB.md)** - 🔐 **⭐ CÓMO CONFIGURAR SECRETS EN GITHUB** - Guía paso a paso completa
-- **[GITHUB_HOSTINGER_INTEGRATION.md](rp-workspace/deploy-on-vps/GITHUB_HOSTINGER_INTEGRATION.md)** - 🔗 **GitHub Actions Integration** - Deployment automático desde GitHub
-- **[PRIMER_DEPLOYMENT.md](rp-workspace/deploy-on-vps/PRIMER_DEPLOYMENT.md)** - ⭐ **Guía del Primer Deployment**
-- **[EJECUTAR_TEST_SSH.md](rp-workspace/deploy-on-vps/EJECUTAR_TEST_SSH.md)** - 🧪 Ejecutar Test SSH Connection
-- **[PLAN_DEPLOYMENT_REQUIREMENTS.md](rp-workspace/deploy-on-vps/PLAN_DEPLOYMENT_REQUIREMENTS.md)** - Plan completo paso a paso
-- **[QUICK_START_VPS.md](rp-workspace/deploy-on-vps/QUICK_START_VPS.md)** - ⚡ Guía rápida de 5 comandos
-- **[CHECKLIST_VERIFICACION.md](rp-workspace/deploy-on-vps/CHECKLIST_VERIFICACION.md)** - ✅ Checklist de verificación completa
-- **[TROUBLESHOOTING_GITHUB_ACTIONS.md](rp-workspace/deploy-on-vps/TROUBLESHOOTING_GITHUB_ACTIONS.md)** - 🔧 Troubleshooting GitHub Actions
-- **[TROUBLESHOOTING_SSH.md](rp-workspace/deploy-on-vps/TROUBLESHOOTING_SSH.md)** - 🔧 Troubleshooting SSH
-- **[PASO_A_PASO_SOLUCION_SSH.md](rp-workspace/deploy-on-vps/PASO_A_PASO_SOLUCION_SSH.md)** - 🔧 **⭐ SOLUCIÓN PASO A PASO** - Guía detallada para resolver Permission Denied
-- **[MEJORES_PRACTICAS_SSH_GITHUB_ACTIONS.md](rp-workspace/deploy-on-vps/MEJORES_PRACTICAS_SSH_GITHUB_ACTIONS.md)** - 🔐 **MEJORES PRÁCTICAS SSH** - Configuración automática permanente y segura
-- **[SOLUCION_RAPIDA_SSH.md](rp-workspace/deploy-on-vps/SOLUCION_RAPIDA_SSH.md)** - ⚡ **Solución Rápida SSH** - Fix en 5 pasos
-- **[TROUBLESHOOTING_SSH_PERMISSION_DENIED.md](rp-workspace/deploy-on-vps/TROUBLESHOOTING_SSH_PERMISSION_DENIED.md)** - 🔧 **Permission denied (publickey,password)** - Solución paso a paso completa
-- Ver [`deploy-on-vps/`](rp-workspace/deploy-on-vps/) para todos los scripts y documentación
-
 #### 📊 Monitoreo y Verificación
 
 - **[MONITORING.md](rp-workspace/docs/MONITORING.md)** - Sistema de monitoreo completo
 - **[INTEGRITY_CHECKS.md](rp-workspace/docs/INTEGRITY_CHECKS.md)** - Verificación de integridad y cobertura
-- **[INTEGRITY_REPORT.md](rp-workspace/docs/INTEGRITY_REPORT.md)** - Reporte de integridad del sistema
-- **[INTEGRITY_CHECKLIST.md](rp-workspace/docs/INTEGRITY_CHECKLIST.md)** - Checklist de verificación
 
 #### 🗄️ Base de Datos
 
@@ -618,9 +519,7 @@ cd rp-workspace && docker-compose config
 
 ### Troubleshooting Deployment
 
-- **[Troubleshooting GitHub Actions](rp-workspace/deploy-on-vps/TROUBLESHOOTING_GITHUB_ACTIONS.md)** - Problemas con workflows
-- **[Troubleshooting SSH](rp-workspace/deploy-on-vps/TROUBLESHOOTING_SSH.md)** - Problemas de conexión SSH
-- **[Checklist de Verificación](rp-workspace/deploy-on-vps/CHECKLIST_VERIFICACION.md)** - Verificación completa
+Para problemas de deployment, consulta la documentación en [`docs/`](rp-workspace/docs/).
 
 ---
 
@@ -643,10 +542,8 @@ rp-workspace/
 │           ├── features/    # Features del Portal
 │           └── components/ # Componentes UI
 ├── docs/                    # Documentación completa
-├── deploy-on-vps/          # Scripts y docs de deployment VPS
 ├── scripts/                 # Scripts de automatización
 ├── tests/                   # Scripts de testing y debugging
-├── .github/workflows/       # Workflows de CI/CD (si existe)
 ├── docker-compose.yml       # Orquestación Docker
 └── Makefile                # Comandos útiles
 ```
@@ -660,11 +557,9 @@ rp-workspace/
 - ✅ API completa con Clean Architecture
 - ✅ Portal completo con Next.js
 - ✅ Sistema de monitoreo integrado
-- ✅ CI/CD completo con GitHub Actions
 - ✅ Docker Compose para deployment
 - ✅ Tests con 100% de cobertura
 - ✅ Documentación completa
-- ✅ **Deployment automático a VPS Hostinger** 🆕
 
 ### 🚧 En Desarrollo
 
@@ -698,7 +593,6 @@ Para soporte o preguntas:
 
 - Crear un Issue en GitHub
 - Revisar documentación en [`docs/`](rp-workspace/docs/)
-- Revisar documentación de deployment en [`deploy-on-vps/`](rp-workspace/deploy-on-vps/)
 - Ver logs: `cd rp-workspace && make logs`
 - Ejecutar test scenarios: [`tests/`](rp-workspace/tests/)
 - Verificar integridad: `cd rp-workspace && ./scripts/verify-integrity.sh`
@@ -712,16 +606,8 @@ Para soporte o preguntas:
 - [Índice de Documentación](rp-workspace/docs/README.md)
 - [Guía de Inicio Rápido](rp-workspace/docs/QUICK_START_DOCKER.md)
 - [Guía de Deployment](rp-workspace/docs/DEPLOYMENT.md)
-- [Documentación CI/CD](rp-workspace/docs/CI_CD.md)
 - [Documentación de Monitoreo](rp-workspace/docs/MONITORING.md)
 - [Documentación de Base de Datos](rp-workspace/docs/README-DATABASE.md)
-
-### Deployment
-
-- [GitHub-Hostinger Integration](rp-workspace/deploy-on-vps/GITHUB_HOSTINGER_INTEGRATION.md) - ⭐ Deployment automático
-- [Primer Deployment](rp-workspace/deploy-on-vps/PRIMER_DEPLOYMENT.md) - Guía paso a paso
-- [Plan de Deployment](rp-workspace/deploy-on-vps/PLAN_DEPLOYMENT_REQUIREMENTS.md) - Plan completo
-- [Quick Start VPS](rp-workspace/deploy-on-vps/QUICK_START_VPS.md) - 5 comandos rápidos
 
 ### Testing
 
@@ -734,12 +620,6 @@ Para soporte o preguntas:
 - [Monitoring Dashboard](http://localhost:4200/portal/monitoring)
 - [API Health Check](http://localhost:3000/api/v1/health/liveness)
 
-### CI/CD
-
-- [GitHub Actions](https://github.com/ReleasePlanner/RP-Requirements/actions)
-- [Deploy to Hostinger VPS](.github/workflows/deploy-hostinger.yml) 🆕 - Deployment automático al VPS
-- [Test SSH Connection](.github/workflows/test-ssh-connection.yml) 🆕 - Probar conexión SSH
-- [Workflows README](.github/workflows/README.md) - Documentación de workflows
 
 ---
 

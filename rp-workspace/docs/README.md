@@ -14,17 +14,10 @@ Bienvenido a la documentación completa del Requirements Management System.
 - **[README_DOCKER.md](README_DOCKER.md)** - Guía completa de Docker Setup
 - **[DEPLOYMENT.md](DEPLOYMENT.md)** - Guía completa de deployment y compilación
 
-### 🔄 CI/CD
-
-- **[README_CI_CD.md](README_CI_CD.md)** - Guía rápida de CI/CD
-- **[CI_CD.md](CI_CD.md)** - Documentación completa de CI/CD
-
 ### 📊 Monitoreo y Verificación
 
 - **[MONITORING.md](MONITORING.md)** - Sistema de monitoreo completo
 - **[INTEGRITY_CHECKS.md](INTEGRITY_CHECKS.md)** - Verificación de integridad y cobertura
-- **[INTEGRITY_REPORT.md](INTEGRITY_REPORT.md)** - Reporte de integridad del sistema
-- **[INTEGRITY_CHECKLIST.md](INTEGRITY_CHECKLIST.md)** - Checklist de verificación
 
 ### 🗄️ Base de Datos
 
@@ -61,4 +54,3 @@ Para verificar la integridad del sistema:
 
 - [Makefile](../Makefile) - Comandos útiles de Docker Compose
 - [scripts/](../scripts/) - Scripts de automatización
-- [.github/workflows/](../.github/workflows/) - Workflows de CI/CD

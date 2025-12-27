@@ -18,51 +18,403 @@
       "apps/api/src/shared/*"
     ]
   },
-  "nxJsonPlugins": [
-    {
-      "name": "@nx-dotnet/core",
-      "version": "^3.0.2",
-      "options": {
-        "inferProjects": true,
-        "inferProjectTargets": true
-      }
-    }
-  ],
+  "nxJsonPlugins": [],
   "fileMap": {
+    "nonProjectFiles": [
+      {
+        "file": "tests/check-rgl.js",
+        "hash": "12549065214744575864"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.5d8a8014-b22d-4a1e-9177-6f7a26a01fae.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": ".github/dependabot.yml",
+        "hash": "17294533587955821167"
+      },
+      {
+        "file": ".dockerignore",
+        "hash": "15078179117343470204"
+      },
+      {
+        "file": "tests/verify-update.js",
+        "hash": "7346191291626498709"
+      },
+      {
+        "file": "Makefile",
+        "hash": "11251637710775237065"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "11302388006518204609"
+      },
+      {
+        "file": ".github/workflows/cd-production.yml",
+        "hash": "16958072647586128266"
+      },
+      {
+        "file": "docker-compose.prod.yml",
+        "hash": "7722790298173329246"
+      },
+      {
+        "file": "scripts/verify-integrity.sh",
+        "hash": "6491534588807052501"
+      },
+      {
+        "file": ".github/workflows/docker-build.yml",
+        "hash": "8122340828037614853"
+      },
+      {
+        "file": ".nxignore",
+        "hash": "3295098562631848944"
+      },
+      {
+        "file": "design/database.puml",
+        "hash": "15222123220881032084"
+      },
+      {
+        "file": "docs/README.md",
+        "hash": "6072401339348966926"
+      },
+      {
+        "file": "docker-compose.override.yml.example",
+        "hash": "2852045446860369438"
+      },
+      {
+        "file": ".github/workflows/ci.yml",
+        "hash": "13553925958118218488"
+      },
+      {
+        "file": "static/main.js",
+        "hash": "374743740434718182"
+      },
+      {
+        "file": ".github/workflows/release.yml",
+        "hash": "2609658019903224847"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.48e478c2-b5af-4a48-a998-41b7bb5e9797.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "docs/CHANGELOG.md",
+        "hash": "11199236858669086686"
+      },
+      {
+        "file": "scripts/version-bump.js",
+        "hash": "8536076016928308496"
+      },
+      {
+        "file": ".github/workflows/integrity-check.yml",
+        "hash": "15606626247455969604"
+      },
+      {
+        "file": "docs/requirements-fields.md",
+        "hash": "7840034909238352348"
+      },
+      {
+        "file": "docs/README_DEPLOYMENT.md",
+        "hash": "1322282767599395782"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.7f671f69-e5bf-4dcb-84ea-ecaaa9f4be25.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.c96459da-1c70-41da-b865-6e6e6800c384.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "scripts/docker-setup.sh",
+        "hash": "17164447653207338688"
+      },
+      {
+        "file": "scripts/build.sh",
+        "hash": "6178325586602611719"
+      },
+      {
+        "file": ".github/workflows/dependabot.yml",
+        "hash": "11357885392653408858"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.d45b132a-9df6-48d7-a4b4-4b1fd15e47d8.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.dfa640b5-7c61-4b3e-b613-ff6653185025.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.bbe9f44b-c39b-4148-b397-42bed1626134.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.51e18a5c-3281-486c-9bd9-e9d5c72bd782.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.d24ffa5c-c918-4ef9-b02e-9c26e88ba3fc.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.27e2d87f-58e5-4d2b-a88b-470b832730f7.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.6426009e-5e44-4191-ab76-87343c0b4f6f.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "docker-compose.dev.yml",
+        "hash": "18398053521492410709"
+      },
+      {
+        "file": "tests/portal-debug-api.js",
+        "hash": "15313788807032127515"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.42741328-438e-4fd0-9f73-2c0d60bcd68d.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": ".github/workflows/test-ssh-connection.yml",
+        "hash": "17623986467475944376"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.4be842f1-c803-45d9-b337-1d68be2b48ce.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": ".editorconfig",
+        "hash": "5443105041930014821"
+      },
+      {
+        "file": "static/styles.js",
+        "hash": "16803620677878581351"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.99aee710-79d6-4f39-8dc1-505cca7e9db0.json",
+        "hash": "16109394665231334489"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.208494d0-f12d-4620-bf61-9eec621ed7d9.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.22fc7050-375e-4a0e-a930-90a7dd50c7b3.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "docs/README-DATABASE.md",
+        "hash": "17424415464664098102"
+      },
+      {
+        "file": "docs/DEPLOYMENT.md",
+        "hash": "17838269653454100839"
+      },
+      {
+        "file": "static/favicon.ico",
+        "hash": "9303420814833116677"
+      },
+      {
+        "file": "docs/INTEGRITY_CHECKS.md",
+        "hash": "7076768214076898132"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.648d09bd-be47-40ff-8310-8dfebc48fe9c.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "static/environment.js",
+        "hash": "16909249529897220978"
+      },
+      {
+        "file": "static/styles.css",
+        "hash": "8419273103758193685"
+      },
+      {
+        "file": "docs/QUICK_START_DOCKER.md",
+        "hash": "11147565953061787108"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.9ea025fd-d10c-4a39-b485-697ac53eae74.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "package.json",
+        "hash": "10426097415267541173"
+      },
+      {
+        "file": ".github/workflows/cd-dev.yml",
+        "hash": "14014918389002583205"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.9427163b-fbd0-4815-b800-0c4634a521b6.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tests/verify-rules.js",
+        "hash": "12582076286274820556"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.9cf785f2-264b-4a7d-b540-b8d9725be660.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tests/test-api.js",
+        "hash": "2021116272610310848"
+      },
+      {
+        "file": "tests/test-requirements.js",
+        "hash": "18416270827802545822"
+      },
+      {
+        "file": ".cursor/rules/nextjs-rules.mdc",
+        "hash": "14168781670438874677"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "9852263929439946417"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.19598f11-4947-4ac4-b84a-f8f301806fec.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": ".github/workflows/deploy.yml",
+        "hash": "10393221542912527844"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "4559546046842464951"
+      },
+      {
+        "file": ".github/ISSUE_TEMPLATE/release.md",
+        "hash": "1730678135600790084"
+      },
+      {
+        "file": ".github/workflows/deploy-hostinger.yml",
+        "hash": "8381430554322693944"
+      },
+      {
+        "file": "design/database-seed-example.sql",
+        "hash": "16820485619130529613"
+      },
+      {
+        "file": "tests/verify-full-flow.js",
+        "hash": "10882738622842315764"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.44947768-a14d-43ae-944c-4a9519d3793a.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.6326bfa4-8419-4b40-8478-99fc3af15080.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.374f47d9-3fe2-418b-8675-b8cd60f14f12.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "docker-compose.yml",
+        "hash": "9342295024675914381"
+      },
+      {
+        "file": "tests/README.md",
+        "hash": "11447544850162850198"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.a1c1e1a5-ff22-4fef-845e-abd5a156139b.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.a9c3528d-8eb9-4a38-817a-a5500c02abe3.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "nx.json",
+        "hash": "15316301823341406650"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.9ca4d1d9-d1d8-4a4d-a20d-d83bf302f196.json",
+        "hash": "16109394665231334489"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.42993c35-f0df-469f-92e8-08fa865e4953.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "design/database.sql",
+        "hash": "1104277424757188960"
+      },
+      {
+        "file": "docs/MONITORING.md",
+        "hash": "15658323239605695941"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.c6871e33-79dc-4b6c-81a5-e98cd3a4ce29.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.680ce1c2-fc41-4abc-beba-ccd94d2bc706.json",
+        "hash": "16109394665231334489"
+      },
+      {
+        "file": "tests/debug-epics.js",
+        "hash": "4849366912004125429"
+      },
+      {
+        "file": "tests/api-debug.js",
+        "hash": "5306502369639909078"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.7f2fae09-ac3c-4ade-9f0f-f10bb91719ce.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.027b5bb7-5037-467e-a838-a75d7babf7f0.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "scripts/generate-changelog.js",
+        "hash": "12191962759981028561"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.7330aead-d7f5-4066-a0b2-20ccbbb8801c.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.7fe684eb-18dc-460f-be69-7f6c66a1289c.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "docs/README_DOCKER.md",
+        "hash": "11673175946854338773"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.dc7ff877-c503-45b4-b0c8-5dbd6c3cd17f.json",
+        "hash": "9089623116635460020"
+      },
+      {
+        "file": "design/database-migration.sql",
+        "hash": "8112264670030217055"
+      },
+      {
+        "file": "static/runtime.js",
+        "hash": "14980783667260047515"
+      },
+      {
+        "file": ".cursor/rules/nestjs-rules.mdc",
+        "hash": "7081082577025790803"
+      },
+      {
+        "file": ".config/dotnet-tools.json",
+        "hash": "11380184037138673491"
+      }
+    ],
     "projectFileMap": {
-      "shared-lib-shared-lib-test": [
-        {
-          "file": "libs/shared-lib/shared-lib-test/RpWorkspace.SharedLib.SharedLib.Test.csproj",
-          "hash": "7348442173980500609",
-          "deps": [
-            "libs-shared-lib-shared-lib"
-          ]
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/UnitTest1.cs",
-          "hash": "3940737178873532714"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.dgspec.json",
-          "hash": "16244643420733701690"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.g.props",
-          "hash": "7800595771830664415"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/RpWorkspace.SharedLib.SharedLib.Test.csproj.nuget.g.targets",
-          "hash": "14012898149728570202"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/project.assets.json",
-          "hash": "12561845686918671027"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib-test/obj/project.nuget.cache",
-          "hash": "15529805488842866559"
-        }
-      ],
       "portal": [
         {
           "file": "apps/portal/.dockerignore",
@@ -93,7 +445,7 @@
         },
         {
           "file": "apps/portal/next.config.ts",
-          "hash": "17157214668998829023",
+          "hash": "16921499401712942788",
           "deps": [
             "npm:next"
           ]
@@ -727,24 +1079,6 @@
           "hash": "5855035559254869289"
         }
       ],
-      "libs-shared-lib-shared-lib": [
-        {
-          "file": "libs/shared-lib/shared-lib/.gitignore",
-          "hash": "12821096717990657955"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib/Class1.cs",
-          "hash": "2199511527024579008"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib/RpWorkspace.SharedLib.SharedLib.csproj",
-          "hash": "1884930380395878577"
-        },
-        {
-          "file": "libs/shared-lib/shared-lib/project.json",
-          "hash": "14820539453501141318"
-        }
-      ],
       "api": [
         {
           "file": "apps/api/.dockerignore",
@@ -775,44 +1109,12 @@
           "hash": "7621531065720401964"
         },
         {
-          "file": "apps/api/docs/COMPATIBILITY_REPORT.md",
-          "hash": "7848115952165597741"
-        },
-        {
-          "file": "apps/api/docs/COMPATIBILITY_VERIFICATION.md",
-          "hash": "10694210807195435772"
-        },
-        {
           "file": "apps/api/docs/IMPLEMENTATION_GUIDE.md",
           "hash": "5369844033014904641"
         },
         {
-          "file": "apps/api/docs/MIGRATION_SUMMARY.md",
-          "hash": "1629289250426883525"
-        },
-        {
-          "file": "apps/api/docs/NESTJS_RULES_COMPATIBILITY.md",
-          "hash": "15029660540338044495"
-        },
-        {
-          "file": "apps/api/docs/NESTJS_RULES_COMPATIBILITY_SUMMARY.md",
-          "hash": "8117108786615773254"
-        },
-        {
           "file": "apps/api/docs/README.md",
           "hash": "18430097118549808338"
-        },
-        {
-          "file": "apps/api/docs/REFACTORING_EXAMPLES.md",
-          "hash": "2778629505389972613"
-        },
-        {
-          "file": "apps/api/docs/REFACTORING_PROPOSAL.md",
-          "hash": "12448276655173231896"
-        },
-        {
-          "file": "apps/api/docs/STRUCTURE_VERIFICATION.md",
-          "hash": "12443625114073491304"
         },
         {
           "file": "apps/api/docs/TESTING.md",
@@ -1804,584 +2106,10 @@
         },
         {
           "file": "apps/api/tsconfig.json",
-          "hash": "2101672266034208711"
+          "hash": "16977737042124907783"
         }
       ]
-    },
-    "nonProjectFiles": [
-      {
-        "file": ".config/dotnet-tools.json",
-        "hash": "11380184037138673491"
-      },
-      {
-        "file": ".cursor/rules/nestjs-rules.mdc",
-        "hash": "7081082577025790803"
-      },
-      {
-        "file": ".cursor/rules/nextjs-rules.mdc",
-        "hash": "14168781670438874677"
-      },
-      {
-        "file": ".dockerignore",
-        "hash": "15078179117343470204"
-      },
-      {
-        "file": ".editorconfig",
-        "hash": "5443105041930014821"
-      },
-      {
-        "file": ".github/ISSUE_TEMPLATE/release.md",
-        "hash": "1730678135600790084"
-      },
-      {
-        "file": ".github/dependabot.yml",
-        "hash": "17294533587955821167"
-      },
-      {
-        "file": ".github/workflows/cd-dev.yml",
-        "hash": "14014918389002583205"
-      },
-      {
-        "file": ".github/workflows/cd-production.yml",
-        "hash": "16958072647586128266"
-      },
-      {
-        "file": ".github/workflows/ci.yml",
-        "hash": "13553925958118218488"
-      },
-      {
-        "file": ".github/workflows/dependabot.yml",
-        "hash": "11357885392653408858"
-      },
-      {
-        "file": ".github/workflows/deploy-hostinger.yml",
-        "hash": "8381430554322693944"
-      },
-      {
-        "file": ".github/workflows/deploy.yml",
-        "hash": "10393221542912527844"
-      },
-      {
-        "file": ".github/workflows/docker-build.yml",
-        "hash": "8122340828037614853"
-      },
-      {
-        "file": ".github/workflows/integrity-check.yml",
-        "hash": "15606626247455969604"
-      },
-      {
-        "file": ".github/workflows/release.yml",
-        "hash": "2609658019903224847"
-      },
-      {
-        "file": ".github/workflows/test-ssh-connection.yml",
-        "hash": "17623986467475944376"
-      },
-      {
-        "file": ".gitignore",
-        "hash": "9852263929439946417"
-      },
-      {
-        "file": ".nxignore",
-        "hash": "3295098562631848944"
-      },
-      {
-        "file": "Directory.Build.props",
-        "hash": "11106101967569859271"
-      },
-      {
-        "file": "Directory.Build.targets",
-        "hash": "9005165865624102645"
-      },
-      {
-        "file": "Makefile",
-        "hash": "11251637710775237065"
-      },
-      {
-        "file": "deploy-on-vps/CHECKLIST_VERIFICACION.md",
-        "hash": "3650370405518647811"
-      },
-      {
-        "file": "deploy-on-vps/COMANDOS_A_EJECUTAR.txt",
-        "hash": "4913348233230617429"
-      },
-      {
-        "file": "deploy-on-vps/COMANDO_DEPLOYMENT.txt",
-        "hash": "16054659516067913361"
-      },
-      {
-        "file": "deploy-on-vps/COMANDO_FINAL.txt",
-        "hash": "11069252689434853389"
-      },
-      {
-        "file": "deploy-on-vps/CONFIGURAR_VARIABLES.md",
-        "hash": "14022375467408119263"
-      },
-      {
-        "file": "deploy-on-vps/DEPLOYMENT_MANUAL_PASOS.txt",
-        "hash": "16448484885741539426"
-      },
-      {
-        "file": "deploy-on-vps/DEPLOYMENT_MULTI_MODULE.md",
-        "hash": "14629931499130535810"
-      },
-      {
-        "file": "deploy-on-vps/DEPLOY_NOW.md",
-        "hash": "13123168316003789291"
-      },
-      {
-        "file": "deploy-on-vps/EJECUTAR_AHORA.sh",
-        "hash": "1773665049380079820"
-      },
-      {
-        "file": "deploy-on-vps/EJECUTAR_AUTOMATICO.sh",
-        "hash": "17392610655903089384"
-      },
-      {
-        "file": "deploy-on-vps/EJECUTAR_CON_PASSWORD.sh",
-        "hash": "8823223655739442428"
-      },
-      {
-        "file": "deploy-on-vps/EJECUTAR_DEPLOYMENT.sh",
-        "hash": "16154057646247460956"
-      },
-      {
-        "file": "deploy-on-vps/EJECUTAR_DEPLOYMENT_COMPLETO.sh",
-        "hash": "8853450340557420009"
-      },
-      {
-        "file": "deploy-on-vps/EJECUTAR_DEPLOYMENT_FINAL.txt",
-        "hash": "17600632064973043886"
-      },
-      {
-        "file": "deploy-on-vps/EJECUTAR_EN_VPS.txt",
-        "hash": "8781316541115087115"
-      },
-      {
-        "file": "deploy-on-vps/EJECUTAR_TEST_SSH.md",
-        "hash": "16514939275177419047"
-      },
-      {
-        "file": "deploy-on-vps/GITHUB_HOSTINGER_INTEGRATION.md",
-        "hash": "9221692646133844874"
-      },
-      {
-        "file": "deploy-on-vps/INICIO_DEPLOYMENT.md",
-        "hash": "9299881820941339486"
-      },
-      {
-        "file": "deploy-on-vps/INSTALAR_SSHPASS.md",
-        "hash": "8531534095477428906"
-      },
-      {
-        "file": "deploy-on-vps/INSTRUCCIONES_DEPLOYMENT.md",
-        "hash": "10956722184453622429"
-      },
-      {
-        "file": "deploy-on-vps/INSTRUCCIONES_FINALES.md",
-        "hash": "11114812563706623933"
-      },
-      {
-        "file": "deploy-on-vps/PLAN_DEPLOYMENT_REQUIREMENTS.md",
-        "hash": "11791048885729114516"
-      },
-      {
-        "file": "deploy-on-vps/PLAN_DEPLOYMENT_VPS.md",
-        "hash": "18420321286124841292"
-      },
-      {
-        "file": "deploy-on-vps/PRIMER_DEPLOYMENT.md",
-        "hash": "1033463021428497780"
-      },
-      {
-        "file": "deploy-on-vps/QUICK_START_VPS.md",
-        "hash": "18069766629984339469"
-      },
-      {
-        "file": "deploy-on-vps/RESUMEN_PLAN_VPS.md",
-        "hash": "3481248398692896326"
-      },
-      {
-        "file": "deploy-on-vps/RESUMEN_VERIFICACION.md",
-        "hash": "15321908183099642227"
-      },
-      {
-        "file": "deploy-on-vps/SSH_SETUP.md",
-        "hash": "4598459823279360757"
-      },
-      {
-        "file": "deploy-on-vps/TROUBLESHOOTING_GITHUB_ACTIONS.md",
-        "hash": "12416897524641767485"
-      },
-      {
-        "file": "deploy-on-vps/TROUBLESHOOTING_SSH.md",
-        "hash": "8988604832382434292"
-      },
-      {
-        "file": "deploy-on-vps/VERIFICAR_HOSTINGER.md",
-        "hash": "6273561259092633345"
-      },
-      {
-        "file": "deploy-on-vps/VERIFICAR_REPOSITORIO.md",
-        "hash": "14324335879979156500"
-      },
-      {
-        "file": "design/database-migration.sql",
-        "hash": "8112264670030217055"
-      },
-      {
-        "file": "design/database-seed-example.sql",
-        "hash": "16820485619130529613"
-      },
-      {
-        "file": "design/database.puml",
-        "hash": "15222123220881032084"
-      },
-      {
-        "file": "design/database.sql",
-        "hash": "1104277424757188960"
-      },
-      {
-        "file": "docker-compose.dev.yml",
-        "hash": "18398053521492410709"
-      },
-      {
-        "file": "docker-compose.override.yml.example",
-        "hash": "2852045446860369438"
-      },
-      {
-        "file": "docker-compose.prod.yml",
-        "hash": "7722790298173329246"
-      },
-      {
-        "file": "docker-compose.yml",
-        "hash": "9342295024675914381"
-      },
-      {
-        "file": "docs/CHANGELOG.md",
-        "hash": "5869598997492230660"
-      },
-      {
-        "file": "docs/CI_CD.md",
-        "hash": "2881942003723983019"
-      },
-      {
-        "file": "docs/DEPLOYMENT.md",
-        "hash": "17838269653454100839"
-      },
-      {
-        "file": "docs/INTEGRITY_CHECKLIST.md",
-        "hash": "4822690225449347433"
-      },
-      {
-        "file": "docs/INTEGRITY_CHECKS.md",
-        "hash": "1561420550853212940"
-      },
-      {
-        "file": "docs/INTEGRITY_REPORT.md",
-        "hash": "9501198084788860400"
-      },
-      {
-        "file": "docs/MONITORING.md",
-        "hash": "15658323239605695941"
-      },
-      {
-        "file": "docs/QUICK_START_DOCKER.md",
-        "hash": "11147565953061787108"
-      },
-      {
-        "file": "docs/README-DATABASE.md",
-        "hash": "17424415464664098102"
-      },
-      {
-        "file": "docs/README.md",
-        "hash": "3158610969927688587"
-      },
-      {
-        "file": "docs/README_CI_CD.md",
-        "hash": "7420106885948828323"
-      },
-      {
-        "file": "docs/README_DEPLOYMENT.md",
-        "hash": "1322282767599395782"
-      },
-      {
-        "file": "docs/README_DOCKER.md",
-        "hash": "11673175946854338773"
-      },
-      {
-        "file": "docs/TROUBLESHOOTING_SSH.md",
-        "hash": "8988604832382434292"
-      },
-      {
-        "file": "docs/VERIFICACION_ESTRUCTURA.md",
-        "hash": "853310348110563187"
-      },
-      {
-        "file": "docs/VERIFICAR_HOSTINGER.md",
-        "hash": "6273561259092633345"
-      },
-      {
-        "file": "docs/requirements-fields.md",
-        "hash": "7840034909238352348"
-      },
-      {
-        "file": "graph.html",
-        "hash": "6183388263616623200"
-      },
-      {
-        "file": "nx.json",
-        "hash": "15646319930655109309"
-      },
-      {
-        "file": "package-lock.json",
-        "hash": "4559546046842464951"
-      },
-      {
-        "file": "package.json",
-        "hash": "11631984593082089666"
-      },
-      {
-        "file": "response.json",
-        "hash": "16835660517038180918"
-      },
-      {
-        "file": "scripts/build.sh",
-        "hash": "6178325586602611719"
-      },
-      {
-        "file": "scripts/deploy-on-vps.sh",
-        "hash": "4530979998717104003"
-      },
-      {
-        "file": "scripts/deploy-requirements-vps.sh",
-        "hash": "10677578088263221757"
-      },
-      {
-        "file": "scripts/deploy-vps.sh",
-        "hash": "16169592314802848679"
-      },
-      {
-        "file": "scripts/docker-setup.sh",
-        "hash": "17164447653207338688"
-      },
-      {
-        "file": "scripts/generate-changelog.js",
-        "hash": "12191962759981028561"
-      },
-      {
-        "file": "scripts/quick-start-vps.sh",
-        "hash": "1951230902952123057"
-      },
-      {
-        "file": "scripts/setup-vps.sh",
-        "hash": "16366368075958487665"
-      },
-      {
-        "file": "scripts/verify-integrity.sh",
-        "hash": "6491534588807052501"
-      },
-      {
-        "file": "scripts/version-bump.js",
-        "hash": "8536076016928308496"
-      },
-      {
-        "file": "static/environment.js",
-        "hash": "16909249529897220978"
-      },
-      {
-        "file": "static/favicon.ico",
-        "hash": "9303420814833116677"
-      },
-      {
-        "file": "static/main.js",
-        "hash": "374743740434718182"
-      },
-      {
-        "file": "static/runtime.js",
-        "hash": "14980783667260047515"
-      },
-      {
-        "file": "static/styles.css",
-        "hash": "8419273103758193685"
-      },
-      {
-        "file": "static/styles.js",
-        "hash": "16803620677878581351"
-      },
-      {
-        "file": "tests/README.md",
-        "hash": "11447544850162850198"
-      },
-      {
-        "file": "tests/api-debug.js",
-        "hash": "5306502369639909078"
-      },
-      {
-        "file": "tests/check-rgl.js",
-        "hash": "12549065214744575864"
-      },
-      {
-        "file": "tests/debug-epics.js",
-        "hash": "4849366912004125429"
-      },
-      {
-        "file": "tests/portal-debug-api.js",
-        "hash": "15313788807032127515"
-      },
-      {
-        "file": "tests/test-api.js",
-        "hash": "2021116272610310848"
-      },
-      {
-        "file": "tests/test-requirements.js",
-        "hash": "18416270827802545822"
-      },
-      {
-        "file": "tests/verify-full-flow.js",
-        "hash": "10882738622842315764"
-      },
-      {
-        "file": "tests/verify-rules.js",
-        "hash": "12582076286274820556"
-      },
-      {
-        "file": "tests/verify-update.js",
-        "hash": "7346191291626498709"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.027b5bb7-5037-467e-a838-a75d7babf7f0.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.19598f11-4947-4ac4-b84a-f8f301806fec.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.208494d0-f12d-4620-bf61-9eec621ed7d9.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.22fc7050-375e-4a0e-a930-90a7dd50c7b3.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.27e2d87f-58e5-4d2b-a88b-470b832730f7.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.374f47d9-3fe2-418b-8675-b8cd60f14f12.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.42741328-438e-4fd0-9f73-2c0d60bcd68d.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.42993c35-f0df-469f-92e8-08fa865e4953.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.44947768-a14d-43ae-944c-4a9519d3793a.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.48e478c2-b5af-4a48-a998-41b7bb5e9797.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.4be842f1-c803-45d9-b337-1d68be2b48ce.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.51e18a5c-3281-486c-9bd9-e9d5c72bd782.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.5d8a8014-b22d-4a1e-9177-6f7a26a01fae.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.6326bfa4-8419-4b40-8478-99fc3af15080.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.6426009e-5e44-4191-ab76-87343c0b4f6f.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.648d09bd-be47-40ff-8310-8dfebc48fe9c.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.680ce1c2-fc41-4abc-beba-ccd94d2bc706.json",
-        "hash": "16109394665231334489"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.7330aead-d7f5-4066-a0b2-20ccbbb8801c.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.7f2fae09-ac3c-4ade-9f0f-f10bb91719ce.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.7f671f69-e5bf-4dcb-84ea-ecaaa9f4be25.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.7fe684eb-18dc-460f-be69-7f6c66a1289c.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.99aee710-79d6-4f39-8dc1-505cca7e9db0.json",
-        "hash": "16109394665231334489"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.9ca4d1d9-d1d8-4a4d-a20d-d83bf302f196.json",
-        "hash": "16109394665231334489"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.9cf785f2-264b-4a7d-b540-b8d9725be660.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.9ea025fd-d10c-4a39-b485-697ac53eae74.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.a1c1e1a5-ff22-4fef-845e-abd5a156139b.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.bbe9f44b-c39b-4148-b397-42bed1626134.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.c6871e33-79dc-4b6c-81a5-e98cd3a4ce29.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.c96459da-1c70-41da-b865-6e6e6800c384.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.d24ffa5c-c918-4ef9-b02e-9c26e88ba3fc.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.dc7ff877-c503-45b4-b0c8-5dbd6c3cd17f.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tmp/apps/api/serve/tsconfig.generated.dfa640b5-7c61-4b3e-b613-ff6653185025.json",
-        "hash": "9089623116635460020"
-      },
-      {
-        "file": "tsconfig.base.json",
-        "hash": "11302388006518204609"
-      }
-    ]
+    }
   },
   "externalNodesHash": "8031775494900311888"
 }

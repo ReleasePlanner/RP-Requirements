@@ -11,14 +11,6 @@
     ],
     "sharedGlobals": []
   },
-  "plugins": [
-    {
-      "plugin": "@nx-dotnet/core",
-      "options": {
-        "inferProjects": true,
-        "inferProjectTargets": true
-      }
-    }
-  ],
+  "plugins": [],
   "nxCloudAccessToken": null
 }

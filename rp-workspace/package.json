@@ -3,10 +3,11 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "prepare": "nx g @nx-dotnet/core:restore",
     "start:api": "nx serve api",
     "start:portal": "nx serve portal",
+    "build": "nx run-many --target=build --all",
     "build:api": "nx build api",
+    "build:portal": "cd apps/portal && npm run build",
     "test:api": "nx test api",
     "lint:api": "nx lint api",
     "seed:api": "npx --yes ts-node -r tsconfig-paths/register apps/api/src/infrastructure/database/seed.ts"

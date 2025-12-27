@@ -8,15 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- CI/CD pipeline with GitHub Actions
 - Automated testing and builds
 - Docker image builds
-- Automated releases
 - Changelog generation
 
 ### Changed
 - Improved build process
-- Enhanced deployment automation
 
 ## [1.0.0] - 2025-12-24
 
