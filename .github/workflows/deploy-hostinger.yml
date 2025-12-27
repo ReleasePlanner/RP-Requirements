@@ -719,7 +719,9 @@ jobs:
             
             # Probar primero con ssh para verificar que la contraseña funciona
             echo "🧪 Testing SSH connection first..."
-            sshpass -e ssh -v \
+            
+            # Usar sshpass -p directamente (más confiable que -e con variables de entorno)
+            SSH_TEST_OUTPUT=$(sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' ssh -v \
               -o StrictHostKeyChecking=no \
               -o UserKnownHostsFile=/dev/null \
               -o ConnectTimeout=10 \
@@ -735,30 +737,53 @@ jobs:
               -o GSSAPIAuthentication=no \
               -o HostbasedAuthentication=no \
               ${{ env.VPS_USER }}@${{ env.VPS_HOST }} \
-              "echo 'SSH test successful'" 2>&1 | tee /tmp/ssh-test.log || {
-              echo "❌ SSH connection test failed"
-              echo "📋 Last 20 lines of SSH debug output:"
-              tail -20 /tmp/ssh-test.log || true
+              "echo 'SSH test successful'" 2>&1)
+            
+            SSH_TEST_EXIT_CODE=$?
+            echo "$SSH_TEST_OUTPUT" | tee /tmp/ssh-test.log
+            
+            if [ $SSH_TEST_EXIT_CODE -ne 0 ]; then
               echo ""
-              echo "💡 Troubleshooting:"
-              echo "   1. Verify VPS_SSH_PASSWORD is EXACTLY the same as when you manually connect"
-              echo "   2. Test manually: ssh ${{ env.VPS_USER }}@${{ env.VPS_HOST }}"
-              echo "   3. Check for hidden characters or spaces in the password"
-              echo "   4. Verify VPS_USER is correct (usually 'root')"
-              echo "   5. Verify the server allows password authentication:"
+              echo "❌ SSH connection test FAILED (exit code: $SSH_TEST_EXIT_CODE)"
+              echo "📋 Last 30 lines of SSH debug output:"
+              tail -30 /tmp/ssh-test.log || true
+              echo ""
+              echo "🔍 Análisis del error:"
+              if echo "$SSH_TEST_OUTPUT" | grep -qi "Permission denied"; then
+                echo "   ❌ El servidor rechazó la autenticación"
+                echo "   💡 La contraseña en GitHub Secrets es INCORRECTA"
+                echo ""
+                echo "   🔧 Solución CRÍTICA:"
+                echo "      1. Conéctate manualmente: ssh ${{ env.VPS_USER }}@${{ env.VPS_HOST }}"
+                echo "      2. Usa la contraseña EXACTA que funciona: Aar-Beto-2026"
+                echo "      3. Copia esa contraseña EXACTA (sin espacios, sin comillas)"
+                echo "      4. Ve a GitHub Secrets y actualiza VPS_SSH_PASSWORD"
+                echo "      5. Ejecuta este workflow de nuevo"
+              fi
+              echo ""
+              echo "💡 Troubleshooting detallado:"
+              echo "   1. Verifica la contraseña manualmente:"
+              echo "      ssh ${{ env.VPS_USER }}@${{ env.VPS_HOST }}"
+              echo "      (Usa la contraseña exacta que funciona)"
+              echo ""
+              echo "   2. Verifica que VPS_SSH_PASSWORD en GitHub Secrets sea:"
+              echo "      - Exactamente: Aar-Beto-2026"
+              echo "      - Sin espacios al inicio o final"
+              echo "      - Sin comillas alrededor"
+              echo ""
+              echo "   3. Verifica la configuración del servidor:"
               echo "      ssh ${{ env.VPS_USER }}@${{ env.VPS_HOST }}"
               echo "      sudo cat /etc/ssh/sshd_config | grep PasswordAuthentication"
-              echo "      Should show: PasswordAuthentication yes"
-              echo "   6. If PasswordAuthentication is 'no', enable it:"
-              echo "      sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config"
-              echo "      sudo systemctl restart sshd"
+              echo "      (Debería mostrar: PasswordAuthentication yes)"
               exit 1
-            }
+            fi
             
-            echo "✅ SSH connection test passed, proceeding with SCP..."
+            echo ""
+            echo "✅ SSH connection test PASSED, proceeding with SCP..."
             
-            # Usar sshpass con variable de entorno (más seguro para caracteres especiales)
-            sshpass -e scp -v \
+            # Usar sshpass -p directamente (más confiable que -e con variables de entorno)
+            echo "📤 Copying deployment script using sshpass -p..."
+            sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' scp -v \
               -o StrictHostKeyChecking=no \
               -o UserKnownHostsFile=/dev/null \
               -o ConnectTimeout=10 \
@@ -775,9 +800,16 @@ jobs:
               -o HostbasedAuthentication=no \
               deploy-remote.sh ${{ env.VPS_USER }}@${{ env.VPS_HOST }}:/tmp/deploy-remote.sh || {
               echo "❌ Failed to copy deployment script via SSH password"
-              echo "💡 Verify VPS_SSH_PASSWORD is correct in GitHub Secrets"
-              echo "💡 Verify VPS_USER is correct (usually 'root')"
-              echo "💡 Verify VPS_HOST is correct"
+              echo ""
+              echo "🔍 El test SSH pasó pero SCP falló. Esto puede indicar:"
+              echo "   1. Problema con el archivo deploy-remote.sh (no existe o no es accesible)"
+              echo "   2. Problema con permisos en el servidor"
+              echo "   3. Problema temporal de red"
+              echo ""
+              echo "💡 Verifica:"
+              echo "   1. Que el archivo deploy-remote.sh existe en el repositorio"
+              echo "   2. Que la contraseña sigue siendo correcta"
+              echo "   3. Ejecuta el workflow de nuevo"
               exit 1
             }
           elif [ "${{ steps.check-ssh.outputs.has_ssh_key }}" == "true" ]; then
@@ -846,8 +878,8 @@ jobs:
             rm -f ~/.ssh/id_* 2>/dev/null || true
             rm -f ~/.ssh/known_hosts 2>/dev/null || true
             
-            # Usar sshpass con variable de entorno (más seguro para caracteres especiales)
-            sshpass -e ssh -v \
+            # Usar sshpass -p directamente (más confiable que -e con variables de entorno)
+            sshpass -p '${{ secrets.VPS_SSH_PASSWORD }}' ssh -v \
               -o StrictHostKeyChecking=no \
               -o UserKnownHostsFile=/dev/null \
               -o ConnectTimeout=10 \
@@ -868,6 +900,7 @@ jobs:
               echo ""
               echo "🔍 Troubleshooting:"
               echo "   1. Verify VPS_SSH_PASSWORD is correct in GitHub Secrets"
+              echo "      Should be exactly: Aar-Beto-2026 (without spaces or quotes)"
               echo "   2. Test manually: ssh root@${{ env.VPS_HOST }}"
               echo "   3. Verify VPS_USER is correct (usually 'root')"
               echo "   4. Check if server allows password authentication"
