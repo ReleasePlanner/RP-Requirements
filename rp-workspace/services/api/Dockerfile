@@ -6,10 +6,12 @@ WORKDIR /app
 # Copy root package files first (for better layer caching)
 # These are needed for monorepo dependency resolution
 COPY package*.json ./
+COPY package-lock.json* ./
 COPY tsconfig.base.json ./
 
 # Copy API package files
 COPY apps/api/package*.json ./apps/api/
+COPY apps/api/package-lock.json* ./apps/api/
 
 # Install root dependencies first (including dev dependencies for build)
 RUN npm ci
@@ -36,29 +38,13 @@ WORKDIR /app
 # Install wget for health checks
 RUN apk add --no-cache wget
 
-# Copy root package files (needed for monorepo dependencies)
-COPY package*.json ./
+# Copy API package files and lock file
+COPY apps/api/package*.json ./
+COPY apps/api/package-lock.json* ./
 
-# Copy API package files
-COPY apps/api/package*.json ./apps/api/
-
-# Install root production dependencies first
-# These will be available at /app/node_modules
-RUN npm ci --only=production
-
-# Install API production dependencies
-# npm will hoist shared dependencies to /app/node_modules when possible
-# For API-specific dependencies, they'll be in /app/apps/api/node_modules
-# We set NODE_PATH to ensure both locations are searched
-WORKDIR /app/apps/api
-RUN npm ci --only=production
-
-# Return to app root
-WORKDIR /app
-
-# Set NODE_PATH to include both root and API node_modules
-# This ensures all dependencies are found when running from /app
-ENV NODE_PATH=/app/node_modules:/app/apps/api/node_modules
+# Install only API production dependencies
+# All dependencies will be in /app/node_modules where the app runs
+RUN npm ci --omit=dev || npm install --omit=dev
 
 # Copy built application from builder
 COPY --from=builder /app/apps/api/dist ./dist
