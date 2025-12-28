@@ -3,8 +3,8 @@ version: "3.8"
 services:
   api:
     build:
-      context: .  # Raíz del monorepo (DockerDeploy ejecuta desde aquí)
-      dockerfile: apps/api/Dockerfile
+      context: ../../ Raíz del monorepo (DockerDeploy ejecuta desde aquí)
+      dockerfile: services/api/Dockerfile
     container_name: rp-requirements-api
     restart: unless-stopped
     deploy:

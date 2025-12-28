@@ -42,6 +42,4 @@ JWT_SECRET (mínimo 32 caracteres)
 NEXT_PUBLIC_API_URL
 
 ### Grafana
-GRAFANA_USER
-GRAFANA_PASSWORD
-
+2
