@@ -1,0 +1,87 @@
+version: "3.8"
+
+services:
+  api:
+    build:
+      context: ../../
+      dockerfile: services/api/Dockerfile
+    container_name: rp-requirements-api
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    # Nota: depends_on no funciona con servicios externos
+    # Asegúrate de que postgres y rabbitmq estén corriendo antes de deployar api
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      PORT: 3000
+      # Database
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_SYNCHRONIZE: ${DB_SYNCHRONIZE:-false}
+      DB_LOGGING: ${DB_LOGGING:-false}
+      # RabbitMQ
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USER: ${RABBITMQ_USER}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
+      RABBITMQ_VHOST: ${RABBITMQ_VHOST:-/}
+      RABBITMQ_QUEUE: ${RABBITMQ_QUEUE:-requirements_queue}
+      # JWT
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-1d}
+      # CORS
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:4200}
+      # Rate Limiting
+      THROTTLE_TTL: ${THROTTLE_TTL:-60}
+      THROTTLE_LIMIT: ${THROTTLE_LIMIT:-100}
+      # Request Timeout
+      REQUEST_TIMEOUT: ${REQUEST_TIMEOUT:-30000}
+      # Logging
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      # Monitoring
+      ENABLE_MONITORING: ${ENABLE_MONITORING:-true}
+      METRICS_RETENTION_MS: ${METRICS_RETENTION_MS:-3600000}
+      PROMETHEUS_ENABLED: ${PROMETHEUS_ENABLED:-true}
+      PROMETHEUS_PATH: ${PROMETHEUS_PATH:-/metrics}
+    networks:
+      - rp-network
+      - suite-global
+    volumes:
+      - api_logs:/app/logs
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "require('http').get('http://localhost:3000/api/v1/health/liveness', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    command: >
+      sh -c "
+        echo 'Waiting for services to be ready...' &&
+        sleep 5 &&
+        echo 'Starting API...' &&
+        node dist/main
+      "
+
+networks:
+  rp-network:
+    external: true
+    name: rp-requirements-network
+  suite-global:
+    external: true
+    name: suite-beyondnet-global
+
+volumes:
+  api_logs:
+    external: true
+    name: rp-requirements-api-logs
