@@ -3,7 +3,8 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# Copy root package files (context is workspace root)
+# Copy root package files first (for better layer caching)
+# These are needed for monorepo dependency resolution
 COPY package*.json ./
 COPY nx.json ./
 COPY tsconfig.base.json ./
@@ -11,13 +12,18 @@ COPY tsconfig.base.json ./
 # Copy API package files
 COPY apps/api/package*.json ./apps/api/
 
-# Install dependencies (including dev dependencies for build)
+# Install root dependencies first (including dev dependencies for build)
 RUN npm ci
 
-# Copy source code
+# Install API dependencies (npm will use parent node_modules when possible)
+WORKDIR /app/apps/api
+RUN npm ci
+
+# Copy API source code (this layer changes most frequently)
+WORKDIR /app
 COPY apps/api/ ./apps/api/
 
-# Set working directory to API
+# Set working directory to API for build
 WORKDIR /app/apps/api
 
 # Build application
@@ -31,17 +37,36 @@ WORKDIR /app
 # Install wget for health checks
 RUN apk add --no-cache wget
 
-# Copy package files
-COPY apps/api/package*.json ./
+# Copy root package files (needed for monorepo dependencies)
+COPY package*.json ./
 
-# Install only production dependencies
-RUN npm ci --only=production && npm cache clean --force
+# Copy API package files
+COPY apps/api/package*.json ./apps/api/
+
+# Install root production dependencies first
+# These will be available at /app/node_modules
+RUN npm ci --only=production
+
+# Install API production dependencies
+# npm will hoist shared dependencies to /app/node_modules when possible
+# For API-specific dependencies, they'll be in /app/apps/api/node_modules
+# We set NODE_PATH to ensure both locations are searched
+WORKDIR /app/apps/api
+RUN npm ci --only=production
+
+# Return to app root
+WORKDIR /app
+
+# Set NODE_PATH to include both root and API node_modules
+# This ensures all dependencies are found when running from /app
+ENV NODE_PATH=/app/node_modules:/app/apps/api/node_modules
 
 # Copy built application from builder
 COPY --from=builder /app/apps/api/dist ./dist
 
-# Create logs directory, non-root user and set ownership
-RUN mkdir -p logs && \
+# Clean npm cache, create logs directory, non-root user and set ownership
+RUN npm cache clean --force && \
+    mkdir -p logs && \
     chmod 777 logs && \
     addgroup -g 1001 -S nodejs && \
     adduser -S nestjs -u 1001 && \
