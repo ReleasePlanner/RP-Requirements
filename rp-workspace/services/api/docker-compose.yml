@@ -15,7 +15,7 @@ services:
     # Asegúrate de que postgres y rabbitmq estén corriendo antes de deployar api
     environment:
       NODE_ENV: ${NODE_ENV:-production}
-      PORT: 3000
+      PORT: 3001
       # Database
       # Nota: En Dokploy, usar el nombre del contenedor: rp-requirements-postgres
       DB_HOST: ${DB_HOST:-rp-requirements-postgres}
