@@ -1,222 +1,106 @@
-# Docker Compose para Producción en VPS
-# Este archivo está optimizado para deployment en VPS con Nginx como reverse proxy
-# Los puertos NO están expuestos externamente - Nginx maneja el routing
-
-version: '3.8'
+version: "3.8"
 
 services:
-  # PostgreSQL Database
   postgres:
     image: postgres:15-alpine
     container_name: rp-requirements-postgres
     restart: unless-stopped
+    # Limitamos recursos para no asfixiar el VPS
+    deploy:
+      resources:
+        limits:
+          memory: 512M
     environment:
-      POSTGRES_USER: ${DB_USERNAME:-postgres}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
-      POSTGRES_DB: ${DB_DATABASE:-requirements_db}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - rp-network
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U \"${POSTGRES_USER:-postgres}\" -d \"${POSTGRES_DB:-requirements_db}\""]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
-    # Sin mapeo de puerto externo - solo acceso interno
+      - rp-network # Red de infraestructura interna
 
-  # RabbitMQ Message Broker
   rabbitmq:
     image: rabbitmq:3.12-management-alpine
     container_name: rp-requirements-rabbitmq
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
     environment:
-      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-admin}
-      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-admin123}
-      RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_VHOST:-/}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
     networks:
       - rp-network
-    healthcheck:
-      test: ["CMD", "rabbitmq-diagnostics", "ping"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 30s
-    # Sin mapeo de puerto externo - solo acceso interno
 
-  # Prometheus - Metrics Collection
-  prometheus:
-    image: prom/prometheus:latest
-    container_name: rp-requirements-prometheus
-    restart: unless-stopped
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
-      - '--web.console.templates=/usr/share/prometheus/consoles'
-      - '--storage.tsdb.retention.time=30d'
-      - '--web.enable-lifecycle'
-    volumes:
-      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-      - prometheus_data:/prometheus
-    networks:
-      - rp-network
-    healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9090/-/healthy"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    # Sin mapeo de puerto externo - solo acceso interno o vía Nginx
-
-  # Grafana - Metrics Visualization
-  grafana:
-    image: grafana/grafana:latest
-    container_name: rp-requirements-grafana
-    restart: unless-stopped
-    environment:
-      GF_SECURITY_ADMIN_USER: ${GRAFANA_USER:-admin}
-      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin123}
-      GF_USERS_ALLOW_SIGN_UP: false
-      GF_SERVER_ROOT_URL: ${GRAFANA_ROOT_URL:-https://grafana.beyondnet.cloud}
-      GF_INSTALL_PLUGINS: grafana-clock-panel,grafana-simple-json-datasource
-    volumes:
-      - grafana_data:/var/lib/grafana
-      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
-      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
-    networks:
-      - rp-network
-    depends_on:
-      - prometheus
-    healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    # Sin mapeo de puerto externo - Nginx hace proxy
-
-  # API Service (NestJS)
   api:
     build:
       context: .
       dockerfile: apps/api/Dockerfile
     container_name: rp-requirements-api
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1G # El API NestJS consume más, especialmente con IA
     depends_on:
       postgres:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
     environment:
-      # Server
-      NODE_ENV: ${NODE_ENV:-production}
+      NODE_ENV: production
       PORT: 3000
-      
-      # Database
       DB_HOST: postgres
-      DB_PORT: 5432
-      DB_USERNAME: ${DB_USERNAME:-postgres}
-      DB_PASSWORD: ${DB_PASSWORD:-postgres}
-      DB_DATABASE: ${DB_DATABASE:-requirements_db}
-      DB_SYNCHRONIZE: ${DB_SYNCHRONIZE:-false}
-      DB_LOGGING: ${DB_LOGGING:-false}
-      
-      # RabbitMQ
-      RABBITMQ_HOST: rabbitmq
-      RABBITMQ_PORT: 5672
-      RABBITMQ_USER: ${RABBITMQ_USER:-admin}
-      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-admin123}
-      RABBITMQ_VHOST: ${RABBITMQ_VHOST:-/}
-      RABBITMQ_QUEUE: ${RABBITMQ_QUEUE:-requirements_queue}
-      
-      # JWT
-      JWT_SECRET: ${JWT_SECRET:-your-super-secret-jwt-key-change-in-production-min-32-chars}
-      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-1d}
-      
-      # CORS
-      CORS_ORIGIN: ${CORS_ORIGIN:-https://requirements.beyondnet.cloud}
-      
-      # Rate Limiting
-      THROTTLE_TTL: ${THROTTLE_TTL:-60}
-      THROTTLE_LIMIT: ${THROTTLE_LIMIT:-100}
-      
-      # Request Timeout
-      REQUEST_TIMEOUT: ${REQUEST_TIMEOUT:-30000}
-      
-      # Logging
-      LOG_LEVEL: ${LOG_LEVEL:-info}
-      
-      # Monitoring
-      ENABLE_MONITORING: ${ENABLE_MONITORING:-true}
-      METRICS_RETENTION_MS: ${METRICS_RETENTION_MS:-3600000}
-      PROMETHEUS_ENABLED: ${PROMETHEUS_ENABLED:-true}
-      PROMETHEUS_PATH: ${PROMETHEUS_PATH:-/metrics}
+      # ... resto de tus variables ...
     networks:
-      - rp-network
-    healthcheck:
-      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/api/v1/health/liveness', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+      - rp-network # Para hablar con DB/Rabbit
+      - suite-global # Para hablar con otros Monorepos (Users, etc)
     volumes:
       - api_logs:/app/logs
-    # Sin mapeo de puerto externo - Nginx hace proxy a localhost:3000
-    command: >
-      sh -c "
-        echo 'Waiting for services to be ready...' &&
-        sleep 5 &&
-        echo 'Starting API...' &&
-        node dist/main
-      "
 
-  # Portal Service (Next.js)
   portal:
     build:
       context: .
       dockerfile: apps/portal/Dockerfile
       args:
-        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-https://requirements-api.beyondnet.cloud/api/v1}
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
     container_name: rp-requirements-portal
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
     depends_on:
       api:
         condition: service_healthy
     environment:
-      NODE_ENV: ${NODE_ENV:-production}
-      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-https://requirements-api.beyondnet.cloud/api/v1}
+      NODE_ENV: production
       PORT: 4200
     networks:
-      - rp-network
-    healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:4200"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 30s
-    # Sin mapeo de puerto externo - Nginx hace proxy a localhost:4200
+      - suite-global # El portal solo necesita la red global para el proxy
 
+# --- CONFIGURACIÓN DE REDES ---
 networks:
+  # Red interna para servicios de este monorepo (Seguridad)
   rp-network:
     driver: bridge
-    name: rp-requirements-network
+  # Tu red global que ya creamos en el VPS
+  suite-global:
+    external: true
+    name: suite-beyondnet-global
 
 volumes:
   postgres_data:
     name: rp-requirements-postgres-data
-    driver: local
   rabbitmq_data:
     name: rp-requirements-rabbitmq-data
-    driver: local
   prometheus_data:
     name: rp-requirements-prometheus-data
-    driver: local
   grafana_data:
     name: rp-requirements-grafana-data
-    driver: local
   api_logs:
     name: rp-requirements-api-logs
-    driver: local
