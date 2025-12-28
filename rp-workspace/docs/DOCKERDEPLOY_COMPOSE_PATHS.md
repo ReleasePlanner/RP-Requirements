@@ -9,6 +9,7 @@ Cada servicio tiene su propio **Compose Path** que DockerDeploy puede usar para 
 ## 🎯 Compose Paths por Servicio
 
 ### 1. API (NestJS)
+
 **Compose Path**: `services/api/docker-compose.yml`
 
 ```bash
@@ -16,6 +17,7 @@ docker-compose -f services/api/docker-compose.yml up -d
 ```
 
 ### 2. Portal (Next.js)
+
 **Compose Path**: `services/portal/docker-compose.yml`
 
 ```bash
@@ -23,6 +25,7 @@ docker-compose -f services/portal/docker-compose.yml up -d
 ```
 
 ### 3. PostgreSQL
+
 **Compose Path**: `services/postgres/docker-compose.yml`
 
 ```bash
@@ -30,6 +33,7 @@ docker-compose -f services/postgres/docker-compose.yml up -d
 ```
 
 ### 4. RabbitMQ
+
 **Compose Path**: `services/rabbitmq/docker-compose.yml`
 
 ```bash
@@ -37,6 +41,7 @@ docker-compose -f services/rabbitmq/docker-compose.yml up -d
 ```
 
 ### 5. Prometheus
+
 **Compose Path**: `services/prometheus/docker-compose.yml`
 
 ```bash
@@ -44,6 +49,7 @@ docker-compose -f services/prometheus/docker-compose.yml up -d
 ```
 
 ### 6. Grafana
+
 **Compose Path**: `services/grafana/docker-compose.yml`
 
 ```bash
@@ -95,7 +101,9 @@ Para cada servicio, configura:
 1. **Service Name**: Nombre del servicio (ej: `api`, `portal`, `postgres`)
 2. **Compose Path**: Ruta al `docker-compose.yml` del servicio
    - Ejemplo: `services/api/docker-compose.yml`
-3. **Context**: Directorio raíz del workspace (`rp-workspace/`)
+3. **Context Path**: `.` (raíz del workspace `rp-workspace/`)
+   - DockerDeploy ejecuta desde la raíz del workspace
+   - Los docker-compose.yml usan `context: .` para referenciar la raíz
 
 ### Ejemplo de Configuración DockerDeploy
 
@@ -105,15 +113,15 @@ services:
   api:
     compose_path: services/api/docker-compose.yml
     context: rp-workspace/
-    
+
   portal:
     compose_path: services/portal/docker-compose.yml
     context: rp-workspace/
-    
+
   postgres:
     compose_path: services/postgres/docker-compose.yml
     context: rp-workspace/
-    
+
   rabbitmq:
     compose_path: services/rabbitmq/docker-compose.yml
     context: rp-workspace/
@@ -186,6 +194,7 @@ docker volume create rp-requirements-api-logs
 ## 🔧 Variables de Entorno
 
 Cada servicio puede usar:
+
 - Variables del archivo `.env` en la raíz del workspace
 - Variables específicas del servicio
 - Variables inyectadas por DockerDeploy
@@ -230,11 +239,10 @@ curl http://localhost:4200
 ## 📚 Documentación Adicional
 
 - [README de Services](services/README.md)
-- [Plan de Reorganización](PLAN_REORGANIZACION_DOCKERDEPLOY.md)
+- [Plan de Reorganización](PLAN_REORGANIZACION_DOCKERDEPLOY.md) (en este mismo directorio)
 - [Documentación de API](services/api/README.md)
 - [Documentación de Portal](services/portal/README.md)
 
 ---
 
 **Estructura lista para DockerDeploy** ✅
-

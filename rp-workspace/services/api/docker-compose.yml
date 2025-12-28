@@ -3,8 +3,8 @@ version: "3.8"
 services:
   api:
     build:
-      context: ../../
-      dockerfile: services/api/Dockerfile
+      context: .  # Raíz del monorepo (DockerDeploy ejecuta desde aquí)
+      dockerfile: apps/api/Dockerfile
     container_name: rp-requirements-api
     restart: unless-stopped
     deploy:
@@ -17,7 +17,8 @@ services:
       NODE_ENV: ${NODE_ENV:-production}
       PORT: 3000
       # Database
-      DB_HOST: postgres
+      # Nota: En Dokploy, usar el nombre del contenedor: rp-requirements-postgres
+      DB_HOST: ${DB_HOST:-rp-requirements-postgres}
       DB_PORT: 5432
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
@@ -25,7 +26,8 @@ services:
       DB_SYNCHRONIZE: ${DB_SYNCHRONIZE:-false}
       DB_LOGGING: ${DB_LOGGING:-false}
       # RabbitMQ
-      RABBITMQ_HOST: rabbitmq
+      # Nota: En Dokploy, usar el nombre del contenedor: rp-requirements-rabbitmq
+      RABBITMQ_HOST: ${RABBITMQ_HOST:-rp-requirements-rabbitmq}
       RABBITMQ_PORT: 5672
       RABBITMQ_USER: ${RABBITMQ_USER}
       RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}

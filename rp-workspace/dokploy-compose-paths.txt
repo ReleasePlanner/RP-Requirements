@@ -1,0 +1,47 @@
+# Dokploy Compose Paths - Referencia Rápida
+
+## Compose Paths por Servicio
+
+PostgreSQL:     services/postgres/docker-compose.yml
+RabbitMQ:       services/rabbitmq/docker-compose.yml
+API:            services/api/docker-compose.yml
+Portal:         services/portal/docker-compose.yml
+Prometheus:     services/prometheus/docker-compose.yml
+Grafana:        services/grafana/docker-compose.yml
+
+## Build Context
+
+Todos los servicios usan: . (punto - raíz del workspace)
+
+## Orden de Deployment
+
+1. PostgreSQL
+2. RabbitMQ
+3. API
+4. Portal
+5. Prometheus (opcional)
+6. Grafana (opcional)
+
+## Variables de Entorno Críticas
+
+### PostgreSQL
+DB_USERNAME
+DB_PASSWORD
+DB_DATABASE
+
+### RabbitMQ
+RABBITMQ_USER
+RABBITMQ_PASSWORD
+
+### API
+DB_HOST=rp-requirements-postgres
+RABBITMQ_HOST=rp-requirements-rabbitmq
+JWT_SECRET (mínimo 32 caracteres)
+
+### Portal
+NEXT_PUBLIC_API_URL
+
+### Grafana
+GRAFANA_USER
+GRAFANA_PASSWORD
+

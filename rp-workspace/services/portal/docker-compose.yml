@@ -3,8 +3,8 @@ version: "3.8"
 services:
   portal:
     build:
-      context: ../../
-      dockerfile: services/portal/Dockerfile
+      context: .  # Raíz del monorepo (DockerDeploy ejecuta desde aquí)
+      dockerfile: apps/portal/Dockerfile
       args:
         NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
     container_name: rp-requirements-portal

@@ -94,6 +94,13 @@ Ver `env.docker.example` en la raíz del workspace para todas las variables.
 - [Prometheus](prometheus/README.md)
 - [Grafana](grafana/README.md)
 
+## 🚀 Deployment con Dokploy
+
+Para deployment con Dokploy, ver:
+- [Dokploy Setup](../docs/DOKPLOY_SETUP.md) - Guía completa de configuración
+- [Dokploy Quick Start](../docs/DOKPLOY_QUICK_START.md) - Inicio rápido
+- [Compose Paths Reference](../dokploy-compose-paths.txt) - Referencia rápida de paths
+
 ## 🔗 Dependencias entre Servicios
 
 ```

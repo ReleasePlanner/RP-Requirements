@@ -89,11 +89,13 @@ rp-workspace/
 ### Fase 1: Crear Estructura de Servicios
 
 1. **Crear directorio `services/`**
+
    ```bash
    mkdir -p services/{api,portal,postgres,rabbitmq,prometheus,grafana}
    ```
 
 2. **Mover Dockerfiles a sus servicios**
+
    - `apps/api/Dockerfile` → `services/api/Dockerfile`
    - `apps/portal/Dockerfile` → `services/portal/Dockerfile`
 
@@ -102,13 +104,14 @@ rp-workspace/
 ### Fase 2: Crear Compose Individuales
 
 #### `services/api/docker-compose.yml`
+
 ```yaml
 version: "3.8"
 
 services:
   api:
     build:
-      context: ../../  # Contexto raíz del workspace
+      context: ../../ # Contexto raíz del workspace
       dockerfile: services/api/Dockerfile
     container_name: rp-requirements-api
     restart: unless-stopped
@@ -142,6 +145,7 @@ volumes:
 ```
 
 #### `services/portal/docker-compose.yml`
+
 ```yaml
 version: "3.8"
 
@@ -172,6 +176,7 @@ networks:
 ```
 
 #### `services/postgres/docker-compose.yml`
+
 ```yaml
 version: "3.8"
 
@@ -190,7 +195,7 @@ services:
     networks:
       - rp-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U \"${POSTGRES_USER}\" -d \"${POSTGRES_DB}\""]
+      test: ["CMD-SHELL", 'pg_isready -U "${POSTGRES_USER}" -d "${POSTGRES_DB}"']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -207,6 +212,7 @@ volumes:
 ```
 
 #### `services/rabbitmq/docker-compose.yml`
+
 ```yaml
 version: "3.8"
 
@@ -240,6 +246,7 @@ volumes:
 ```
 
 #### `services/prometheus/docker-compose.yml`
+
 ```yaml
 version: "3.8"
 
@@ -275,6 +282,7 @@ volumes:
 ```
 
 #### `services/grafana/docker-compose.yml`
+
 ```yaml
 version: "3.8"
 
@@ -313,6 +321,7 @@ volumes:
 ### Fase 3: Actualizar Compose Maestro
 
 #### `docker-compose.yml` (Maestro)
+
 ```yaml
 version: "3.8"
 
@@ -345,6 +354,7 @@ include:
 Los Dockerfiles necesitan ajustar los paths del contexto:
 
 #### `services/api/Dockerfile`
+
 ```dockerfile
 # Build stage
 FROM node:20-alpine AS builder
@@ -400,29 +410,34 @@ DockerDeploy típicamente espera:
 ## ✅ Checklist de Migración
 
 ### Preparación
+
 - [ ] Crear directorio `services/`
 - [ ] Crear subdirectorios para cada servicio
 - [ ] Documentar estructura actual
 
 ### Migración de Archivos
+
 - [ ] Mover Dockerfiles a `services/`
 - [ ] Crear `docker-compose.yml` individuales
 - [ ] Mover configuraciones de monitoreo
 - [ ] Crear `.env.example` por servicio
 
 ### Actualización de Configuración
+
 - [ ] Actualizar paths en Dockerfiles
 - [ ] Actualizar contextos en docker-compose
 - [ ] Configurar redes externas
 - [ ] Configurar volumes externos
 
 ### Testing
+
 - [ ] Probar build de cada servicio individualmente
 - [ ] Probar compose maestro
 - [ ] Verificar health checks
 - [ ] Verificar conectividad entre servicios
 
 ### Documentación
+
 - [ ] Actualizar README.md
 - [ ] Documentar nueva estructura
 - [ ] Crear guía de deployment con DockerDeploy
@@ -511,4 +526,3 @@ docker-compose -f services/grafana/docker-compose.yml up -d
 ---
 
 **¿Proceder con la implementación de esta estructura?**
-
