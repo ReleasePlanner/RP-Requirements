@@ -14,11 +14,13 @@ COPY apps/api/package*.json ./apps/api/
 COPY apps/api/package-lock.json* ./apps/api/
 
 # Install root dependencies first (including dev dependencies for build)
-RUN npm ci
+# Use npm install as fallback if package-lock.json is out of sync
+RUN npm ci || npm install
 
 # Install API dependencies (npm will use parent node_modules when possible)
+# Use npm install as fallback if package-lock.json is out of sync
 WORKDIR /app/apps/api
-RUN npm ci
+RUN npm ci || npm install
 
 # Copy API source code (this layer changes most frequently)
 WORKDIR /app
