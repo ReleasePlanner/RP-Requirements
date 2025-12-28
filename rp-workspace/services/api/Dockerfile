@@ -15,6 +15,7 @@ COPY apps/api/package-lock.json* ./apps/api/
 
 # Install root dependencies first (including dev dependencies for build)
 # Use npm install as fallback if package-lock.json is out of sync
+# This handles monorepo dependencies that may be shared across apps
 RUN npm ci || npm install
 
 # Install API dependencies (npm will use parent node_modules when possible)
