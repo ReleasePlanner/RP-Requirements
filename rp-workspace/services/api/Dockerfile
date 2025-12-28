@@ -6,7 +6,6 @@ WORKDIR /app
 # Copy root package files first (for better layer caching)
 # These are needed for monorepo dependency resolution
 COPY package*.json ./
-COPY nx.json ./
 COPY tsconfig.base.json ./
 
 # Copy API package files
