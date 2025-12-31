@@ -1,3 +1,10 @@
+# Docker Compose para PostgreSQL y pgAdmin
+# Este servicio NO requiere build - usa imágenes pre-construidas
+# Configuración para Dokploy:
+# - Compose Path: services/postgres/docker-compose.yml
+# - Build Context: . (raíz del workspace)
+# - NO usar flag --build al deployar
+
 services:
   postgres:
     image: postgres:15-alpine
@@ -71,12 +78,14 @@ services:
 
 networks:
   rp-network:
-    external: true
+    # Red para comunicación entre servicios
+    # Se crea automáticamente si no existe
     name: rp-requirements-network
 
 volumes:
   postgres_data:
-    external: true
+    # Volumen para persistencia de datos de PostgreSQL
+    # Se crea automáticamente si no existe
     name: rp-requirements-postgres-data
   pgadmin_data:
     # Volumen local para persistencia de datos de pgAdmin
